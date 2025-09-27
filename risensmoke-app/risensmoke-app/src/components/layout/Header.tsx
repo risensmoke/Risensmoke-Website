@@ -81,22 +81,49 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mobile-menu">
-            {navItems.map((item) => (
+          <div
+            className="md:hidden mobile-menu"
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0,
+              backgroundColor: '#2a2a2a',
+              borderBottom: '2px solid #FF6B35',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.9)',
+              padding: '1rem',
+              zIndex: 99999
+            }}
+          >
+            {navItems.map((item, index) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-3 nav-link text-lg"
+                className="nav-link"
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ borderBottom: '1px solid rgba(255, 107, 53, 0.2)' }}
+                style={{
+                  display: 'block',
+                  padding: '0.75rem 0',
+                  fontSize: '1.125rem',
+                  borderBottom: index < navItems.length - 1 ? '1px solid rgba(255, 107, 53, 0.2)' : 'none',
+                  textDecoration: 'none',
+                  color: '#F8F8F8'
+                }}
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="/order"
-              className="btn-primary mt-4 block text-center"
+              className="btn-primary"
               onClick={() => setIsMobileMenuOpen(false)}
+              style={{
+                display: 'block',
+                marginTop: '1rem',
+                textAlign: 'center',
+                padding: '0.75rem 1rem',
+                borderRadius: '0.5rem'
+              }}
             >
               Order Online
             </Link>
