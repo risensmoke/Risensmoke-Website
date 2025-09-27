@@ -68,7 +68,7 @@ export default function CartModal() {
           >
             <div className="flex items-center gap-2">
               <ShoppingCart className="w-6 h-6" style={{ color: '#FFD700' }} />
-              <h2 className="text-xl font-bold" style={{ color: '#FFD700' }}>
+              <h2 className="text-lg sm:text-xl font-bold" style={{ color: '#FFD700' }}>
                 Your Cart ({items.length})
               </h2>
             </div>
@@ -89,10 +89,10 @@ export default function CartModal() {
                   className="w-16 h-16 mx-auto mb-4 opacity-30"
                   style={{ color: '#FF6B35' }}
                 />
-                <p className="text-lg mb-2" style={{ color: '#F8F8F8' }}>
+                <p className="text-base sm:text-lg mb-2" style={{ color: '#F8F8F8' }}>
                   Your cart is empty
                 </p>
-                <p className="text-sm mb-6" style={{ color: '#999' }}>
+                <p className="text-xs sm:text-sm mb-6" style={{ color: '#999' }}>
                   Add some delicious BBQ to get started!
                 </p>
                 <Link
@@ -120,10 +120,10 @@ export default function CartModal() {
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1">
-                        <h3 className="font-semibold" style={{ color: '#FFD700' }}>
+                        <h3 className="text-sm sm:text-base font-semibold" style={{ color: '#FFD700' }}>
                           {item.name}
                         </h3>
-                        <p className="text-sm" style={{ color: '#F8F8F8' }}>
+                        <p className="text-xs sm:text-sm" style={{ color: '#F8F8F8' }}>
                           ${item.basePrice.toFixed(2)} each
                         </p>
                       </div>
@@ -165,7 +165,7 @@ export default function CartModal() {
                           <Plus className="w-4 h-4" style={{ color: '#FF6B35' }} />
                         </button>
                       </div>
-                      <span className="font-bold" style={{ color: '#FF6B35' }}>
+                      <span className="text-sm sm:text-base font-bold" style={{ color: '#FF6B35' }}>
                         ${(item.basePrice * item.quantity).toFixed(2)}
                       </span>
                     </div>

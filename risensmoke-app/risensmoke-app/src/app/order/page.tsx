@@ -414,7 +414,7 @@ export default function OrderPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
           {/* Menu Section */}
           <div className="lg:col-span-2">
             {/* Category Filter */}
@@ -448,8 +448,8 @@ export default function OrderPage() {
                     border: '2px solid rgba(255, 107, 53, 0.3)'
                   }}
                 >
-                  <div className="flex flex-col md:flex-row">
-                    <div className="md:w-32 h-32 relative">
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="w-full sm:w-32 h-48 sm:h-32 relative flex-shrink-0">
                       <Image
                         src={item.image || '/Food_Image.jpg'}
                         alt={item.name}
@@ -458,18 +458,18 @@ export default function OrderPage() {
                       />
                     </div>
                     <div className="flex-1 p-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold" style={{ color: '#FFD700' }}>
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                        <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#FFD700' }}>
                           {item.name}
                         </h3>
-                        <span className="text-xl font-bold" style={{ color: '#FF6B35' }}>
+                        <span className="text-lg sm:text-xl font-bold" style={{ color: '#FF6B35' }}>
                           ${item.price.toFixed(2)}
                         </span>
                       </div>
                       <p className="text-sm mb-3" style={{ color: '#F8F8F8' }}>
                         {item.description}
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4">
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => updateItemQuantity(item.id, -1)}
@@ -524,13 +524,13 @@ export default function OrderPage() {
           {/* Order Summary Sidebar */}
           <div className="lg:col-span-1">
             <div
-              className="sticky top-24 rounded-lg p-6"
+              className="lg:sticky lg:top-24 rounded-lg p-4 sm:p-6"
               style={{
                 backgroundColor: 'rgba(40, 40, 40, 0.9)',
                 border: '2px solid rgba(255, 107, 53, 0.3)'
               }}
             >
-              <h2 className="text-2xl font-bold mb-4" style={{ color: '#FFD700' }}>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#FFD700' }}>
                 Order Summary
               </h2>
 
@@ -672,11 +672,11 @@ export default function OrderPage() {
           />
           <div className="fixed inset-0 flex items-center justify-center z-[100001] p-4">
             <div
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg p-6"
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg p-4 sm:p-6"
               style={{ backgroundColor: '#2a2a2a' }}
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold" style={{ color: '#FFD700' }}>
+                <h2 className="text-xl sm:text-2xl font-bold" style={{ color: '#FFD700' }}>
                   Checkout Information
                 </h2>
                 <button
@@ -910,12 +910,12 @@ export default function OrderPage() {
                   className="p-4 rounded-lg"
                   style={{ backgroundColor: '#1C1C1C', border: '1px solid #FF6B35' }}
                 >
-                  <h3 className="font-bold mb-3" style={{ color: '#FFD700' }}>
+                  <h3 className="text-base sm:text-lg font-bold mb-3" style={{ color: '#FFD700' }}>
                     Order Summary
                   </h3>
                   <div className="space-y-2 mb-3">
                     {items.map((item, idx) => (
-                      <div key={idx} className="flex justify-between text-sm">
+                      <div key={idx} className="flex justify-between text-xs sm:text-sm">
                         <span style={{ color: '#F8F8F8' }}>
                           {item.quantity}x {item.name}
                         </span>
@@ -962,7 +962,7 @@ export default function OrderPage() {
           <div className="fixed inset-0 bg-black/70 z-[100000]" />
           <div className="fixed inset-0 flex items-center justify-center z-[100001] p-4">
             <div
-              className="w-full max-w-md text-center p-8 rounded-lg"
+              className="w-full max-w-md text-center p-6 sm:p-8 rounded-lg mx-4"
               style={{ backgroundColor: '#2a2a2a' }}
             >
               <div
@@ -985,7 +985,7 @@ export default function OrderPage() {
               </div>
 
               <h2
-                className="text-3xl font-bold mb-3"
+                className="text-2xl sm:text-3xl font-bold mb-3"
                 style={{
                   color: '#FFD700',
                   fontFamily: "'Alfa Slab One', serif"
@@ -994,12 +994,12 @@ export default function OrderPage() {
                 Order Confirmed!
               </h2>
 
-              <p className="text-lg mb-2" style={{ color: '#F8F8F8' }}>
+              <p className="text-base sm:text-lg mb-2" style={{ color: '#F8F8F8' }}>
                 Your order number is:
               </p>
 
               <div
-                className="text-2xl font-bold mb-6 py-3 rounded"
+                className="text-xl sm:text-2xl font-bold mb-6 py-3 rounded"
                 style={{
                   color: '#FF6B35',
                   backgroundColor: 'rgba(255, 107, 53, 0.1)',
@@ -1009,12 +1009,12 @@ export default function OrderPage() {
                 {orderNumber}
               </div>
 
-              <p className="mb-6" style={{ color: '#F8F8F8' }}>
+              <p className="text-sm sm:text-base mb-6" style={{ color: '#F8F8F8' }}>
                 We've received your order and it will be ready for pickup at:
               </p>
 
               <div className="mb-6">
-                <p className="text-xl font-bold" style={{ color: '#FFD700' }}>
+                <p className="text-lg sm:text-xl font-bold" style={{ color: '#FFD700' }}>
                   {checkoutForm.pickupTime}
                 </p>
               </div>
