@@ -15,166 +15,243 @@ interface MenuItem {
   available: boolean;
 }
 
+interface CheckoutForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  pickupDate: string;
+  pickupTime: string;
+  specialInstructions: string;
+  createAccount: boolean;
+  username: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const menuCategories = [
   'All',
-  'Meats',
+  'Blessed Plates',
   'Sandwiches',
+  'By The Pound',
   'Sides',
-  'Desserts',
-  'Beverages'
+  'Catering Trays'
 ];
 
 const menuItems: MenuItem[] = [
-  // Meats
+  // Blessed Plates
   {
-    id: 'brisket',
-    name: 'Heavenly Brisket',
-    description: '12-hour smoked USDA Prime brisket with our signature bark',
-    price: 24.99,
-    category: 'Meats',
+    id: 'gospel-plate',
+    name: 'Gospel Plate',
+    description: 'Mini gospel truth about the smoke',
+    price: 12.50,
+    category: 'Blessed Plates',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'ribs',
-    name: 'Sacred Ribs',
-    description: 'St. Louis cut ribs with our holy glaze',
-    price: 22.99,
-    category: 'Meats',
+    id: 'disciples-plate',
+    name: 'Disciples Plate',
+    description: 'One meat blessed by the rise',
+    price: 15.35,
+    category: 'Blessed Plates',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'pulled-pork',
-    name: 'Blessed Pulled Pork',
-    description: 'Slow-smoked shoulder, hand-pulled and seasoned',
-    price: 18.99,
-    category: 'Meats',
+    id: 'trinity-plate',
+    name: 'Trinity Plate',
+    description: 'Two meats, one holy transformation',
+    price: 16.95,
+    category: 'Blessed Plates',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'chicken',
-    name: 'Smoked Half Chicken',
-    description: 'Brined and smoked to juicy perfection',
-    price: 16.99,
-    category: 'Meats',
+    id: 'revelation-plate',
+    name: 'Revelation Plate',
+    description: 'The truth about real smoke revealed',
+    price: 18.45,
+    category: 'Blessed Plates',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'sausage',
-    name: 'Texas Hot Links',
-    description: 'Spicy smoked sausage with a perfect snap',
-    price: 14.99,
-    category: 'Meats',
+    id: 'little-rise',
+    name: "Rise N Smoke A Little",
+    description: 'The Signature Rise N Smoke Lil Rib Plate',
+    price: 13.00,
+    category: 'Blessed Plates',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'lotta-rise',
+    name: "Rise N Smoke A Lot",
+    description: 'The Signature Rise N Smoke Rib Plate',
+    price: 18.45,
+    category: 'Blessed Plates',
     image: '/Food_Image.jpg',
     available: true
   },
 
   // Sandwiches
   {
-    id: 'brisket-sandwich',
-    name: 'Brisket Sandwich',
-    description: 'Sliced brisket on a brioche bun with pickles and onions',
-    price: 12.99,
+    id: 'brisket-sausage',
+    name: 'Smokey-Duo',
+    description: 'Double Smoked, Double Flavor',
+    price: 13.00,
     category: 'Sandwiches',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'pulled-pork-sandwich',
-    name: 'Pulled Pork Sandwich',
-    description: 'Pulled pork with coleslaw on a brioche bun',
-    price: 10.99,
+    id: 'sliced-brisket',
+    name: 'Smoke Ring King',
+    description: 'Smoke Ring King - Sliced Brisket',
+    price: 11.95,
     category: 'Sandwiches',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'chopped-brisket',
+    name: 'Smoke Ring Chopped',
+    description: 'Smoke Ring King - Chopped Brisket',
+    price: 10.95,
+    category: 'Sandwiches',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'pulled-pork',
+    name: 'Rise & Pull Pork',
+    description: 'Pork pulled from the rising flames of smoke',
+    price: 10.95,
+    category: 'Sandwiches',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'hotlink',
+    name: 'Fire & Desire',
+    description: 'Hotlink with a smokey edge to love',
+    price: 8.50,
+    category: 'Sandwiches',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'jalapeno-cheddar',
+    name: 'Cheesey Jalapeno Heat',
+    description: 'Sausage kissed with sweet cheese & smokey jalapeno',
+    price: 8.50,
+    category: 'Sandwiches',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+
+  // By The Pound
+  {
+    id: 'brisket-pound',
+    name: 'Brisket By The Pound',
+    description: 'Heavenly smoke-kissed perfection',
+    price: 29.95,
+    category: 'By The Pound',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'ribs-pound',
+    name: 'Ribs By The Pound',
+    description: 'Fall-off-the-bone blessed',
+    price: 25.95,
+    category: 'By The Pound',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'pulled-pork-pound',
+    name: 'Pulled Pork By The Pound',
+    description: 'Tender and transformed',
+    price: 19.95,
+    category: 'By The Pound',
     image: '/Food_Image.jpg',
     available: true
   },
 
   // Sides
   {
+    id: 'potato-salad',
+    name: 'Trinity Potato Salad',
+    description: 'Three-blessed potato perfection',
+    price: 3.50,
+    category: 'Sides',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
     id: 'mac-cheese',
-    name: 'Smoked Mac & Cheese',
-    description: 'Three-cheese blend with a crispy top',
-    price: 6.99,
+    name: 'Sacred Mac & Cheese',
+    description: 'Cheese blessed by the smoke',
+    price: 4.50,
+    category: 'Sides',
+    image: '/Food_Image.jpg',
+    available: true
+  },
+  {
+    id: 'green-beans',
+    name: 'Rise N Green Beans',
+    description: 'Beans that rise with flavor',
+    price: 3.50,
     category: 'Sides',
     image: '/Food_Image.jpg',
     available: true
   },
   {
     id: 'coleslaw',
-    name: 'Tangy Coleslaw',
-    description: 'Fresh and crispy with our house dressing',
-    price: 4.99,
+    name: 'Cool Rise Slaw',
+    description: 'The perfect cooling complement',
+    price: 3.50,
     category: 'Sides',
     image: '/Food_Image.jpg',
     available: true
   },
   {
     id: 'beans',
-    name: 'Smoky Baked Beans',
-    description: 'Slow-cooked with brisket chunks',
-    price: 5.99,
-    category: 'Sides',
-    image: '/Food_Image.jpg',
-    available: true
-  },
-  {
-    id: 'cornbread',
-    name: 'Honey Cornbread',
-    description: 'Sweet and moist, served warm',
-    price: 3.99,
+    name: 'Blessed Beans',
+    description: 'Slow-cooked with holy smoke',
+    price: 3.50,
     category: 'Sides',
     image: '/Food_Image.jpg',
     available: true
   },
 
-  // Desserts
+  // Catering Trays
   {
-    id: 'pecan-pie',
-    name: 'Texas Pecan Pie',
-    description: 'Classic pecan pie with whipped cream',
-    price: 7.99,
-    category: 'Desserts',
+    id: 'family-feast',
+    name: 'Family Feast',
+    description: 'Feed 4-6 blessed souls',
+    price: 65.00,
+    category: 'Catering Trays',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'banana-pudding',
-    name: 'Banana Pudding',
-    description: 'Homemade with vanilla wafers',
-    price: 6.99,
-    category: 'Desserts',
-    image: '/Food_Image.jpg',
-    available: true
-  },
-
-  // Beverages
-  {
-    id: 'sweet-tea',
-    name: 'Sweet Tea',
-    description: 'House-made Southern sweet tea',
-    price: 2.99,
-    category: 'Beverages',
+    id: 'gathering-tray',
+    name: 'Gathering Tray',
+    description: 'Perfect for 8-10 disciples',
+    price: 120.00,
+    category: 'Catering Trays',
     image: '/Food_Image.jpg',
     available: true
   },
   {
-    id: 'lemonade',
-    name: 'Fresh Lemonade',
-    description: 'Hand-squeezed daily',
-    price: 3.49,
-    category: 'Beverages',
-    image: '/Food_Image.jpg',
-    available: true
-  },
-  {
-    id: 'soda',
-    name: 'Soft Drinks',
-    description: 'Coke, Sprite, Dr Pepper, Orange',
-    price: 2.49,
-    category: 'Beverages',
+    id: 'celebration-spread',
+    name: 'Celebration Spread',
+    description: 'Transform your party (15-20 people)',
+    price: 225.00,
+    category: 'Catering Trays',
     image: '/Food_Image.jpg',
     available: true
   }
@@ -182,17 +259,31 @@ const menuItems: MenuItem[] = [
 
 export default function OrderPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [pickupDate, setPickupDate] = useState('');
-  const [pickupTime, setPickupTime] = useState('');
-  const [specialInstructions, setSpecialInstructions] = useState('');
   const [itemQuantities, setItemQuantities] = useState<{ [key: string]: number }>({});
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const [orderNumber, setOrderNumber] = useState('');
+  const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    pickupDate: '',
+    pickupTime: '',
+    specialInstructions: '',
+    createAccount: false,
+    username: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [formErrors, setFormErrors] = useState<Partial<CheckoutForm>>({});
 
-  const { items, addItem, removeItem, updateQuantity, subtotal, tax, total } = useCartStore();
+  const { items, addItem, removeItem, updateQuantity, subtotal, tax, total, clearCart } = useCartStore();
 
   useEffect(() => {
     // Set default pickup date to today
     const today = new Date().toISOString().split('T')[0];
-    setPickupDate(today);
+    setCheckoutForm(prev => ({ ...prev, pickupDate: today }));
   }, []);
 
   const filteredItems = selectedCategory === 'All'
@@ -219,6 +310,86 @@ export default function OrderPage() {
 
   const getItemQuantityInCart = (itemId: string) => {
     return items.filter(item => item.menuItemId === itemId).reduce((sum, item) => sum + item.quantity, 0);
+  };
+
+  const validateForm = (): boolean => {
+    const errors: Partial<CheckoutForm> = {};
+
+    if (!checkoutForm.firstName.trim()) errors.firstName = 'First name is required';
+    if (!checkoutForm.lastName.trim()) errors.lastName = 'Last name is required';
+    if (!checkoutForm.email.trim()) errors.email = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(checkoutForm.email)) {
+      errors.email = 'Invalid email format';
+    }
+    if (!checkoutForm.phone.trim()) errors.phone = 'Phone number is required';
+    else if (!/^\d{10}$/.test(checkoutForm.phone.replace(/\D/g, ''))) {
+      errors.phone = 'Phone must be 10 digits';
+    }
+    if (!checkoutForm.pickupTime) errors.pickupTime = 'Pickup time is required';
+
+    // Validate account creation fields if checked
+    if (checkoutForm.createAccount) {
+      if (!checkoutForm.username.trim()) errors.username = 'Username is required';
+      else if (checkoutForm.username.length < 4) errors.username = 'Username must be at least 4 characters';
+
+      if (!checkoutForm.password) errors.password = 'Password is required';
+      else if (checkoutForm.password.length < 8) errors.password = 'Password must be at least 8 characters';
+
+      if (!checkoutForm.confirmPassword) errors.confirmPassword = 'Please confirm your password';
+      else if (checkoutForm.password !== checkoutForm.confirmPassword) {
+        errors.confirmPassword = 'Passwords do not match';
+      }
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleCheckoutSubmit = () => {
+    if (!validateForm()) return;
+
+    // Generate order number
+    const orderNum = 'RSB' + Date.now().toString().slice(-6);
+    setOrderNumber(orderNum);
+    setOrderConfirmed(true);
+
+    // In production, this would send order to backend
+    console.log('Order submitted:', {
+      orderNumber: orderNum,
+      customer: checkoutForm,
+      items: items,
+      total: total
+    });
+
+    // Clear cart after successful order
+    setTimeout(() => {
+      clearCart();
+    }, 2000);
+  };
+
+  const handleInputChange = (field: keyof CheckoutForm, value: string) => {
+    setCheckoutForm(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (formErrors[field]) {
+      setFormErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
+
+  // Generate time slots for pickup
+  const generateTimeSlots = () => {
+    const slots = [];
+    for (let hour = 11; hour <= 20; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        const display = new Date(`2000-01-01T${time}`).toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        slots.push({ value: time, display });
+      }
+    }
+    return slots;
   };
 
   return (
@@ -398,8 +569,8 @@ export default function OrderPage() {
                 </label>
                 <input
                   type="date"
-                  value={pickupDate}
-                  onChange={(e) => setPickupDate(e.target.value)}
+                  value={checkoutForm.pickupDate}
+                  onChange={(e) => handleInputChange('pickupDate', e.target.value)}
                   min={new Date().toISOString().split('T')[0]}
                   className="w-full px-3 py-2 rounded mb-2"
                   style={{
@@ -409,8 +580,8 @@ export default function OrderPage() {
                   }}
                 />
                 <select
-                  value={pickupTime}
-                  onChange={(e) => setPickupTime(e.target.value)}
+                  value={checkoutForm.pickupTime}
+                  onChange={(e) => handleInputChange('pickupTime', e.target.value)}
                   className="w-full px-3 py-2 rounded"
                   style={{
                     backgroundColor: 'rgba(30, 30, 30, 0.8)',
@@ -419,24 +590,11 @@ export default function OrderPage() {
                   }}
                 >
                   <option value="">Select pickup time</option>
-                  <option value="11:00">11:00 AM</option>
-                  <option value="11:30">11:30 AM</option>
-                  <option value="12:00">12:00 PM</option>
-                  <option value="12:30">12:30 PM</option>
-                  <option value="13:00">1:00 PM</option>
-                  <option value="13:30">1:30 PM</option>
-                  <option value="14:00">2:00 PM</option>
-                  <option value="14:30">2:30 PM</option>
-                  <option value="15:00">3:00 PM</option>
-                  <option value="15:30">3:30 PM</option>
-                  <option value="16:00">4:00 PM</option>
-                  <option value="16:30">4:30 PM</option>
-                  <option value="17:00">5:00 PM</option>
-                  <option value="17:30">5:30 PM</option>
-                  <option value="18:00">6:00 PM</option>
-                  <option value="18:30">6:30 PM</option>
-                  <option value="19:00">7:00 PM</option>
-                  <option value="19:30">7:30 PM</option>
+                  {generateTimeSlots().map(slot => (
+                    <option key={slot.value} value={slot.display}>
+                      {slot.display}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -446,8 +604,8 @@ export default function OrderPage() {
                   Special Instructions
                 </label>
                 <textarea
-                  value={specialInstructions}
-                  onChange={(e) => setSpecialInstructions(e.target.value)}
+                  value={checkoutForm.specialInstructions}
+                  onChange={(e) => handleInputChange('specialInstructions', e.target.value)}
                   rows={3}
                   placeholder="Any special requests?"
                   className="w-full px-3 py-2 rounded resize-none"
@@ -479,23 +637,24 @@ export default function OrderPage() {
               <button
                 className="w-full py-3 rounded-lg font-bold text-lg"
                 style={{
-                  background: items.length > 0 && pickupTime
+                  background: items.length > 0 && checkoutForm.pickupTime
                     ? 'linear-gradient(135deg, #FF6B35, #D32F2F)'
                     : 'rgba(100, 100, 100, 0.5)',
                   color: '#F8F8F8',
-                  cursor: items.length > 0 && pickupTime ? 'pointer' : 'not-allowed'
+                  cursor: items.length > 0 && checkoutForm.pickupTime ? 'pointer' : 'not-allowed'
                 }}
-                disabled={items.length === 0 || !pickupTime}
+                disabled={items.length === 0 || !checkoutForm.pickupTime}
+                onClick={() => items.length > 0 && checkoutForm.pickupTime && setShowCheckout(true)}
               >
-                {items.length === 0 ? 'Add Items to Cart' : !pickupTime ? 'Select Pickup Time' : 'Proceed to Checkout'}
+                {items.length === 0 ? 'Add Items to Cart' : !checkoutForm.pickupTime ? 'Select Pickup Time' : 'Proceed to Checkout'}
               </button>
 
               {/* Estimated Ready Time */}
-              {pickupTime && (
+              {checkoutForm.pickupTime && (
                 <div className="mt-4 text-center">
                   <Clock className="inline w-4 h-4 mr-1" style={{ color: '#FF6B35' }} />
                   <span className="text-sm" style={{ color: '#F8F8F8' }}>
-                    Estimated ready by {pickupTime}
+                    Estimated ready by {checkoutForm.pickupTime}
                   </span>
                 </div>
               )}
@@ -503,6 +662,408 @@ export default function OrderPage() {
           </div>
         </div>
       </div>
+
+      {/* Checkout Modal */}
+      {showCheckout && !orderConfirmed && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/70 z-[100000]"
+            onClick={() => setShowCheckout(false)}
+          />
+          <div className="fixed inset-0 flex items-center justify-center z-[100001] p-4">
+            <div
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg p-6"
+              style={{ backgroundColor: '#2a2a2a' }}
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold" style={{ color: '#FFD700' }}>
+                  Checkout Information
+                </h2>
+                <button
+                  onClick={() => setShowCheckout(false)}
+                  className="p-1 hover:opacity-80"
+                  style={{ color: '#F8F8F8' }}
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {/* Name Fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                      First Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={checkoutForm.firstName}
+                      onChange={(e) => handleInputChange('firstName', e.target.value)}
+                      className="w-full px-4 py-2 rounded"
+                      style={{
+                        backgroundColor: '#1C1C1C',
+                        color: '#F8F8F8',
+                        border: formErrors.firstName ? '1px solid #D32F2F' : '1px solid #444'
+                      }}
+                    />
+                    {formErrors.firstName && (
+                      <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                        {formErrors.firstName}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                      Last Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={checkoutForm.lastName}
+                      onChange={(e) => handleInputChange('lastName', e.target.value)}
+                      className="w-full px-4 py-2 rounded"
+                      style={{
+                        backgroundColor: '#1C1C1C',
+                        color: '#F8F8F8',
+                        border: formErrors.lastName ? '1px solid #D32F2F' : '1px solid #444'
+                      }}
+                    />
+                    {formErrors.lastName && (
+                      <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                        {formErrors.lastName}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Contact Fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      value={checkoutForm.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className="w-full px-4 py-2 rounded"
+                      style={{
+                        backgroundColor: '#1C1C1C',
+                        color: '#F8F8F8',
+                        border: formErrors.email ? '1px solid #D32F2F' : '1px solid #444'
+                      }}
+                    />
+                    {formErrors.email && (
+                      <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                        {formErrors.email}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                      Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      value={checkoutForm.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      placeholder="(123) 456-7890"
+                      className="w-full px-4 py-2 rounded"
+                      style={{
+                        backgroundColor: '#1C1C1C',
+                        color: '#F8F8F8',
+                        border: formErrors.phone ? '1px solid #D32F2F' : '1px solid #444'
+                      }}
+                    />
+                    {formErrors.phone && (
+                      <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                        {formErrors.phone}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Account Creation Option */}
+                <div
+                  className="p-4 rounded-lg"
+                  style={{ backgroundColor: 'rgba(255, 215, 0, 0.1)', border: '1px solid rgba(255, 215, 0, 0.3)' }}
+                >
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={checkoutForm.createAccount}
+                      onChange={(e) => setCheckoutForm(prev => ({ ...prev, createAccount: e.target.checked }))}
+                      className="mr-3 w-5 h-5"
+                      style={{ accentColor: '#FFD700' }}
+                    />
+                    <span className="font-semibold" style={{ color: '#FFD700' }}>
+                      Create an account for faster checkout next time
+                    </span>
+                  </label>
+
+                  {checkoutForm.createAccount && (
+                    <div className="mt-4 space-y-4">
+                      <div>
+                        <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                          Username *
+                        </label>
+                        <input
+                          type="text"
+                          value={checkoutForm.username}
+                          onChange={(e) => handleInputChange('username', e.target.value)}
+                          className="w-full px-4 py-2 rounded"
+                          placeholder="Choose a username"
+                          style={{
+                            backgroundColor: '#1C1C1C',
+                            color: '#F8F8F8',
+                            border: formErrors.username ? '1px solid #D32F2F' : '1px solid #444'
+                          }}
+                        />
+                        {formErrors.username && (
+                          <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                            {formErrors.username}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                            Password *
+                          </label>
+                          <input
+                            type="password"
+                            value={checkoutForm.password}
+                            onChange={(e) => handleInputChange('password', e.target.value)}
+                            className="w-full px-4 py-2 rounded"
+                            placeholder="Min. 8 characters"
+                            style={{
+                              backgroundColor: '#1C1C1C',
+                              color: '#F8F8F8',
+                              border: formErrors.password ? '1px solid #D32F2F' : '1px solid #444'
+                            }}
+                          />
+                          {formErrors.password && (
+                            <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                              {formErrors.password}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                            Confirm Password *
+                          </label>
+                          <input
+                            type="password"
+                            value={checkoutForm.confirmPassword}
+                            onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                            className="w-full px-4 py-2 rounded"
+                            placeholder="Re-enter password"
+                            style={{
+                              backgroundColor: '#1C1C1C',
+                              color: '#F8F8F8',
+                              border: formErrors.confirmPassword ? '1px solid #D32F2F' : '1px solid #444'
+                            }}
+                          />
+                          {formErrors.confirmPassword && (
+                            <p className="text-sm mt-1" style={{ color: '#D32F2F' }}>
+                              {formErrors.confirmPassword}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="mt-3 p-3 rounded" style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)' }}>
+                        <p className="text-sm" style={{ color: '#FF6B35' }}>
+                          ✓ Save your order history<br />
+                          ✓ Quick reorder your favorites<br />
+                          ✓ Earn loyalty points
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Special Instructions */}
+                <div>
+                  <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+                    Special Instructions (Optional)
+                  </label>
+                  <textarea
+                    value={checkoutForm.specialInstructions}
+                    onChange={(e) => handleInputChange('specialInstructions', e.target.value)}
+                    rows={3}
+                    className="w-full px-4 py-2 rounded"
+                    style={{
+                      backgroundColor: '#1C1C1C',
+                      color: '#F8F8F8',
+                      border: '1px solid #444'
+                    }}
+                    placeholder="Any special requests or dietary restrictions..."
+                  />
+                </div>
+
+                {/* Order Summary */}
+                <div
+                  className="p-4 rounded-lg"
+                  style={{ backgroundColor: '#1C1C1C', border: '1px solid #FF6B35' }}
+                >
+                  <h3 className="font-bold mb-3" style={{ color: '#FFD700' }}>
+                    Order Summary
+                  </h3>
+                  <div className="space-y-2 mb-3">
+                    {items.map((item, idx) => (
+                      <div key={idx} className="flex justify-between text-sm">
+                        <span style={{ color: '#F8F8F8' }}>
+                          {item.quantity}x {item.name}
+                        </span>
+                        <span style={{ color: '#FF6B35' }}>
+                          ${(item.basePrice * item.quantity).toFixed(2)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="pt-3 border-t border-gray-600">
+                    <div className="flex justify-between font-bold">
+                      <span style={{ color: '#FFD700' }}>Total</span>
+                      <span style={{ color: '#FFD700' }}>${total.toFixed(2)}</span>
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <p className="text-sm" style={{ color: '#F8F8F8' }}>
+                      <Clock className="inline w-4 h-4 mr-1" style={{ color: '#FF6B35' }} />
+                      Pickup Time: {checkoutForm.pickupTime}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  onClick={handleCheckoutSubmit}
+                  className="w-full py-3 rounded-lg font-bold text-lg"
+                  style={{
+                    background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
+                    color: '#F8F8F8'
+                  }}
+                >
+                  Place Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Order Confirmation Modal */}
+      {orderConfirmed && (
+        <>
+          <div className="fixed inset-0 bg-black/70 z-[100000]" />
+          <div className="fixed inset-0 flex items-center justify-center z-[100001] p-4">
+            <div
+              className="w-full max-w-md text-center p-8 rounded-lg"
+              style={{ backgroundColor: '#2a2a2a' }}
+            >
+              <div
+                className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(255, 215, 0, 0.2)' }}
+              >
+                <svg
+                  className="w-12 h-12"
+                  fill="none"
+                  stroke="#FFD700"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+
+              <h2
+                className="text-3xl font-bold mb-3"
+                style={{
+                  color: '#FFD700',
+                  fontFamily: "'Alfa Slab One', serif"
+                }}
+              >
+                Order Confirmed!
+              </h2>
+
+              <p className="text-lg mb-2" style={{ color: '#F8F8F8' }}>
+                Your order number is:
+              </p>
+
+              <div
+                className="text-2xl font-bold mb-6 py-3 rounded"
+                style={{
+                  color: '#FF6B35',
+                  backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                  border: '2px dashed #FF6B35'
+                }}
+              >
+                {orderNumber}
+              </div>
+
+              <p className="mb-6" style={{ color: '#F8F8F8' }}>
+                We've received your order and it will be ready for pickup at:
+              </p>
+
+              <div className="mb-6">
+                <p className="text-xl font-bold" style={{ color: '#FFD700' }}>
+                  {checkoutForm.pickupTime}
+                </p>
+              </div>
+
+              <p className="text-sm mb-4" style={{ color: '#999' }}>
+                A confirmation email has been sent to {checkoutForm.email}
+              </p>
+
+              {checkoutForm.createAccount && (
+                <div className="mb-6 p-3 rounded" style={{ backgroundColor: 'rgba(255, 215, 0, 0.1)' }}>
+                  <p className="text-sm font-semibold" style={{ color: '#FFD700' }}>
+                    ✓ Account created successfully!
+                  </p>
+                  <p className="text-sm mt-1" style={{ color: '#F8F8F8' }}>
+                    You can now log in with username: {checkoutForm.username}
+                  </p>
+                </div>
+              )}
+
+              <button
+                onClick={() => {
+                  setOrderConfirmed(false);
+                  setShowCheckout(false);
+                  setCheckoutForm({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phone: '',
+                    pickupDate: new Date().toISOString().split('T')[0],
+                    pickupTime: '',
+                    specialInstructions: '',
+                    createAccount: false,
+                    username: '',
+                    password: '',
+                    confirmPassword: ''
+                  });
+                }}
+                className="w-full py-3 rounded-lg font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
+                  color: '#F8F8F8'
+                }}
+              >
+                Start New Order
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

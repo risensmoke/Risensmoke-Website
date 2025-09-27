@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   keywords: "BBQ, barbecue, Hillsboro Texas, Rise N Smoke, smoked meat, restaurant",
   authors: [{ name: "Rise N' Smoke" }],
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     title: "Rise N' Smoke BBQ",
