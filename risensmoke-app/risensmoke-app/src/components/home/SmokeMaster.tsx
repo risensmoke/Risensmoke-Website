@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { Flame } from 'lucide-react';
 
 const SmokeMaster = () => {
   return (
@@ -61,22 +60,6 @@ const SmokeMaster = () => {
               />
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-              {/* Badge */}
-              <div
-                className="absolute top-6 right-6 px-6 py-3 rounded-full backdrop-blur-sm"
-                style={{
-                  backgroundColor: 'rgba(211, 47, 47, 0.9)',
-                  boxShadow: '0 8px 32px rgba(211, 47, 47, 0.4)'
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <Flame className="w-5 h-5" style={{ color: '#FFD700' }} />
-                  <span className="font-bold text-sm" style={{ color: '#F8F8F8' }}>
-                    MASTER OF SMOKE
-                  </span>
-                </div>
-              </div>
             </div>
 
             {/* Decorative Elements */}
