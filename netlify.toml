@@ -1,7 +1,7 @@
 [build]
   base = "risensmoke-app/risensmoke-app"
   command = "npm run build"
-  publish = "risensmoke-app/risensmoke-app/out"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "20"
