@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import CartModal from "@/components/cart/CartModal";
 
 export const metadata: Metadata = {
   title: "Rise N' Smoke - Real Smoke. Real Deep. Real Good.",
@@ -38,6 +39,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="custom-scrollbar" style={{ fontFamily: "'Source Sans Pro', Arial, sans-serif", color: "#F8F8F8", backgroundColor: "#1C1C1C" }}>
         <Header />
+        <CartModal />
         <main className="pt-20">
           {children}
         </main>
