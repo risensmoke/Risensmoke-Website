@@ -459,10 +459,11 @@ export default function MenuPage() {
 
   const handleAddToCart = (item: MenuItem) => {
     addItem({
-      id: item.id,
+      menuItemId: item.id,
       name: item.name,
-      price: item.price,
-      quantity: 1
+      basePrice: item.price,
+      quantity: 1,
+      modifiers: []
     });
   };
 
