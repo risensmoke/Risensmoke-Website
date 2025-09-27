@@ -4,7 +4,10 @@ import Image from 'next/image';
 
 const SmokeMaster = () => {
   return (
-    <section className="py-20 px-4 relative overflow-hidden" style={{ backgroundColor: '#1C1C1C' }}>
+    <section
+      className="py-12 md:py-20 px-4 relative overflow-hidden"
+      style={{ backgroundColor: '#1C1C1C' }}
+    >
       {/* Background Smoke Effect */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -18,27 +21,29 @@ const SmokeMaster = () => {
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Full Width Section Headers */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <h2
-            className="text-hero mb-4"
+            className="text-3xl md:text-5xl lg:text-hero mb-4"
             style={{
               fontFamily: "'Rye', serif",
               background: 'linear-gradient(135deg, #FF6B35, #FFD700)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               textShadow: '0 0 40px rgba(255, 107, 53, 0.5)',
-              letterSpacing: '2px'
+              letterSpacing: '2px',
+              lineHeight: '1.2'
             }}
           >
             THE SMOKEMASTER
           </h2>
 
           <h3
-            className="text-h2"
+            className="text-xl md:text-2xl lg:text-h2 px-4"
             style={{
               color: '#FF6B35',
               fontFamily: "'Alfa Slab One', serif",
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+              lineHeight: '1.3'
             }}
           >
             The Rise & Transform Method™
@@ -46,10 +51,10 @@ const SmokeMaster = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Image Section */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative order-1 md:order-1">
+            <div className="relative rounded-lg md:rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/Image_Smokemaster.jpg"
                 alt="The SmokeMaster"
@@ -62,9 +67,9 @@ const SmokeMaster = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
 
-            {/* Decorative Elements */}
+            {/* Decorative Elements - Hidden on mobile */}
             <div
-              className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full opacity-50"
+              className="hidden md:block absolute -bottom-4 -right-4 w-32 h-32 rounded-full opacity-50"
               style={{
                 background: 'radial-gradient(circle, rgba(255, 107, 53, 0.4), transparent)',
                 filter: 'blur(40px)'
@@ -73,73 +78,81 @@ const SmokeMaster = () => {
           </div>
 
           {/* Text Content */}
-          <div className="text-center md:text-left">
-            <p className="text-lg mb-6 leading-relaxed" style={{ color: '#F8F8F8' }}>
+          <div className="text-center md:text-left order-2 md:order-2">
+            <p
+              className="text-base md:text-lg mb-6 leading-relaxed px-2 md:px-0"
+              style={{ color: '#F8F8F8' }}
+            >
               For over 15 years, our SmokeMaster has perfected the ancient art of BBQ transformation.
               Using a secret blend of hickory and oak, timing the smoke to rise at just the right moment,
               creating that perfect bark and smoke ring that turns good meat into something heavenly.
             </p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8 px-2 md:px-0">
               <div className="flex items-start gap-3">
                 <div
-                  className="w-2 h-2 rounded-full mt-2"
+                  className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
                   style={{ backgroundColor: '#FF6B35', boxShadow: '0 0 10px rgba(255, 107, 53, 0.6)' }}
                 />
-                <p style={{ color: '#F8F8F8' }}>
+                <p className="text-sm md:text-base" style={{ color: '#F8F8F8' }}>
                   <strong>Temperature Control:</strong> Maintaining the perfect 225°F for hours on end
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
                 <div
-                  className="w-2 h-2 rounded-full mt-2"
+                  className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
                   style={{ backgroundColor: '#FF6B35', boxShadow: '0 0 10px rgba(255, 107, 53, 0.6)' }}
                 />
-                <p style={{ color: '#F8F8F8' }}>
+                <p className="text-sm md:text-base" style={{ color: '#F8F8F8' }}>
                   <strong>Smoke Timing:</strong> Knowing exactly when the smoke rises and transforms
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
                 <div
-                  className="w-2 h-2 rounded-full mt-2"
+                  className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
                   style={{ backgroundColor: '#FF6B35', boxShadow: '0 0 10px rgba(255, 107, 53, 0.6)' }}
                 />
-                <p style={{ color: '#F8F8F8' }}>
+                <p className="text-sm md:text-base" style={{ color: '#F8F8F8' }}>
                   <strong>The Secret:</strong> It&apos;s not just cooking - it&apos;s a spiritual transformation
                 </p>
               </div>
             </div>
 
             <div
-              className="inline-block p-6 rounded-lg"
+              className="inline-block p-4 md:p-6 rounded-lg mx-auto md:mx-0"
               style={{
                 backgroundColor: 'rgba(40, 40, 40, 0.8)',
                 border: '2px solid rgba(255, 107, 53, 0.3)'
               }}
             >
               <p
-                className="text-2xl font-bold mb-2"
+                className="text-lg md:text-xl lg:text-2xl font-bold mb-2"
                 style={{
                   color: '#FFD700',
                   fontFamily: "'Alfa Slab One', serif",
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                  lineHeight: '1.3'
                 }}
               >
                 "When smoke rises just right,
               </p>
               <p
-                className="text-2xl font-bold"
+                className="text-lg md:text-xl lg:text-2xl font-bold"
                 style={{
                   color: '#FFD700',
                   fontFamily: "'Alfa Slab One', serif",
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                  lineHeight: '1.3'
                 }}
               >
                 meat transforms into magic."
               </p>
-              <p className="text-right mt-3" style={{ color: '#FF6B35', fontStyle: 'italic' }}>
+              <p
+                className="text-right mt-3 text-sm md:text-base"
+                style={{ color: '#FF6B35', fontStyle: 'italic' }}
+              >
                 - The SmokeMaster
               </p>
             </div>
