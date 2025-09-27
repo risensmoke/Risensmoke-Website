@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)file:///C:/Users/rosej/Downloads/font_demo.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rise N' Smoke Typography Demo</title>
+    <link href="./Rise N&#39; Smoke Typography Demo_files/css2" rel="stylesheet">
+    <style>
+        :root {
+            --smoke-black: #1C1C1C;
+            --ember-orange: #FF6B35;
+            --fire-red: #D32F2F;
+            --ash-gray: #6C6C6C;
+            --smoke-white: #F8F8F8;
+            --hickory-brown: #8B4513;
+            --primary-gradient: linear-gradient(135deg, #FF6B35, #D32F2F);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F5F5F5;
+            font-family: 'Source Sans Pro', Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(28, 28, 28, 0.1);
+        }
+
+        .dark-section {
+            background: linear-gradient(to bottom, #6C6C6C, #1C1C1C);
+            color: var(--smoke-white);
+        }
+
+        /* Primary Font - Western Headlines */
+        .font-primary {
+            font-family: 'Rye', 'serif';
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .font-primary-alt {
+            font-family: 'Alfa Slab One', 'serif';
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .font-primary-bold {
+            font-family: 'Fredoka One', 'cursive';
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        /* Secondary Font - Subheadings */
+        .font-secondary {
+            font-family: 'Alfa Slab One', 'serif';
+            font-weight: 400;
+        }
+
+        /* Body Font */
+        .font-body {
+            font-family: 'Source Sans Pro', 'Arial', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Typography Scale */
+        .text-hero {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--smoke-black);
+            margin: 0 0 1rem 0;
+        }
+
+        .text-hero.gradient {
+            background: linear-gradient(to top, #D32F2F, #FF6B35, #FFB74D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .text-hero.fire-gradient {
+            background: linear-gradient(to top, #B71C1C, #D32F2F, #FF5722, #FF6B35, #FF9800, #FFC107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .text-hero.smoke-gradient {
+            background: linear-gradient(to top, #1C1C1C, #424242, #6C6C6C, #9E9E9E, #C0C0C0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+        }
+
+        .text-h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin: 0 0 1rem 0;
+        }
+
+        .text-h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 0 0 1rem 0;
+        }
+
+        .text-h3 {
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            margin: 0 0 1rem 0;
+        }
+
+        .text-large {
+            font-size: 1.25rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .text-base {
+            font-size: 1rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .orange {
+            color: var(--ember-orange);
+        }
+
+        .white {
+            color: var(--smoke-white);
+        }
+
+        .gray {
+            color: var(--ash-gray);
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--ash-gray);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            color: var(--ember-orange);
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: var(--ash-gray);
+            margin-top: 0.5rem;
+        }
+
+        .brand-demo {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(to bottom, #6C6C6C, #1C1C1C);
+            color: var(--smoke-white);
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Brand Header Demo -->
+        <div class="brand-demo">
+            <h1 class="font-primary text-hero fire-gradient">RISE N' SMOKE</h1>
+            <p class="font-secondary text-large orange">The Rise &amp; Transform Method™</p>
+            <p class="font-body text-base">"Real Smoke. Real Deep. Real Good."</p>
+        </div>
+
+        <!-- Western Font Options -->
+        <div class="demo-section">
+            <h2 class="font-secondary text-h2">Western Font Options</h2>
+            
+            <h1 class="font-primary text-hero fire-gradient">Rye Font - Fire Gradient</h1>
+            <h1 class="font-primary text-hero gradient">Rye Font - Orange Gradient</h1>
+            <h1 class="font-primary text-hero smoke-gradient">Rye Font - Smoke Gradient</h1>
+            
+            <h1 class="font-primary-alt text-hero fire-gradient">Alfa Slab One - Fire</h1>
+            <h1 class="font-primary-alt text-hero gradient">Alfa Slab One - Orange</h1>
+            
+            <h1 class="font-primary-bold text-hero fire-gradient">Fredoka One - Fire</h1>
+            <h1 class="font-primary-bold text-hero gradient">Fredoka One - Orange</h1>
+        </div>
+
+        <!-- Typography Hierarchy -->
+        <div class="demo-section">
+            <h2 class="font-secondary text-h2">Western Typography with Gradients</h2>
+            
+            <h1 class="font-primary text-hero fire-gradient">Hero Headlines (Rye)</h1>
+            <h2 class="font-primary text-h1 gradient">Main Headlines</h2>
+            <h3 class="font-secondary text-h2">Secondary Headlines (Alfa Slab One)</h3>
+            <h4 class="font-secondary text-h3 orange">Section Headers</h4>
+            
+            <p class="font-body text-large"><strong>Large Body Text (Source Sans Pro)</strong> - Clean, readable body text that complements the Western headlines without competing for attention.</p>
+            
+            <p class="font-body text-base">Regular body text maintains readability while the Western fonts handle the personality and brand impact in headlines and menu items.</p>
+        </div>
+
+        <!-- Menu Item Examples -->
+        <div class="demo-section">
+            <h2 class="font-secondary text-h2">Western Menu Typography</h2>
+            
+            <div class="menu-item">
+                <div>
+                    <h3 class="font-primary-alt text-h3 gradient">Holy Trinity Plate</h3>
+                    <p class="font-body text-base gray">Three meats, one holy transformation</p>
+                </div>
+                <span class="font-secondary price">$18.99</span>
+            </div>
+            
+            <div class="menu-item">
+                <div>
+                    <h3 class="font-primary-alt text-h3 gradient">Sacred Link</h3>
+                    <p class="font-body text-base gray">Blessed by the rising smoke</p>
+                </div>
+                <span class="font-secondary price">$12.99</span>
+            </div>
+            
+            <div class="menu-item">
+                <div>
+                    <h3 class="font-primary-alt text-h3 gradient">The Perfect Rise</h3>
+                    <p class="font-body text-base gray">Sliced thick to show off that smoke ring</p>
+                </div>
+                <span class="font-secondary price">$15.99</span>
+            </div>
+        </div>
+
+        <!-- Dark Theme Example -->
+        <div class="demo-section dark-section">
+            <h2 class="font-primary text-h1 fire-gradient">Dark Theme Typography</h2>
+            <h3 class="font-secondary text-h2 orange">We Make Smoke Work Harder</h3>
+            <p class="font-body text-large white">See, when smoke gets hot enough and rises just right, it opens up the meat like tiny doors, letting all that smoky goodness get deep inside.</p>
+            <p class="font-body text-base white">It's not just coating the outside—it's changing the whole thing from the inside out. We've spent years learning exactly when that smoke is doing its best work.</p>
+        </div>
+
+        <!-- Brand Messaging Examples -->
+        <div class="demo-section">
+            <h2 class="font-secondary text-h2">Western Brand Messaging</h2>
+            
+            <h3 class="font-primary text-h1 fire-gradient">"THE SECRET'S IN THE RISE"</h3>
+            <p class="font-body text-large">Primary messaging with fire gradient for maximum impact</p>
+            
+            <h3 class="font-secondary text-h2 gradient">Smoke That Soaks Bone-Deep</h3>
+            <p class="font-body text-base">Secondary messaging with orange gradient</p>
+            
+            <h3 class="font-primary-bold text-h2 smoke-gradient">Transformed From Inside Out</h3>
+            <p class="font-body text-base gray">Alternative Western font with smoke gradient effect</p>
+        </div>
+    </div>
+
+</body></html>

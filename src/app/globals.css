@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&family=Alfa+Slab+One&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors */
+  --smoke-black: #1C1C1C;
+  --ember-orange: #FF6B35;
+  --fire-red: #D32F2F;
+
+  /* Secondary Colors */
+  --ash-gray: #6C6C6C;
+  --smoke-white: #F8F8F8;
+  --hickory-brown: #8B4513;
+  --light-background: #F5F5F5;
+
+  /* Final Approved Gradients */
+  --primary-gradient: linear-gradient(to top, #D32F2F, #FF6B35, #FFB74D);
+  --fire-gradient: linear-gradient(to top, #B71C1C, #D32F2F, #FF5722, #FF6B35, #FF9800, #FFC107);
+  --smoke-gradient: linear-gradient(to top, #1C1C1C, #424242, #6C6C6C, #9E9E9E, #C0C0C0);
+  --background-gradient: linear-gradient(to bottom, #6C6C6C, #1C1C1C);
+
+  /* Semantic Colors */
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+  --info: #2196F3;
+}
+
+@layer base {
+  body {
+    @apply font-body text-smoke-black bg-smoke-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-secondary;
+  }
+}
+
+@layer components {
+  /* Text Gradient Effects */
+  .text-fire-gradient {
+    background: linear-gradient(to top, #B71C1C, #D32F2F, #FF5722, #FF6B35, #FF9800, #FFC107);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+  }
+
+  .text-primary-gradient {
+    background: linear-gradient(to top, #D32F2F, #FF6B35, #FFB74D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .text-smoke-gradient {
+    background: linear-gradient(to top, #1C1C1C, #424242, #6C6C6C, #9E9E9E, #C0C0C0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-primary-gradient text-smoke-white border-none px-8 py-4 font-secondary font-normal uppercase tracking-wider rounded-lg transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-ember-orange border-2 border-ember-orange px-8 py-4 font-secondary font-normal uppercase tracking-wider rounded-lg transition-all duration-300 cursor-pointer hover:bg-ember-orange hover:text-smoke-white hover:-translate-y-0.5;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border border-ember-orange/10 hover:-translate-y-1 hover:shadow-xl;
+    box-shadow: 0 4px 20px rgba(28, 28, 28, 0.1);
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.2);
+  }
+
+  .card-dark {
+    @apply bg-background-gradient text-smoke-white shadow-xl;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Navigation */
+  .navbar {
+    @apply bg-background-gradient backdrop-blur-lg py-4 fixed w-full top-0 z-[1000] border-b border-ember-orange/20;
+  }
+
+  .navbar.scrolled {
+    @apply bg-smoke-black/90 backdrop-blur-xl;
+  }
+
+  .nav-link {
+    @apply text-smoke-white font-secondary font-normal uppercase tracking-wider transition-all duration-300 no-underline px-4 py-2 rounded hover:text-ember-orange hover:bg-ember-orange/10;
+  }
+
+  /* Menu Items */
+  .menu-item-card {
+    @apply bg-white rounded-2xl p-6 shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent hover:-translate-y-1 hover:shadow-lg hover:border-ember-orange;
+    box-shadow: 0 4px 15px rgba(28, 28, 28, 0.08);
+  }
+
+  .menu-item-card:hover {
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+  }
+
+  .menu-item-price {
+    @apply text-fire-red font-secondary font-normal text-xl;
+  }
+
+  /* Cart */
+  .cart-sidebar {
+    @apply fixed right-0 top-0 h-screen w-[400px] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-[1001] overflow-y-auto;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .cart-sidebar.open {
+    @apply translate-x-0;
+  }
+
+  .cart-item {
+    @apply p-4 border-b border-ash-gray/20 transition-colors duration-200 hover:bg-ember-orange/5;
+  }
+
+  /* Smoke Animation */
+  .smoke-particle {
+    @apply absolute w-20 h-20 bg-smoke-white/10 rounded-full blur-xl;
+    animation: smokeRise 4s ease-in-out infinite;
+  }
+
+  /* Form Elements */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  textarea,
+  select {
+    @apply w-full px-4 py-2 border border-ash-gray/30 rounded-lg focus:border-ember-orange focus:outline-none focus:ring-2 focus:ring-ember-orange/20 transition-all duration-200;
+  }
+
+  label {
+    @apply block text-sm font-semibold text-ash-gray mb-2;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ember-orange) var(--smoke-white);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--smoke-white);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--ember-orange);
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--fire-red);
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "risensmoke-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "@hookform/resolvers": "^5.2.2",
+    "@prisma/client": "^6.16.2",
+    "@stripe/react-stripe-js": "^4.0.2",
+    "@stripe/stripe-js": "^7.9.0",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.58.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.22",
+    "lucide-react": "^0.544.0",
+    "next": "15.5.4",
+    "next-auth": "^5.0.0-beta.29",
+    "prisma": "^6.16.2",
+    "react": "19.1.0",
+    "react-datepicker": "^8.7.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.63.0",
+    "react-hot-toast": "^2.6.0",
+    "stripe": "^18.5.0",
+    "zod": "^4.1.11",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-datepicker": "^6.2.0",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.6",
+    "typescript": "^5"
+  }
+}
