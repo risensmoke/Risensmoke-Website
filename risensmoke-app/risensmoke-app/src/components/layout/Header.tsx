@@ -36,7 +36,7 @@ const Header = () => {
               alt="Rise N' Smoke BBQ Logo"
               width={60}
               height={60}
-              className="rounded-full"
+              className="rounded-full w-12 h-12 md:w-15 md:h-15"
               style={{ backgroundColor: 'transparent', mixBlendMode: 'normal' }}
               priority
             />
@@ -52,7 +52,7 @@ const Header = () => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center" style={{ gap: '0.75rem' }}>
             <CartButton />
             <Link href="/order" className="hidden md:block btn-primary">
               Order Online
@@ -60,14 +60,20 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden"
-              style={{ color: "#F8F8F8" }}
+              className="md:hidden p-2"
+              style={{
+                color: "#F8F8F8",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-7 h-7" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-7 h-7" />
               )}
             </button>
           </div>
@@ -75,13 +81,14 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
+          <div className="md:hidden mobile-menu">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-2 nav-link"
+                className="block py-3 nav-link text-lg"
                 onClick={() => setIsMobileMenuOpen(false)}
+                style={{ borderBottom: '1px solid rgba(255, 107, 53, 0.2)' }}
               >
                 {item.name}
               </Link>

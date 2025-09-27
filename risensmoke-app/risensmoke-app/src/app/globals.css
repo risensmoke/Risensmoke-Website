@@ -114,8 +114,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   width: 100%;
   z-index: 99999;
-  padding: 1rem 0;
-  /* High contrast background for debugging */
+  padding: 0.75rem 0;
   background: #2a2a2a;
   border-bottom: 4px solid #FF6B35;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
@@ -136,16 +135,59 @@ h1, h2, h3, h4, h5, h6 {
   visibility: visible !important;
 }
 
-/* Ensure navigation items container is visible */
-.navbar > div > nav > div:nth-child(2) {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  gap: 2rem;
-  /* Debug: bright background to ensure visibility */
-  background: rgba(255, 107, 53, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+/* Mobile styles */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar .container {
+    padding: 0 0.75rem;
+  }
+
+  /* Mobile menu dropdown */
+  .navbar .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #2a2a2a;
+    border-bottom: 2px solid #FF6B35;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+  }
+
+  .navbar .mobile-menu a {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+  }
+
+  .navbar .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+
+  /* Adjust logo size on mobile */
+  .navbar .logo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  /* Cart and menu button spacing */
+  .navbar > div > nav > div:last-child {
+    gap: 0.5rem;
+  }
+}
+
+/* Desktop navigation items container */
+@media (min-width: 768px) {
+  .navbar > div > nav > div:nth-child(2) {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    gap: 2rem;
+    align-items: center;
+  }
 }
 
 .navbar .container {
@@ -180,6 +222,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .navbar .md\:hidden {
+    display: none !important;
+  }
+}
+
+/* Hide mobile menu button on desktop */
+@media (max-width: 767px) {
+  .navbar .hidden.md\:flex {
+    display: none !important;
+  }
+
+  .navbar .hidden.md\:block {
     display: none !important;
   }
 }
