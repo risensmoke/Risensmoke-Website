@@ -84,8 +84,8 @@ export default function SmokeMasterPage() {
       {/* The Calling Section */}
       <section className="py-20" style={{ padding: '5rem 1rem' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
+          <div className="max-w-4xl mx-auto">
+            <div>
               <h2
                 className="text-3xl sm:text-4xl mb-6"
                 style={{
@@ -113,19 +113,6 @@ export default function SmokeMasterPage() {
                 >
                   But sometimes, the Lord has different plans.
                 </p>
-              </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <div
-                className="rounded-lg overflow-hidden shadow-2xl"
-                style={{
-                  border: '3px solid rgba(255, 107, 53, 0.5)',
-                  boxShadow: '0 0 40px rgba(255, 107, 53, 0.3)'
-                }}
-              >
-                <div className="aspect-video bg-gradient-to-br from-orange-900/20 to-red-900/20 flex items-center justify-center">
-                  <Sparkles className="w-32 h-32 opacity-30" style={{ color: '#FF6B35' }} />
-                </div>
               </div>
             </div>
           </div>
@@ -187,7 +174,7 @@ export default function SmokeMasterPage() {
           <div
             className="mt-12 p-8 rounded-lg text-center"
             style={{
-              background: 'radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%)',
+              backgroundColor: 'rgba(40, 40, 40, 0.8)',
               border: '2px solid rgba(255, 215, 0, 0.3)'
             }}
           >
@@ -465,7 +452,7 @@ export default function SmokeMasterPage() {
             <div
               className="inline-block p-8 rounded-lg"
               style={{
-                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%)',
+                backgroundColor: 'rgba(40, 40, 40, 0.8)',
                 border: '3px solid #FFD700'
               }}
             >

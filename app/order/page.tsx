@@ -448,51 +448,54 @@ export default function OrderPage() {
                     border: '2px solid rgba(255, 107, 53, 0.3)'
                   }}
                 >
-                  <div className="flex flex-col sm:flex-row">
-                    <div className="w-full sm:w-32 h-48 sm:h-32 relative flex-shrink-0">
+                  <div className="flex flex-col md:flex-row gap-0">
+                    {/* Image Section - Fixed Width on Desktop */}
+                    <div className="w-full md:w-[200px] lg:w-[240px] h-48 md:h-[150px] lg:h-[160px] relative flex-shrink-0 bg-gray-800">
                       <Image
                         src={item.image || '/Food_Image.jpg'}
                         alt={item.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 240px"
                       />
                     </div>
-                    <div className="flex-1 p-4">
+                    {/* Description Section - Takes Remaining Space */}
+                    <div className="flex-1 p-4 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
-                        <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#FFD700' }}>
+                        <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#FFD700 !important' }}>
                           {item.name}
                         </h3>
-                        <span className="text-lg sm:text-xl font-bold" style={{ color: '#FF6B35' }}>
+                        <span className="text-lg sm:text-xl font-bold" style={{ color: '#FF6B35 !important' }}>
                           ${item.price.toFixed(2)}
                         </span>
                       </div>
-                      <p className="text-sm mb-3" style={{ color: '#F8F8F8' }}>
+                      <p className="text-sm mb-3" style={{ color: '#F8F8F8 !important' }}>
                         {item.description}
                       </p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4">
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => updateItemQuantity(item.id, -1)}
-                            className="w-8 h-8 rounded-full flex items-center justify-center"
+                            className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                             style={{
-                              backgroundColor: 'rgba(255, 107, 53, 0.2)',
-                              border: '1px solid #FF6B35'
+                              backgroundColor: 'rgba(255, 107, 53, 0.3)',
+                              border: '2px solid #FF6B35'
                             }}
                           >
-                            <Minus className="w-4 h-4" style={{ color: '#FF6B35' }} />
+                            <Minus className="w-4 h-4" style={{ color: '#FF6B35 !important' }} />
                           </button>
-                          <span style={{ color: '#F8F8F8', minWidth: '2rem', textAlign: 'center' }}>
+                          <span style={{ color: '#F8F8F8 !important', minWidth: '2rem', textAlign: 'center', fontWeight: 'bold' }}>
                             {itemQuantities[item.id] || 1}
                           </span>
                           <button
                             onClick={() => updateItemQuantity(item.id, 1)}
-                            className="w-8 h-8 rounded-full flex items-center justify-center"
+                            className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                             style={{
-                              backgroundColor: 'rgba(255, 107, 53, 0.2)',
-                              border: '1px solid #FF6B35'
+                              backgroundColor: 'rgba(255, 107, 53, 0.3)',
+                              border: '2px solid #FF6B35'
                             }}
                           >
-                            <Plus className="w-4 h-4" style={{ color: '#FF6B35' }} />
+                            <Plus className="w-4 h-4" style={{ color: '#FF6B35 !important' }} />
                           </button>
                         </div>
                         <div className="flex items-center gap-2">

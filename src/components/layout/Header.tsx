@@ -31,16 +31,21 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="logo">
-            <Image
-              src="/risensmoke-logo.png"
-              alt="Rise N' Smoke BBQ Logo"
-              width={60}
-              height={60}
-              className="rounded-full w-12 h-12 md:w-15 md:h-15"
-              style={{ backgroundColor: 'transparent', mixBlendMode: 'normal' }}
-              priority
-            />
+          <Link href="/" className="logo flex-shrink-0">
+            <div className="w-12 h-12 md:w-14 md:h-14 relative">
+              <Image
+                src="/risensmoke-logo.png"
+                alt="Rise N' Smoke BBQ Logo"
+                fill
+                className="rounded-full object-contain"
+                style={{
+                  backgroundColor: 'transparent',
+                  mixBlendMode: 'normal'
+                }}
+                sizes="(max-width: 768px) 48px, 56px"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

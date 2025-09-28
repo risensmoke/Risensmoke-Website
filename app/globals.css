@@ -23,8 +23,8 @@
 
 /* Base Styles */
 body {
-  color: var(--smoke-black);
-  background-color: var(--smoke-white);
+  color: var(--smoke-white);
+  background-color: var(--smoke-black);
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
