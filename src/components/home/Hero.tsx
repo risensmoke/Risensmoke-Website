@@ -78,7 +78,7 @@ const Hero = () => {
         </h1>
 
         <h2 className="text-h2 text-primary-gradient mb-6 animate-slide-up" style={{ fontFamily: "'Alfa Slab One', serif" }}>
-          The Rise &amp; Transform Method™
+          Pit BBQ: The Rise &amp; Transform Method™
         </h2>
 
         <p className="text-large mb-8 max-w-2xl mx-auto animate-fade-in-delayed" style={{ color: "#F8F8F8" }}>

@@ -59,9 +59,9 @@ export default function Home() {
       <SmokeMaster />
 
       {/* Location & Hours Section */}
-      <section className="py-20 px-4 bg-light-background">
+      <section className="py-20 px-4" style={{ backgroundColor: '#1C1C1C' }}>
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-h1 mb-8 text-primary-gradient">
+          <h2 className="text-h1 mb-8 text-fire-gradient">
             Location & Hours
           </h2>
 

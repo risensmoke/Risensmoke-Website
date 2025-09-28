@@ -469,7 +469,7 @@ export default function SmokeMasterPage() {
               </p>
               <p className="text-lg" style={{ color: '#FF6B35' }}>
                 - Michael Johnson, Owner & SmokeMaster<br />
-                Rise N&apos; Smoke Pitt BBQ
+                Rise N&apos; Smoke Pit BBQ
               </p>
             </div>
           </div>

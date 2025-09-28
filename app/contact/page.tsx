@@ -30,17 +30,29 @@ export default function ContactPage() {
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1
-            className="text-hero mb-4"
+            className="mb-4"
             style={{
               fontFamily: "'Rye', serif",
+              textShadow: '0 0 40px rgba(255, 107, 53, 0.5)'
+            }}
+          >
+            <span style={{
+              fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+              color: '#F8F8F8',
+              letterSpacing: '1px'
+            }}>
+              Follow the{' '}
+            </span>
+            <span style={{
+              fontSize: 'clamp(3rem, 6vw, 5rem)',
               background: 'linear-gradient(135deg, #FF6B35, #FFD700)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 40px rgba(255, 107, 53, 0.5)',
-              letterSpacing: '2px'
-            }}
-          >
-            Follow the rising smoke!
+              letterSpacing: '3px',
+              fontWeight: 'bold'
+            }}>
+              RISING SMOKE!
+            </span>
           </h1>
           <p className="text-xl" style={{ color: '#F8F8F8' }}>
             Get in touch with Rise N' Smoke BBQ

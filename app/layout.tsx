@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import CartModal from "@/components/cart/CartModal";
 
 export const metadata: Metadata = {
@@ -37,12 +38,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="custom-scrollbar" style={{ fontFamily: "'Source Sans Pro', Arial, sans-serif", color: "#F8F8F8", backgroundColor: "#1C1C1C" }}>
+      <body className="custom-scrollbar flex flex-col min-h-screen" style={{ fontFamily: "'Source Sans Pro', Arial, sans-serif", color: "#F8F8F8", backgroundColor: "#1C1C1C" }}>
         <Header />
         <CartModal />
-        <main className="pt-20">
+        <main className="pt-20 flex-1">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
