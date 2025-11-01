@@ -15,7 +15,9 @@ export default function CartModal() {
     clearCart,
     subtotal,
     tax,
-    total
+    shippingCost,
+    total,
+    orderType
   } = useCartStore();
 
   // Close modal on escape key
@@ -216,6 +218,12 @@ export default function CartModal() {
                   <span style={{ color: '#F8F8F8' }}>Tax (8%)</span>
                   <span style={{ color: '#F8F8F8' }}>${tax.toFixed(2)}</span>
                 </div>
+                {orderType === 'shipping' && shippingCost > 0 && (
+                  <div className="flex justify-between">
+                    <span style={{ color: '#F8F8F8' }}>Shipping (FedEx 2-Day)</span>
+                    <span style={{ color: '#F8F8F8' }}>${shippingCost.toFixed(2)}</span>
+                  </div>
+                )}
                 <div
                   className="flex justify-between text-xl font-bold pt-2"
                   style={{ borderTop: '1px solid rgba(255, 107, 53, 0.2)' }}

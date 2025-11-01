@@ -21,11 +21,11 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               <Image
-                src="/risensmoke-logo.png"
+                src="/Assets/Logo/Logo_RiseNSmoke.svg"
                 alt="Rise N' Smoke BBQ"
                 width={50}
                 height={50}
-                className="rounded-full mr-3"
+                className="mr-3"
               />
               <h3 className="text-xl font-bold" style={{ color: '#FFD700' }}>
                 Rise N&apos; Smoke

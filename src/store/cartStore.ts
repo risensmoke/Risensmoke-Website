@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { calculateShippingCost } from '@/lib/shipping';
 
 interface CartItem {
   id: string;
@@ -19,13 +20,28 @@ interface CartModifier {
   category: string;
 }
 
+export interface ShippingAddress {
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2?: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  phone: string;
+  email: string;
+}
+
 interface CartState {
   items: CartItem[];
   subtotal: number;
   tax: number;
+  shippingCost: number;
   total: number;
+  orderType: 'pickup' | 'shipping';
   pickupTime?: Date;
   estimatedReady?: Date;
+  shippingAddress?: ShippingAddress;
   isOpen: boolean;
 }
 
@@ -36,6 +52,8 @@ interface CartActions {
   updateModifiers: (itemId: string, modifiers: CartModifier[]) => void;
   clearCart: () => void;
   setPickupTime: (time: Date) => void;
+  setOrderType: (type: 'pickup' | 'shipping') => void;
+  setShippingAddress: (address: ShippingAddress) => void;
   toggleCart: () => void;
   calculateTotals: () => void;
 }
@@ -48,7 +66,9 @@ export const useCartStore = create<CartState & CartActions>()(
       items: [],
       subtotal: 0,
       tax: 0,
+      shippingCost: 0,
       total: 0,
+      orderType: 'pickup',
       isOpen: false,
 
       addItem: (item) => {
@@ -108,14 +128,27 @@ export const useCartStore = create<CartState & CartActions>()(
           items: [],
           subtotal: 0,
           tax: 0,
+          shippingCost: 0,
           total: 0,
+          orderType: 'pickup',
           pickupTime: undefined,
-          estimatedReady: undefined
+          estimatedReady: undefined,
+          shippingAddress: undefined
         });
       },
 
       setPickupTime: (time) => {
         set({ pickupTime: time });
+      },
+
+      setOrderType: (type) => {
+        set({ orderType: type });
+        get().calculateTotals();
+      },
+
+      setShippingAddress: (address) => {
+        set({ shippingAddress: address });
+        get().calculateTotals();
       },
 
       toggleCart: () => {
@@ -126,18 +159,29 @@ export const useCartStore = create<CartState & CartActions>()(
         const state = get();
         const subtotal = state.items.reduce((sum, item) => sum + item.totalPrice, 0);
         const tax = subtotal * TAX_RATE;
-        const total = subtotal + tax;
 
-        set({ subtotal, tax, total });
+        // Calculate shipping cost if order type is shipping
+        let shippingCost = 0;
+        if (state.orderType === 'shipping' && state.shippingAddress?.state) {
+          const shippingInfo = calculateShippingCost(state.shippingAddress.state);
+          shippingCost = shippingInfo?.totalShipping || 0;
+        }
+
+        const total = subtotal + tax + shippingCost;
+
+        set({ subtotal, tax, shippingCost, total });
       }
     }),
     {
       name: 'rise-n-smoke-cart',
       partialize: (state) => ({
         items: state.items,
+        orderType: state.orderType,
         pickupTime: state.pickupTime,
+        shippingAddress: state.shippingAddress,
         subtotal: state.subtotal,
         tax: state.tax,
+        shippingCost: state.shippingCost,
         total: state.total
       })
     }

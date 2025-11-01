@@ -23,7 +23,7 @@ const menuItems: MenuItem[] = [
     price: 12.50,
     category: 'Blessed Plates',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/plate-1meat.PNG'
   },
   {
     id: 'disciples-plate',
@@ -32,7 +32,7 @@ const menuItems: MenuItem[] = [
     price: 15.35,
     category: 'Blessed Plates',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/plate-1meat.PNG'
   },
   {
     id: 'trinity-plate',
@@ -41,7 +41,7 @@ const menuItems: MenuItem[] = [
     price: 16.95,
     category: 'Blessed Plates',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/plate-2meat.PNG'
   },
   {
     id: 'revelation-plate',
@@ -50,7 +50,7 @@ const menuItems: MenuItem[] = [
     price: 18.45,
     category: 'Blessed Plates',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/plate-3meat.PNG'
   },
   {
     id: 'little-rise',
@@ -59,7 +59,7 @@ const menuItems: MenuItem[] = [
     price: 13.00,
     category: 'Blessed Plates',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/plate-rib-small.PNG'
   },
   {
     id: 'lotta-rise',
@@ -68,7 +68,7 @@ const menuItems: MenuItem[] = [
     price: 18.45,
     category: 'Blessed Plates',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/plate-rib-large.PNG'
   },
 
   // Sandwiches
@@ -79,7 +79,7 @@ const menuItems: MenuItem[] = [
     price: 13.00,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-beef-brisket-saus.jpg'
   },
   {
     id: 'sliced-brisket',
@@ -88,7 +88,7 @@ const menuItems: MenuItem[] = [
     price: 11.95,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-brisket-slice.jpg'
   },
   {
     id: 'chopped-brisket',
@@ -97,7 +97,7 @@ const menuItems: MenuItem[] = [
     price: 10.95,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-brisket-chop.jpg'
   },
   {
     id: 'pulled-pork',
@@ -106,7 +106,7 @@ const menuItems: MenuItem[] = [
     price: 10.95,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-pull-pork.jpg'
   },
   {
     id: 'hotlink',
@@ -115,7 +115,7 @@ const menuItems: MenuItem[] = [
     price: 8.50,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-hot-link.jpg'
   },
   {
     id: 'jalapeno-cheddar',
@@ -124,7 +124,7 @@ const menuItems: MenuItem[] = [
     price: 8.50,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-jalapeno-cheddar.jpg'
   },
   {
     id: 'pork-ribs',
@@ -133,7 +133,7 @@ const menuItems: MenuItem[] = [
     price: 10.95,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-pork-ribs.jpg'
   },
   {
     id: 'beef-sausage',
@@ -142,7 +142,16 @@ const menuItems: MenuItem[] = [
     price: 10.95,
     category: 'Sandwiches',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-hot-link.jpg'
+  },
+  {
+    id: 'smoke-chicken',
+    name: 'Chicken & Smoke',
+    description: 'Smokey, finger-lickin goodness',
+    price: 10.95,
+    category: 'Sandwiches',
+    available: true,
+    image: '/Assets/sand-smoke-chicken.jpg'
   },
 
   // Meats by the Pound
@@ -153,7 +162,7 @@ const menuItems: MenuItem[] = [
     price: 8.95,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/pound-brisket-slice.jpg'
   },
   {
     id: 'brisket-half',
@@ -162,7 +171,7 @@ const menuItems: MenuItem[] = [
     price: 15.35,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/pound-brisket-slice.jpg'
   },
   {
     id: 'brisket-three-quarter',
@@ -171,7 +180,7 @@ const menuItems: MenuItem[] = [
     price: 18.45,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/pound-brisket-slice.jpg'
   },
   {
     id: 'brisket-pound',
@@ -180,7 +189,7 @@ const menuItems: MenuItem[] = [
     price: 25.45,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/pound-brisket-slice.jpg'
   },
   {
     id: 'pulled-pork-quarter',
@@ -189,7 +198,7 @@ const menuItems: MenuItem[] = [
     price: 5.95,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/pound-pull-pork.jpg'
   },
   {
     id: 'pulled-pork-half',
@@ -198,7 +207,7 @@ const menuItems: MenuItem[] = [
     price: 11.45,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/pound-pull-pork.jpg'
   },
   {
     id: 'ribs-half',
@@ -207,7 +216,7 @@ const menuItems: MenuItem[] = [
     price: 11.45,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-pork-ribs.jpg'
   },
   {
     id: 'ribs-pound',
@@ -216,7 +225,7 @@ const menuItems: MenuItem[] = [
     price: 19.95,
     category: 'Meats',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/sand-pork-ribs.jpg'
   },
 
   // Favorites
@@ -227,7 +236,7 @@ const menuItems: MenuItem[] = [
     price: 11.95,
     category: 'Favorites',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/fav-sidewinder.PNG'
   },
   {
     id: 'loaded-side-winder',
@@ -236,7 +245,7 @@ const menuItems: MenuItem[] = [
     price: 11.95,
     category: 'Favorites',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/fav-sidewinder.PNG'
   },
   {
     id: 'red-pit-burrito',
@@ -245,7 +254,7 @@ const menuItems: MenuItem[] = [
     price: 14.95,
     category: 'Favorites',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/fav-potato-loaded.png'
   },
   {
     id: 'baked-potato-plain',
@@ -254,7 +263,7 @@ const menuItems: MenuItem[] = [
     price: 7.50,
     category: 'Favorites',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/fav-potato-plain.PNG'
   },
   {
     id: 'baked-potato-loaded',
@@ -263,7 +272,7 @@ const menuItems: MenuItem[] = [
     price: 9.25,
     category: 'Favorites',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/fav-potato-loaded.png'
   },
   {
     id: 'baked-potato-works',
@@ -272,7 +281,7 @@ const menuItems: MenuItem[] = [
     price: 11.95,
     category: 'Favorites',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/fav-potato-works.PNG'
   },
 
   // Family Meals
@@ -283,7 +292,7 @@ const menuItems: MenuItem[] = [
     price: 44.95,
     category: 'Family Meals',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/family-meat-platter.PNG'
   },
   {
     id: 'med-group',
@@ -292,7 +301,7 @@ const menuItems: MenuItem[] = [
     price: 82.95,
     category: 'Family Meals',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/family-meat-platter.PNG'
   },
   {
     id: 'large-group',
@@ -301,7 +310,7 @@ const menuItems: MenuItem[] = [
     price: 120.50,
     category: 'Family Meals',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/family-meat-platter.PNG'
   },
 
   // Divine Sides
@@ -312,7 +321,7 @@ const menuItems: MenuItem[] = [
     price: 2.85,
     category: 'Sides',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/side-mac-cheese.jpg'
   },
   {
     id: 'blessed-potato-salad',
@@ -321,7 +330,7 @@ const menuItems: MenuItem[] = [
     price: 2.85,
     category: 'Sides',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/side-potato-salad.PNG'
   },
   {
     id: 'hallelujah-baked-beans',
@@ -330,7 +339,7 @@ const menuItems: MenuItem[] = [
     price: 2.85,
     category: 'Sides',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/side-brisket-beans.PNG'
   },
   {
     id: 'divine-green-beans',
@@ -339,7 +348,7 @@ const menuItems: MenuItem[] = [
     price: 2.85,
     category: 'Sides',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/side-green-beans.PNG'
   },
   {
     id: 'salvation-cole-slaw',
@@ -348,7 +357,7 @@ const menuItems: MenuItem[] = [
     price: 2.85,
     category: 'Sides',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/side-cole-slaw.PNG'
   },
 
   // This and That
@@ -359,7 +368,7 @@ const menuItems: MenuItem[] = [
     price: 6.50,
     category: 'This and That',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/tt-garden-salad.PNG'
   },
   {
     id: 'chef-salad',
@@ -368,43 +377,43 @@ const menuItems: MenuItem[] = [
     price: 9.25,
     category: 'This and That',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/tt-garden-salad.PNG'
   },
   {
-    id: 'wraparound',
-    name: 'Wraparound',
-    description: 'Burrito-style sandwich wrap',
-    price: 7.25,
+    id: 'side-fries',
+    name: 'Side Fries',
+    description: 'Crispy golden fries',
+    price: 3.50,
     category: 'This and That',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/tt-side-fries.PNG'
   },
   {
-    id: 'sausage-on-stick',
-    name: 'Sausage-on-a-stick',
-    description: 'Smoked sausage on a stick',
-    price: 7.25,
+    id: 'banana-pudding',
+    name: 'Banana Pudding',
+    description: 'Homemade banana pudding',
+    price: 2.99,
     category: 'This and That',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/tt-banana-pudding.PNG'
   },
   {
-    id: 'xtra-meat',
-    name: 'Xtra-meat',
-    description: 'Extra heaping of meat',
-    price: 4.50,
+    id: 'ice-cream',
+    name: 'Vanilla Ice Cream',
+    description: 'Rich & Creamy Vanilla Ice Cream',
+    price: 2.99,
     category: 'This and That',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/tt-ice-cream.jpg'
   },
   {
-    id: 'chips',
-    name: 'Chips',
-    description: 'Various Chip selections',
-    price: 1.35,
+    id: 'peach-cobbler',
+    name: 'Homemade Peach Cobbler',
+    description: 'Delightful Peach Cobbler',
+    price: 2.99,
     category: 'This and That',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/Assets/tt-peach-cobbler.PNG'
   },
 
   // Drinks
@@ -415,7 +424,7 @@ const menuItems: MenuItem[] = [
     price: 2.50,
     category: 'Drinks',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/tt-sweet-tea.png'
   },
   {
     id: 'soda',
@@ -424,7 +433,7 @@ const menuItems: MenuItem[] = [
     price: 1.50,
     category: 'Drinks',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/tt-soda.png'
   },
   {
     id: 'water',
@@ -433,7 +442,7 @@ const menuItems: MenuItem[] = [
     price: 2.00,
     category: 'Drinks',
     available: true,
-    image: '/Food_Image.jpg'
+    image: '/tt-water.jpg'
   }
 ];
 

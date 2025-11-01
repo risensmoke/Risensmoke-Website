@@ -63,11 +63,11 @@ const Hero = () => {
       <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
         <div className="mb-6 logo-glow">
           <Image
-            src="/risensmoke-logo.png"
+            src="/Assets/Logo/Logo_RiseNSmoke.svg"
             alt="Rise N' Smoke BBQ Logo"
             width={200}
             height={200}
-            className="mx-auto rounded-full shadow-2xl hover:scale-105 transition-transform duration-500"
+            className="mx-auto shadow-2xl hover:scale-105 transition-transform duration-500"
             style={{ backgroundColor: 'transparent', mixBlendMode: 'normal' }}
             priority
           />

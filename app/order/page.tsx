@@ -46,7 +46,7 @@ const menuItems: MenuItem[] = [
     description: 'Mini gospel truth about the smoke',
     price: 12.50,
     category: 'Blessed Plates',
-    image: '/Food_Image.jpg',
+    image: '/Assets/plate-1meat.PNG',
     available: true
   },
   {
@@ -55,7 +55,7 @@ const menuItems: MenuItem[] = [
     description: 'One meat blessed by the rise',
     price: 15.35,
     category: 'Blessed Plates',
-    image: '/Food_Image.jpg',
+    image: '/Assets/plate-1meat.PNG',
     available: true
   },
   {
@@ -64,7 +64,7 @@ const menuItems: MenuItem[] = [
     description: 'Two meats, one holy transformation',
     price: 16.95,
     category: 'Blessed Plates',
-    image: '/Food_Image.jpg',
+    image: '/Assets/plate-2meat.PNG',
     available: true
   },
   {
@@ -73,7 +73,7 @@ const menuItems: MenuItem[] = [
     description: 'The truth about real smoke revealed',
     price: 18.45,
     category: 'Blessed Plates',
-    image: '/Food_Image.jpg',
+    image: '/Assets/plate-3meat.PNG',
     available: true
   },
   {
@@ -82,7 +82,7 @@ const menuItems: MenuItem[] = [
     description: 'The Signature Rise N Smoke Lil Rib Plate',
     price: 13.00,
     category: 'Blessed Plates',
-    image: '/Food_Image.jpg',
+    image: '/Assets/plate-rib-small.PNG',
     available: true
   },
   {
@@ -91,7 +91,7 @@ const menuItems: MenuItem[] = [
     description: 'The Signature Rise N Smoke Rib Plate',
     price: 18.45,
     category: 'Blessed Plates',
-    image: '/Food_Image.jpg',
+    image: '/Assets/plate-rib-large.PNG',
     available: true
   },
 
@@ -102,7 +102,7 @@ const menuItems: MenuItem[] = [
     description: 'Double Smoked, Double Flavor',
     price: 13.00,
     category: 'Sandwiches',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-beef-brisket-saus.jpg',
     available: true
   },
   {
@@ -111,7 +111,7 @@ const menuItems: MenuItem[] = [
     description: 'Smoke Ring King - Sliced Brisket',
     price: 11.95,
     category: 'Sandwiches',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-brisket-slice.jpg',
     available: true
   },
   {
@@ -120,7 +120,7 @@ const menuItems: MenuItem[] = [
     description: 'Smoke Ring King - Chopped Brisket',
     price: 10.95,
     category: 'Sandwiches',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-brisket-chop.jpg',
     available: true
   },
   {
@@ -129,7 +129,7 @@ const menuItems: MenuItem[] = [
     description: 'Pork pulled from the rising flames of smoke',
     price: 10.95,
     category: 'Sandwiches',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-pull-pork.jpg',
     available: true
   },
   {
@@ -138,7 +138,7 @@ const menuItems: MenuItem[] = [
     description: 'Hotlink with a smokey edge to love',
     price: 8.50,
     category: 'Sandwiches',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-hot-link.jpg',
     available: true
   },
   {
@@ -147,7 +147,25 @@ const menuItems: MenuItem[] = [
     description: 'Sausage kissed with sweet cheese & smokey jalapeno',
     price: 8.50,
     category: 'Sandwiches',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-jalapeno-cheddar.jpg',
+    available: true
+  },
+  {
+    id: 'pork-ribs',
+    name: 'Rise & Fall Ribs',
+    description: 'Rise, Smoke, and Fall from the bone!',
+    price: 10.95,
+    category: 'Sandwiches',
+    image: '/Assets/sand-pork-ribs.jpg',
+    available: true
+  },
+  {
+    id: 'smoke-chicken',
+    name: 'Chicken & Smoke',
+    description: 'Smokey, finger-lickin goodness',
+    price: 10.95,
+    category: 'Sandwiches',
+    image: '/Assets/sand-smoke-chicken.jpg',
     available: true
   },
 
@@ -158,7 +176,7 @@ const menuItems: MenuItem[] = [
     description: 'Heavenly smoke-kissed perfection',
     price: 29.95,
     category: 'By The Pound',
-    image: '/Food_Image.jpg',
+    image: '/Assets/pound-brisket-slice.jpg',
     available: true
   },
   {
@@ -167,7 +185,7 @@ const menuItems: MenuItem[] = [
     description: 'Fall-off-the-bone blessed',
     price: 25.95,
     category: 'By The Pound',
-    image: '/Food_Image.jpg',
+    image: '/Assets/sand-pork-ribs.jpg',
     available: true
   },
   {
@@ -176,7 +194,7 @@ const menuItems: MenuItem[] = [
     description: 'Tender and transformed',
     price: 19.95,
     category: 'By The Pound',
-    image: '/Food_Image.jpg',
+    image: '/Assets/pound-pull-pork.jpg',
     available: true
   },
 
@@ -187,7 +205,7 @@ const menuItems: MenuItem[] = [
     description: 'Three-blessed potato perfection',
     price: 3.50,
     category: 'Sides',
-    image: '/Food_Image.jpg',
+    image: '/Assets/side-potato-salad.PNG',
     available: true
   },
   {
@@ -196,7 +214,7 @@ const menuItems: MenuItem[] = [
     description: 'Cheese blessed by the smoke',
     price: 4.50,
     category: 'Sides',
-    image: '/Food_Image.jpg',
+    image: '/Assets/side-mac-cheese.jpg',
     available: true
   },
   {
@@ -205,7 +223,7 @@ const menuItems: MenuItem[] = [
     description: 'Beans that rise with flavor',
     price: 3.50,
     category: 'Sides',
-    image: '/Food_Image.jpg',
+    image: '/Assets/side-green-beans.PNG',
     available: true
   },
   {
@@ -214,7 +232,7 @@ const menuItems: MenuItem[] = [
     description: 'The perfect cooling complement',
     price: 3.50,
     category: 'Sides',
-    image: '/Food_Image.jpg',
+    image: '/Assets/side-cole-slaw.PNG',
     available: true
   },
   {
@@ -223,7 +241,43 @@ const menuItems: MenuItem[] = [
     description: 'Slow-cooked with holy smoke',
     price: 3.50,
     category: 'Sides',
-    image: '/Food_Image.jpg',
+    image: '/Assets/side-brisket-beans.PNG',
+    available: true
+  },
+  {
+    id: 'side-fries',
+    name: 'Side Fries',
+    description: 'Crispy golden fries',
+    price: 3.50,
+    category: 'Sides',
+    image: '/Assets/tt-side-fries.PNG',
+    available: true
+  },
+  {
+    id: 'banana-pudding',
+    name: 'Banana Pudding',
+    description: 'Homemade banana pudding',
+    price: 2.99,
+    category: 'Sides',
+    image: '/Assets/tt-banana-pudding.PNG',
+    available: true
+  },
+  {
+    id: 'ice-cream',
+    name: 'Vanilla Ice Cream',
+    description: 'Rich & Creamy Vanilla Ice Cream',
+    price: 2.99,
+    category: 'Sides',
+    image: '/Assets/tt-ice-cream.jpg',
+    available: true
+  },
+  {
+    id: 'peach-cobbler',
+    name: 'Homemade Peach Cobbler',
+    description: 'Delightful Peach Cobbler',
+    price: 2.99,
+    category: 'Sides',
+    image: '/Assets/tt-peach-cobbler.PNG',
     available: true
   },
 
@@ -234,7 +288,7 @@ const menuItems: MenuItem[] = [
     description: 'Feed 4-6 blessed souls',
     price: 65.00,
     category: 'Catering Trays',
-    image: '/Food_Image.jpg',
+    image: '/Assets/family-meat-platter.PNG',
     available: true
   },
   {
@@ -243,7 +297,7 @@ const menuItems: MenuItem[] = [
     description: 'Perfect for 8-10 disciples',
     price: 120.00,
     category: 'Catering Trays',
-    image: '/Food_Image.jpg',
+    image: '/Assets/family-meat-platter.PNG',
     available: true
   },
   {
@@ -252,7 +306,7 @@ const menuItems: MenuItem[] = [
     description: 'Transform your party (15-20 people)',
     price: 225.00,
     category: 'Catering Trays',
-    image: '/Food_Image.jpg',
+    image: '/Assets/family-meat-platter.PNG',
     available: true
   }
 ];

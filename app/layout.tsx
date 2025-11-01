@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   keywords: "BBQ, barbecue, Hillsboro Texas, Rise N Smoke, smoked meat, restaurant",
   authors: [{ name: "Rise N' Smoke" }],
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/Assets/Logo/Logo_RiseNSmoke.svg',
+    apple: '/Assets/Logo/Logo_RiseNSmoke.png',
   },
   openGraph: {
     title: "Rise N' Smoke BBQ",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Rise N' Smoke",
     images: [
       {
-        url: '/risensmoke-logo.png',
+        url: '/Assets/Logo/Logo_RiseNSmoke.png',
         width: 800,
         height: 800,
         alt: "Rise N' Smoke BBQ Logo",

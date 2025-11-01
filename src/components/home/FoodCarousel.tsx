@@ -10,31 +10,31 @@ const FoodCarousel = () => {
 
   const slides = [
     {
-      image: '/Image1.jpg',
-      title: 'Heavenly Brisket',
-      description: 'Our signature brisket is blessed with 12 hours of low and slow smoking. Each slice melts in your mouth, delivering the perfect balance of smoke ring and tender meat.',
+      image: '/Assets/plate-rib-large.PNG',
+      title: 'Rise N Smoke A Lot',
+      description: 'Our signature rib plate featuring fall-off-the-bone tender ribs, blessed with hours of slow smoking. The Rise & Transform Method™ delivers perfect bark and succulent meat.',
       price: '$18.45',
-      highlight: '12-Hour Smoked'
+      highlight: 'Signature Plate'
     },
     {
-      image: '/Image2.jpg',
-      title: 'Divine BBQ Platter',
-      description: 'A holy trinity of our finest meats - brisket, ribs, and pulled pork. Perfect for those who want to experience the full range of our smoking mastery.',
-      price: '$24.95',
+      image: '/Assets/family-meat-platter.PNG',
+      title: 'Family Feast',
+      description: 'Feed the whole crew with our family platter. A generous selection of our finest smoked meats, perfect for gatherings and celebrations.',
+      price: '$120.50',
       highlight: 'Best Seller'
     },
     {
-      image: '/Image3.png',
-      title: 'Sacred Ribs',
-      description: 'Fall-off-the-bone tender ribs glazed with our secret sauce. Each rack is carefully tended for hours until it reaches BBQ perfection.',
-      price: '$22.50',
+      image: '/Assets/plate-3meat.PNG',
+      title: 'Revelation Plate',
+      description: 'The truth about real smoke revealed with three of our finest meats. Experience brisket, ribs, and sausage all transformed through our smoking mastery.',
+      price: '$18.45',
       highlight: 'Award Winner'
     },
     {
-      image: '/Image4.jpg',
-      title: 'Gospel Wings',
-      description: 'Crispy on the outside, juicy on the inside. Our wings are smoked then flash-fried for the perfect texture, tossed in our signature BBQ sauce.',
-      price: '$15.35',
+      image: '/Assets/sand-beef-brisket-saus.jpg',
+      title: 'Smokey-Duo',
+      description: 'Double smoked, double flavor! Our signature brisket paired with savory sausage on a toasted bun. A taste of Texas in every bite.',
+      price: '$13.00',
       highlight: 'Crowd Favorite'
     }
   ];

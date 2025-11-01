@@ -22,6 +22,7 @@ const Header = () => {
     { name: "Home", href: "/" },
     { name: "Menu", href: "/menu" },
     { name: "Order", href: "/order" },
+    { name: "Ship Nationwide", href: "/ship" },
     { name: "The SmokeMaster", href: "/smokemaster" },
     { name: "Contact", href: "/contact" }
   ];
@@ -34,10 +35,10 @@ const Header = () => {
           <Link href="/" className="logo flex-shrink-0">
             <div className="w-12 h-12 md:w-14 md:h-14 relative">
               <Image
-                src="/risensmoke-logo.png"
+                src="/Assets/Logo/Logo_RiseNSmoke.svg"
                 alt="Rise N' Smoke BBQ Logo"
                 fill
-                className="rounded-full object-contain"
+                className="object-contain"
                 style={{
                   backgroundColor: 'transparent',
                   mixBlendMode: 'normal'

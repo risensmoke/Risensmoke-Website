@@ -1013,16 +1013,16 @@ export const menuData = {
         name: "Gospel Plate",
         description: "Mini gospel truth about the smoke",
         basePrice: 12.50,
-        image: "/images/menu/mini-plate.jpg",
+        image: "/images/menu/plate-1meat.png",
         prepTime: 15,
-        modifierGroups: ["meat-selection-1", "sides-1", "sauces"]
+        modifierGroups: ["meat-selection-1", "sides-2", "sauces"]
       },
 	  {
         id: "disciples-plate",
         name: "Disciples Plate",
         description: "One meat blessed by the rise",
         basePrice: 15.35,
-        image: "/images/menu/1meat-plate.jpg",
+        image: "/images/menu/plate-1meat.png",
         prepTime: 15,
         modifierGroups: ["meat-selection-1", "sides-2", "sauces"]
       },
@@ -1031,7 +1031,7 @@ export const menuData = {
         name: "Trinity Plate",
         description: "Two meats, one holy transformation",
         basePrice: 16.95,
-        image: "/images/menu/2meat-plate.jpg",
+        image: "/images/menu/plate-2meat.png",
         prepTime: 18,
         modifierGroups: ["meat-selection-2", "sides-2", "sauces"]
       },      
@@ -1040,7 +1040,7 @@ export const menuData = {
         name: "Revelation Plate",
         description: "The truth about real smoke revealed",
         basePrice: 18.45,
-        image: "/images/menu/3meat-plate.jpg",
+        image: "/images/menu/plate-3meat.png",
         prepTime: 16,
         modifierGroups: ["meat-selection-3", "sides-2", "sauces"]
       },
@@ -1049,7 +1049,7 @@ export const menuData = {
         name: "Rise N Smoke A Little",
         description: "The Signature Rise N Smoke Lil Rib Plate",
         basePrice: 13.00,
-        image: "/images/menu/rib-plate-small.jpg",
+        image: "/images/menu/plate-rib-small.png",
         prepTime: 16,
         modifierGroups: ["meat-selection-2", "sides-2", "sauces"]
       },
@@ -1058,7 +1058,7 @@ export const menuData = {
         name: "Rise N Smoke A Lot",
         description: "The Signature Rise N Smoke Rib Plate",
         basePrice: 18.45,
-        image: "/images/menu/rib-plate-large.jpg",
+        image: "/images/menu/plate=rib-large.png",
         prepTime: 16,
         modifierGroups: ["meat-selection-3", "sides-2", "sauces"]
       }
@@ -1075,7 +1075,7 @@ export const menuData = {
         name: "Smokey-Duo",
         description: "Double Smoked, Double Flavor",
         basePrice: 13.00,
-        image: "/images/menu/sandwich-brisket=sausage.jpg",
+        image: "/images/menu/sand-beef-brisket-saus.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1084,7 +1084,7 @@ export const menuData = {
         name: "Smoke Ring King", 
         description: "Smoke Ring King - Sliced Brisket",
         basePrice: 11.95,
-        image: "/images/menu/sandwich-brisket-sliced.jpg",
+        image: "/images/menu/sand-brisket-slice.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1093,7 +1093,7 @@ export const menuData = {
         name: "Smoke Ring Chopped",
         description: "Smoke Ring King - Chopped Brisket",
         basePrice: 10.95,
-        image: "/images/menu/sandwich-brisket-chopped.jpg", 
+        image: "/images/menu/sand-brisket-chop.png", 
         prepTime: 14,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1102,7 +1102,7 @@ export const menuData = {
         name: "Rise & Pull Pork",
         description: "Pork pulled from the rising flames of smoke",
         basePrice: 10.95,
-        image: "/images/menu/sandwich-pulled-pork.jpg", 
+        image: "/images/menu/sand-pull-pork.png", 
         prepTime: 14,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1111,7 +1111,7 @@ export const menuData = {
         name: "Fire & Desire",
         description: "Hotlink with a smokey edge to love",
         basePrice: 8.50,
-        image: "/images/menu/sandwich-hotlink.jpg", 
+        image: "/images/menu/sand-hot-link.png", 
         prepTime: 14,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1120,7 +1120,7 @@ export const menuData = {
         name: "Cheesey Jalapeno Heat",
         description: "Sausage kissed with sweet cheese & smokey jalapeno",
         basePrice: 8.50,
-        image: "/images/menu/sandwich-jalapeno-cheddar.jpg", 
+        image: "/images/menu/sand-jalapeno-cheddar.png", 
         prepTime: 14,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1129,7 +1129,7 @@ export const menuData = {
         name: "Rise & Fall Ribs",
         description: "Rise, Smoke, and Fall from the bone!",
         basePrice: 10.95,
-        image: "/images/menu/sandwich-pork-ribs.jpg", 
+        image: "/images/menu/sand-pork-ribs.png", 
         prepTime: 14,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       },
@@ -1138,7 +1138,16 @@ export const menuData = {
         name: "Beef & Please",
         description: "Blessed by the rising flames",
         basePrice: 10.95,
-        image: "/images/menu/sandwich-beef-sausage.jpg", 
+        image: "/images/menu/sand-hot-link.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      }
+	  {
+        id: "smoke-chicken",
+        name: "Chicken & Smoke",
+        description: "Smokey, finger-lickin goodness",
+        basePrice: 10.95,
+        image: "/images/menu/sand-smoke-chicken.png", 
         prepTime: 14,
         modifierGroups: ["bread-selection", "sides-1", "sauces"]
       }
@@ -1154,7 +1163,7 @@ export const menuData = {
         name: "Brisket 1/4 Pound",
         description: "Brisket 1/4 Pound",
         basePrice: 8.95,
-        image: "/images/menu/brisket.jpg",
+        image: "/images/menu/pound-brisket-slice.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1163,7 +1172,7 @@ export const menuData = {
         name: "Brisket 1/2 Pound",
         description: "Brisket 1/2 Pound", 
         basePrice: 15.35,
-        image: "/images/menu/brisket.jpg",
+        image: "/images/menu/pound-brisket-slice.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1172,7 +1181,7 @@ export const menuData = {
         name: "Brisket 3/4 Pound",
         description: "Brisket 3/4 Pound",
         basePrice: 18.45,
-        image: "/images/menu/brisket.jpg",
+        image: "/images/menu/pound-brisket-slice.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1181,7 +1190,7 @@ export const menuData = {
         name: "Brisket 1 Pound",
         description: "Brisket 1 Pound",
         basePrice: 25.45,
-        image: "/images/menu/brisket.jpg",
+        image: "/images/menu/pound-brisket-slice.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       }
@@ -1194,7 +1203,7 @@ export const menuData = {
         name: "Chopped Beef 1/4 Pound",
         description: "Chopped Beef 1/4 Pound",
         basePrice: 5.95,
-        image: "/images/menu/chopped-beef.jpg",
+        image: "/images/menu/pound-brisket-chop.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1203,7 +1212,7 @@ export const menuData = {
         name: "Chopped Beef 1/2 Pound",
         description: "Chopped Beef 1/2 Pound", 
         basePrice: 11.45,
-        image: "/images/menu/chopped-beef.jpg",
+        image: "/images/menu/pound-brisket-chop.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1212,7 +1221,7 @@ export const menuData = {
         name: "Chopped Beef 3/4 Pound",
         description: "Chopped Beef 3/4 Pound",
         basePrice: 16.35,
-        image: "/images/menu/chopped-beef.jpg",
+        image: "/images/menu/pound-brisket-chop.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1221,7 +1230,7 @@ export const menuData = {
         name: "Chopped Beef 1 Pound",
         description: "Brisket 1 Pound",
         basePrice: 19.95,
-        image: "/images/menu/chopped-beef.jpg",
+        image: "/images/menu/pound-brisket-chop.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       }
@@ -1234,7 +1243,7 @@ export const menuData = {
         name: "Pulled Pork 1/4 Pound",
         description: "Pulled Pork 1/4 Pound",
         basePrice: 5.95,
-        image: "/images/menu/pulled-pork.jpg",
+        image: "/images/menu/pound-pull-pork.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1243,7 +1252,7 @@ export const menuData = {
         name: "Pulled Pork 1/2 Pound",
         description: "Pulled Pork 1/2 Pound", 
         basePrice: 11.45,
-        image: "/images/menu/pulled-pork.jpg",
+        image: "/images/menu/pound-pull-pork.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1252,7 +1261,7 @@ export const menuData = {
         name: "Pulled Pork 3/4 Pound",
         description: "Pulled Pork 3/4 Pound",
         basePrice: 16.35,
-        image: "/images/menu/pulled-pork.jpg",
+        image: "/images/menu/pound-pull-pork.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1261,7 +1270,7 @@ export const menuData = {
         name: "Pulled Pork 1 Pound",
         description: "Pulled Pork 1 Pound",
         basePrice: 19.95,
-        image: "/images/menu/pulled-pork.jpg",
+        image: "/images/menu/pound-pull-pork.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       }
@@ -1314,7 +1323,7 @@ export const menuData = {
         name: "Hot Link or Cheddar Jalapeno 1/4 Pound",
         description: "Hot Link or Cheddar Jalapeno 1/4 Pound",
         basePrice: 5.95,
-        image: "/images/menu/link-sausage.jpg",
+        image: "/images/menu/pound-link-sausage.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1323,7 +1332,7 @@ export const menuData = {
         name: "Hot Link or Cheddar Jalapeno 1/2 Pound",
         description: "Hot Link or Cheddar Jalapeno 1/2 Pound", 
         basePrice: 11.45,
-        image: "/images/menu/link-sausage.jpg",
+        image: "/images/menu/pound-link-sausage.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1332,7 +1341,7 @@ export const menuData = {
         name: "Hot Link or Cheddar Jalapeno 3/4 Pound",
         description: "Hot Link or Cheddar Jalapeno 3/4 Pound",
         basePrice: 16.35,
-        image: "/images/menu/link-sausage.jpg",
+        image: "/images/menu/pound-ched-sausage.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1341,7 +1350,7 @@ export const menuData = {
         name: "Hot Link or Cheddar Jalapeno 1 Pound",
         description: "Hot Link or Cheddar Jalapeno 1 Pound",
         basePrice: 19.95,
-        image: "/images/menu/link-sausage.jpg",
+        image: "/images/menu/pound-link-sausage.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       }
@@ -1354,7 +1363,7 @@ export const menuData = {
         name: "Beef Sausage 1/4 Pound",
         description: "Beef Sausage 1/4 Pound",
         basePrice: 5.95,
-        image: "/images/menu/beef-sausage.jpg",
+        image: "/images/menu/pound-smoke-sausage.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1363,7 +1372,7 @@ export const menuData = {
         name: "Beef Sausage 1/2 Pound",
         description: "Beef Sausage 1/2 Pound", 
         basePrice: 11.45,
-        image: "/images/menu/beef-sausage.jpg",
+        image: "/images/menu/pound-smoke-sausage.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1372,7 +1381,7 @@ export const menuData = {
         name: "Beef Sausage 3/4 Pound",
         description: "Beef Sausage 3/4 Pound",
         basePrice: 16.35,
-        image: "/images/menu/beef-sausage.jpg",
+        image: "/images/menu/pound-smoke-sausage.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1381,7 +1390,7 @@ export const menuData = {
         name: "Beef Sausage 1 Pound",
         description: "Beef Sausage 1 Pound",
         basePrice: 19.95,
-        image: "/images/menu/beef-sausage.jpg",
+        image: "/images/menu/pound-smoke-sausage.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       }
@@ -1394,7 +1403,7 @@ export const menuData = {
         name: "Smoked Ribs 1/4 Pound",
         description: "Smoked Ribs 1/4 Pound",
         basePrice: 5.95,
-        image: "/images/menu/smoked-ribs.jpg",
+        image: "/images/menu/sand-pork-ribs.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1403,7 +1412,7 @@ export const menuData = {
         name: "Smoked Ribs 1/2 Pound",
         description: "Smoked Ribs 1/2 Pound", 
         basePrice: 11.45,
-        image: "/images/menu/smoked-ribs.jpg",
+        image: "/images/menu/sand-pork-ribs.png",
         prepTime: 10,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1412,7 +1421,7 @@ export const menuData = {
         name: "Smoked Ribs 3/4 Pound",
         description: "Smoked Ribs 3/4 Pound",
         basePrice: 16.35,
-        image: "/images/menu/smoked-ribs.jpg",
+        image: "/images/menu/sand-pork-ribs.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       },
@@ -1421,7 +1430,7 @@ export const menuData = {
         name: "Smoked Ribs 1 Pound",
         description: "Smoked Ribs 1 Pound",
         basePrice: 19.95,
-        image: "/images/menu/smoked-ribs.jpg",
+        image: "/images/menu/sand-pork-ribs.png",
         prepTime: 12,
         modifierGroups: ["bread-selection", "sauces"]
       }
@@ -1445,7 +1454,7 @@ export const menuData = {
         name: "Loaded Side Winder",
         description: "Loaded Fries w/Sauce & Queso, Choice of Meat",
         basePrice: 11.95,
-        image: "/images/menu/side-winder.jpg",
+        image: "/images/menu/fav-sidewinder.png",
         prepTime: 12        
       },
       {
@@ -1461,7 +1470,7 @@ export const menuData = {
         name: "Baked Potato Plain",
         description: "Smoked Baked Potato",
         basePrice: 7.50,
-        image: "/images/menu/potato-plain.jpg",
+        image: "/images/menu/fav-potato-plain.png",
         prepTime: 12      
       },
 	  {
@@ -1469,7 +1478,7 @@ export const menuData = {
         name: "Baked Potato Loaded",
         description: "Baked Potato loaded w/Cheese & Sour Cream",
         basePrice: 9.25,
-        image: "/images/menu/potato-loaded.jpg",
+        image: "/images/menu/fav-potato-loaded.png",
         prepTime: 12       
       },
 	  {
@@ -1477,7 +1486,7 @@ export const menuData = {
         name: "Baked Potato Loaded with Meat",
         description: "Loaded Bake Potato w/Meat",
         basePrice: 11.95,
-        image: "/images/menu/potato-meat.jpg",
+        image: "/images/menu/fav-potato-works.png",
         prepTime: 12        
       }
     ]
@@ -1492,7 +1501,7 @@ export const menuData = {
         name: "Small Smoke Stack",
         description: "Feeds 3-4 People",
         basePrice: 44.95,
-        image: "/images/menu/small-stack.jpg",
+        image: "/images/menu/family-meat-platter.png",
         prepTime: 8,
         modifierGroups: ["meat-selection1", "bread-selection", "med-side-1", "med-side-2", "sauces"]
       },
@@ -1501,7 +1510,7 @@ export const menuData = {
         name: "Medium Smoke Stack",
         description: "Feeds 6-8 People",
         basePrice: 82.95,
-        image: "/images/menu/med-stack.jpg", 
+        image: "/images/menu/family-meat-platter.png", 
         prepTime: 8,
         modifierGroups: ["meat-selection1", "meat-selection2", "bread-selection", "lrg-side-1", "lrg-side-2", "sauces"]
       },
@@ -1510,7 +1519,7 @@ export const menuData = {
         name: "Large Smoke Stack", 
         description: "Feeds 10-12 People",
         basePrice: 120.50,
-        image: "/images/menu/large-stack.jpg",
+        image: "/images/menu/family-meat-platter.png",
         prepTime: 10,
         modifierGroups: ["meat-selection1", "meat-selection2", "meat-selection3", "bread-selection", "lrg-side-1", "lrg-side-2", "lrg-side-3", "sauces"]
       }
@@ -1526,7 +1535,7 @@ export const menuData = {
         name: "Mamas Smoky Mac & Cheese",
         description: "Creamy comfort blessed by the kitchen",
         basePrice: 2.85,
-        image: "/images/menu/mac-cheese.jpg",
+        image: "/images/menu/side-mac-cheese.png",
         prepTime: 5
       },
       {
@@ -1534,7 +1543,7 @@ export const menuData = {
         name: "Blessed Potato Salad", 
         description: "Creamy potatoes touched by grace",
         basePrice: 2.85,
-        image: "/images/menu/potato-salad.jpg",
+        image: "/images/menu/side-potato-salad.png",
         prepTime: 3
       },
       {
@@ -1542,7 +1551,7 @@ export const menuData = {
         name: "Hallelujah Baked Beans",
         description: "Baked sweet and smoky, worth the wait",
         basePrice: 2.85,
-        image: "/images/menu/baked-beans.jpg",
+        image: "/images/menu/side-potato-salad.png",
         prepTime: 5
       },
       {
@@ -1550,7 +1559,7 @@ export const menuData = {
         name: "Divine Green Beans",
         description: "Divinely seasoned with love",
         basePrice: 2.85,
-        image: "/images/menu/green-beans.jpg",
+        image: "/images/menu/side-green-beans.png",
         prepTime: 3
       },
       {
@@ -1558,7 +1567,7 @@ export const menuData = {
         name: "Promised Green Beans",
         description: "Fresh salvation in every bite",
         basePrice: 2.85,
-        image: "/images/menu/cole-slaw.jpg",
+        image: "/images/menu/side-cole-slaw.png",
         prepTime: 3
       },	  
     ]
@@ -1603,7 +1612,7 @@ this and that: {
         name: "Garden Salad",
         description: "Made to order garden salad",
         basePrice: 6.50,
-        image: "/images/menu/garden-salad.jpg",
+        image: "/images/menu/tt-garden-salad.png",
         prepTime: 1
       },
       {
@@ -1611,7 +1620,7 @@ this and that: {
         name: "Chef Salad",
         description: "Made to order Chef Salad",
         basePrice: 9.25,
-        image: "/images/menu/chef-salad.jpg",
+        image: "/images/menu/tt-garden-salad.png",
         prepTime: 2
       },
       {
@@ -1651,7 +1660,7 @@ this and that: {
         name: "fries",
         description: "Dark roast enlightenment",
         basePrice: 2.99,
-        image: "/images/menu/coffee-revelation.jpg",
+        image: "/images/menu/tt-side-fries.png",
         prepTime: 2
       },
 	  {
@@ -1660,6 +1669,30 @@ this and that: {
         description: "Dark roast enlightenment",
         basePrice: 2.99,
         image: "/images/menu/coffee-revelation.jpg",
+        prepTime: 2
+      }
+	  {
+        id: "banana-pudding",
+        name: "Banana Pudding",
+        description: "Homemade banana pudding",
+        basePrice: 2.99,
+        image: "/images/menu/tt-banana-pudding.png",
+        prepTime: 2
+      }
+	  {
+        id: "ice-cream",
+        name: "Vanilla Ice Cream",
+        description: "Rich & Creamy Vanilla Ice Cream",
+        basePrice: 2.99,
+        image: "/images/menu/tt-ice-cream.png",
+        prepTime: 2
+      }
+	  {
+        id: "peach-cobbler",
+        name: "Homemade Peach Cobbler",
+        description: "Delightful Peach Cobbler",
+        basePrice: 2.99,
+        image: "/images/menu/tt-peach-cobbler.png",
         prepTime: 2
       }
     ]
