@@ -48,7 +48,6 @@ export default function SmokeMasterPage() {
               background: 'linear-gradient(135deg, #FF6B35, #FFD700)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 60px rgba(255, 107, 53, 0.8)',
               letterSpacing: '3px'
             }}
           >
@@ -58,8 +57,7 @@ export default function SmokeMasterPage() {
             className="text-2xl sm:text-3xl lg:text-4xl mb-8"
             style={{
               fontFamily: "'Alfa Slab One', serif",
-              color: '#FF6B35',
-              textShadow: '3px 3px 6px rgba(0, 0, 0, 0.7)'
+              color: '#FF6B35'
             }}
           >
             Mike Johnson's Journey
@@ -90,8 +88,7 @@ export default function SmokeMasterPage() {
                 className="text-3xl sm:text-4xl mb-6"
                 style={{
                   fontFamily: "'Rye', serif",
-                  color: '#FFD700',
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                  color: '#FFD700'
                 }}
               >
                 <Flame className="inline w-8 h-8 mr-3" style={{ color: '#FF6B35' }} />
@@ -132,8 +129,7 @@ export default function SmokeMasterPage() {
             className="text-3xl sm:text-4xl mb-12 text-center"
             style={{
               fontFamily: "'Rye', serif",
-              color: '#FFD700',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              color: '#FFD700'
             }}
           >
             <BookOpen className="inline w-8 h-8 mr-3" style={{ color: '#FF6B35' }} />
@@ -200,8 +196,7 @@ export default function SmokeMasterPage() {
             className="text-3xl sm:text-4xl mb-12 text-center"
             style={{
               fontFamily: "'Rye', serif",
-              color: '#FFD700',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              color: '#FFD700'
             }}
           >
             <Award className="inline w-8 h-8 mr-3" style={{ color: '#FF6B35' }} />
@@ -285,8 +280,7 @@ export default function SmokeMasterPage() {
             className="text-3xl sm:text-4xl mb-12 text-center"
             style={{
               fontFamily: "'Rye', serif",
-              color: '#FFD700',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              color: '#FFD700'
             }}
           >
             <Heart className="inline w-8 h-8 mr-3" style={{ color: '#FF6B35' }} />
@@ -340,8 +334,7 @@ export default function SmokeMasterPage() {
             className="text-3xl sm:text-4xl mb-12 text-center"
             style={{
               fontFamily: "'Rye', serif",
-              color: '#FFD700',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              color: '#FFD700'
             }}
           >
             <Users className="inline w-8 h-8 mr-3" style={{ color: '#FF6B35' }} />
@@ -404,8 +397,7 @@ export default function SmokeMasterPage() {
             className="text-3xl sm:text-4xl mb-12"
             style={{
               fontFamily: "'Rye', serif",
-              color: '#FFD700',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              color: '#FFD700'
             }}
           >
             The Legacy Continues
@@ -460,8 +452,7 @@ export default function SmokeMasterPage() {
                 className="text-2xl sm:text-3xl font-bold mb-4"
                 style={{
                   fontFamily: "'Alfa Slab One', serif",
-                  color: '#FFD700',
-                  textShadow: '3px 3px 6px rgba(0, 0, 0, 0.7)'
+                  color: '#FFD700'
                 }}
               >
                 &quot;When smoke rises just right,<br />

@@ -124,8 +124,7 @@ const FoodCarousel = () => {
                         className="text-h2 mb-4"
                         style={{
                           color: '#FF6B35',
-                          fontFamily: "'Alfa Slab One', serif",
-                          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                          fontFamily: "'Alfa Slab One', serif"
                         }}
                       >
                         {slide.title}
@@ -146,8 +145,7 @@ const FoodCarousel = () => {
                           <p
                             className="text-3xl font-bold"
                             style={{
-                              color: '#FFD700',
-                              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                              color: '#FFD700'
                             }}
                           >
                             {slide.price}

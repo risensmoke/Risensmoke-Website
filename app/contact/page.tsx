@@ -32,8 +32,7 @@ export default function ContactPage() {
           <h1
             className="mb-4"
             style={{
-              fontFamily: "'Rye', serif",
-              textShadow: '0 0 40px rgba(255, 107, 53, 0.5)'
+              fontFamily: "'Rye', serif"
             }}
           >
             <span style={{

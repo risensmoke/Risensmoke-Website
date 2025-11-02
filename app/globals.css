@@ -257,14 +257,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   transition: all 0.3s ease;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
 }
 
 .nav-link:hover {
   color: #FF6B35;
   background-color: rgba(255, 107, 53, 0.2);
   transform: translateY(-2px);
-  text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
 }
 
 /* Buttons */

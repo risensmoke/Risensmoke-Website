@@ -458,8 +458,7 @@ export default function OrderPage() {
               fontFamily: "'Rye', serif",
               background: 'linear-gradient(135deg, #FF6B35, #FFD700)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 40px rgba(255, 107, 53, 0.5)'
+              WebkitTextFillColor: 'transparent'
             }}
           >
             ORDER ONLINE

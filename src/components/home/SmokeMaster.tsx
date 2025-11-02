@@ -29,7 +29,6 @@ const SmokeMaster = () => {
               background: 'linear-gradient(135deg, #FF6B35, #FFD700)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 40px rgba(255, 107, 53, 0.5)',
               letterSpacing: '2px',
               lineHeight: '1.2'
             }}
@@ -42,7 +41,6 @@ const SmokeMaster = () => {
             style={{
               color: '#FF6B35',
               fontFamily: "'Alfa Slab One', serif",
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
               lineHeight: '1.3'
             }}
           >
@@ -132,7 +130,6 @@ const SmokeMaster = () => {
                 style={{
                   color: '#FFD700',
                   fontFamily: "'Alfa Slab One', serif",
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                   lineHeight: '1.3'
                 }}
               >
@@ -143,7 +140,6 @@ const SmokeMaster = () => {
                 style={{
                   color: '#FFD700',
                   fontFamily: "'Alfa Slab One', serif",
-                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                   lineHeight: '1.3'
                 }}
               >
