@@ -57,7 +57,7 @@ export default function CartModal() {
 
       {/* Cart Modal */}
       <div
-        className="fixed right-0 top-0 h-full w-full md:w-96 z-[100001] shadow-2xl"
+        className="fixed right-0 top-0 h-full w-96 max-w-full z-[100001] shadow-2xl"
         style={{ backgroundColor: '#2a2a2a' }}
       >
         <div className="flex flex-col h-full">
@@ -85,7 +85,7 @@ export default function CartModal() {
           </div>
 
           {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="overflow-y-auto p-4">
             {items.length === 0 ? (
               <div className="text-center py-12">
                 <ShoppingCart

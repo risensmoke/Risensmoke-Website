@@ -33,9 +33,12 @@ const menuCategories = [
   'All',
   'Blessed Plates',
   'Sandwiches',
-  'By The Pound',
+  'Meats',
+  'Favorites',
+  'Family Meals',
   'Sides',
-  'Catering Trays'
+  'This and That',
+  'Drinks'
 ];
 
 const menuItems: MenuItem[] = [
@@ -46,8 +49,8 @@ const menuItems: MenuItem[] = [
     description: 'Mini gospel truth about the smoke',
     price: 12.50,
     category: 'Blessed Plates',
-    image: '/Assets/plate-1meat.PNG',
-    available: true
+    available: true,
+    image: '/Assets/plate-1meat.PNG'
   },
   {
     id: 'disciples-plate',
@@ -55,8 +58,8 @@ const menuItems: MenuItem[] = [
     description: 'One meat blessed by the rise',
     price: 15.35,
     category: 'Blessed Plates',
-    image: '/Assets/plate-1meat.PNG',
-    available: true
+    available: true,
+    image: '/Assets/plate-1meat.PNG'
   },
   {
     id: 'trinity-plate',
@@ -64,8 +67,8 @@ const menuItems: MenuItem[] = [
     description: 'Two meats, one holy transformation',
     price: 16.95,
     category: 'Blessed Plates',
-    image: '/Assets/plate-2meat.PNG',
-    available: true
+    available: true,
+    image: '/Assets/plate-2meat.PNG'
   },
   {
     id: 'revelation-plate',
@@ -73,8 +76,8 @@ const menuItems: MenuItem[] = [
     description: 'The truth about real smoke revealed',
     price: 18.45,
     category: 'Blessed Plates',
-    image: '/Assets/plate-3meat.PNG',
-    available: true
+    available: true,
+    image: '/Assets/plate-3meat.PNG'
   },
   {
     id: 'little-rise',
@@ -82,8 +85,8 @@ const menuItems: MenuItem[] = [
     description: 'The Signature Rise N Smoke Lil Rib Plate',
     price: 13.00,
     category: 'Blessed Plates',
-    image: '/Assets/plate-rib-small.PNG',
-    available: true
+    available: true,
+    image: '/Assets/plate-rib-small.PNG'
   },
   {
     id: 'lotta-rise',
@@ -91,8 +94,8 @@ const menuItems: MenuItem[] = [
     description: 'The Signature Rise N Smoke Rib Plate',
     price: 18.45,
     category: 'Blessed Plates',
-    image: '/Assets/plate-rib-large.PNG',
-    available: true
+    available: true,
+    image: '/Assets/plate-rib-large.PNG'
   },
 
   // Sandwiches
@@ -102,8 +105,8 @@ const menuItems: MenuItem[] = [
     description: 'Double Smoked, Double Flavor',
     price: 13.00,
     category: 'Sandwiches',
-    image: '/Assets/sand-beef-brisket-saus.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-beef-brisket-saus.jpg'
   },
   {
     id: 'sliced-brisket',
@@ -111,8 +114,8 @@ const menuItems: MenuItem[] = [
     description: 'Smoke Ring King - Sliced Brisket',
     price: 11.95,
     category: 'Sandwiches',
-    image: '/Assets/sand-brisket-slice.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-brisket-slice.jpg'
   },
   {
     id: 'chopped-brisket',
@@ -120,8 +123,8 @@ const menuItems: MenuItem[] = [
     description: 'Smoke Ring King - Chopped Brisket',
     price: 10.95,
     category: 'Sandwiches',
-    image: '/Assets/sand-brisket-chop.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-brisket-chop.jpg'
   },
   {
     id: 'pulled-pork',
@@ -129,8 +132,8 @@ const menuItems: MenuItem[] = [
     description: 'Pork pulled from the rising flames of smoke',
     price: 10.95,
     category: 'Sandwiches',
-    image: '/Assets/sand-pull-pork.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-pull-pork.jpg'
   },
   {
     id: 'hotlink',
@@ -138,8 +141,8 @@ const menuItems: MenuItem[] = [
     description: 'Hotlink with a smokey edge to love',
     price: 8.50,
     category: 'Sandwiches',
-    image: '/Assets/sand-hot-link.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-hot-link.jpg'
   },
   {
     id: 'jalapeno-cheddar',
@@ -147,8 +150,8 @@ const menuItems: MenuItem[] = [
     description: 'Sausage kissed with sweet cheese & smokey jalapeno',
     price: 8.50,
     category: 'Sandwiches',
-    image: '/Assets/sand-jalapeno-cheddar.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-jalapeno-cheddar.jpg'
   },
   {
     id: 'pork-ribs',
@@ -156,8 +159,17 @@ const menuItems: MenuItem[] = [
     description: 'Rise, Smoke, and Fall from the bone!',
     price: 10.95,
     category: 'Sandwiches',
-    image: '/Assets/sand-pork-ribs.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-pork-ribs.jpg'
+  },
+  {
+    id: 'beef-sausage',
+    name: 'Beef & Please',
+    description: 'Blessed by the rising flames',
+    price: 10.95,
+    category: 'Sandwiches',
+    available: true,
+    image: '/Assets/sand-hot-link.jpg'
   },
   {
     id: 'smoke-chicken',
@@ -165,149 +177,299 @@ const menuItems: MenuItem[] = [
     description: 'Smokey, finger-lickin goodness',
     price: 10.95,
     category: 'Sandwiches',
-    image: '/Assets/sand-smoke-chicken.jpg',
-    available: true
+    available: true,
+    image: '/Assets/sand-smoke-chicken.jpg'
   },
 
-  // By The Pound
+  // Meats by the Pound
+  {
+    id: 'brisket-quarter',
+    name: 'Brisket 1/4 Pound',
+    description: 'Premium smoked brisket',
+    price: 8.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-brisket-slice.jpg'
+  },
+  {
+    id: 'brisket-half',
+    name: 'Brisket 1/2 Pound',
+    description: 'Premium smoked brisket',
+    price: 15.35,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-brisket-slice.jpg'
+  },
+  {
+    id: 'brisket-three-quarter',
+    name: 'Brisket 3/4 Pound',
+    description: 'Premium smoked brisket',
+    price: 18.45,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-brisket-slice.jpg'
+  },
   {
     id: 'brisket-pound',
-    name: 'Brisket By The Pound',
-    description: 'Heavenly smoke-kissed perfection',
-    price: 29.95,
-    category: 'By The Pound',
-    image: '/Assets/pound-brisket-slice.jpg',
-    available: true
+    name: 'Brisket 1 Pound',
+    description: 'Premium smoked brisket',
+    price: 25.45,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-brisket-slice.jpg'
+  },
+  {
+    id: 'pulled-pork-quarter',
+    name: 'Pulled Pork 1/4 Pound',
+    description: 'Tender pulled pork shoulder',
+    price: 5.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-pull-pork.jpg'
+  },
+  {
+    id: 'pulled-pork-half',
+    name: 'Pulled Pork 1/2 Pound',
+    description: 'Tender pulled pork shoulder',
+    price: 11.45,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-pull-pork.jpg'
+  },
+  {
+    id: 'ribs-half',
+    name: 'Smoked Ribs 1/2 Pound',
+    description: 'Fall-off-the-bone pork ribs',
+    price: 11.45,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/sand-pork-ribs.jpg'
   },
   {
     id: 'ribs-pound',
-    name: 'Ribs By The Pound',
-    description: 'Fall-off-the-bone blessed',
-    price: 25.95,
-    category: 'By The Pound',
-    image: '/Assets/sand-pork-ribs.jpg',
-    available: true
-  },
-  {
-    id: 'pulled-pork-pound',
-    name: 'Pulled Pork By The Pound',
-    description: 'Tender and transformed',
+    name: 'Smoked Ribs 1 Pound',
+    description: 'Fall-off-the-bone pork ribs',
     price: 19.95,
-    category: 'By The Pound',
-    image: '/Assets/pound-pull-pork.jpg',
-    available: true
+    category: 'Meats',
+    available: true,
+    image: '/Assets/sand-pork-ribs.jpg'
   },
 
-  // Sides
+  // Favorites
   {
-    id: 'potato-salad',
-    name: 'Trinity Potato Salad',
-    description: 'Three-blessed potato perfection',
-    price: 3.50,
-    category: 'Sides',
-    image: '/Assets/side-potato-salad.PNG',
-    available: true
+    id: 'brisket-nachos',
+    name: 'Brisket Nachos',
+    description: 'Tortilla Chips, Chopped Brisket, Sauce & Queso',
+    price: 11.95,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/fav-sidewinder.PNG'
   },
   {
-    id: 'mac-cheese',
-    name: 'Sacred Mac & Cheese',
-    description: 'Cheese blessed by the smoke',
-    price: 4.50,
-    category: 'Sides',
-    image: '/Assets/side-mac-cheese.jpg',
-    available: true
+    id: 'loaded-side-winder',
+    name: 'Loaded Side Winder',
+    description: 'Loaded Fries w/Sauce & Queso, Choice of Meat',
+    price: 11.95,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/fav-sidewinder.PNG'
   },
   {
-    id: 'green-beans',
-    name: 'Rise N Green Beans',
-    description: 'Beans that rise with flavor',
-    price: 3.50,
-    category: 'Sides',
-    image: '/Assets/side-green-beans.PNG',
-    available: true
+    id: 'red-pit-burrito',
+    name: 'Red Pit Burrito',
+    description: 'Seasoned Potatoes, Jalapeño Sausage, Chopped Brisket, Sauce & Queso',
+    price: 14.95,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/fav-potato-loaded.png'
   },
   {
-    id: 'coleslaw',
-    name: 'Cool Rise Slaw',
-    description: 'The perfect cooling complement',
-    price: 3.50,
-    category: 'Sides',
-    image: '/Assets/side-cole-slaw.PNG',
-    available: true
+    id: 'baked-potato-plain',
+    name: 'Baked Potato Plain',
+    description: 'Smoked Baked Potato',
+    price: 7.50,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/fav-potato-plain.PNG'
   },
   {
-    id: 'beans',
-    name: 'Blessed Beans',
-    description: 'Slow-cooked with holy smoke',
-    price: 3.50,
+    id: 'baked-potato-loaded',
+    name: 'Baked Potato Loaded',
+    description: 'Baked Potato loaded w/Cheese & Sour Cream',
+    price: 9.25,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/fav-potato-loaded.png'
+  },
+  {
+    id: 'baked-potato-works',
+    name: 'Baked Potato Loaded with Meat',
+    description: 'Loaded Baked Potato w/Meat',
+    price: 11.95,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/fav-potato-works.PNG'
+  },
+
+  // Family Meals
+  {
+    id: 'small-group',
+    name: 'Small Smoke Stack',
+    description: 'Feeds 3-4 People - Choice of 1 meat, 2 medium sides, bread & sauce',
+    price: 44.95,
+    category: 'Family Meals',
+    available: true,
+    image: '/Assets/family-meat-platter.PNG'
+  },
+  {
+    id: 'med-group',
+    name: 'Medium Smoke Stack',
+    description: 'Feeds 6-8 People - Choice of 2 meats, 2 large sides, bread & sauce',
+    price: 82.95,
+    category: 'Family Meals',
+    available: true,
+    image: '/Assets/family-meat-platter.PNG'
+  },
+  {
+    id: 'large-group',
+    name: 'Large Smoke Stack',
+    description: 'Feeds 10-12 People - Choice of 3 meats, 3 large sides, bread & sauce',
+    price: 120.50,
+    category: 'Family Meals',
+    available: true,
+    image: '/Assets/family-meat-platter.PNG'
+  },
+
+  // Divine Sides
+  {
+    id: 'mamas-smoky-mac',
+    name: "Mamas Smoky Mac & Cheese",
+    description: 'Creamy comfort blessed by the kitchen',
+    price: 2.85,
     category: 'Sides',
-    image: '/Assets/side-brisket-beans.PNG',
-    available: true
+    available: true,
+    image: '/Assets/side-mac-cheese.jpg'
+  },
+  {
+    id: 'blessed-potato-salad',
+    name: 'Blessed Potato Salad',
+    description: 'Creamy potatoes touched by grace',
+    price: 2.85,
+    category: 'Sides',
+    available: true,
+    image: '/Assets/side-potato-salad.PNG'
+  },
+  {
+    id: 'hallelujah-baked-beans',
+    name: 'Hallelujah Baked Beans',
+    description: 'Baked sweet and smoky, worth the wait',
+    price: 2.85,
+    category: 'Sides',
+    available: true,
+    image: '/Assets/side-brisket-beans.PNG'
+  },
+  {
+    id: 'divine-green-beans',
+    name: 'Divine Green Beans',
+    description: 'Divinely seasoned with love',
+    price: 2.85,
+    category: 'Sides',
+    available: true,
+    image: '/Assets/side-green-beans.PNG'
+  },
+  {
+    id: 'salvation-cole-slaw',
+    name: 'Salvation Cole Slaw',
+    description: 'Fresh salvation in every bite',
+    price: 2.85,
+    category: 'Sides',
+    available: true,
+    image: '/Assets/side-cole-slaw.PNG'
+  },
+
+  // This and That
+  {
+    id: 'garden-salad',
+    name: 'Garden Salad',
+    description: 'Made to order garden salad',
+    price: 6.50,
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-garden-salad.PNG'
+  },
+  {
+    id: 'chef-salad',
+    name: 'Chef Salad',
+    description: 'Made to order Chef Salad',
+    price: 9.25,
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-garden-salad.PNG'
   },
   {
     id: 'side-fries',
     name: 'Side Fries',
     description: 'Crispy golden fries',
     price: 3.50,
-    category: 'Sides',
-    image: '/Assets/tt-side-fries.PNG',
-    available: true
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-side-fries.PNG'
   },
   {
     id: 'banana-pudding',
     name: 'Banana Pudding',
     description: 'Homemade banana pudding',
     price: 2.99,
-    category: 'Sides',
-    image: '/Assets/tt-banana-pudding.PNG',
-    available: true
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-banana-pudding.PNG'
   },
   {
     id: 'ice-cream',
     name: 'Vanilla Ice Cream',
     description: 'Rich & Creamy Vanilla Ice Cream',
     price: 2.99,
-    category: 'Sides',
-    image: '/Assets/tt-ice-cream.jpg',
-    available: true
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-ice-cream.jpg'
   },
   {
     id: 'peach-cobbler',
     name: 'Homemade Peach Cobbler',
     description: 'Delightful Peach Cobbler',
     price: 2.99,
-    category: 'Sides',
-    image: '/Assets/tt-peach-cobbler.PNG',
-    available: true
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-peach-cobbler.PNG'
   },
 
-  // Catering Trays
+  // Drinks
   {
-    id: 'family-feast',
-    name: 'Family Feast',
-    description: 'Feed 4-6 blessed souls',
-    price: 65.00,
-    category: 'Catering Trays',
-    image: '/Assets/family-meat-platter.PNG',
-    available: true
+    id: 'sweet-tea',
+    name: 'Sweet Tea',
+    description: 'Southern sweet tea',
+    price: 2.50,
+    category: 'Drinks',
+    available: true,
+    image: '/tt-sweet-tea.png'
   },
   {
-    id: 'gathering-tray',
-    name: 'Gathering Tray',
-    description: 'Perfect for 8-10 disciples',
-    price: 120.00,
-    category: 'Catering Trays',
-    image: '/Assets/family-meat-platter.PNG',
-    available: true
+    id: 'soda',
+    name: 'Soda',
+    description: 'Coke, Pepsi, Sprite, and more',
+    price: 1.50,
+    category: 'Drinks',
+    available: true,
+    image: '/tt-soda.png'
   },
   {
-    id: 'celebration-spread',
-    name: 'Celebration Spread',
-    description: 'Transform your party (15-20 people)',
-    price: 225.00,
-    category: 'Catering Trays',
-    image: '/Assets/family-meat-platter.PNG',
-    available: true
+    id: 'water',
+    name: 'Bottled Water',
+    description: 'Bottled Water',
+    price: 2.00,
+    category: 'Drinks',
+    available: true,
+    image: '/tt-water.jpg'
   }
 ];
 
@@ -468,7 +630,7 @@ export default function OrderPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-12">
           {/* Menu Section */}
           <div className="lg:col-span-2">
             {/* Category Filter */}
@@ -493,88 +655,219 @@ export default function OrderPage() {
 
             {/* Menu Items */}
             <div className="space-y-4">
-              {filteredItems.map(item => (
+              {selectedCategory === 'All' ? (
+                // Group by category when showing all items
+                menuCategories.filter(cat => cat !== 'All').map(category => {
+                  const categoryItems = filteredItems.filter(item => item.category === category);
+                  if (categoryItems.length === 0) return null;
+
+                  return (
+                    <div key={category}>
+                      {/* Category Header */}
+                      <h3
+                        className="text-xl md:text-2xl font-bold mb-3 pb-2"
+                        style={{
+                          color: '#FFD700',
+                          borderBottom: '2px solid rgba(255, 107, 53, 0.3)',
+                          fontFamily: "'Alfa Slab One', serif"
+                        }}
+                      >
+                        {category}
+                      </h3>
+                      <div className="space-y-4 mb-8">
+                        {categoryItems.map(item => (
+                          <div
+                            key={item.id}
+                            className="rounded-lg overflow-hidden flex flex-row h-48"
+                            style={{
+                              border: '2px solid rgba(255, 107, 53, 0.3)',
+                              backgroundColor: 'rgba(40, 40, 40, 0.8)'
+                            }}
+                          >
+                            {/* Left Section - Image (50%) */}
+                            <div className="w-1/2 h-full relative flex-shrink-0">
+                              <Image
+                                src={item.image || '/Food_Image.jpg'}
+                                alt={item.name}
+                                fill
+                                className="object-cover"
+                                sizes="50vw"
+                              />
+                            </div>
+
+                            {/* Right Section - Content (50%) */}
+                            <div className="w-1/2 p-3 flex flex-col justify-between">
+                              {/* Title */}
+                              <h3 className="text-base md:text-lg font-bold mb-1" style={{ color: '#FFD700' }}>
+                                {item.name}
+                              </h3>
+
+                              {/* Description */}
+                              <p className="text-xs mb-2" style={{ color: '#F8F8F8' }}>
+                                {item.description}
+                              </p>
+
+                              {/* Quantity Controls */}
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  onClick={() => updateItemQuantity(item.id, -1)}
+                                  className="w-7 h-7 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                                  style={{
+                                    backgroundColor: 'rgba(255, 107, 53, 0.3)',
+                                    border: '2px solid #FF6B35'
+                                  }}
+                                >
+                                  <Minus className="w-3 h-3" style={{ color: '#FF6B35' }} />
+                                </button>
+                                <span className="text-base font-bold" style={{ color: '#F8F8F8', minWidth: '1.5rem', textAlign: 'center' }}>
+                                  {itemQuantities[item.id] || 1}
+                                </span>
+                                <button
+                                  onClick={() => updateItemQuantity(item.id, 1)}
+                                  className="w-7 h-7 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                                  style={{
+                                    backgroundColor: 'rgba(255, 107, 53, 0.3)',
+                                    border: '2px solid #FF6B35'
+                                  }}
+                                >
+                                  <Plus className="w-3 h-3" style={{ color: '#FF6B35' }} />
+                                </button>
+                              </div>
+
+                              {/* Price */}
+                              <div className="text-lg md:text-xl font-bold mb-2" style={{ color: '#F8F8F8' }}>
+                                ${item.price.toFixed(2)}
+                              </div>
+
+                              {/* Add to Cart Button */}
+                              <button
+                                onClick={() => handleAddToCart(item)}
+                                className="w-full py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105"
+                                style={{
+                                  background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
+                                  color: '#F8F8F8',
+                                  fontSize: '0.8125rem'
+                                }}
+                              >
+                                <ShoppingCart className="w-4 h-4" />
+                                Add to Cart
+                              </button>
+
+                              {/* In Cart Indicator */}
+                              {getItemQuantityInCart(item.id) > 0 && (
+                                <div className="text-xs mt-1" style={{ color: '#FFD700' }}>
+                                  ({getItemQuantityInCart(item.id)} in cart)
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                // Show single category header when filtered
+                <>
+                  <h3
+                    className="text-xl md:text-2xl font-bold mb-3 pb-2"
+                    style={{
+                      color: '#FFD700',
+                      borderBottom: '2px solid rgba(255, 107, 53, 0.3)',
+                      fontFamily: "'Alfa Slab One', serif"
+                    }}
+                  >
+                    {selectedCategory}
+                  </h3>
+                  {filteredItems.map(item => (
                 <div
                   key={item.id}
-                  className="rounded-lg overflow-hidden"
+                  className="rounded-lg overflow-hidden flex flex-row h-48"
                   style={{
-                    backgroundColor: 'rgba(40, 40, 40, 0.8)',
-                    border: '2px solid rgba(255, 107, 53, 0.3)'
+                    border: '2px solid rgba(255, 107, 53, 0.3)',
+                    backgroundColor: 'rgba(40, 40, 40, 0.8)'
                   }}
                 >
-                  <div className="flex flex-col md:flex-row gap-0">
-                    {/* Image Section - Thumbnail Size */}
-                    <div className="w-32 h-32 md:w-28 md:h-28 lg:w-32 lg:h-32 relative flex-shrink-0 rounded overflow-hidden" style={{ backgroundColor: '#2a2a2a' }}>
-                      <Image
-                        src={item.image || '/Food_Image.jpg'}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                        sizes="128px"
-                      />
+                  {/* Left Section - Image (50%) */}
+                  <div className="w-1/2 h-full relative flex-shrink-0">
+                    <Image
+                      src={item.image || '/Food_Image.jpg'}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                      sizes="50vw"
+                    />
+                  </div>
+
+                  {/* Right Section - Content (50%) */}
+                  <div className="w-1/2 p-3 flex flex-col justify-between">
+                    {/* Title */}
+                    <h3 className="text-base md:text-lg font-bold mb-1" style={{ color: '#FFD700' }}>
+                      {item.name}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs mb-2" style={{ color: '#F8F8F8' }}>
+                      {item.description}
+                    </p>
+
+                    {/* Quantity Controls */}
+                    <div className="flex items-center gap-2 mb-2">
+                      <button
+                        onClick={() => updateItemQuantity(item.id, -1)}
+                        className="w-7 h-7 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                        style={{
+                          backgroundColor: 'rgba(255, 107, 53, 0.3)',
+                          border: '2px solid #FF6B35'
+                        }}
+                      >
+                        <Minus className="w-3 h-3" style={{ color: '#FF6B35' }} />
+                      </button>
+                      <span className="text-base font-bold" style={{ color: '#F8F8F8', minWidth: '1.5rem', textAlign: 'center' }}>
+                        {itemQuantities[item.id] || 1}
+                      </span>
+                      <button
+                        onClick={() => updateItemQuantity(item.id, 1)}
+                        className="w-7 h-7 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                        style={{
+                          backgroundColor: 'rgba(255, 107, 53, 0.3)',
+                          border: '2px solid #FF6B35'
+                        }}
+                      >
+                        <Plus className="w-3 h-3" style={{ color: '#FF6B35' }} />
+                      </button>
                     </div>
-                    {/* Description Section - Takes Remaining Space */}
-                    <div className="flex-1 p-4 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
-                        <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#FFD700 !important' }}>
-                          {item.name}
-                        </h3>
-                        <span className="text-lg sm:text-xl font-bold" style={{ color: '#FF6B35 !important' }}>
-                          ${item.price.toFixed(2)}
-                        </span>
-                      </div>
-                      <p className="text-sm mb-3" style={{ color: '#F8F8F8 !important' }}>
-                        {item.description}
-                      </p>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() => updateItemQuantity(item.id, -1)}
-                            className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
-                            style={{
-                              backgroundColor: 'rgba(255, 107, 53, 0.3)',
-                              border: '2px solid #FF6B35'
-                            }}
-                          >
-                            <Minus className="w-4 h-4" style={{ color: '#FF6B35 !important' }} />
-                          </button>
-                          <span style={{ color: '#F8F8F8 !important', minWidth: '2rem', textAlign: 'center', fontWeight: 'bold' }}>
-                            {itemQuantities[item.id] || 1}
-                          </span>
-                          <button
-                            onClick={() => updateItemQuantity(item.id, 1)}
-                            className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
-                            style={{
-                              backgroundColor: 'rgba(255, 107, 53, 0.3)',
-                              border: '2px solid #FF6B35'
-                            }}
-                          >
-                            <Plus className="w-4 h-4" style={{ color: '#FF6B35 !important' }} />
-                          </button>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {getItemQuantityInCart(item.id) > 0 && (
-                            <span className="text-sm" style={{ color: '#FFD700' }}>
-                              ({getItemQuantityInCart(item.id)} in cart)
-                            </span>
-                          )}
-                          <button
-                            onClick={() => handleAddToCart(item)}
-                            className="px-4 py-2 rounded-lg font-semibold flex items-center gap-2"
-                            style={{
-                              background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
-                              color: '#F8F8F8'
-                            }}
-                          >
-                            <ShoppingCart className="w-4 h-4" />
-                            Add to Cart
-                          </button>
-                        </div>
-                      </div>
+
+                    {/* Price */}
+                    <div className="text-lg md:text-xl font-bold mb-2" style={{ color: '#F8F8F8' }}>
+                      ${item.price.toFixed(2)}
                     </div>
+
+                    {/* Add to Cart Button */}
+                    <button
+                      onClick={() => handleAddToCart(item)}
+                      className="w-full py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105"
+                      style={{
+                        background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
+                        color: '#F8F8F8',
+                        fontSize: '0.8125rem'
+                      }}
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      Add to Cart
+                    </button>
+
+                    {/* In Cart Indicator */}
+                    {getItemQuantityInCart(item.id) > 0 && (
+                      <div className="text-xs mt-1" style={{ color: '#FFD700' }}>
+                        ({getItemQuantityInCart(item.id)} in cart)
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
+                </>
+              )}
             </div>
           </div>
 
