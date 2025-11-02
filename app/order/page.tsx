@@ -504,14 +504,14 @@ export default function OrderPage() {
                   }}
                 >
                   <div className="flex flex-col md:flex-row gap-0">
-                    {/* Image Section - Fixed Width on Desktop */}
-                    <div className="w-full md:w-[200px] lg:w-[240px] aspect-[4/3] md:aspect-square relative flex-shrink-0" style={{ backgroundColor: '#2a2a2a' }}>
+                    {/* Image Section - Thumbnail Size */}
+                    <div className="w-32 h-32 md:w-28 md:h-28 lg:w-32 lg:h-32 relative flex-shrink-0 rounded overflow-hidden" style={{ backgroundColor: '#2a2a2a' }}>
                       <Image
                         src={item.image || '/Food_Image.jpg'}
                         alt={item.name}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 240px"
+                        sizes="128px"
                       />
                     </div>
                     {/* Description Section - Takes Remaining Space */}
