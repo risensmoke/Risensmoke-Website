@@ -517,12 +517,12 @@ export default function MenuPage() {
           {filteredItems.map((item) => (
             <div key={item.id} className="menu-item-card overflow-hidden">
               {/* Item Image */}
-              <div className="relative w-full h-64 -mx-6 -mt-6 mb-4" style={{ backgroundColor: '#2a2a2a' }}>
+              <div className="relative w-full aspect-[4/3] -mx-6 -mt-6 mb-4" style={{ backgroundColor: '#2a2a2a' }}>
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
-                  className="object-contain"
+                  className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 {/* Price Badge */}

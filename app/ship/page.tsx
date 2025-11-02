@@ -260,12 +260,12 @@ export default function ShipPage() {
                   }}
                 >
                   {/* Image */}
-                  <div className="relative w-full h-48" style={{ backgroundColor: '#2a2a2a' }}>
+                  <div className="relative w-full aspect-[4/3]" style={{ backgroundColor: '#2a2a2a' }}>
                     <Image
                       src={pkg.image}
                       alt={pkg.name}
                       fill
-                      className="object-contain"
+                      className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div
