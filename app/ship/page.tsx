@@ -141,7 +141,8 @@ export default function ShipPage() {
       name: pkg.name,
       basePrice: pkg.price,
       quantity: 1,
-      modifiers: []
+      modifiers: [],
+      image: pkg.image
     });
     toggleCart();
   };

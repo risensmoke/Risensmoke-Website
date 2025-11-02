@@ -472,7 +472,8 @@ export default function MenuPage() {
       name: item.name,
       basePrice: item.price,
       quantity: 1,
-      modifiers: []
+      modifiers: [],
+      image: item.image
     });
   };
 

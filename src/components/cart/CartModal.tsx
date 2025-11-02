@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { X, Plus, Minus, ShoppingCart, Trash2 } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CartModal() {
   const {
@@ -114,28 +115,44 @@ export default function CartModal() {
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="rounded-lg p-4"
+                    className="rounded-lg p-3"
                     style={{
                       backgroundColor: 'rgba(40, 40, 40, 0.8)',
                       border: '1px solid rgba(255, 107, 53, 0.2)'
                     }}
                   >
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex-1">
-                        <h3 className="text-sm sm:text-base font-semibold" style={{ color: '#FFD700' }}>
-                          {item.name}
-                        </h3>
+                    <div className="flex gap-3 mb-3">
+                      {/* Thumbnail Image */}
+                      {item.image && (
+                        <div className="relative w-16 h-16 flex-shrink-0 rounded overflow-hidden" style={{ backgroundColor: '#2a2a2a' }}>
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-contain"
+                            sizes="64px"
+                          />
+                        </div>
+                      )}
+
+                      {/* Item Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-start mb-1">
+                          <h3 className="text-sm sm:text-base font-semibold" style={{ color: '#FFD700' }}>
+                            {item.name}
+                          </h3>
+                          <button
+                            onClick={() => removeItem(item.id)}
+                            className="ml-2 p-1 hover:opacity-80 flex-shrink-0"
+                            style={{ color: '#D32F2F' }}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                         <p className="text-xs sm:text-sm" style={{ color: '#F8F8F8' }}>
                           ${item.basePrice.toFixed(2)} each
                         </p>
                       </div>
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="ml-2 p-1 hover:opacity-80"
-                        style={{ color: '#D32F2F' }}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
                     </div>
 
                     <div className="flex items-center justify-between">

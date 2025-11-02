@@ -11,6 +11,7 @@ interface CartItem {
   modifiers: CartModifier[];
   specialInstructions?: string;
   totalPrice: number;
+  image?: string;
 }
 
 interface CartModifier {
