@@ -42,7 +42,7 @@ const SHIPPING_PACKAGES: ShippingPackage[] = [
     id: 'brisket-bundle',
     name: 'Brisket Lover\'s Bundle',
     description: 'Premium smoked brisket perfection',
-    longDescription: 'For the true brisket connoisseur. Our award-winning brisket smoked low and slow with hickory and oak.',
+    longDescription: 'For the true brisket connoisseur. Our award-winning brisket smoked low and slow with oak.',
     price: 129.95,
     serves: '6-8 people',
     weight: '5 lbs',

@@ -122,7 +122,7 @@ const Footer = () => {
                 <Clock className="w-4 h-4 mt-0.5 mr-2 flex-shrink-0" style={{ color: '#FF6B35' }} />
                 <div>
                   <p className="text-sm" style={{ color: '#F8F8F8' }}>
-                    Tue-Sat: 11:00 AM - 8:00 PM<br />
+                    Tue-Sat: 11:00 AM - 6:00 PM<br />
                     Sun-Mon: Closed
                   </p>
                 </div>

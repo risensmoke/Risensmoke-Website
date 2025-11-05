@@ -27,7 +27,7 @@ export default function Home() {
                 It&apos;s All About the Rise
               </h3>
               <p style={{ color: "#F8F8F8" }}>
-                When we burn our hickory and oak just right, the smoke doesn&apos;t just sit there—it rises up
+                When we burn our oak just right, the smoke doesn&apos;t just sit there—it rises up
                 in perfect little streams, carrying all that wood flavor with it.
               </p>
             </div>
@@ -78,7 +78,7 @@ export default function Home() {
               <div className="space-y-2" style={{ color: "#F8F8F8" }}>
                 <p>Sunday: Closed</p>
                 <p>Monday: Closed</p>
-                <p className="font-semibold" style={{ color: "#F8F8F8" }}>Tuesday - Saturday: 11:00 AM - 8:00 PM</p>
+                <p className="font-semibold" style={{ color: "#F8F8F8" }}>Tuesday - Saturday: 11:00 AM - 6:00 PM</p>
               </div>
             </div>
 

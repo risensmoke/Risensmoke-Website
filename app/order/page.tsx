@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ShoppingCart, Clock, Plus, Minus, X, Calendar } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
+import SizeSelectionModal from '@/components/menu/SizeSelectionModal';
+import PlateCustomizationModal from '@/components/menu/PlateCustomizationModal';
 
 interface MenuItem {
   id: string;
@@ -183,77 +185,78 @@ const menuItems: MenuItem[] = [
 
   // Meats by the Pound
   {
-    id: 'brisket-quarter',
-    name: 'Brisket 1/4 Pound',
-    description: 'Premium smoked brisket',
-    price: 8.95,
-    category: 'Meats',
-    available: true,
-    image: '/Assets/pound-brisket-slice.jpg'
-  },
-  {
-    id: 'brisket-half',
-    name: 'Brisket 1/2 Pound',
-    description: 'Premium smoked brisket',
-    price: 15.35,
-    category: 'Meats',
-    available: true,
-    image: '/Assets/pound-brisket-slice.jpg'
-  },
-  {
-    id: 'brisket-three-quarter',
-    name: 'Brisket 3/4 Pound',
-    description: 'Premium smoked brisket',
-    price: 18.45,
-    category: 'Meats',
-    available: true,
-    image: '/Assets/pound-brisket-slice.jpg'
-  },
-  {
-    id: 'brisket-pound',
-    name: 'Brisket 1 Pound',
-    description: 'Premium smoked brisket',
+    id: 'brisket-sliced',
+    name: 'Sliced Brisket',
+    description: 'Premium smoked sliced brisket - Select weight - price per pound listed',
     price: 25.45,
     category: 'Meats',
     available: true,
     image: '/Assets/pound-brisket-slice.jpg'
   },
   {
-    id: 'pulled-pork-quarter',
-    name: 'Pulled Pork 1/4 Pound',
-    description: 'Tender pulled pork shoulder',
-    price: 5.95,
-    category: 'Meats',
-    available: true,
-    image: '/Assets/pound-pull-pork.jpg'
-  },
-  {
-    id: 'pulled-pork-half',
-    name: 'Pulled Pork 1/2 Pound',
-    description: 'Tender pulled pork shoulder',
-    price: 11.45,
-    category: 'Meats',
-    available: true,
-    image: '/Assets/pound-pull-pork.jpg'
-  },
-  {
-    id: 'ribs-half',
-    name: 'Smoked Ribs 1/2 Pound',
-    description: 'Fall-off-the-bone pork ribs',
-    price: 11.45,
-    category: 'Meats',
-    available: true,
-    image: '/Assets/sand-pork-ribs.jpg'
-  },
-  {
-    id: 'ribs-pound',
-    name: 'Smoked Ribs 1 Pound',
-    description: 'Fall-off-the-bone pork ribs',
+    id: 'brisket-chopped',
+    name: 'Chopped Brisket',
+    description: 'Premium smoked chopped brisket - Select weight - price per pound listed',
     price: 19.95,
     category: 'Meats',
     available: true,
-    image: '/Assets/sand-pork-ribs.jpg'
+    image: '/Assets/pound-brisket-chop.jpg'
   },
+  {
+    id: 'pulled-pork',
+    name: 'Pulled Pork',
+    description: 'Tender pulled pork shoulder - Select weight - price per pound listed',
+    price: 19.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-pull-pork.jpg'
+  },
+  {
+    id: 'smoked-ribs',
+    name: 'Smoked Ribs',
+    description: 'Fall-off-the-bone pork ribs - Select weight - price per pound listed',
+    price: 19.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-pork-ribs.jpg'
+  },
+  {
+    id: 'smoked-chicken',
+    name: 'Smoked Chicken',
+    description: 'Tender smoked chicken - Select weight - price per pound listed',
+    price: 19.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-smoke-chicken.jpg'
+  },
+  {
+    id: 'jalapeno-sausage',
+    name: 'Jalapeño Sausage',
+    description: 'Spicy jalapeño sausage - Select weight - price per pound listed',
+    price: 19.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-jalapeno-sausage.jpg'
+  },
+  {
+    id: 'beef-sausage',
+    name: 'Beef Sausage',
+    description: 'Premium beef sausage - Select weight - price per pound listed',
+    price: 19.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-beef-sausage.jpg'
+  },
+  {
+    id: 'hot-link',
+    name: 'Hot Link',
+    description: 'Spicy hot link sausage - Select weight - price per pound listed',
+    price: 19.95,
+    category: 'Meats',
+    available: true,
+    image: '/Assets/pound-hot-link.jpg'
+  },
+
 
   // Favorites
   {
@@ -263,7 +266,7 @@ const menuItems: MenuItem[] = [
     price: 11.95,
     category: 'Favorites',
     available: true,
-    image: '/Assets/fav-sidewinder.PNG'
+    image: '/Assets/fav-brisket-nachos.jpg'
   },
   {
     id: 'loaded-side-winder',
@@ -293,29 +296,29 @@ const menuItems: MenuItem[] = [
     image: '/Assets/fav-potato-plain.PNG'
   },
   {
-    id: 'baked-potato-loaded',
-    name: 'Baked Potato Loaded',
-    description: 'Baked Potato loaded w/Cheese & Sour Cream',
+    id: 'baked-potato-stuffed',
+    name: 'Baked Potato Stuffed',
+    description: 'Baked Potato stuffed w/Cheese & Sour Cream',
     price: 9.25,
     category: 'Favorites',
     available: true,
-    image: '/Assets/fav-potato-loaded.png'
+    image: '/Assets/fav-potato-stuffed.PNG'
   },
   {
-    id: 'baked-potato-works',
-    name: 'Baked Potato Loaded with Meat',
+    id: 'baked-potato-loaded',
+    name: 'Baked Potato Loaded',
     description: 'Loaded Baked Potato w/Meat',
     price: 11.95,
     category: 'Favorites',
     available: true,
-    image: '/Assets/fav-potato-works.PNG'
+    image: '/Assets/fav-potato-loaded.png'
   },
 
   // Family Meals
   {
     id: 'small-group',
     name: 'Small Smoke Stack',
-    description: 'Feeds 3-4 People - Choice of 1 meat, 2 medium sides, bread & sauce',
+    description: 'Feeds 3-4 People - 1lb of Meat choice, 2 medium sides, bread & sauce',
     price: 44.95,
     category: 'Family Meals',
     available: true,
@@ -324,7 +327,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'med-group',
     name: 'Medium Smoke Stack',
-    description: 'Feeds 6-8 People - Choice of 2 meats, 2 large sides, bread & sauce',
+    description: 'Feeds 6-8 People - 2lbs of Meat choice, 2 large sides, bread & sauce',
     price: 82.95,
     category: 'Family Meals',
     available: true,
@@ -333,7 +336,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'large-group',
     name: 'Large Smoke Stack',
-    description: 'Feeds 10-12 People - Choice of 3 meats, 3 large sides, bread & sauce',
+    description: 'Feeds 10-12 People - 3lbs of Meat choice, 3 large sides, bread & sauce',
     price: 120.50,
     category: 'Family Meals',
     available: true,
@@ -344,7 +347,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'mamas-smoky-mac',
     name: "Mamas Smoky Mac & Cheese",
-    description: 'Creamy comfort blessed by the kitchen',
+    description: 'Creamy comfort blessed by the kitchen - Choose from S, M, or L',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -353,7 +356,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'blessed-potato-salad',
     name: 'Blessed Potato Salad',
-    description: 'Creamy potatoes touched by grace',
+    description: 'Creamy potatoes touched by grace - Choose from S, M, or L',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -362,7 +365,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'hallelujah-baked-beans',
     name: 'Hallelujah Baked Beans',
-    description: 'Baked sweet and smoky, worth the wait',
+    description: 'Baked sweet and smoky, worth the wait - Choose from S, M, or L',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -371,7 +374,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'divine-green-beans',
     name: 'Divine Green Beans',
-    description: 'Divinely seasoned with love',
+    description: 'Divinely seasoned with love - Choose from S, M, or L',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -380,7 +383,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'salvation-cole-slaw',
     name: 'Salvation Cole Slaw',
-    description: 'Fresh salvation in every bite',
+    description: 'Fresh salvation in every bite - Choose from S, M, or L',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -407,6 +410,15 @@ const menuItems: MenuItem[] = [
     image: '/Assets/tt-garden-salad.PNG'
   },
   {
+    id: 'chef-salad-meat',
+    name: 'Chef Salad with Meat',
+    description: 'Made to order Chef Salad with your choice of smoked meat',
+    price: 9.25,
+    category: 'This and That',
+    available: true,
+    image: '/Assets/tt-chef-salad-meat.jpg'
+  },
+  {
     id: 'side-fries',
     name: 'Side Fries',
     description: 'Crispy golden fries',
@@ -428,7 +440,7 @@ const menuItems: MenuItem[] = [
     id: 'ice-cream',
     name: 'Vanilla Ice Cream',
     description: 'Rich & Creamy Vanilla Ice Cream',
-    price: 2.99,
+    price: 1.25,
     category: 'This and That',
     available: true,
     image: '/Assets/tt-ice-cream.jpg'
@@ -451,7 +463,7 @@ const menuItems: MenuItem[] = [
     price: 2.50,
     category: 'Drinks',
     available: true,
-    image: '/tt-sweet-tea.png'
+    image: '/Assets/drinks-tea.jpg'
   },
   {
     id: 'soda',
@@ -460,7 +472,7 @@ const menuItems: MenuItem[] = [
     price: 1.50,
     category: 'Drinks',
     available: true,
-    image: '/tt-soda.png'
+    image: '/Assets/drinks-soda.jpg'
   },
   {
     id: 'water',
@@ -469,12 +481,64 @@ const menuItems: MenuItem[] = [
     price: 2.00,
     category: 'Drinks',
     available: true,
-    image: '/tt-water.jpg'
+    image: '/Assets/drink-water.jpg'
   }
 ];
 
+const sidesSizeOptions = [
+  { label: '4 oz', price: 2.85 },
+  { label: '16 oz', price: 8.00 },
+  { label: '32 oz', price: 12.00 }
+];
+
+const standardMeatWeightOptions = [
+  { label: '1/4 lb', price: 5.95 },
+  { label: '1/2 lb', price: 11.45 },
+  { label: '3/4 lb', price: 16.35 },
+  { label: '1 lb', price: 19.95 }
+];
+
+const premiumMeatWeightOptions = [
+  { label: '1/4 lb', price: 8.95 },
+  { label: '1/2 lb', price: 15.35 },
+  { label: '3/4 lb', price: 18.45 },
+  { label: '1 lb', price: 25.45 }
+];
+
+const meatOptions = [
+  { label: 'Sliced Brisket', price: 0.00 },
+  { label: 'Chopped Brisket', price: 0.00 },
+  { label: 'Pulled Pork', price: 0.00 },
+  { label: 'Smoked Ribs', price: 0.00 },
+  { label: 'Smoked Chicken', price: 0.00 },
+  { label: 'Jalapeño Sausage', price: 0.00 },
+  { label: 'Beef Sausage', price: 0.00 },
+  { label: 'Hot Link', price: 0.00 }
+];
+
+const sidesOptions = [
+  { label: 'Mamas Smoky Mac & Cheese', price: 0.00 },
+  { label: 'Blessed Potato Salad', price: 0.00 },
+  { label: 'Hallelujah Baked Beans', price: 0.00 },
+  { label: 'Divine Green Beans', price: 0.00 },
+  { label: 'Salvation Cole Slaw', price: 0.00 }
+];
+
+// Plate configurations
+const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; excludeRibs?: boolean } } = {
+  'gospel-plate': { meatCount: 1, sideCount: 2, excludeRibs: true },
+  'disciples-plate': { meatCount: 1, sideCount: 2 },
+  'trinity-plate': { meatCount: 2, sideCount: 2 },
+  'revelation-plate': { meatCount: 3, sideCount: 2 },
+  'little-rise': { meatCount: 0, sideCount: 2 },
+  'lotta-rise': { meatCount: 0, sideCount: 2 }
+};
+
 export default function OrderPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
+  const [plateModalItem, setPlateModalItem] = useState<MenuItem | null>(null);
+  const [meatWeightModalItem, setMeatWeightModalItem] = useState<MenuItem | null>(null);
   const [itemQuantities, setItemQuantities] = useState<{ [key: string]: number }>({});
   const [showCheckout, setShowCheckout] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
@@ -507,6 +571,24 @@ export default function OrderPage() {
     : menuItems.filter(item => item.category === selectedCategory);
 
   const handleAddToCart = (item: MenuItem) => {
+    // Show size selection modal for Sides
+    if (item.category === 'Sides') {
+      setSizeModalItem(item);
+      return;
+    }
+
+    // Show plate customization modal for Blessed Plates
+    if (item.category === 'Blessed Plates' && plateConfigs[item.id]) {
+      setPlateModalItem(item);
+      return;
+    }
+
+    // Show weight selection modal for Meats
+    if (item.category === 'Meats') {
+      setMeatWeightModalItem(item);
+      return;
+    }
+
     const quantity = itemQuantities[item.id] || 1;
     addItem({
       menuItemId: item.id,
@@ -514,6 +596,84 @@ export default function OrderPage() {
       basePrice: item.price,
       quantity: quantity,
       modifiers: [],
+      image: item.image
+    });
+    setItemQuantities({ ...itemQuantities, [item.id]: 1 });
+  };
+
+  const handleSizeSelection = (item: MenuItem, size: { label: string; price: number }) => {
+    // For sides, the base price is the 4oz price (2.85)
+    // We add a modifier for the selected size with appropriate price adjustment
+    const baseSidePrice = 2.85;
+    const modifierPrice = size.price - baseSidePrice;
+    const quantity = itemQuantities[item.id] || 1;
+
+    addItem({
+      menuItemId: item.id,
+      name: item.name,
+      basePrice: baseSidePrice,
+      quantity: quantity,
+      modifiers: [{
+        id: `size-${size.label}`,
+        name: size.label,
+        price: modifierPrice,
+        category: 'Size'
+      }],
+      image: item.image
+    });
+    setItemQuantities({ ...itemQuantities, [item.id]: 1 });
+  };
+
+  const handlePlateCustomization = (
+    item: MenuItem,
+    meats: { label: string; price: number }[],
+    sides: { label: string; price: number }[]
+  ) => {
+    const quantity = itemQuantities[item.id] || 1;
+    const modifiers = [
+      ...meats.map((meat, idx) => ({
+        id: `meat-${idx}-${meat.label}`,
+        name: meat.label,
+        price: meat.price,
+        category: 'Meat'
+      })),
+      ...sides.map((side, idx) => ({
+        id: `side-${idx}-${side.label}`,
+        name: side.label,
+        price: side.price,
+        category: 'Side'
+      }))
+    ];
+
+    addItem({
+      menuItemId: item.id,
+      name: item.name,
+      basePrice: item.price,
+      quantity: quantity,
+      modifiers,
+      image: item.image
+    });
+    setItemQuantities({ ...itemQuantities, [item.id]: 1 });
+  };
+
+  const handleMeatWeightSelection = (item: MenuItem, weight: { label: string; price: number }) => {
+    // The weight selection contains the full price, not a modifier price
+    // We set base price to the lowest tier price and adjust with modifier
+    const baseMeatPrice = item.id === 'brisket-sliced' ? 8.95 : 5.95;
+    const modifierPrice = weight.price - baseMeatPrice;
+    const quantity = itemQuantities[item.id] || 1;
+
+    addItem({
+      menuItemId: item.id,
+      name: item.name,
+      basePrice: baseMeatPrice,
+      quantity: quantity,
+      modifiers: [{
+        id: `weight-${weight.label}`,
+        name: weight.label,
+        price: modifierPrice,
+        category: 'Weight'
+      }],
       image: item.image
     });
     setItemQuantities({ ...itemQuantities, [item.id]: 1 });
@@ -678,25 +838,25 @@ export default function OrderPage() {
                         {categoryItems.map(item => (
                           <div
                             key={item.id}
-                            className="rounded-lg overflow-hidden flex flex-row h-48"
+                            className="rounded-lg overflow-hidden flex flex-row h-64"
                             style={{
                               border: '2px solid rgba(255, 107, 53, 0.3)',
                               backgroundColor: 'rgba(40, 40, 40, 0.8)'
                             }}
                           >
-                            {/* Left Section - Image (50%) */}
-                            <div className="w-1/2 h-full relative flex-shrink-0">
+                            {/* Left Section - Image (60%) */}
+                            <div className="w-3/5 h-full relative flex-shrink-0">
                               <Image
                                 src={item.image || '/Food_Image.jpg'}
                                 alt={item.name}
                                 fill
                                 className="object-cover"
-                                sizes="50vw"
+                                sizes="60vw"
                               />
                             </div>
 
-                            {/* Right Section - Content (50%) */}
-                            <div className="w-1/2 p-3 flex flex-col justify-between">
+                            {/* Right Section - Content (40%) */}
+                            <div className="w-2/5 p-3 flex flex-col justify-between">
                               {/* Title */}
                               <h3 className="text-base md:text-lg font-bold mb-1" style={{ color: '#FFD700' }}>
                                 {item.name}
@@ -782,25 +942,25 @@ export default function OrderPage() {
                   {filteredItems.map(item => (
                 <div
                   key={item.id}
-                  className="rounded-lg overflow-hidden flex flex-row h-48"
+                  className="rounded-lg overflow-hidden flex flex-row h-64"
                   style={{
                     border: '2px solid rgba(255, 107, 53, 0.3)',
                     backgroundColor: 'rgba(40, 40, 40, 0.8)'
                   }}
                 >
-                  {/* Left Section - Image (50%) */}
-                  <div className="w-1/2 h-full relative flex-shrink-0">
+                  {/* Left Section - Image (60%) */}
+                  <div className="w-3/5 h-full relative flex-shrink-0">
                     <Image
                       src={item.image || '/Food_Image.jpg'}
                       alt={item.name}
                       fill
                       className="object-cover"
-                      sizes="50vw"
+                      sizes="60vw"
                     />
                   </div>
 
-                  {/* Right Section - Content (50%) */}
-                  <div className="w-1/2 p-3 flex flex-col justify-between">
+                  {/* Right Section - Content (40%) */}
+                  <div className="w-2/5 p-3 flex flex-col justify-between">
                     {/* Title */}
                     <h3 className="text-base md:text-lg font-bold mb-1" style={{ color: '#FFD700' }}>
                       {item.name}
@@ -1413,6 +1573,45 @@ export default function OrderPage() {
             </div>
           </div>
         </>
+      )}
+
+      {/* Size Selection Modal */}
+      {sizeModalItem && (
+        <SizeSelectionModal
+          isOpen={!!sizeModalItem}
+          onClose={() => setSizeModalItem(null)}
+          itemName={sizeModalItem.name}
+          itemImage={sizeModalItem.image}
+          sizeOptions={sidesSizeOptions}
+          onSelectSize={(size) => handleSizeSelection(sizeModalItem, size)}
+        />
+      )}
+
+      {/* Plate Customization Modal */}
+      {plateModalItem && plateConfigs[plateModalItem.id] && (
+        <PlateCustomizationModal
+          isOpen={!!plateModalItem}
+          onClose={() => setPlateModalItem(null)}
+          plateName={plateModalItem.name}
+          meatCount={plateConfigs[plateModalItem.id].meatCount}
+          sideCount={plateConfigs[plateModalItem.id].sideCount}
+          meatOptions={meatOptions}
+          sideOptions={sidesOptions}
+          excludeRibs={plateConfigs[plateModalItem.id].excludeRibs}
+          onComplete={(meats, sides) => handlePlateCustomization(plateModalItem, meats, sides)}
+        />
+      )}
+
+      {/* Meat Weight Selection Modal */}
+      {meatWeightModalItem && (
+        <SizeSelectionModal
+          isOpen={!!meatWeightModalItem}
+          onClose={() => setMeatWeightModalItem(null)}
+          itemName={meatWeightModalItem.name}
+          itemImage={meatWeightModalItem.image}
+          sizeOptions={meatWeightModalItem.id === 'brisket-sliced' ? premiumMeatWeightOptions : standardMeatWeightOptions}
+          onSelectSize={(weight) => handleMeatWeightSelection(meatWeightModalItem, weight)}
+        />
       )}
     </div>
   );

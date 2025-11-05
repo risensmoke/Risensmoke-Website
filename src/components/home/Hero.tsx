@@ -82,7 +82,7 @@ const Hero = () => {
         </h2>
 
         <p className="text-large mb-8 max-w-2xl mx-auto animate-fade-in-delayed" style={{ color: "#F8F8F8" }}>
-          We&apos;ve figured out the secret of how smoke actually works - when we burn our hickory and oak just right,
+          We&apos;ve figured out the secret of how smoke actually works - when we burn our oak just right,
           the smoke rises in perfect streams, opening up the meat like tiny doors.
         </p>
 

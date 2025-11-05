@@ -23,7 +23,7 @@ export default function AboutPage() {
             <p className="text-lg leading-relaxed">
               Located in the heart of Hillsboro, Texas, we wake up every morning at 4 AM to
               start our fires. By the time you walk through our doors, every piece of meat has
-              been kissed by 12 hours of hickory and oak smoke, transformed into tender,
+              been kissed by 12 hours of oak smoke, transformed into tender,
               flavorful perfection.
             </p>
 
@@ -48,7 +48,7 @@ export default function AboutPage() {
               (254) 221-6247
             </p>
             <p className="text-lg" style={{ color: '#F8F8F8' }}>
-              Tuesday - Saturday: 11:00 AM - 8:00 PM
+              Tuesday - Saturday: 11:00 AM - 6:00 PM
             </p>
             <p className="text-sm mt-2" style={{ color: '#FF6B35' }}>
               (Closed Sunday & Monday)

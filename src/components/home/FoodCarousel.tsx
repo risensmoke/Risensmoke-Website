@@ -221,7 +221,7 @@ const FoodCarousel = () => {
                 Wood-Fired Daily
               </h4>
               <p className="text-sm" style={{ color: '#F8F8F8' }}>
-                Fresh hickory & oak blend
+                Fresh oak wood
               </p>
             </div>
           </div>

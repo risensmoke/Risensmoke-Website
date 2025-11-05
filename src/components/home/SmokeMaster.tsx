@@ -82,7 +82,7 @@ const SmokeMaster = () => {
               style={{ color: '#F8F8F8' }}
             >
               For over 15 years, our SmokeMaster has perfected the ancient art of BBQ transformation.
-              Using a secret blend of hickory and oak, timing the smoke to rise at just the right moment,
+              Using oak wood, timing the smoke to rise at just the right moment,
               creating that perfect bark and smoke ring that turns good meat into something heavenly.
             </p>
 
