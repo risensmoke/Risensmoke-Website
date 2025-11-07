@@ -22,7 +22,6 @@ const Header = () => {
     { name: "Home", href: "/" },
     { name: "Menu", href: "/menu" },
     { name: "Order", href: "/order" },
-    { name: "Ship Nationwide", href: "/ship" },
     { name: "The SmokeMaster", href: "/smokemaster" },
     { name: "Contact", href: "/contact" }
   ];

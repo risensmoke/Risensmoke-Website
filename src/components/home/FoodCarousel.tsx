@@ -17,7 +17,7 @@ const FoodCarousel = () => {
       highlight: 'Signature Plate'
     },
     {
-      image: '/Assets/family-meat-platter.PNG',
+      image: '/Assets/family-meat-platter.jpeg',
       title: 'Family Feast',
       description: 'Feed the whole crew with our family platter. A generous selection of our finest smoked meats, perfect for gatherings and celebrations.',
       price: '$120.50',
@@ -33,7 +33,7 @@ const FoodCarousel = () => {
     {
       image: '/Assets/sand-beef-brisket-saus.jpg',
       title: 'Smokey-Duo',
-      description: 'Double smoked, double flavor! Our signature brisket paired with savory sausage on a toasted bun. A taste of Texas in every bite.',
+      description: 'Double smoked, double flavor! Our signature chopped brisket paired with savory sausage on a toasted bun. A taste of Texas in every bite.',
       price: '$13.00',
       highlight: 'Crowd Favorite'
     }

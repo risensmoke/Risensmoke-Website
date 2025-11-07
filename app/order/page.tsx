@@ -6,6 +6,8 @@ import { ShoppingCart, Clock, Plus, Minus, X, Calendar } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import SizeSelectionModal from '@/components/menu/SizeSelectionModal';
 import PlateCustomizationModal from '@/components/menu/PlateCustomizationModal';
+import CondimentSelectionModal from '@/components/menu/CondimentSelectionModal';
+import FavoritesCustomizationModal from '@/components/menu/FavoritesCustomizationModal';
 
 interface MenuItem {
   id: string;
@@ -39,8 +41,8 @@ const menuCategories = [
   'Favorites',
   'Family Meals',
   'Sides',
-  'This and That',
-  'Drinks'
+  'Desserts',
+  'Extras'
 ];
 
 const menuItems: MenuItem[] = [
@@ -104,7 +106,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'brisket-sausage',
     name: 'Smokey-Duo',
-    description: 'Double Smoked, Double Flavor',
+    description: 'Double Smoked, Double Flavor *sausage & chopped brisket - no subs*',
     price: 13.00,
     category: 'Sandwiches',
     available: true,
@@ -129,7 +131,7 @@ const menuItems: MenuItem[] = [
     image: '/Assets/sand-brisket-chop.jpg'
   },
   {
-    id: 'pulled-pork',
+    id: 'pulled-pork-sandwich',
     name: 'Rise & Pull Pork',
     description: 'Pork pulled from the rising flames of smoke',
     price: 10.95,
@@ -149,7 +151,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'jalapeno-cheddar',
     name: 'Cheesey Jalapeno Heat',
-    description: 'Sausage kissed with sweet cheese & smokey jalapeno',
+    description: 'Sausage kissed with cheddar cheese & smokey jalapeno',
     price: 8.50,
     category: 'Sandwiches',
     available: true,
@@ -162,10 +164,10 @@ const menuItems: MenuItem[] = [
     price: 10.95,
     category: 'Sandwiches',
     available: true,
-    image: '/Assets/sand-pork-ribs.jpg'
+    image: '/Assets/sand-pork-ribs.jpeg'
   },
   {
-    id: 'beef-sausage',
+    id: 'beef-sausage-sandwich',
     name: 'Beef & Please',
     description: 'Blessed by the rising flames',
     price: 10.95,
@@ -209,7 +211,7 @@ const menuItems: MenuItem[] = [
     price: 19.95,
     category: 'Meats',
     available: true,
-    image: '/Assets/pound-pull-pork.jpg'
+    image: '/Assets/pound-pull-pork.jpeg'
   },
   {
     id: 'smoked-ribs',
@@ -272,7 +274,7 @@ const menuItems: MenuItem[] = [
     id: 'loaded-side-winder',
     name: 'Loaded Side Winder',
     description: 'Loaded Fries w/Sauce & Queso, Choice of Meat',
-    price: 11.95,
+    price: 15.35,
     category: 'Favorites',
     available: true,
     image: '/Assets/fav-sidewinder.PNG'
@@ -284,7 +286,7 @@ const menuItems: MenuItem[] = [
     price: 14.95,
     category: 'Favorites',
     available: true,
-    image: '/Assets/fav-potato-loaded.png'
+    image: '/Assets/fav-burrito-redpit.jpeg'
   },
   {
     id: 'baked-potato-plain',
@@ -322,7 +324,7 @@ const menuItems: MenuItem[] = [
     price: 44.95,
     category: 'Family Meals',
     available: true,
-    image: '/Assets/family-meat-platter.PNG'
+    image: '/Assets/family-meat-platter.jpeg'
   },
   {
     id: 'med-group',
@@ -331,7 +333,7 @@ const menuItems: MenuItem[] = [
     price: 82.95,
     category: 'Family Meals',
     available: true,
-    image: '/Assets/family-meat-platter.PNG'
+    image: '/Assets/family-meat-platter.jpeg'
   },
   {
     id: 'large-group',
@@ -340,7 +342,7 @@ const menuItems: MenuItem[] = [
     price: 120.50,
     category: 'Family Meals',
     available: true,
-    image: '/Assets/family-meat-platter.PNG'
+    image: '/Assets/family-meat-platter.jpeg'
   },
 
   // Divine Sides
@@ -390,98 +392,125 @@ const menuItems: MenuItem[] = [
     image: '/Assets/side-cole-slaw.PNG'
   },
 
-  // This and That
+  // Additional Favorites
   {
     id: 'garden-salad',
     name: 'Garden Salad',
     description: 'Made to order garden salad',
     price: 6.50,
-    category: 'This and That',
+    category: 'Favorites',
     available: true,
-    image: '/Assets/tt-garden-salad.PNG'
-  },
-  {
-    id: 'chef-salad',
-    name: 'Chef Salad',
-    description: 'Made to order Chef Salad',
-    price: 9.25,
-    category: 'This and That',
-    available: true,
-    image: '/Assets/tt-garden-salad.PNG'
+    image: '/Assets/fav-garden-salad.PNG'
   },
   {
     id: 'chef-salad-meat',
     name: 'Chef Salad with Meat',
     description: 'Made to order Chef Salad with your choice of smoked meat',
     price: 9.25,
-    category: 'This and That',
+    category: 'Favorites',
     available: true,
-    image: '/Assets/tt-chef-salad-meat.jpg'
+    image: '/Assets/fav-chef-salad-meat.jpg'
   },
   {
     id: 'side-fries',
-    name: 'Side Fries',
-    description: 'Crispy golden fries',
-    price: 3.50,
-    category: 'This and That',
+    name: 'French Fries',
+    description: 'Small, Large, Family',
+    price: 2.85,
+    category: 'Sides',
     available: true,
-    image: '/Assets/tt-side-fries.PNG'
+    image: '/Assets/side-french-fries.PNG'
   },
   {
     id: 'banana-pudding',
     name: 'Banana Pudding',
     description: 'Homemade banana pudding',
-    price: 2.99,
-    category: 'This and That',
+    price: 4.95,
+    category: 'Desserts',
     available: true,
-    image: '/Assets/tt-banana-pudding.PNG'
+    image: '/Assets/dessert-banana-pudding.PNG'
   },
   {
     id: 'ice-cream',
     name: 'Vanilla Ice Cream',
     description: 'Rich & Creamy Vanilla Ice Cream',
     price: 1.25,
-    category: 'This and That',
+    category: 'Desserts',
     available: true,
-    image: '/Assets/tt-ice-cream.jpg'
+    image: '/Assets/dessert-ice-cream.jpg'
   },
   {
     id: 'peach-cobbler',
     name: 'Homemade Peach Cobbler',
     description: 'Delightful Peach Cobbler',
-    price: 2.99,
-    category: 'This and That',
+    price: 4.95,
+    category: 'Desserts',
     available: true,
-    image: '/Assets/tt-peach-cobbler.PNG'
+    image: '/Assets/dessert-peach-cobbler.PNG'
   },
 
-  // Drinks
+  // Extras
   {
     id: 'sweet-tea',
     name: 'Sweet Tea',
     description: 'Southern sweet tea',
     price: 2.50,
-    category: 'Drinks',
+    category: 'Extras',
     available: true,
-    image: '/Assets/drinks-tea.jpg'
+    image: '/Assets/extra-ice-tea.jpg'
   },
   {
     id: 'soda',
     name: 'Soda',
     description: 'Coke, Pepsi, Sprite, and more',
     price: 1.50,
-    category: 'Drinks',
+    category: 'Extras',
     available: true,
-    image: '/Assets/drinks-soda.jpg'
+    image: '/Assets/extra-drinks-soda.jpg'
   },
   {
     id: 'water',
     name: 'Bottled Water',
     description: 'Bottled Water',
     price: 2.00,
-    category: 'Drinks',
+    category: 'Extras',
     available: true,
-    image: '/Assets/drink-water.jpg'
+    image: '/Assets/extra-bottle-water.jpg'
+  },
+  {
+    id: 'potato-chips',
+    name: 'Potato Chips',
+    description: 'Variety of potato chips',
+    price: 1.35,
+    category: 'Extras',
+    available: true,
+    image: '/Assets/extra-chips-variety.jpg'
+  },
+  {
+    id: 'lil-wrangler-meal',
+    name: 'Lil Wrangler Meal',
+    description: 'Chopped beef sandwich or Wraparound, Chips, Cookies, Capri-sun',
+    price: 7.95,
+    category: 'Extras',
+    available: true,
+    image: '/Assets/extra-kids-meal.jpg'
+  },
+  {
+    id: 'sausage-stick',
+    name: 'Sausage on a Stick',
+    description: 'Sausage on a Stick',
+    price: 7.25,
+    category: 'Extras',
+    available: true,
+    image: '/Assets/extra-sausage-stick.jpg'
+  },
+  {
+    id: 'wraparound',
+    name: 'Wraparound',
+    description: 'Wraparound',
+    price: 7.25,
+    category: 'Extras',
+    available: true,
+    image: '/Assets/extra-wraparound.png'
   }
 ];
 
@@ -489,6 +518,12 @@ const sidesSizeOptions = [
   { label: '4 oz', price: 2.85 },
   { label: '16 oz', price: 8.00 },
   { label: '32 oz', price: 12.00 }
+];
+
+const frenchFriesSizeOptions = [
+  { label: 'Small', price: 2.85 },
+  { label: 'Large', price: 8.00 },
+  { label: 'Family', price: 12.00 }
 ];
 
 const standardMeatWeightOptions = [
@@ -524,10 +559,37 @@ const sidesOptions = [
   { label: 'Salvation Cole Slaw', price: 0.00 }
 ];
 
+const condimentOptions = [
+  { label: 'Smoky BBQ Sauce', price: 0.00 },
+  { label: 'Sweet & Spicy BBQ Sauce', price: 0.00 },
+  { label: 'Pickles', price: 0.00 },
+  { label: 'Onions', price: 0.00 },
+  { label: 'Jalapenos', price: 0.00 }
+];
+
+// Favorites meat options
+const favoritesMeatOptions = [
+  { label: 'Chopped Brisket', price: 0.00 },
+  { label: 'Pulled Pork', price: 0.00 },
+  { label: 'Smoked Chicken', price: 0.00 },
+  { label: 'Jalapeno Sausage', price: 0.00 },
+  { label: 'Beef Sausage', price: 0.00 },
+  { label: 'Hot Link', price: 0.00 }
+];
+
+// Favorites topping options
+const favoritesToppingOptions = [
+  { label: 'Shredded Cheddar Cheese', price: 1.00, category: 'topping' as const },
+  { label: 'Queso', price: 1.85, category: 'topping' as const },
+  { label: 'Sour Cream', price: 0.50, category: 'topping' as const },
+  { label: 'Ranch Dressing', price: 0.50, category: 'dressing' as const },
+  { label: 'Italian Dressing', price: 0.50, category: 'dressing' as const }
+];
+
 // Plate configurations
 const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; excludeRibs?: boolean } } = {
   'gospel-plate': { meatCount: 1, sideCount: 2, excludeRibs: true },
-  'disciples-plate': { meatCount: 1, sideCount: 2 },
+  'disciples-plate': { meatCount: 1, sideCount: 2, excludeRibs: true },
   'trinity-plate': { meatCount: 2, sideCount: 2 },
   'revelation-plate': { meatCount: 3, sideCount: 2 },
   'little-rise': { meatCount: 0, sideCount: 2 },
@@ -539,6 +601,12 @@ export default function OrderPage() {
   const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
   const [plateModalItem, setPlateModalItem] = useState<MenuItem | null>(null);
   const [meatWeightModalItem, setMeatWeightModalItem] = useState<MenuItem | null>(null);
+  const [condimentModalItem, setCondimentModalItem] = useState<MenuItem | null>(null);
+  const [favoritesModalItem, setFavoritesModalItem] = useState<MenuItem | null>(null);
+  const [pendingMeatData, setPendingMeatData] = useState<{
+    item: MenuItem;
+    weight: { label: string; price: number };
+  } | null>(null);
   const [itemQuantities, setItemQuantities] = useState<{ [key: string]: number }>({});
   const [showCheckout, setShowCheckout] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
@@ -589,6 +657,18 @@ export default function OrderPage() {
       return;
     }
 
+    // Show condiment modal for Sandwiches
+    if (item.category === 'Sandwiches') {
+      setCondimentModalItem(item);
+      return;
+    }
+
+    // Show favorites customization modal for Favorites
+    if (item.category === 'Favorites') {
+      setFavoritesModalItem(item);
+      return;
+    }
+
     const quantity = itemQuantities[item.id] || 1;
     addItem({
       menuItemId: item.id,
@@ -627,7 +707,8 @@ export default function OrderPage() {
   const handlePlateCustomization = (
     item: MenuItem,
     meats: { label: string; price: number }[],
-    sides: { label: string; price: number }[]
+    sides: { label: string; price: number }[],
+    condiments: { label: string; price: number }[]
   ) => {
     const quantity = itemQuantities[item.id] || 1;
     const modifiers = [
@@ -642,6 +723,12 @@ export default function OrderPage() {
         name: side.label,
         price: side.price,
         category: 'Side'
+      })),
+      ...condiments.map((condiment, idx) => ({
+        id: `condiment-${idx}-${condiment.label}`,
+        name: condiment.label,
+        price: condiment.price,
+        category: 'Condiment'
       }))
     ];
 
@@ -653,30 +740,128 @@ export default function OrderPage() {
       modifiers,
       image: item.image
     });
+
     setItemQuantities({ ...itemQuantities, [item.id]: 1 });
   };
 
-  const handleMeatWeightSelection = (item: MenuItem, weight: { label: string; price: number }) => {
-    // The weight selection contains the full price, not a modifier price
-    // We set base price to the lowest tier price and adjust with modifier
-    const baseMeatPrice = item.id === 'brisket-sliced' ? 8.95 : 5.95;
-    const modifierPrice = weight.price - baseMeatPrice;
-    const quantity = itemQuantities[item.id] || 1;
+  const handleCondimentSelection = (condiments: { label: string; price: number }[]) => {
+    // If we have pending meat weight data, add meat with condiments
+    if (pendingMeatData) {
+      const quantity = itemQuantities[pendingMeatData.item.id] || 1;
+      const baseMeatPrice = pendingMeatData.item.id === 'brisket-sliced' ? 8.95 : 5.95;
+      const modifierPrice = pendingMeatData.weight.price - baseMeatPrice;
+
+      const modifiers = [
+        {
+          id: `weight-${pendingMeatData.weight.label}`,
+          name: pendingMeatData.weight.label,
+          price: modifierPrice,
+          category: 'Weight'
+        },
+        ...condiments.map((condiment, idx) => ({
+          id: `condiment-${idx}-${condiment.label}`,
+          name: condiment.label,
+          price: condiment.price,
+          category: 'Condiment'
+        }))
+      ];
+
+      addItem({
+        menuItemId: pendingMeatData.item.id,
+        name: pendingMeatData.item.name,
+        basePrice: baseMeatPrice,
+        quantity: quantity,
+        modifiers,
+        image: pendingMeatData.item.image
+      });
+
+      setItemQuantities({ ...itemQuantities, [pendingMeatData.item.id]: 1 });
+      setPendingMeatData(null);
+    }
+    // Otherwise it's a sandwich with condiments
+    else if (condimentModalItem) {
+      const quantity = itemQuantities[condimentModalItem.id] || 1;
+      const modifiers = condiments.map((condiment, idx) => ({
+        id: `condiment-${idx}-${condiment.label}`,
+        name: condiment.label,
+        price: condiment.price,
+        category: 'Condiment'
+      }));
+
+      addItem({
+        menuItemId: condimentModalItem.id,
+        name: condimentModalItem.name,
+        basePrice: condimentModalItem.price,
+        quantity: quantity,
+        modifiers,
+        image: condimentModalItem.image
+      });
+
+      setItemQuantities({ ...itemQuantities, [condimentModalItem.id]: 1 });
+    }
+  };
+
+  const handleFavoritesCustomization = (
+    meat: { label: string; price: number } | null,
+    includedToppings: { label: string; price: number; category: string }[],
+    addOnToppings: { label: string; price: number; category: string }[],
+    condiments: { label: string; price: number }[]
+  ) => {
+    if (!favoritesModalItem) return;
+
+    const quantity = itemQuantities[favoritesModalItem.id] || 1;
+    const modifiers = [
+      // Add meat selection if applicable
+      ...(meat ? [{
+        id: `meat-${meat.label}`,
+        name: meat.label,
+        price: meat.price,
+        category: 'Meat'
+      }] : []),
+      // Add included toppings (no charge)
+      ...includedToppings.map((topping, idx) => ({
+        id: `topping-included-${idx}-${topping.label}`,
+        name: topping.label,
+        price: 0.00, // Included toppings are free
+        category: 'Topping'
+      })),
+      // Add add-on toppings (with charge)
+      ...addOnToppings.map((topping, idx) => ({
+        id: `topping-addon-${idx}-${topping.label}`,
+        name: `Extra ${topping.label}`,
+        price: topping.price,
+        category: 'Add-on'
+      })),
+      // Add condiments
+      ...condiments.map((condiment, idx) => ({
+        id: `condiment-${idx}-${condiment.label}`,
+        name: condiment.label,
+        price: condiment.price,
+        category: 'Condiment'
+      }))
+    ];
 
     addItem({
-      menuItemId: item.id,
-      name: item.name,
-      basePrice: baseMeatPrice,
+      menuItemId: favoritesModalItem.id,
+      name: favoritesModalItem.name,
+      basePrice: favoritesModalItem.price,
       quantity: quantity,
-      modifiers: [{
-        id: `weight-${weight.label}`,
-        name: weight.label,
-        price: modifierPrice,
-        category: 'Weight'
-      }],
-      image: item.image
+      modifiers,
+      image: favoritesModalItem.image
     });
-    setItemQuantities({ ...itemQuantities, [item.id]: 1 });
+
+    setItemQuantities({ ...itemQuantities, [favoritesModalItem.id]: 1 });
+  };
+
+  const handleMeatWeightSelection = (item: MenuItem, weight: { label: string; price: number }) => {
+    // Store meat weight data and close meat modal first
+    setPendingMeatData({ item, weight });
+    setMeatWeightModalItem(null);
+
+    // Show condiment modal after a brief delay to ensure clean state transition
+    setTimeout(() => {
+      setCondimentModalItem(item);
+    }, 0);
   };
 
   const updateItemQuantity = (itemId: string, delta: number) => {
@@ -1582,7 +1767,7 @@ export default function OrderPage() {
           onClose={() => setSizeModalItem(null)}
           itemName={sizeModalItem.name}
           itemImage={sizeModalItem.image}
-          sizeOptions={sidesSizeOptions}
+          sizeOptions={sizeModalItem.id === 'side-fries' ? frenchFriesSizeOptions : sidesSizeOptions}
           onSelectSize={(size) => handleSizeSelection(sizeModalItem, size)}
         />
       )}
@@ -1597,8 +1782,9 @@ export default function OrderPage() {
           sideCount={plateConfigs[plateModalItem.id].sideCount}
           meatOptions={meatOptions}
           sideOptions={sidesOptions}
+          condimentOptions={condimentOptions}
           excludeRibs={plateConfigs[plateModalItem.id].excludeRibs}
-          onComplete={(meats, sides) => handlePlateCustomization(plateModalItem, meats, sides)}
+          onComplete={(meats, sides, condiments) => handlePlateCustomization(plateModalItem, meats, sides, condiments)}
         />
       )}
 
@@ -1611,6 +1797,35 @@ export default function OrderPage() {
           itemImage={meatWeightModalItem.image}
           sizeOptions={meatWeightModalItem.id === 'brisket-sliced' ? premiumMeatWeightOptions : standardMeatWeightOptions}
           onSelectSize={(weight) => handleMeatWeightSelection(meatWeightModalItem, weight)}
+        />
+      )}
+
+      {/* Condiment Selection Modal */}
+      {condimentModalItem && (
+        <CondimentSelectionModal
+          isOpen={!!condimentModalItem}
+          onClose={() => {
+            setCondimentModalItem(null);
+            setPendingMeatData(null);
+          }}
+          itemName={condimentModalItem.name}
+          condimentOptions={condimentOptions}
+          onComplete={(condiments) => handleCondimentSelection(condiments)}
+        />
+      )}
+
+      {/* Favorites Customization Modal */}
+      {favoritesModalItem && (
+        <FavoritesCustomizationModal
+          isOpen={!!favoritesModalItem}
+          onClose={() => setFavoritesModalItem(null)}
+          itemName={favoritesModalItem.name}
+          itemId={favoritesModalItem.id}
+          meatOptions={favoritesMeatOptions}
+          toppingOptions={favoritesToppingOptions}
+          condimentOptions={condimentOptions}
+          onComplete={(meat, includedToppings, addOnToppings, condiments) =>
+            handleFavoritesCustomization(meat, includedToppings, addOnToppings, condiments)}
         />
       )}
     </div>

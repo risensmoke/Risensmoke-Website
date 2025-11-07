@@ -59,7 +59,7 @@ interface CartActions {
   calculateTotals: () => void;
 }
 
-const TAX_RATE = 0.08; // 8% Texas sales tax
+const TAX_RATE = 0.0825; // 8.25% Texas sales tax
 
 export const useCartStore = create<CartState & CartActions>()(
   persist(

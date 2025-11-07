@@ -185,7 +185,7 @@ export default function CartModal() {
                         </button>
                       </div>
                       <span className="text-sm sm:text-base font-bold" style={{ color: '#FF6B35' }}>
-                        ${(item.basePrice * item.quantity).toFixed(2)}
+                        ${item.totalPrice.toFixed(2)}
                       </span>
                     </div>
 

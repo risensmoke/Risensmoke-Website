@@ -1,0 +1,2723 @@
+# Rise N' Smoke - Final Development Documentation for Claude Code
+
+## Project Overview
+
+### Restaurant Concept
+**Rise N' Smoke** - Southern BBQ restaurant specializing in "The Rise & Transform Method™"
+- Location: 401 Abbott Avenue, Hillsboro Texas 76645 (rural customer base)
+- Brand Story: Scientific approach to traditional smoking methods where smoke rises and transforms meat from the inside out
+- Target: Good ole rural customers who appreciate authentic BBQ craftsmanship
+
+### Core Brand Narrative
+**"The Rise & Transform Method™"**
+- Tagline: "Real Smoke. Real Deep. Real Good."
+- Key Message: "We've figured out the secret of how smoke actually works"
+- Story: When we burn hickory and oak just right, smoke rises in perfect streams, opening up meat like tiny doors, letting smoky goodness transform everything from the inside out
+
+---
+
+## Technology Stack Requirements
+
+### Core Technologies
+- **Framework**: React with Next.js 14+ (App Router)
+- **Database**: PostgreSQL with Prisma ORM
+- **Payment Processing**: Stripe + Clover API integration
+- **State Management**: Zustand for cart and order state
+- **Authentication**: NextAuth.js v5 for customer accounts
+- **API Integration**: Clover REST API v3
+- **Styling**: Tailwind CSS + Custom CSS for gradients
+- **Fonts**: Google Fonts (Rye, Alfa Slab One, Source Sans Pro)
+- **Images**: Next.js Image optimization with WebP
+- **Real-time**: WebSocket for order status updates
+- **Caching**: Redis for session and order data
+- **Email**: SendGrid for order confirmations
+- **SMS**: Twilio for pickup notifications
+
+### File Structure
+```
+/src
+  /app
+    - layout.tsx
+    - page.tsx (Homepage)
+    - menu/
+      - page.tsx
+      - loading.tsx
+    - order/
+      - page.tsx
+      - checkout/
+        - page.tsx
+      - confirmation/
+        - page.tsx
+    - account/
+      - profile/
+        - page.tsx
+      - orders/
+        - page.tsx
+    - about/
+      - page.tsx
+	- our smokemaster
+	  - page.tsx
+    - contact/
+      - page.tsx
+    - api/
+      - clover/
+        - orders/route.ts
+        - inventory/route.ts
+        - webhook/route.ts
+      - stripe/
+        - payment-intent/route.ts
+        - webhook/route.ts
+      - orders/
+        - create/route.ts
+        - status/route.ts
+        - available-times/route.ts
+      - auth/
+        - [...nextauth]/route.ts
+  /components
+    - ui/
+      - Button.tsx
+      - Card.tsx
+      - Modal.tsx
+      - Input.tsx
+      - Select.tsx
+    - layout/
+      - Header.tsx
+      - Footer.tsx
+      - Navigation.tsx
+    - home/
+      - Hero.tsx
+      - AboutMethod.tsx
+      - MenuHighlights.tsx
+      - LocationHours.tsx
+    - ordering/
+      - MenuSection.tsx
+      - MenuItemCard.tsx
+      - ItemModal.tsx
+      - ModifierSelector.tsx
+      - QuantitySelector.tsx
+      - PickupTimeSelector.tsx
+    - cart/
+      - CartSidebar.tsx
+      - CartItem.tsx
+      - CartSummary.tsx
+      - CartButton.tsx
+    - checkout/
+      - CheckoutForm.tsx
+      - CustomerForm.tsx
+      - PaymentForm.tsx
+      - OrderSummary.tsx
+      - OrderConfirmation.tsx
+    - auth/
+      - LoginModal.tsx
+      - SignupForm.tsx
+      - GuestCheckout.tsx
+  /lib
+    - clover.ts (Clover API client)
+    - stripe.ts (Stripe configuration)
+    - db.ts (Database connection)
+    - auth.ts (NextAuth configuration)
+    - utils.ts (Utility functions)
+    - validations.ts (Zod schemas)
+  /hooks
+    - useCart.ts
+    - useOrders.ts
+    - useAuth.ts
+    - useClover.ts
+  /store
+    - cartStore.ts (Zustand store)
+    - orderStore.ts
+    - userStore.ts
+  /styles
+    - globals.css
+    - components.css
+  /types
+    - index.ts
+    - clover.ts
+    - stripe.ts
+  /prisma
+    - schema.prisma
+    - migrations/
+```
+
+---
+
+## Final Design System
+
+### Color Palette (CSS Custom Properties)
+```css
+:root {
+  /* Primary Colors */
+  --smoke-black: #1C1C1C;
+  --ember-orange: #FF6B35;
+  --fire-red: #D32F2F;
+  
+  /* Secondary Colors */
+  --ash-gray: #6C6C6C;
+  --smoke-white: #F8F8F8;
+  --hickory-brown: #8B4513;
+  --light-background: #F5F5F5;
+  
+  /* Final Approved Gradients */
+  --primary-gradient: linear-gradient(to top, #D32F2F, #FF6B35, #FFB74D);
+  --fire-gradient: linear-gradient(to top, #B71C1C, #D32F2F, #FF5722, #FF6B35, #FF9800, #FFC107);
+  --smoke-gradient: linear-gradient(to top, #1C1C1C, #424242, #6C6C6C, #9E9E9E, #C0C0C0);
+  --background-gradient: linear-gradient(to bottom, #6C6C6C, #1C1C1C);
+  
+  /* Semantic Colors */
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+  --info: #2196F3;
+}
+```
+
+### Typography System
+```css
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Rye&family=Alfa+Slab+One&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+/* Font Classes */
+.font-primary {
+  font-family: 'Rye', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.font-secondary {
+  font-family: 'Alfa Slab One', serif;
+  font-weight: 400;
+}
+
+.font-body {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Final Approved Typography Scale */
+.text-hero { 
+  font-size: clamp(4rem, 12vw, 8rem); 
+  line-height: 0.85;
+  letter-spacing: 0.1em;
+}
+.text-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+.text-h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+.text-h3 { font-size: clamp(1.25rem, 3vw, 2rem); }
+.text-h4 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
+.text-large { font-size: 1.25rem; }
+.text-base { font-size: 1rem; }
+.text-small { font-size: 0.875rem; }
+
+/* Final Approved Gradient Text Effects */
+.text-fire-gradient {
+  background: linear-gradient(to top, #B71C1C, #D32F2F, #FF5722, #FF6B35, #FF9800, #FFC107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+}
+
+.text-primary-gradient {
+  background: linear-gradient(to top, #D32F2F, #FF6B35, #FFB74D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.text-smoke-gradient {
+  background: linear-gradient(to top, #1C1C1C, #424242, #6C6C6C, #9E9E9E, #C0C0C0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+}
+```
+
+### Component Styles
+```css
+/* Buttons */
+.btn-primary {
+  background: var(--primary-gradient);
+  color: var(--smoke-white);
+  border: none;
+  padding: 1rem 2rem;
+  font-family: 'Alfa Slab One', serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ember-orange);
+  border: 2px solid var(--ember-orange);
+  padding: 1rem 2rem;
+  font-family: 'Alfa Slab One', serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--ember-orange);
+  color: var(--smoke-white);
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(28, 28, 28, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.2);
+}
+
+.card-dark {
+  background: var(--background-gradient);
+  color: var(--smoke-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation */
+.navbar {
+  background: var(--background-gradient);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.nav-link {
+  color: var(--smoke-white);
+  font-family: 'Alfa Slab One', serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.nav-link:hover {
+  color: var(--ember-orange);
+  background: rgba(255, 107, 53, 0.1);
+}
+
+/* Menu Items */
+.menu-item-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(28, 28, 28, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+  border-color: var(--ember-orange);
+}
+
+.menu-item-price {
+  color: var(--fire-red);
+  font-family: 'Alfa Slab One', serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+/* Cart */
+.cart-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 400px;
+  background: white;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.cart-sidebar.open {
+  transform: translateX(0);
+}
+
+.cart-item {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(108, 108, 108, 0.2);
+  transition: background 0.2s ease;
+}
+
+.cart-item:hover {
+  background: rgba(255, 107, 53, 0.05);
+}
+```
+
+---
+
+## E-Commerce System
+
+### Database Schema (Prisma)
+```prisma
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  firstName     String
+  lastName      String
+  phone         String?
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  orders        Order[]
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model MenuItem {
+  id              String   @id @default(cuid())
+  cloverItemId    String   @unique
+  name            String
+  description     String
+  basePrice       Float
+  category        String
+  image           String?
+  available       Boolean  @default(true)
+  prepTime        Int      @default(15)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  modifierGroups  ModifierGroup[]
+  orderItems      OrderItem[]
+}
+
+model ModifierGroup {
+  id              String   @id @default(cuid())
+  menuItemId      String
+  cloverGroupId   String?
+  name            String
+  required        Boolean  @default(false)
+  minSelections   Int      @default(0)
+  maxSelections   Int?
+  
+  menuItem        MenuItem @relation(fields: [menuItemId], references: [id])
+  modifiers       Modifier[]
+}
+
+model Modifier {
+  id              String   @id @default(cuid())
+  modifierGroupId String
+  cloverModId     String?
+  name            String
+  price           Float    @default(0)
+  
+  modifierGroup   ModifierGroup @relation(fields: [modifierGroupId], references: [id])
+  orderItemMods   OrderItemModifier[]
+}
+
+model Order {
+  id                  String   @id @default(cuid())
+  orderNumber         String   @unique
+  cloverOrderId       String?
+  userId              String?
+  customerEmail       String
+  customerPhone       String
+  customerFirstName   String
+  customerLastName    String
+  subtotal            Float
+  tax                 Float
+  total               Float
+  pickupTime          DateTime
+  estimatedReady      DateTime
+  status              OrderStatus @default(CONFIRMED)
+  paymentIntentId     String
+  specialInstructions String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  user                User?      @relation(fields: [userId], references: [id])
+  items               OrderItem[]
+}
+
+model OrderItem {
+  id                  String   @id @default(cuid())
+  orderId             String
+  menuItemId          String
+  quantity            Int
+  basePrice           Float
+  totalPrice          Float
+  specialInstructions String?
+  
+  order               Order    @relation(fields: [orderId], references: [id])
+  menuItem            MenuItem @relation(fields: [menuItemId], references: [id])
+  modifiers           OrderItemModifier[]
+}
+
+model OrderItemModifier {
+  id           String @id @default(cuid())
+  orderItemId  String
+  modifierId   String
+  price        Float
+  
+  orderItem    OrderItem @relation(fields: [orderItemId], references: [id])
+  modifier     Modifier  @relation(fields: [modifierId], references: [id])
+}
+
+enum OrderStatus {
+  CONFIRMED
+  PREPARING
+  READY
+  PICKED_UP
+  CANCELLED
+}
+```
+
+### Cart Management (Zustand Store)
+```typescript
+// store/cartStore.ts
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface CartItem {
+  id: string;
+  menuItemId: string;
+  name: string;
+  basePrice: number;
+  quantity: number;
+  modifiers: CartModifier[];
+  specialInstructions?: string;
+  totalPrice: number;
+}
+
+interface CartModifier {
+  id: string;
+  name: string;
+  price: number;
+  category: string;
+}
+
+interface CartState {
+  items: CartItem[];
+  subtotal: number;
+  tax: number;
+  total: number;
+  pickupTime?: Date;
+  estimatedReady?: Date;
+  isOpen: boolean;
+}
+
+interface CartActions {
+  addItem: (item: Omit<CartItem, 'id' | 'totalPrice'>) => void;
+  removeItem: (itemId: string) => void;
+  updateQuantity: (itemId: string, quantity: number) => void;
+  updateModifiers: (itemId: string, modifiers: CartModifier[]) => void;
+  clearCart: () => void;
+  setPickupTime: (time: Date) => void;
+  toggleCart: () => void;
+  calculateTotals: () => void;
+}
+
+const TAX_RATE = 0.08; // 8% Texas sales tax
+
+export const useCartStore = create<CartState & CartActions>()(
+  persist(
+    (set, get) => ({
+      items: [],
+      subtotal: 0,
+      tax: 0,
+      total: 0,
+      isOpen: false,
+
+      addItem: (item) => {
+        const id = `${item.menuItemId}-${Date.now()}-${Math.random()}`;
+        const totalPrice = item.basePrice + item.modifiers.reduce((sum, mod) => sum + mod.price, 0);
+        
+        set((state) => ({
+          items: [...state.items, { ...item, id, totalPrice: totalPrice * item.quantity }]
+        }));
+        get().calculateTotals();
+      },
+
+      removeItem: (itemId) => {
+        set((state) => ({
+          items: state.items.filter(item => item.id !== itemId)
+        }));
+        get().calculateTotals();
+      },
+
+      updateQuantity: (itemId, quantity) => {
+        if (quantity <= 0) {
+          get().removeItem(itemId);
+          return;
+        }
+        
+        set((state) => ({
+          items: state.items.map(item => 
+            item.id === itemId 
+              ? { 
+                  ...item, 
+                  quantity, 
+                  totalPrice: (item.basePrice + item.modifiers.reduce((sum, mod) => sum + mod.price, 0)) * quantity 
+                }
+              : item
+          )
+        }));
+        get().calculateTotals();
+      },
+
+      updateModifiers: (itemId, modifiers) => {
+        set((state) => ({
+          items: state.items.map(item => 
+            item.id === itemId 
+              ? { 
+                  ...item, 
+                  modifiers,
+                  totalPrice: (item.basePrice + modifiers.reduce((sum, mod) => sum + mod.price, 0)) * item.quantity 
+                }
+              : item
+          )
+        }));
+        get().calculateTotals();
+      },
+
+      clearCart: () => {
+        set({
+          items: [],
+          subtotal: 0,
+          tax: 0,
+          total: 0,
+          pickupTime: undefined,
+          estimatedReady: undefined
+        });
+      },
+
+      setPickupTime: (time) => {
+        set({ pickupTime: time });
+      },
+
+      toggleCart: () => {
+        set((state) => ({ isOpen: !state.isOpen }));
+      },
+
+      calculateTotals: () => {
+        const state = get();
+        const subtotal = state.items.reduce((sum, item) => sum + item.totalPrice, 0);
+        const tax = subtotal * TAX_RATE;
+        const total = subtotal + tax;
+        
+        set({ subtotal, tax, total });
+      }
+    }),
+    {
+      name: 'rise-n-smoke-cart',
+      partialize: (state) => ({
+        items: state.items,
+        pickupTime: state.pickupTime,
+        subtotal: state.subtotal,
+        tax: state.tax,
+        total: state.total
+      })
+    }
+  )
+);
+```
+
+### Clover API Integration
+```typescript
+// lib/clover.ts
+interface CloverOrder {
+  id?: string;
+  type: 'manual';
+  state: 'open' | 'locked' | 'paid';
+  currency: 'usd';
+  customers?: CloverCustomer[];
+  lineItems: CloverLineItem[];
+  note?: string;
+}
+
+interface CloverCustomer {
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  email?: string;
+}
+
+interface CloverLineItem {
+  item: { id: string };
+  name: string;
+  price: number; // in cents
+  quantity?: number;
+  modifications?: CloverModification[];
+}
+
+interface CloverModification {
+  modifier: { id: string };
+  name: string;
+  amount: number; // in cents
+}
+
+export class CloverAPI {
+  private baseUrl: string;
+  private merchantId: string;
+  private accessToken: string;
+
+  constructor() {
+    this.baseUrl = process.env.CLOVER_API_BASE_URL!;
+    this.merchantId = process.env.CLOVER_MERCHANT_ID!;
+    this.accessToken = process.env.CLOVER_ACCESS_TOKEN!;
+  }
+
+  private async request(endpoint: string, options: RequestInit = {}) {
+    const url = `${this.baseUrl}/v3/merchants/${this.merchantId}${endpoint}`;
+    
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        'Authorization': `Bearer ${this.accessToken}`,
+        'Content-Type': 'application/json',
+        ...options.headers
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Clover API error: ${response.status} ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  async createOrder(orderData: {
+    customer: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone: string;
+    };
+    items: CartItem[];
+    pickupTime: Date;
+    specialInstructions?: string;
+    localOrderId: string;
+  }): Promise<CloverOrder> {
+    const cloverOrder: CloverOrder = {
+      type: 'manual',
+      state: 'open',
+      currency: 'usd',
+      customers: [{
+        firstName: orderData.customer.firstName,
+        lastName: orderData.customer.lastName,
+        phone: orderData.customer.phone,
+        email: orderData.customer.email
+      }],
+      lineItems: orderData.items.map(item => ({
+        item: { id: item.menuItemId },
+        name: item.name,
+        price: Math.round(item.totalPrice * 100), // Convert to cents
+        quantity: item.quantity,
+        modifications: item.modifiers.map(mod => ({
+          modifier: { id: mod.id },
+          name: mod.name,
+          amount: Math.round(mod.price * 100)
+        }))
+      })),
+      note: [
+        `Pickup Time: ${orderData.pickupTime.toLocaleString()}`,
+        `Local Order ID: ${orderData.localOrderId}`,
+        orderData.specialInstructions ? `Special Instructions: ${orderData.specialInstructions}` : ''
+      ].filter(Boolean).join('\n')
+    };
+
+    return this.request('/orders', {
+      method: 'POST',
+      body: JSON.stringify(cloverOrder)
+    });
+  }
+
+  async updateOrderStatus(orderId: string, status: 'locked' | 'paid') {
+    return this.request(`/orders/${orderId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ state: status })
+    });
+  }
+
+  async getMenuItems() {
+    return this.request('/items?expand=modifierGroups');
+  }
+
+  async getModifierGroups() {
+    return this.request('/modifier_groups?expand=modifiers');
+  }
+
+  async sendToKitchenPrinter(orderId: string) {
+    return this.request(`/orders/${orderId}/print`, {
+      method: 'POST',
+      body: JSON.stringify({
+        printCategory: 'KITCHEN_TICKET'
+      })
+    });
+  }
+
+  async processPayment(orderId: string, paymentData: {
+    amount: number;
+    currency: string;
+    source: string;
+  }) {
+    return this.request(`/orders/${orderId}/payments`, {
+      method: 'POST',
+      body: JSON.stringify(paymentData)
+    });
+  }
+}
+```
+
+### Order Processing API
+```typescript
+// app/api/orders/create/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { CloverAPI } from '@/lib/clover';
+import { prisma } from '@/lib/db';
+import { stripe } from '@/lib/stripe';
+import { z } from 'zod';
+
+const createOrderSchema = z.object({
+  cart: z.object({
+    items: z.array(z.object({
+      menuItemId: z.string(),
+      name: z.string(),
+      quantity: z.number().min(1),
+      basePrice: z.number(),
+      totalPrice: z.number(),
+      modifiers: z.array(z.object({
+        id: z.string(),
+        name: z.string(),
+        price: z.number()
+      }))
+    })),
+    subtotal: z.number(),
+    tax: z.number(),
+    total: z.number(),
+    pickupTime: z.string().datetime()
+  }),
+  customer: z.object({
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    email: z.string().email(),
+    phone: z.string().min(10)
+  }),
+  payment: z.object({
+    paymentMethodId: z.string()
+  })
+});
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { cart, customer, payment } = createOrderSchema.parse(body);
+
+    // 1. Process payment with Stripe
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(cart.total * 100),
+      currency: 'usd',
+      payment_method: payment.paymentMethodId,
+      confirm: true,
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: 'never'
+      },
+      metadata: {
+        customerEmail: customer.email,
+        pickupTime: cart.pickupTime
+      }
+    });
+
+    if (paymentIntent.status !== 'succeeded') {
+      return NextResponse.json(
+        { error: 'Payment failed', details: paymentIntent.last_payment_error },
+        { status: 400 }
+      );
+    }
+
+    // 2. Generate order number
+    const orderNumber = `RSN${Date.now().toString().slice(-6)}`;
+
+    // 3. Create order in database
+    const order = await prisma.order.create({
+      data: {
+        orderNumber,
+        customerEmail: customer.email,
+        customerPhone: customer.phone,
+        customerFirstName: customer.firstName,
+        customerLastName: customer.lastName,
+        subtotal: cart.subtotal,
+        tax: cart.tax,
+        total: cart.total,
+        pickupTime: new Date(cart.pickupTime),
+        estimatedReady: new Date(new Date(cart.pickupTime).getTime() + 30 * 60000), // 30 min prep
+        paymentIntentId: paymentIntent.id,
+        status: 'CONFIRMED',
+        items: {
+          create: cart.items.map(item => ({
+            menuItemId: item.menuItemId,
+            quantity: item.quantity,
+            basePrice: item.basePrice,
+            totalPrice: item.totalPrice,
+            modifiers: {
+              create: item.modifiers.map(mod => ({
+                modifierId: mod.id,
+                price: mod.price
+              }))
+            }
+          }))
+        }
+      },
+      include: {
+        items: {
+          include: {
+            modifiers: true
+          }
+        }
+      }
+    });
+
+    // 4. Send order to Clover POS
+    const clover = new CloverAPI();
+    const cloverOrder = await clover.createOrder({
+      customer,
+      items: cart.items,
+      pickupTime: new Date(cart.pickupTime),
+      localOrderId: order.id
+    });
+
+    // 5. Update order with Clover ID
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { cloverOrderId: cloverOrder.id }
+    });
+
+    // 6. Print to kitchen printer
+    await clover.sendToKitchenPrinter(cloverOrder.id!);
+
+    // 7. Send confirmation email
+    await sendOrderConfirmationEmail({
+      customer,
+      order,
+      orderNumber
+    });
+
+    return NextResponse.json({
+      orderId: order.id,
+      orderNumber,
+      cloverOrderId: cloverOrder.id,
+      estimatedReady: order.estimatedReady
+    });
+
+  } catch (error) {
+    console.error('Order creation failed:', error);
+    
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Invalid order data', details: error.errors },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: 'Order creation failed' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+---
+
+## Content Structure
+
+### Final Menu with Names
+```typescript
+// Data structure for all menu items
+export const menuData = {
+  Plates: {
+    name: "Blessed Plates",
+    description: "Where meat meets divine transformation",
+    items: [
+      {
+        id: "gospel-plate",
+        name: "Gospel Plate",
+        description: "Mini gospel truth about the smoke",
+        basePrice: 12.50,
+        image: "/images/menu/plate-1meat.png",
+        prepTime: 15,
+        modifierGroups: ["meat-selection-1", "sides-2", "sauces"]
+      },
+	  {
+        id: "disciples-plate",
+        name: "Disciples Plate",
+        description: "One meat blessed by the rise",
+        basePrice: 15.35,
+        image: "/images/menu/plate-1meat.png",
+        prepTime: 15,
+        modifierGroups: ["meat-selection-1", "sides-2", "sauces"]
+      },
+      {
+        id: "trinity-plate", 
+        name: "Trinity Plate",
+        description: "Two meats, one holy transformation",
+        basePrice: 16.95,
+        image: "/images/menu/plate-2meat.png",
+        prepTime: 18,
+        modifierGroups: ["meat-selection-2", "sides-2", "sauces"]
+      },      
+      {
+        id: "revelation-plate",
+        name: "Revelation Plate",
+        description: "The truth about real smoke revealed",
+        basePrice: 18.45,
+        image: "/images/menu/plate-3meat.png",
+        prepTime: 16,
+        modifierGroups: ["meat-selection-3", "sides-2", "sauces"]
+      },
+	  {
+        id: "little-rise",
+        name: "Rise N Smoke A Little",
+        description: "The Signature Rise N Smoke Lil Rib Plate",
+        basePrice: 13.00,
+        image: "/images/menu/plate-rib-small.png",
+        prepTime: 16,
+        modifierGroups: ["meat-selection-2", "sides-2", "sauces"]
+      },
+	  {
+        id: "lotta-rise",
+        name: "Rise N Smoke A Lot",
+        description: "The Signature Rise N Smoke Rib Plate",
+        basePrice: 18.45,
+        image: "/images/menu/plate=rib-large.png",
+        prepTime: 16,
+        modifierGroups: ["meat-selection-3", "sides-2", "sauces"]
+      }
+	  
+    ]
+  },
+  
+  Sandwiches: {
+    name: "Sandwiches",
+    description: "Sandwiches",
+    items: [
+      {
+        id: "brisket-sausage",
+        name: "Smokey-Duo",
+        description: "Double Smoked, Double Flavor",
+        basePrice: 13.00,
+        image: "/images/menu/sand-beef-brisket-saus.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+      {
+        id: "sliced-brisket",
+        name: "Smoke Ring King", 
+        description: "Smoke Ring King - Sliced Brisket",
+        basePrice: 11.95,
+        image: "/images/menu/sand-brisket-slice.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+      {
+        id: "chopped-brisket",
+        name: "Smoke Ring Chopped",
+        description: "Smoke Ring King - Chopped Brisket",
+        basePrice: 10.95,
+        image: "/images/menu/sand-brisket-chop.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+	  {
+        id: "pulled-pork",
+        name: "Rise & Pull Pork",
+        description: "Pork pulled from the rising flames of smoke",
+        basePrice: 10.95,
+        image: "/images/menu/sand-pull-pork.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+	  {
+        id: "hotlink",
+        name: "Fire & Desire",
+        description: "Hotlink with a smokey edge to love",
+        basePrice: 8.50,
+        image: "/images/menu/sand-hot-link.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+	  {
+        id: "jalapeno-cheddar",
+        name: "Cheesey Jalapeno Heat",
+        description: "Sausage kissed with sweet cheese & smokey jalapeno",
+        basePrice: 8.50,
+        image: "/images/menu/sand-jalapeno-cheddar.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+	  {
+        id: "pork-ribs",
+        name: "Rise & Fall Ribs",
+        description: "Rise, Smoke, and Fall from the bone!",
+        basePrice: 10.95,
+        image: "/images/menu/sand-pork-ribs.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      },
+	  {
+        id: "beef-sausage",
+        name: "Beef & Please",
+        description: "Blessed by the rising flames",
+        basePrice: 10.95,
+        image: "/images/menu/sand-hot-link.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      }
+	  {
+        id: "smoke-chicken",
+        name: "Chicken & Smoke",
+        description: "Smokey, finger-lickin goodness",
+        basePrice: 10.95,
+        image: "/images/menu/sand-smoke-chicken.png", 
+        prepTime: 14,
+        modifierGroups: ["bread-selection", "sides-1", "sauces"]
+      }
+    ]
+  },
+
+  meats: {
+    name: "sliced-brisket",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "brisket-quarter",
+        name: "Brisket 1/4 Pound",
+        description: "Brisket 1/4 Pound",
+        basePrice: 8.95,
+        image: "/images/menu/pound-brisket-slice.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "brisket-half",
+        name: "Brisket 1/2 Pound",
+        description: "Brisket 1/2 Pound", 
+        basePrice: 15.35,
+        image: "/images/menu/pound-brisket-slice.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "brisket-three-quarter",
+        name: "Brisket 3/4 Pound",
+        description: "Brisket 3/4 Pound",
+        basePrice: 18.45,
+        image: "/images/menu/pound-brisket-slice.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "brisket-pound",
+        name: "Brisket 1 Pound",
+        description: "Brisket 1 Pound",
+        basePrice: 25.45,
+        image: "/images/menu/pound-brisket-slice.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]
+	name: "chopped-beef",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "chopped-quarter",
+        name: "Chopped Beef 1/4 Pound",
+        description: "Chopped Beef 1/4 Pound",
+        basePrice: 5.95,
+        image: "/images/menu/pound-brisket-chop.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "chopped-half",
+        name: "Chopped Beef 1/2 Pound",
+        description: "Chopped Beef 1/2 Pound", 
+        basePrice: 11.45,
+        image: "/images/menu/pound-brisket-chop.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "chopped-three-quarter",
+        name: "Chopped Beef 3/4 Pound",
+        description: "Chopped Beef 3/4 Pound",
+        basePrice: 16.35,
+        image: "/images/menu/pound-brisket-chop.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "chopped-pound",
+        name: "Chopped Beef 1 Pound",
+        description: "Brisket 1 Pound",
+        basePrice: 19.95,
+        image: "/images/menu/pound-brisket-chop.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]
+	name: "pulled-pork",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "pulled-quarter",
+        name: "Pulled Pork 1/4 Pound",
+        description: "Pulled Pork 1/4 Pound",
+        basePrice: 5.95,
+        image: "/images/menu/pound-pull-pork.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "pulled-half",
+        name: "Pulled Pork 1/2 Pound",
+        description: "Pulled Pork 1/2 Pound", 
+        basePrice: 11.45,
+        image: "/images/menu/pound-pull-pork.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "pulled-three-quarter",
+        name: "Pulled Pork 3/4 Pound",
+        description: "Pulled Pork 3/4 Pound",
+        basePrice: 16.35,
+        image: "/images/menu/pound-pull-pork.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "pulled-pound",
+        name: "Pulled Pork 1 Pound",
+        description: "Pulled Pork 1 Pound",
+        basePrice: 19.95,
+        image: "/images/menu/pound-pull-pork.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]
+	name: "grilled-chicken",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "chicken-quarter",
+        name: "Grilled Chicken 1/4 Pound",
+        description: "Grilled Chicken 1/4 Pound",
+        basePrice: 5.95,
+        image: "/images/menu/grilled-chicken.jpg",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "chicken-half",
+        name: "Grilled Chicken 1/2 Pound",
+        description: "Grilled Chicken 1/2 Pound", 
+        basePrice: 11.45,
+        image: "/images/menu/grilled-chicken.jpg",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "chicken-three-quarter",
+        name: "Grilled Chicken 3/4 Pound",
+        description: "Grilled Chicken 3/4 Pound",
+        basePrice: 16.35,
+        image: "/images/menu/grilled-chicken.jpg",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "chicken-pound",
+        name: "Grilled Chicken 1 Pound",
+        description: "Grilled Chicken 1 Pound",
+        basePrice: 19.95,
+        image: "/images/menu/grilled-chicken.jpg",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]
+	name: "link-sausage",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "link-quarter",
+        name: "Hot Link or Cheddar Jalapeno 1/4 Pound",
+        description: "Hot Link or Cheddar Jalapeno 1/4 Pound",
+        basePrice: 5.95,
+        image: "/images/menu/pound-link-sausage.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "link-half",
+        name: "Hot Link or Cheddar Jalapeno 1/2 Pound",
+        description: "Hot Link or Cheddar Jalapeno 1/2 Pound", 
+        basePrice: 11.45,
+        image: "/images/menu/pound-link-sausage.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "link-three-quarter",
+        name: "Hot Link or Cheddar Jalapeno 3/4 Pound",
+        description: "Hot Link or Cheddar Jalapeno 3/4 Pound",
+        basePrice: 16.35,
+        image: "/images/menu/pound-ched-sausage.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "link-pound",
+        name: "Hot Link or Cheddar Jalapeno 1 Pound",
+        description: "Hot Link or Cheddar Jalapeno 1 Pound",
+        basePrice: 19.95,
+        image: "/images/menu/pound-link-sausage.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]		
+	name: "beef-sausage",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "sausage-quarter",
+        name: "Beef Sausage 1/4 Pound",
+        description: "Beef Sausage 1/4 Pound",
+        basePrice: 5.95,
+        image: "/images/menu/pound-smoke-sausage.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "sausage-half",
+        name: "Beef Sausage 1/2 Pound",
+        description: "Beef Sausage 1/2 Pound", 
+        basePrice: 11.45,
+        image: "/images/menu/pound-smoke-sausage.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "sausage-three-quarter",
+        name: "Beef Sausage 3/4 Pound",
+        description: "Beef Sausage 3/4 Pound",
+        basePrice: 16.35,
+        image: "/images/menu/pound-smoke-sausage.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "sausage-pound",
+        name: "Beef Sausage 1 Pound",
+        description: "Beef Sausage 1 Pound",
+        basePrice: 19.95,
+        image: "/images/menu/pound-smoke-sausage.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]		
+	name: "smoked-ribs",
+    description: "Transformed and ready for glory",
+    items: [
+      {
+        id: "ribs-quarter",
+        name: "Smoked Ribs 1/4 Pound",
+        description: "Smoked Ribs 1/4 Pound",
+        basePrice: 5.95,
+        image: "/images/menu/sand-pork-ribs.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "ribs-half",
+        name: "Smoked Ribs 1/2 Pound",
+        description: "Smoked Ribs 1/2 Pound", 
+        basePrice: 11.45,
+        image: "/images/menu/sand-pork-ribs.png",
+        prepTime: 10,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+      {
+        id: "ribs-three-quarter",
+        name: "Smoked Ribs 3/4 Pound",
+        description: "Smoked Ribs 3/4 Pound",
+        basePrice: 16.35,
+        image: "/images/menu/sand-pork-ribs.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      },
+	  {
+        id: "ribs-pound",
+        name: "Smoked Ribs 1 Pound",
+        description: "Smoked Ribs 1 Pound",
+        basePrice: 19.95,
+        image: "/images/menu/sand-pork-ribs.png",
+        prepTime: 12,
+        modifierGroups: ["bread-selection", "sauces"]
+      }
+    ]		
+  },
+
+  favorites: {
+    name: "Favorites", 
+    description: "Rise N Smoke Fan Favorites",
+    items: [
+      {
+        id: "brisket-nachos",
+        name: "Brisket Nachos",
+        description: "Tortilla Chips, Chopped Brisket, Sauce & Queso",
+        basePrice: 11.95,
+        image: "/images/menu/brisket-nachos.jpg",
+        prepTime: 10        
+      },
+      {
+        id: "loaded-side-winder", 
+        name: "Loaded Side Winder",
+        description: "Loaded Fries w/Sauce & Queso, Choice of Meat",
+        basePrice: 11.95,
+        image: "/images/menu/fav-sidewinder.png",
+        prepTime: 12        
+      },
+      {
+        id: "red-pit-burrito",
+        name: "Red Pit Burrito",
+        description: "Sasoned Potatos, Jalapeno Sausage, Chopped Brisket, Sauce & Queso",
+        basePrice: 14.95,
+        image: "/images/menu/pit-burrito.jpg",
+        prepTime: 12       
+      },
+	  {
+        id: "baked-potato-plain",
+        name: "Baked Potato Plain",
+        description: "Smoked Baked Potato",
+        basePrice: 7.50,
+        image: "/images/menu/fav-potato-plain.png",
+        prepTime: 12      
+      },
+	  {
+        id: "baked-potato-loaded",
+        name: "Baked Potato Loaded",
+        description: "Baked Potato loaded w/Cheese & Sour Cream",
+        basePrice: 9.25,
+        image: "/images/menu/fav-potato-loaded.png",
+        prepTime: 12       
+      },
+	  {
+        id: "baked-potato-works",
+        name: "Baked Potato Loaded with Meat",
+        description: "Loaded Bake Potato w/Meat",
+        basePrice: 11.95,
+        image: "/images/menu/fav-potato-works.png",
+        prepTime: 12        
+      }
+    ]
+  },
+
+  family meals: {
+    name: "Family Meals",
+    description: "The bonds that hold flavor together",
+    items: [
+      {
+        id: "small-group",
+        name: "Small Smoke Stack",
+        description: "Feeds 3-4 People",
+        basePrice: 44.95,
+        image: "/images/menu/family-meat-platter.png",
+        prepTime: 8,
+        modifierGroups: ["meat-selection1", "bread-selection", "med-side-1", "med-side-2", "sauces"]
+      },
+      {
+        id: "med-group",
+        name: "Medium Smoke Stack",
+        description: "Feeds 6-8 People",
+        basePrice: 82.95,
+        image: "/images/menu/family-meat-platter.png", 
+        prepTime: 8,
+        modifierGroups: ["meat-selection1", "meat-selection2", "bread-selection", "lrg-side-1", "lrg-side-2", "sauces"]
+      },
+      {
+        id: "large-group",
+        name: "Large Smoke Stack", 
+        description: "Feeds 10-12 People",
+        basePrice: 120.50,
+        image: "/images/menu/family-meat-platter.png",
+        prepTime: 10,
+        modifierGroups: ["meat-selection1", "meat-selection2", "meat-selection3", "bread-selection", "lrg-side-1", "lrg-side-2", "lrg-side-3", "sauces"]
+      }
+    ]
+  },
+
+  sides: {
+    name: "Divine Sides",
+    description: "Blessed accompaniments to complete your meal",
+    items: [
+      {
+        id: "mamas-smoky-mac",
+        name: "Mamas Smoky Mac & Cheese",
+        description: "Creamy comfort blessed by the kitchen",
+        basePrice: 2.85,
+        image: "/images/menu/side-mac-cheese.png",
+        prepTime: 5
+      },
+      {
+        id: "blessed-potato-salad",
+        name: "Blessed Potato Salad", 
+        description: "Creamy potatoes touched by grace",
+        basePrice: 2.85,
+        image: "/images/menu/side-potato-salad.png",
+        prepTime: 3
+      },
+      {
+        id: "hallelujah-baked-beans",
+        name: "Hallelujah Baked Beans",
+        description: "Baked sweet and smoky, worth the wait",
+        basePrice: 2.85,
+        image: "/images/menu/side-potato-salad.png",
+        prepTime: 5
+      },
+      {
+        id: divine-green-beans",
+        name: "Divine Green Beans",
+        description: "Divinely seasoned with love",
+        basePrice: 2.85,
+        image: "/images/menu/side-green-beans.png",
+        prepTime: 3
+      },
+      {
+        id: "salvation-cole-slaw",
+        name: "Promised Green Beans",
+        description: "Fresh salvation in every bite",
+        basePrice: 2.85,
+        image: "/images/menu/side-cole-slaw.png",
+        prepTime: 3
+      },	  
+    ]
+  },
+
+  drinks: {
+    name: "Drinks",
+    description: "Quench your thirst righteously",
+    items: [
+      {
+        id: "sweet-tea",
+        name: "Sweet Tea",
+        description: "Southern sweet tea",
+        basePrice: 2.50,
+        image: "/images/menu/sweet-tea.jpg",
+        prepTime: 1
+      },
+      {
+        id: "soda",
+        name: "Soda",
+        description: "Coke, Pepsi, Sprite, and more",
+        basePrice: 1.50,
+        image: "/images/menu/sodas.jpg",
+        prepTime: 1
+      },
+  {
+        id: "water",
+        name: "Bottled Water",
+        description: "Bottled Water",
+        basePrice: 2.00,
+        image: "/images/menu/baptismal-lemonade.jpg",
+        prepTime: 2
+      }	  
+    ]
+  }
+this and that: {
+    name: "This and That",
+    description: "This and That",
+    items: [
+      {
+        id: "garden-salad",
+        name: "Garden Salad",
+        description: "Made to order garden salad",
+        basePrice: 6.50,
+        image: "/images/menu/tt-garden-salad.png",
+        prepTime: 1
+      },
+      {
+        id: "chef-salad",
+        name: "Chef Salad",
+        description: "Made to order Chef Salad",
+        basePrice: 9.25,
+        image: "/images/menu/tt-garden-salad.png",
+        prepTime: 2
+      },
+      {
+        id: "wraparound",
+        name: "Wraparound",
+        description: "Burrito-style sandwich wrap",
+        basePrice: 7.25,
+        image: "/images/menu/wraparound.jpg",
+        prepTime: 1
+      },
+      {
+        id: "sausage-on-stick",
+        name: "Sausage-on-a-stick",
+        description: "Smoked sausage on a stick",
+        basePrice: 7.25,
+        image: "/images/menu/sausage-stick.jpg",
+        prepTime: 2
+      },
+	  {
+        id: "xtra-meat",
+        name: "Xtra-meat",
+        description: "Extra heaping of meat",
+        basePrice: 4.50,
+        image: "/images/menu/extra-meat.jpg",
+        prepTime: 2
+      },
+	  {
+        id: "chips",
+        name: "chips",
+        description: "Various Chip selections",
+        basePrice: 1.35,
+        image: "/images/menu/chips.jpg",
+        prepTime: 2
+      },
+	  {
+        id: "fries",
+        name: "fries",
+        description: "Dark roast enlightenment",
+        basePrice: 2.99,
+        image: "/images/menu/tt-side-fries.png",
+        prepTime: 2
+      },
+	  {
+        id: "sausage-on-stick",
+        name: "Coffee Revelation",
+        description: "Dark roast enlightenment",
+        basePrice: 2.99,
+        image: "/images/menu/coffee-revelation.jpg",
+        prepTime: 2
+      }
+	  {
+        id: "banana-pudding",
+        name: "Banana Pudding",
+        description: "Homemade banana pudding",
+        basePrice: 2.99,
+        image: "/images/menu/tt-banana-pudding.png",
+        prepTime: 2
+      }
+	  {
+        id: "ice-cream",
+        name: "Vanilla Ice Cream",
+        description: "Rich & Creamy Vanilla Ice Cream",
+        basePrice: 2.99,
+        image: "/images/menu/tt-ice-cream.png",
+        prepTime: 2
+      }
+	  {
+        id: "peach-cobbler",
+        name: "Homemade Peach Cobbler",
+        description: "Delightful Peach Cobbler",
+        basePrice: 2.99,
+        image: "/images/menu/tt-peach-cobbler.png",
+        prepTime: 2
+      }
+    ]
+  }
+  kids: {
+    name: "Little Smokey",
+    description: "Kids snack pack",
+    items: [
+      {
+        id: "chopped beef wrap",
+        name: "Chopped Beef Wrap",
+        description: "Small Chopped Beef Wrap",
+        basePrice: 7.95,
+        image: "/images/menu/sweet-tea-scripture.jpg",
+        prepTime: 1
+      },
+      {
+        id: "cookie",
+        name: "Chocolate Chip Cookie",
+        description: "Fresh squeezed for spiritual cleansing",
+        basePrice: 0.00,
+        image: "/images/menu/baptismal-lemonade.jpg",
+        prepTime: 2
+      },
+      {
+        id: "capri-sun",
+        name: "Capri-Sun",
+        description: "Coke, Pepsi, Sprite, and more",
+        basePrice: 0.00,
+        image: "/images/menu/fountain-sodas.jpg",
+        prepTime: 1
+      }      
+    ]
+  }
+  
+};
+
+// Modifier groups for customization
+export const modifierGroups = {
+  "meat-selection-2": {
+    name: "Select Your 2 Meats",
+    required: true,
+    minSelections: 2,
+    maxSelections: 2,
+    modifiers: [
+      { id: "brisket", name: "Brisket", price: 0 },
+      { id: "ribs", name: "Ribs", price: 0 },
+      { id: "sausage", name: "Sausage", price: 0 },
+      { id: "pulled-pork", name: "Pulled Pork", price: 0 },
+      { id: "turkey", name: "Turkey", price: 2.00 },
+      { id: "chicken", name: "Smoked Chicken", price: 1.00 }
+    ]
+  },
+  
+  "meat-selection-3": {
+    name: "Select Your 3 Meats",
+    required: true,
+    minSelections: 3,
+    maxSelections: 3,
+    modifiers: [
+      { id: "brisket", name: "Brisket", price: 0 },
+      { id: "ribs", name: "Ribs", price: 0 },
+      { id: "sausage", name: "Sausage", price: 0 },
+      { id: "pulled-pork", name: "Pulled Pork", price: 0 },
+      { id: "turkey", name: "Turkey", price: 2.00 },
+      { id: "chicken", name: "Smoked Chicken", price: 1.00 }
+    ]
+  },
+
+  "sides-1": {
+    name: "Choose 1 Side", 
+    required: true,
+    minSelections: 1,
+    maxSelections: 1,
+    modifiers: [
+      { id: "mac-cheese", name: "Heavenly Mac & Cheese", price: 0 },
+      { id: "coleslaw", name: "Garden of Eden Slaw", price: 0 },
+      { id: "beans", name: "Promised Beans", price: 0 },
+      { id: "potato-salad", name: "Blessed Potato Salad", price: 0 }
+    ]
+  },
+
+  "sides-2": {
+    name: "Choose 2 Sides",
+    required: true, 
+    minSelections: 2,
+    maxSelections: 2,
+    modifiers: [
+      { id: "mac-cheese", name: "Heavenly Mac & Cheese", price: 0 },
+      { id: "coleslaw", name: "Garden of Eden Slaw", price: 0 },
+      { id: "beans", name: "Promised Beans", price: 0 },
+      { id: "potato-salad", name: "Blessed Potato Salad", price: 0 },
+      { id: "cornbread", name: "Cornbread Salvation", price: 1.00 }
+    ]
+  },
+
+  "bread-selection": {
+    name: "Choose Your Bread",
+    required: true,
+    minSelections: 1,
+    maxSelections: 1,
+    modifiers: [
+      { id: "texas-toast", name: "Texas Toast", price: 0 },
+      { id: "brioche-bun", name: "Brioche Bun", price: 0.50 },
+      { id: "kaiser-roll", name: "Kaiser Roll", price: 0 },
+      { id: "no-bread", name: "No Bread", price: -1.00 }
+    ]
+  },
+
+  "sauces": {
+    name: "Sauces (Optional)",
+    required: false,
+    maxSelections: 3,
+    modifiers: [
+      { id: "bbq-sauce", name: "House BBQ Sauce", price: 0 },
+      { id: "hot-sauce", name: "Fire & Brimstone Hot", price: 0.50 },
+      { id: "extra-sauce", name: "Extra Sauce Cup", price: 1.00 },
+      { id: "honey-mustard", name: "Honey Mustard", price: 0.50 },
+      { id: "ranch", name: "Ranch", price: 0.50 }
+    ]
+  }
+};
+```
+
+### Homepage Content Structure
+```typescript
+// Homepage sections content
+export const homepageContent = {
+  hero: {
+    headline: "RISE N' SMOKE",
+    subheadline: "The Rise & Transform Method™", 
+    tagline: "Real Smoke. Real Deep. Real Good.",
+    description: "We've figured out the secret of how smoke actually works - when we burn our hickory and oak just right, the smoke rises in perfect streams, opening up the meat like tiny doors.",
+    ctaText: "Order Online Now",
+    ctaSecondary: "View Our Menu",
+    backgroundImage: "/images/hero-bbq-smoke.jpg"
+  },
+
+  aboutMethod: {
+    headline: "The Secret's in the Rise",
+    description: "Most folks just let smoke happen. We make it work for us.",
+    sections: [
+      {
+        title: "It's All About the Rise",
+        description: "When we burn our hickory and oak just right, the smoke doesn't just sit there—it rises up in perfect little streams, carrying all that wood flavor with it. Most folks just let smoke happen. We make it work for us.",
+        icon: "/images/icons/smoke-rise.svg"
+      },
+      {
+        title: "Smoke That Actually Soaks In",
+        description: "See, when smoke gets hot enough and rises just right, it opens up the meat like tiny doors, letting all that smoky goodness get deep inside. It's not just coating the outside—it's changing the whole thing from the inside out.",
+        icon: "/images/icons/meat-transform.svg"
+      },
+      {
+        title: "Our Secret Timing", 
+        description: "We've spent years learning exactly when that smoke is doing its best work. Too cool, and it just sits on top. Too hot, and it burns off. But hit it just right, and that smoke transforms your meat into something special.",
+        icon: "/images/icons/perfect-timing.svg"
+      }
+    ]
+  },
+
+  menuHighlights: {
+    headline: "Taste the Transformation",
+    description: "Every dish tells the story of our Rise & Transform Method™",
+    featuredItems: [
+      "trinity-plate",
+      "burning-bush-ribs", 
+      "pillar-of-smoke",
+      "sacred-link"
+    ]
+  },
+
+  locationHours: {
+    headline: "Follow the rising smoke!",
+    address: "401 Abbott Avenue, Hillsboro Texas 76645",
+    phone: "(254) 221-6247",
+    email: "order@risensmoke.com",
+    hours: {
+      "Sunday:  Closed"
+	  "Monday:  Closed"
+	  "Tuesday - Saturday:  11:00 AM - 8:00 PM"      
+    },
+    mapEmbedUrl: "https://maps.google.com/embed?pb=..."
+  }
+};
+```
+
+---
+
+## Component Requirements
+
+### Header Component
+```typescript
+// components/layout/Header.tsx
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useCartStore } from '@/store/cartStore';
+import CartButton from '@/components/cart/CartButton';
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Menu", href: "/menu" },
+    { name: "The Method", href: "/about" },
+    { name: "Contact", href: "/contact" }
+  ];
+
+  return (
+    <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="container mx-auto px-4">
+        <nav className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="logo">
+            <span className="font-primary text-h3 text-fire-gradient">
+              RISE N' SMOKE
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link key={item.name} href={item.href} className="nav-link">
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-4">
+            <CartButton />
+            <Link href="/order" className="btn-primary">
+              Order Online
+            </Link>
+            
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-smoke-white"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4">
+            {navItems.map((item) => (
+              <Link 
+                key={item.name} 
+                href={item.href} 
+                className="block py-2 nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+```
+
+### Hero Component
+```typescript
+// components/home/Hero.tsx
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { homepageContent } from '@/data/content';
+
+const Hero = () => {
+  return (
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={homepageContent.hero.backgroundImage}
+          alt="Rise N' Smoke BBQ"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Smoke Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-smoke-black/80 via-smoke-black/40 to-transparent" />
+      </div>
+
+      {/* Smoke Animation Particles */}
+      <div className="absolute inset-0 z-10">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="smoke-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
+        <h1 className="font-primary text-hero text-fire-gradient mb-4">
+          {homepageContent.hero.headline}
+        </h1>
+        
+        <h2 className="font-secondary text-h2 text-primary-gradient mb-6">
+          {homepageContent.hero.subheadline}
+        </h2>
+        
+        <p className="font-body text-large text-smoke-white mb-8 max-w-2xl mx-auto">
+          {homepageContent.hero.description}
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/order" className="btn-primary text-lg px-8 py-4">
+            {homepageContent.hero.ctaText}
+          </Link>
+          <Link href="/menu" className="btn-secondary text-lg px-8 py-4">
+            {homepageContent.hero.ctaSecondary}
+          </Link>
+        </div>
+        
+        <p className="font-body text-base text-smoke-white/80 mt-6 italic">
+          "{homepageContent.hero.tagline}"
+        </p>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
+```
+
+### Cart Management Components
+```typescript
+// components/cart/CartSidebar.tsx
+'use client';
+
+import { useCartStore } from '@/store/cartStore';
+import CartItem from './CartItem';
+import Link from 'next/link';
+
+const CartSidebar = () => {
+  const { items, isOpen, toggleCart, subtotal, tax, total, clearCart } = useCartStore();
+
+  if (!isOpen) return null;
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div 
+        className="fixed inset-0 bg-black/50 z-50"
+        onClick={toggleCart}
+      />
+      
+      {/* Sidebar */}
+      <div className="cart-sidebar open">
+        <div className="p-6 border-b border-ash-gray/20">
+          <div className="flex items-center justify-between">
+            <h2 className="font-secondary text-h3 text-smoke-black">Your Order</h2>
+            <button 
+              onClick={toggleCart}
+              className="text-ash-gray hover:text-smoke-black"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto">
+          {items.length === 0 ? (
+            <div className="p-6 text-center">
+              <p className="font-body text-ash-gray mb-4">Your cart is empty</p>
+              <Link href="/menu" onClick={toggleCart} className="btn-primary">
+                Browse Menu
+              </Link>
+            </div>
+          ) : (
+            <div className="p-4">
+              {items.map((item) => (
+                <CartItem key={item.id} item={item} />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {items.length > 0 && (
+          <div className="border-t border-ash-gray/20 p-6">
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between font-body">
+                <span>Subtotal:</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between font-body">
+                <span>Tax:</span>
+                <span>${tax.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between font-secondary text-h4 text-fire-red">
+                <span>Total:</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <Link 
+                href="/checkout" 
+                onClick={toggleCart}
+                className="btn-primary w-full block text-center"
+              >
+                Checkout - ${total.toFixed(2)}
+              </Link>
+              <button 
+                onClick={clearCart}
+                className="btn-secondary w-full"
+              >
+                Clear Cart
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default CartSidebar;
+```
+
+---
+
+## Environment Variables & Configuration
+
+### Complete Environment Setup
+```env
+# App Configuration
+NEXT_PUBLIC_SITE_URL=https://risensmoke.com
+NEXT_PUBLIC_APP_NAME="Rise N' Smoke"
+
+# Database - Use Supabase
+DATABASE_URL="postgresql://username:password@localhost:5432/risensmoke"
+DIRECT_URL="postgresql://username:password@localhost:5432/risensmoke"
+
+# Authentication
+NEXTAUTH_URL=https://risensmoke.com
+NEXTAUTH_SECRET=your_nextauth_secret_here
+JWT_SECRET=your_jwt_secret_here
+
+# Payment Processing
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Clover POS Integration
+CLOVER_API_BASE_URL=https://api.clover.com
+CLOVER_MERCHANT_ID=your_merchant_id
+CLOVER_ACCESS_TOKEN=your_access_token
+CLOVER_WEBHOOK_SECRET=your_clover_webhook_secret
+
+# Redis Cache
+REDIS_URL=redis://localhost:6379
+REDIS_PASSWORD=your_redis_password
+
+# Email Service (SendGrid)
+SENDGRID_API_KEY=SG.your_sendgrid_api_key
+FROM_EMAIL=orders@risensmoke.com
+FROM_NAME="Rise N' Smoke"
+
+# SMS Service (Twilio)
+TWILIO_ACCOUNT_SID=ACyour_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=+1234567890
+
+# Analytics & Monitoring
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+
+# Social Media
+NEXT_PUBLIC_FACEBOOK_URL=https://facebook.com/risensmoke
+NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/risensmoke
+NEXT_PUBLIC_TWITTER_URL=https://twitter.com/risensmoke
+
+# Business Information
+BUSINESS_NAME="Rise N' Smoke"
+BUSINESS_ADDRESS="401 Abbott Avenue, Hillsboro Texas 76645"
+BUSINESS_PHONE="(254) 221-6247"
+BUSINESS_EMAIL="order@risensmoke.com"
+
+# Order Configuration
+DEFAULT_PREP_TIME_MINUTES=30
+MAX_ORDER_DAYS_AHEAD=7
+MIN_ORDER_MINUTES_AHEAD=60
+TAX_RATE=0.08
+```
+
+### Package.json Dependencies
+```json
+{
+  "name": "rise-n-smoke",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@prisma/client": "^5.0.0",
+    "prisma": "^5.0.0",
+    "next-auth": "^5.0.0-beta",
+    "zustand": "^4.4.0",
+    "stripe": "^14.0.0",
+    "@stripe/stripe-js": "^2.0.0",
+    "@stripe/react-stripe-js": "^2.0.0",
+    "zod": "^3.22.0",
+    "react-hook-form": "^7.46.0",
+    "@hookform/resolvers": "^3.3.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "@headlessui/react": "^1.7.0",
+    "date-fns": "^2.30.0",
+    "react-datepicker": "^4.18.0",
+    "react-hot-toast": "^2.4.0",
+    "framer-motion": "^10.16.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.290.0"
+  },
+    "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "tsx": "^4.0.0"
+  }
+}
+```
+
+---
+
+## Security & Performance
+
+### Input Validation Schemas
+```typescript
+// lib/validations.ts
+import { z } from 'zod';
+
+export const customerSchema = z.object({
+  firstName: z.string().min(1, 'First name is required').max(50),
+  lastName: z.string().min(1, 'Last name is required').max(50),
+  email: z.string().email('Valid email is required'),
+  phone: z.string().regex(/^\(\d{3}\) \d{3}-\d{4}$/, 'Phone must be in format (XXX) XXX-XXXX')
+});
+
+export const cartItemSchema = z.object({
+  menuItemId: z.string().cuid(),
+  name: z.string().min(1),
+  quantity: z.number().min(1).max(10),
+  basePrice: z.number().positive(),
+  modifiers: z.array(z.object({
+    id: z.string(),
+    name: z.string(),
+    price: z.number().min(0)
+  }))
+});
+
+export const orderSchema = z.object({
+  cart: z.object({
+    items: z.array(cartItemSchema).min(1, 'Cart cannot be empty'),
+    subtotal: z.number().positive(),
+    tax: z.number().min(0),
+    total: z.number().positive(),
+    pickupTime: z.string().datetime()
+  }),
+  customer: customerSchema,
+  payment: z.object({
+    paymentMethodId: z.string().min(1, 'Payment method is required')
+  })
+});
+
+export const pickupTimeSchema = z.object({
+  date: z.string().datetime(),
+  cartItems: z.array(z.object({
+    prepTime: z.number().min(0)
+  }))
+});
+```
+
+### Rate Limiting Middleware
+```typescript
+// middleware.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.REDIS_URL!,
+  token: process.env.REDIS_TOKEN!
+});
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, '1m'), // 10 requests per minute
+  analytics: true
+});
+
+export async function middleware(request: NextRequest) {
+  // Apply rate limiting to API routes
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    const ip = request.ip ?? '127.0.0.1';
+    const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip);
+
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests' },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': limit.toString(),
+            'X-RateLimit-Remaining': remaining.toString(),
+            'X-RateLimit-Reset': new Date(reset).toISOString()
+          }
+        }
+      );
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/api/:path*']
+};
+```
+
+### Webhook Security
+```typescript
+// app/api/clover/webhook/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { headers } from 'next/headers';
+import crypto from 'crypto';
+import { prisma } from '@/lib/db';
+
+function verifyCloverWebhook(payload: string, signature: string): boolean {
+  const expectedSignature = crypto
+    .createHmac('sha256', process.env.CLOVER_WEBHOOK_SECRET!)
+    .update(payload)
+    .digest('hex');
+    
+  return crypto.timingSafeEqual(
+    Buffer.from(signature, 'hex'),
+    Buffer.from(expectedSignature, 'hex')
+  );
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.text();
+    const headersList = headers();
+    const signature = headersList.get('x-clover-signature');
+
+    if (!signature || !verifyCloverWebhook(body, signature)) {
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
+    }
+
+    const event = JSON.parse(body);
+
+    switch (event.type) {
+      case 'ORDER_UPDATED':
+        await handleOrderUpdate(event.data);
+        break;
+      case 'PAYMENT_PROCESSED':
+        await handlePaymentProcessed(event.data);
+        break;
+      default:
+        console.log(`Unhandled webhook event: ${event.type}`);
+    }
+
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    console.error('Webhook error:', error);
+    return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 });
+  }
+}
+
+async function handleOrderUpdate(orderData: any) {
+  await prisma.order.update({
+    where: { cloverOrderId: orderData.id },
+    data: {
+      status: mapCloverStatus(orderData.state)
+    }
+  });
+}
+
+function mapCloverStatus(cloverState: string): OrderStatus {
+  switch (cloverState) {
+    case 'open': return 'CONFIRMED';
+    case 'locked': return 'PREPARING';
+    case 'paid': return 'READY';
+    default: return 'CONFIRMED';
+  }
+}
+```
+
+---
+
+## Testing & Quality Assurance
+
+### Test Structure
+```typescript
+// __tests__/cart.test.ts
+import { renderHook, act } from '@testing-library/react';
+import { useCartStore } from '@/store/cartStore';
+
+describe('Cart Store', () => {
+  beforeEach(() => {
+    useCartStore.getState().clearCart();
+  });
+
+  it('should add item to cart', () => {
+    const { result } = renderHook(() => useCartStore());
+
+    act(() => {
+      result.current.addItem({
+        menuItemId: 'test-item',
+        name: 'Test Item',
+        basePrice: 10.99,
+        quantity: 1,
+        modifiers: []
+      });
+    });
+
+    expect(result.current.items).toHaveLength(1);
+    expect(result.current.subtotal).toBe(10.99);
+  });
+
+  it('should calculate tax correctly', () => {
+    const { result } = renderHook(() => useCartStore());
+
+    act(() => {
+      result.current.addItem({
+        menuItemId: 'test-item',
+        name: 'Test Item',
+        basePrice: 100,
+        quantity: 1,
+        modifiers: []
+      });
+    });
+
+    expect(result.current.tax).toBe(8); // 8% tax
+    expect(result.current.total).toBe(108);
+  });
+});
+```
+
+### Performance Monitoring
+```typescript
+// lib/monitoring.ts
+export function trackPageView(url: string) {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!, {
+      page_title: document.title,
+      page_location: url
+    });
+  }
+}
+
+export function trackOrderEvent(orderData: {
+  orderId: string;
+  total: number;
+  items: Array<{ name: string; quantity: number; price: number }>;
+}) {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'purchase', {
+      transaction_id: orderData.orderId,
+      value: orderData.total,
+      currency: 'USD',
+      items: orderData.items.map(item => ({
+        item_id: item.name.toLowerCase().replace(/\s+/g, '-'),
+        item_name: item.name,
+        quantity: item.quantity,
+        price: item.price
+      }))
+    });
+  }
+}
+
+export function trackCartEvent(action: 'add' | 'remove', itemName: string, value: number) {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', action === 'add' ? 'add_to_cart' : 'remove_from_cart', {
+      currency: 'USD',
+      value,
+      items: [{
+        item_name: itemName
+      }]
+    });
+  }
+}
+```
+
+---
+
+## Deployment Configuration
+
+### Docker Setup
+```dockerfile
+# Dockerfile
+FROM node:18-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN npx prisma generate
+RUN npm run build
+
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+CMD ["node", "server.js"]
+```
+
+### Vercel Deployment
+```json
+// vercel.json
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "DATABASE_URL": "@database-url",
+    "NEXTAUTH_SECRET": "@nextauth-secret",
+    "STRIPE_SECRET_KEY": "@stripe-secret",
+    "CLOVER_ACCESS_TOKEN": "@clover-token"
+  },
+  "functions": {
+    "app/api/**": {
+      "maxDuration": 30
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cleanup/expired-orders",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}
+```
+
+---
+
+## Final Development Timeline
+
+### Week 1-2: Foundation & Setup
+**Days 1-3: Project Setup**
+- Initialize Next.js 14 project with TypeScript
+- Set up Prisma with PostgreSQL database
+- Configure Tailwind CSS with custom design system
+- Implement Western typography with gradient effects
+- Set up Zustand cart store
+
+**Days 4-7: Core Components**
+- Build Header with navigation and cart button
+- Create Hero section with fire gradient text
+- Implement base card and button components
+- Set up responsive layout system
+
+**Days 8-14: Authentication & User Management**
+- Configure NextAuth.js for customer accounts
+- Build login/signup modals
+- Implement guest checkout option
+- Create user profile and order history pages
+
+### Week 3-4: E-Commerce Core
+**Days 15-18: Menu System**
+- Build menu page with biblical item names
+- Create modifier selection system
+- Implement item customization modal
+- Add menu item search and filtering
+
+**Days 19-22: Cart Functionality**
+- Complete cart sidebar with add/remove/modify
+- Build pickup time selection with availability
+- Implement cart persistence across sessions
+- Add special instructions and notes
+
+**Days 23-28: Checkout Process**
+- Create multi-step checkout form
+- Integrate Stripe payment processing
+- Build order summary and confirmation
+- Implement input validation and error handling
+
+### Week 5: Clover Integration
+**Days 29-31: API Setup**
+- Configure Clover API client
+- Sync menu items from Clover inventory
+- Map modifier groups and pricing
+
+**Days 32-35: Order Processing**
+- Build order creation workflow
+- Implement kitchen printer integration
+- Set up order status tracking
+- Configure webhook handling for real-time updates
+
+### Week 6: Enhancement & Testing
+**Days 36-38: Performance Optimization**
+- Optimize images and implement lazy loading
+- Set up Redis caching for frequently accessed data
+- Implement database query optimization
+- Configure CDN for static assets
+
+**Days 39-42: Mobile Optimization**
+- Ensure responsive design across all devices
+- Optimize touch interactions for mobile ordering
+- Test payment processing on mobile devices
+- Implement progressive web app features
+
+### Week 7: Launch Preparation
+**Days 43-45: Security & Compliance**
+- Implement PCI DSS compliance measures
+- Set up SSL certificates and security headers
+- Configure rate limiting and DDoS protection
+- Conduct security audit and penetration testing
+
+**Days 46-49: Final Testing & Deployment**
+- End-to-end testing of complete order workflow
+- Load testing for high-traffic scenarios
+- Staff training on Clover integration
+- Soft launch with limited customer base
+- Monitor system performance and fix any issues
+- Full public launch
+
+---
+
+## Success Metrics & Monitoring
+
+### Key Performance Indicators
+- **Order Completion Rate**: >95% of started orders completed
+- **Page Load Speed**: <2 seconds for all pages
+- **Mobile Conversion**: >80% of mobile visitors can complete orders
+- **Payment Success Rate**: >99% of payment attempts successful
+- **Order Accuracy**: >98% of orders printed correctly to kitchen
+- **Customer Satisfaction**: >4.5/5 average rating for online ordering
+
+### Analytics Tracking
+```typescript
+// Track key business metrics
+const businessMetrics = {
+  orderVolume: 'Daily order count and revenue',
+  averageOrderValue: 'Track AOV trends over time', 
+  popularItems: 'Most ordered menu items',
+  peakHours: 'Busiest ordering times',
+  customerRetention: 'Repeat customer percentage',
+  cartAbandonment: 'Where customers drop off in funnel'
+};
+```
+
+This comprehensive documentation provides Claude Code with everything needed to build a complete, production-ready e-commerce website for Rise N' Smoke that seamlessly integrates with Clover POS while maintaining the authentic Western BBQ brand identity throughout the entire customer experience.
