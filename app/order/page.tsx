@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { ShoppingCart, Clock, Plus, Minus, X, Calendar } from 'lucide-react';
@@ -597,7 +597,7 @@ const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; exc
   'lotta-rise': { meatCount: 0, sideCount: 2 }
 };
 
-export default function OrderPage() {
+function OrderPageContent() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
@@ -1839,5 +1839,13 @@ export default function OrderPage() {
         />
       )}
     </div>
+  );
+}
+
+export default function OrderPage() {
+  return (
+    <Suspense fallback={<div style={{ backgroundColor: '#1C1C1C', minHeight: '100vh' }}></div>}>
+      <OrderPageContent />
+    </Suspense>
   );
 }

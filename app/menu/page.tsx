@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCartStore } from '@/store/cartStore';
@@ -569,7 +569,7 @@ const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; exc
   'lotta-rise': { meatCount: 0, sideCount: 2 }
 };
 
-export default function MenuPage() {
+function MenuPageContent() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
@@ -978,5 +978,13 @@ export default function MenuPage() {
         />
       )}
     </div>
+  );
+}
+
+export default function MenuPage() {
+  return (
+    <Suspense fallback={<div style={{ backgroundColor: '#1C1C1C', minHeight: '100vh' }}></div>}>
+      <MenuPageContent />
+    </Suspense>
   );
 }
