@@ -31,7 +31,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Alfa Slab One', serif;
+  font-family: 'Rye', serif;
   font-weight: normal;
   line-height: 1.2;
   margin-bottom: 1rem;
@@ -245,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link {
   color: #F8F8F8;
-  font-family: 'Alfa Slab One', serif;
+  font-family: 'Rye', serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -265,7 +265,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Buttons */
 .btn-primary {
   color: #F8F8F8;
-  font-family: 'Alfa Slab One', serif;
+  font-family: 'Rye', serif;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -287,7 +287,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-secondary {
   color: #FF6B35;
-  font-family: 'Alfa Slab One', serif;
+  font-family: 'Rye', serif;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -361,7 +361,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .menu-item-price {
   color: var(--fire-red);
-  font-family: 'Alfa Slab One', serif;
+  font-family: 'Rye', serif;
   font-size: 1.25rem;
 }
 

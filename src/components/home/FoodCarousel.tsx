@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Flame, Clock, Award } from 'lucide-react';
 
 const FoodCarousel = () => {
@@ -14,28 +15,32 @@ const FoodCarousel = () => {
       title: 'Rise N Smoke A Lot',
       description: 'Our signature rib plate featuring fall-off-the-bone tender ribs, blessed with hours of slow smoking. The Rise & Transform Method™ delivers perfect bark and succulent meat.',
       price: '$18.45',
-      highlight: 'Signature Plate'
+      highlight: 'Signature Plate',
+      category: 'Blessed Plates'
     },
     {
       image: '/Assets/family-meat-platter.jpeg',
       title: 'Family Feast',
       description: 'Feed the whole crew with our family platter. A generous selection of our finest smoked meats, perfect for gatherings and celebrations.',
       price: '$120.50',
-      highlight: 'Best Seller'
+      highlight: 'Best Seller',
+      category: 'Family Meals'
     },
     {
       image: '/Assets/plate-3meat.PNG',
       title: 'Revelation Plate',
       description: 'The truth about real smoke revealed with three of our finest meats. Experience brisket, ribs, and sausage all transformed through our smoking mastery.',
       price: '$18.45',
-      highlight: 'Award Winner'
+      highlight: 'Award Winner',
+      category: 'Blessed Plates'
     },
     {
       image: '/Assets/sand-beef-brisket-saus.jpg',
       title: 'Smokey-Duo',
       description: 'Double smoked, double flavor! Our signature chopped brisket paired with savory sausage on a toasted bun. A taste of Texas in every bite.',
       price: '$13.00',
-      highlight: 'Crowd Favorite'
+      highlight: 'Crowd Favorite',
+      category: 'Sandwiches'
     }
   ];
 
@@ -124,7 +129,7 @@ const FoodCarousel = () => {
                         className="text-h2 mb-4"
                         style={{
                           color: '#FF6B35',
-                          fontFamily: "'Alfa Slab One', serif"
+                          fontFamily: "'Rye', serif"
                         }}
                       >
                         {slide.title}
@@ -152,12 +157,13 @@ const FoodCarousel = () => {
                           </p>
                         </div>
 
-                        <button
+                        <Link
+                          href={`/order?category=${encodeURIComponent(slide.category)}`}
                           className="btn-primary"
                           style={{ padding: '0.75rem 2rem' }}
                         >
                           Order Now
-                        </button>
+                        </Link>
                       </div>
 
                       {/* Decorative Smoke Effect */}

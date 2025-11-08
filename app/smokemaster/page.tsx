@@ -56,7 +56,7 @@ export default function SmokeMasterPage() {
           <h2
             className="text-2xl sm:text-3xl lg:text-4xl mb-8"
             style={{
-              fontFamily: "'Alfa Slab One', serif",
+              fontFamily: "'Rye', serif",
               color: '#FF6B35'
             }}
           >
@@ -178,7 +178,7 @@ export default function SmokeMasterPage() {
               className="text-xl sm:text-2xl italic"
               style={{
                 color: '#FFD700',
-                fontFamily: "'Alfa Slab One', serif"
+                fontFamily: "'Rye', serif"
               }}
             >
               "It hit me like a revelation. Smoke isn&apos;t random. When you get the conditions
@@ -451,7 +451,7 @@ export default function SmokeMasterPage() {
               <p
                 className="text-2xl sm:text-3xl font-bold mb-4"
                 style={{
-                  fontFamily: "'Alfa Slab One', serif",
+                  fontFamily: "'Rye', serif",
                   color: '#FFD700'
                 }}
               >

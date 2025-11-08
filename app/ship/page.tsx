@@ -169,7 +169,7 @@ export default function ShipPage() {
           >
             SHIP NATIONWIDE
           </h1>
-          <p className="text-xl mb-4" style={{ color: '#FFD700', fontFamily: "'Alfa Slab One', serif" }}>
+          <p className="text-xl mb-4" style={{ color: '#FFD700', fontFamily: "'Rye', serif" }}>
             Texas BBQ Delivered to Your Door
           </p>
           <p className="text-lg max-w-3xl mx-auto" style={{ color: '#F8F8F8' }}>

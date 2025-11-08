@@ -77,7 +77,7 @@ const Hero = () => {
           RISE N&apos; SMOKE
         </h1>
 
-        <h2 className="text-h2 text-primary-gradient mb-6 animate-slide-up" style={{ fontFamily: "'Alfa Slab One', serif" }}>
+        <h2 className="text-h2 text-primary-gradient mb-6 animate-slide-up" style={{ fontFamily: "'Rye', serif" }}>
           Pit BBQ: The Rise &amp; Transform Method™
         </h2>
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCartStore } from '@/store/cartStore';
 import SizeSelectionModal from '@/components/menu/SizeSelectionModal';
@@ -569,6 +570,7 @@ const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; exc
 };
 
 export default function MenuPage() {
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
   const [plateModalItem, setPlateModalItem] = useState<MenuItem | null>(null);
@@ -592,6 +594,14 @@ export default function MenuPage() {
     'Desserts',
     'Extras'
   ];
+
+  // Set category from URL parameter
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (category && categories.includes(category)) {
+      setSelectedCategory(category);
+    }
+  }, [searchParams]);
 
   const filteredItems = selectedCategory === 'All'
     ? menuItems

@@ -40,7 +40,7 @@ const SmokeMaster = () => {
             className="text-xl md:text-2xl lg:text-h2 px-4"
             style={{
               color: '#FF6B35',
-              fontFamily: "'Alfa Slab One', serif",
+              fontFamily: "'Rye', serif",
               lineHeight: '1.3'
             }}
           >
@@ -129,7 +129,7 @@ const SmokeMaster = () => {
                 className="text-lg md:text-xl lg:text-2xl font-bold mb-2"
                 style={{
                   color: '#FFD700',
-                  fontFamily: "'Alfa Slab One', serif",
+                  fontFamily: "'Rye', serif",
                   lineHeight: '1.3'
                 }}
               >
@@ -139,7 +139,7 @@ const SmokeMaster = () => {
                 className="text-lg md:text-xl lg:text-2xl font-bold"
                 style={{
                   color: '#FFD700',
-                  fontFamily: "'Alfa Slab One', serif",
+                  fontFamily: "'Rye', serif",
                   lineHeight: '1.3'
                 }}
               >

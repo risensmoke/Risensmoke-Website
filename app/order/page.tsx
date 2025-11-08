@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { ShoppingCart, Clock, Plus, Minus, X, Calendar } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
@@ -597,6 +598,7 @@ const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; exc
 };
 
 export default function OrderPage() {
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
   const [plateModalItem, setPlateModalItem] = useState<MenuItem | null>(null);
@@ -633,6 +635,14 @@ export default function OrderPage() {
     const today = new Date().toISOString().split('T')[0];
     setCheckoutForm(prev => ({ ...prev, pickupDate: today }));
   }, []);
+
+  // Set category from URL parameter
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (category && menuCategories.includes(category)) {
+      setSelectedCategory(category);
+    }
+  }, [searchParams]);
 
   const filteredItems = selectedCategory === 'All'
     ? menuItems
@@ -1014,7 +1024,7 @@ export default function OrderPage() {
                         style={{
                           color: '#FFD700',
                           borderBottom: '2px solid rgba(255, 107, 53, 0.3)',
-                          fontFamily: "'Alfa Slab One', serif"
+                          fontFamily: "'Rye', serif"
                         }}
                       >
                         {category}
@@ -1119,7 +1129,7 @@ export default function OrderPage() {
                     style={{
                       color: '#FFD700',
                       borderBottom: '2px solid rgba(255, 107, 53, 0.3)',
-                      fontFamily: "'Alfa Slab One', serif"
+                      fontFamily: "'Rye', serif"
                     }}
                   >
                     {selectedCategory}
@@ -1225,7 +1235,7 @@ export default function OrderPage() {
                 border: '2px solid rgba(255, 107, 53, 0.3)'
               }}
             >
-              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#FFD700' }}>
+              <h2 className="text-xl sm:text-2xl mb-4" style={{ color: '#FFD700', fontFamily: "'Rye', serif", fontWeight: 400, letterSpacing: '0.5px' }}>
                 Order Summary
               </h2>
 
@@ -1683,7 +1693,7 @@ export default function OrderPage() {
                 className="text-2xl sm:text-3xl font-bold mb-3"
                 style={{
                   color: '#FFD700',
-                  fontFamily: "'Alfa Slab One', serif"
+                  fontFamily: "'Rye', serif"
                 }}
               >
                 Order Confirmed!

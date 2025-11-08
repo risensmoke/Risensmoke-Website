@@ -25,7 +25,7 @@ const config: Config = {
       },
       fontFamily: {
         'primary': ['Rye', 'serif'],
-        'secondary': ['Alfa Slab One', 'serif'],
+        'secondary': ['Rye', 'serif'],
         'body': ['Source Sans Pro', 'Arial', 'sans-serif'],
       },
       fontSize: {
