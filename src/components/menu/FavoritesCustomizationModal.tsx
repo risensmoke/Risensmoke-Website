@@ -124,9 +124,16 @@ export default function FavoritesCustomizationModal({
   );
 
   // Get items that should appear in ADD-ON section (all items NOT auto-selected)
-  const addOnSectionToppings = availableToppings.filter(t =>
+  let addOnSectionToppings = availableToppings.filter(t =>
     !autoSelectedLabels.includes(t.label)
   );
+
+  // For wraparound, only show Cheddar Cheese and Queso
+  if (itemId === 'wraparound') {
+    addOnSectionToppings = addOnSectionToppings.filter(t =>
+      ['Shredded Cheddar Cheese', 'Queso'].includes(t.label)
+    );
+  }
 
   // Reset when modal opens/closes
   useEffect(() => {

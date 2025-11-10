@@ -207,7 +207,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 'jalapeno-sausage',
-    name: 'Jalapeño Sausage',
+    name: 'Jalapeño Cheddar Sausage',
     description: 'Spicy jalapeño sausage - Select weight - price per pound listed',
     price: 19.95,
     category: 'Meats',
@@ -255,8 +255,8 @@ const menuItems: MenuItem[] = [
   {
     id: 'red-pit-burrito',
     name: 'Red Pit Burrito',
-    description: 'Seasoned Potatoes, Jalapeño Sausage, Chopped Brisket, Sauce & Queso',
-    price: 14.95,
+    description: 'Seasoned Potatoes, Jalapeño Cheddar Sausage, Chopped Brisket, Sauce & Queso',
+    price: 7.95,
     category: 'Favorites',
     available: true,
     image: '/Assets/fav-burrito-redpit.jpeg'
@@ -287,6 +287,15 @@ const menuItems: MenuItem[] = [
     category: 'Favorites',
     available: true,
     image: '/Assets/fav-potato-loaded.png'
+  },
+  {
+    id: 'wraparound',
+    name: 'Sausage Wraparound',
+    description: 'Sausage Wraparound with your choice of premium sausage',
+    price: 7.25,
+    category: 'Favorites',
+    available: true,
+    image: '/Assets/extra-wraparound.jpg'
   },
 
   // Family Meals
@@ -424,8 +433,8 @@ const menuItems: MenuItem[] = [
   // Extras
   {
     id: 'sweet-tea',
-    name: 'Sweet Tea',
-    description: 'Southern sweet tea',
+    name: 'Tea',
+    description: 'Assorted variety of southern tea (unsweet, sweet, extra sweet)',
     price: 2.50,
     category: 'Extras',
     available: true,
@@ -434,7 +443,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'soda',
     name: 'Soda',
-    description: 'Coke, Pepsi, Sprite, and more',
+    description: 'Assorted variety of Coca-Cola™, Pepsi™, and Dr Pepper™ products',
     price: 1.50,
     category: 'Extras',
     available: true,
@@ -452,7 +461,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'potato-chips',
     name: 'Potato Chips',
-    description: 'Variety of potato chips',
+    description: 'Assorted variety of Frito Lay™ chips',
     price: 1.35,
     category: 'Extras',
     available: true,
@@ -461,7 +470,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'lil-wrangler-meal',
     name: 'Lil Wrangler Meal',
-    description: 'Chopped beef sandwich or Wraparound, Chips, Cookies, Capri-sun',
+    description: 'Chopped Beef Wraparound, Chips, Cookies, Capri-Sun',
     price: 7.95,
     category: 'Extras',
     available: true,
@@ -475,15 +484,6 @@ const menuItems: MenuItem[] = [
     category: 'Extras',
     available: true,
     image: '/Assets/extra-sausage-stick.jpg'
-  },
-  {
-    id: 'wraparound',
-    name: 'Wraparound',
-    description: 'Wraparound',
-    price: 7.25,
-    category: 'Extras',
-    available: true,
-    image: '/Assets/extra-wraparound.png'
   }
 ];
 
@@ -519,7 +519,7 @@ const meatOptions = [
   { label: 'Pulled Pork', price: 0.00 },
   { label: 'Smoked Ribs', price: 0.00 },
   { label: 'Smoked Chicken', price: 0.00 },
-  { label: 'Jalapeño Sausage', price: 0.00 },
+  { label: 'Jalapeño Cheddar Sausage', price: 0.00 },
   { label: 'Beef Sausage', price: 0.00 },
   { label: 'Hot Link', price: 0.00 }
 ];
@@ -537,7 +537,8 @@ const condimentOptions = [
   { label: 'Sweet & Spicy BBQ Sauce', price: 0.00 },
   { label: 'Pickles', price: 0.00 },
   { label: 'Onions', price: 0.00 },
-  { label: 'Jalapenos', price: 0.00 }
+  { label: 'Jalapenos', price: 0.00 },
+  { label: 'Ketchup', price: 0.00 }
 ];
 
 // Favorites meat options
@@ -545,7 +546,7 @@ const favoritesMeatOptions = [
   { label: 'Chopped Brisket', price: 0.00 },
   { label: 'Pulled Pork', price: 0.00 },
   { label: 'Smoked Chicken', price: 0.00 },
-  { label: 'Jalapeno Sausage', price: 0.00 },
+  { label: 'Jalapeno Cheddar Sausage', price: 0.00 },
   { label: 'Beef Sausage', price: 0.00 },
   { label: 'Hot Link', price: 0.00 }
 ];
@@ -566,7 +567,10 @@ const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; exc
   'trinity-plate': { meatCount: 2, sideCount: 2 },
   'revelation-plate': { meatCount: 3, sideCount: 2 },
   'little-rise': { meatCount: 0, sideCount: 2 },
-  'lotta-rise': { meatCount: 0, sideCount: 2 }
+  'lotta-rise': { meatCount: 0, sideCount: 2 },
+  'small-group': { meatCount: 1, sideCount: 2 },
+  'med-group': { meatCount: 2, sideCount: 2 },
+  'large-group': { meatCount: 3, sideCount: 3 }
 };
 
 function MenuPageContent() {
@@ -614,8 +618,8 @@ function MenuPageContent() {
       return;
     }
 
-    // Show plate customization modal for Blessed Plates
-    if (item.category === 'Blessed Plates' && plateConfigs[item.id]) {
+    // Show plate customization modal for Blessed Plates and Family Meals
+    if ((item.category === 'Blessed Plates' || item.category === 'Family Meals') && plateConfigs[item.id]) {
       setPlateModalItem(item);
       return;
     }
@@ -710,14 +714,11 @@ function MenuPageContent() {
   const handleCondimentSelection = (condiments: { label: string; price: number }[]) => {
     // If we have pending meat weight data, add meat with condiments
     if (pendingMeatData) {
-      const baseMeatPrice = pendingMeatData.item.id === 'brisket-sliced' ? 8.95 : 5.95;
-      const modifierPrice = pendingMeatData.weight.price - baseMeatPrice;
-
       const modifiers = [
         {
           id: `weight-${pendingMeatData.weight.label}`,
           name: pendingMeatData.weight.label,
-          price: modifierPrice,
+          price: 0,
           category: 'Weight'
         },
         ...condiments.map((condiment, idx) => ({
@@ -731,7 +732,7 @@ function MenuPageContent() {
       addItem({
         menuItemId: pendingMeatData.item.id,
         name: pendingMeatData.item.name,
-        basePrice: baseMeatPrice,
+        basePrice: pendingMeatData.weight.price,
         quantity: 1,
         modifiers,
         image: pendingMeatData.item.image
@@ -970,7 +971,13 @@ function MenuPageContent() {
           onClose={() => setFavoritesModalItem(null)}
           itemName={favoritesModalItem.name}
           itemId={favoritesModalItem.id}
-          meatOptions={favoritesMeatOptions}
+          meatOptions={
+            favoritesModalItem.id === 'wraparound'
+              ? favoritesMeatOptions.filter(m =>
+                  ['Hot Link', 'Jalapeno Cheddar Sausage', 'Beef Sausage'].includes(m.label)
+                )
+              : favoritesMeatOptions
+          }
           toppingOptions={favoritesToppingOptions}
           condimentOptions={condimentOptions}
           onComplete={(meat, includedToppings, addOnToppings, condiments) =>
