@@ -537,7 +537,10 @@ const condimentOptions = [
   { label: 'Sweet & Spicy BBQ Sauce', price: 0.00 },
   { label: 'Pickles', price: 0.00 },
   { label: 'Onions', price: 0.00 },
-  { label: 'Jalapenos', price: 0.00 },
+  { label: 'Jalapenos', price: 0.00 }
+];
+
+const ketchupOptions = [
   { label: 'Ketchup', price: 0.00 }
 ];
 
@@ -584,6 +587,10 @@ function MenuPageContent() {
   const [pendingMeatData, setPendingMeatData] = useState<{
     item: MenuItem;
     weight: { label: string; price: number };
+  } | null>(null);
+  const [pendingFriesData, setPendingFriesData] = useState<{
+    item: MenuItem;
+    size: { label: string; price: number };
   } | null>(null);
   const { addItem } = useCartStore();
 
@@ -654,7 +661,19 @@ function MenuPageContent() {
   };
 
   const handleSizeSelection = (item: MenuItem, size: { label: string; price: number }) => {
-    // For sides, the base price is the 4oz price (2.85)
+    // Special handling for French Fries - show ketchup condiment modal
+    if (item.id === 'side-fries') {
+      setPendingFriesData({ item, size });
+      setSizeModalItem(null);
+
+      // Show condiment modal after a brief delay to ensure clean state transition
+      setTimeout(() => {
+        setCondimentModalItem(item);
+      }, 0);
+      return;
+    }
+
+    // For other sides, the base price is the 4oz price (2.85)
     // We add a modifier for the selected size with appropriate price adjustment
     const baseSidePrice = 2.85;
     const modifierPrice = size.price - baseSidePrice;
@@ -712,8 +731,39 @@ function MenuPageContent() {
   };
 
   const handleCondimentSelection = (condiments: { label: string; price: number }[]) => {
+    // If we have pending French Fries data, add fries with size and ketchup
+    if (pendingFriesData) {
+      const baseSidePrice = 2.85;
+      const modifierPrice = pendingFriesData.size.price - baseSidePrice;
+
+      const modifiers = [
+        {
+          id: `size-${pendingFriesData.size.label}`,
+          name: pendingFriesData.size.label,
+          price: modifierPrice,
+          category: 'Size'
+        },
+        ...condiments.map((condiment, idx) => ({
+          id: `condiment-${idx}-${condiment.label}`,
+          name: condiment.label,
+          price: condiment.price,
+          category: 'Condiment'
+        }))
+      ];
+
+      addItem({
+        menuItemId: pendingFriesData.item.id,
+        name: pendingFriesData.item.name,
+        basePrice: baseSidePrice,
+        quantity: 1,
+        modifiers,
+        image: pendingFriesData.item.image
+      });
+
+      setPendingFriesData(null);
+    }
     // If we have pending meat weight data, add meat with condiments
-    if (pendingMeatData) {
+    else if (pendingMeatData) {
       const modifiers = [
         {
           id: `weight-${pendingMeatData.weight.label}`,
@@ -957,9 +1007,10 @@ function MenuPageContent() {
           onClose={() => {
             setCondimentModalItem(null);
             setPendingMeatData(null);
+            setPendingFriesData(null);
           }}
           itemName={condimentModalItem.name}
-          condimentOptions={condimentOptions}
+          condimentOptions={condimentModalItem.id === 'side-fries' ? ketchupOptions : condimentOptions}
           onComplete={(condiments) => handleCondimentSelection(condiments)}
         />
       )}
