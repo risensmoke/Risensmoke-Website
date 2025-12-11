@@ -78,7 +78,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'revelation-plate',
     name: 'Revelation Plate',
-    description: 'The truth about real smoke revealed',
+    description: 'Three meats; the truth about real smoke revealed',
     price: 18.45,
     category: 'Blessed Plates',
     available: true,
@@ -87,7 +87,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'little-rise',
     name: "Rise N Smoke A Little",
-    description: 'The Signature Rise N Smoke Lil Rib Plate',
+    description: 'Two Ribs; The Signature Rise N Smoke Plate',
     price: 13.00,
     category: 'Blessed Plates',
     available: true,
@@ -96,7 +96,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'lotta-rise',
     name: "Rise N Smoke A Lot",
-    description: 'The Signature Rise N Smoke Rib Plate',
+    description: 'Three Ribs; The Signature Rise N Smoke Plate',
     price: 18.45,
     category: 'Blessed Plates',
     available: true,
@@ -190,7 +190,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'brisket-sliced',
     name: 'Sliced Brisket',
-    description: 'Premium smoked sliced brisket - Select weight - price per pound listed',
+    description: 'Premium smoked sliced brisket',
     price: 25.45,
     category: 'Meats',
     available: true,
@@ -199,7 +199,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'brisket-chopped',
     name: 'Chopped Brisket',
-    description: 'Premium smoked chopped brisket - Select weight - price per pound listed',
+    description: 'Premium smoked chopped brisket',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -208,7 +208,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'pulled-pork',
     name: 'Pulled Pork',
-    description: 'Tender pulled pork shoulder - Select weight - price per pound listed',
+    description: 'Tender pulled pork shoulder',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -217,7 +217,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'smoked-ribs',
     name: 'Smoked Ribs',
-    description: 'Fall-off-the-bone pork ribs - Select weight - price per pound listed',
+    description: 'Fall-off-the-bone pork ribs',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -226,7 +226,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'smoked-chicken',
     name: 'Smoked Chicken',
-    description: 'Tender smoked chicken - Select weight - price per pound listed',
+    description: 'Tender smoked chicken',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -235,7 +235,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'jalapeno-sausage',
     name: 'Jalapeño Cheddar Sausage',
-    description: 'Spicy jalapeño sausage - Select weight - price per pound listed',
+    description: 'Spicy jalapeño sausage',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -244,7 +244,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'beef-sausage',
     name: 'Beef Sausage',
-    description: 'Premium beef sausage - Select weight - price per pound listed',
+    description: 'Premium beef sausage',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -253,7 +253,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'hot-link',
     name: 'Hot Link',
-    description: 'Spicy hot link sausage - Select weight - price per pound listed',
+    description: 'Spicy hot link sausage',
     price: 19.95,
     category: 'Meats',
     available: true,
@@ -292,7 +292,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'baked-potato-plain',
     name: 'Baked Potato Plain',
-    description: 'Smoked Baked Potato',
+    description: 'Plain Baked Potato',
     price: 7.50,
     category: 'Favorites',
     available: true,
@@ -359,7 +359,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'mamas-smoky-mac',
     name: "Mamas Smoky Mac & Cheese",
-    description: 'Creamy comfort blessed by the kitchen - Choose from S, M, or L',
+    description: 'Creamy comfort blessed by the kitchen',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -368,7 +368,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'blessed-potato-salad',
     name: 'Blessed Potato Salad',
-    description: 'Creamy potatoes touched by grace - Choose from S, M, or L',
+    description: 'Creamy potatoes touched by grace',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -377,7 +377,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'hallelujah-baked-beans',
     name: 'Hallelujah Baked Beans',
-    description: 'Baked sweet and smoky, worth the wait - Choose from S, M, or L',
+    description: 'Baked sweet and smoky, worth the wait',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -386,7 +386,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'divine-green-beans',
     name: 'Divine Green Beans',
-    description: 'Divinely seasoned with love - Choose from S, M, or L',
+    description: 'Divinely seasoned with love',
     price: 2.85,
     category: 'Sides',
     available: true,
@@ -395,7 +395,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'salvation-cole-slaw',
     name: 'Salvation Cole Slaw',
-    description: 'Fresh salvation in every bite - Choose from S, M, or L',
+    description: 'Fresh salvation in every bite',
     price: 2.85,
     category: 'Sides',
     available: true,
