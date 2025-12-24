@@ -1,14 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CartButton from '@/components/cart/CartButton';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const { data: session, status } = useSession();
+
+  // Debug session loading
+  useEffect(() => {
+    console.log('[Session] Status:', status, 'User:', session?.user?.email || 'none', 'Time:', new Date().toLocaleTimeString());
+  }, [status, session]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +25,17 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close user menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const navItems = [
@@ -60,6 +80,80 @@ const Header = () => {
           {/* Right Side Actions */}
           <div className="flex items-center" style={{ gap: '0.75rem' }}>
             <CartButton />
+
+            {/* User Menu / Sign In */}
+            <div className="hidden md:block relative" ref={userMenuRef}>
+              {session?.user ? (
+                <>
+                  <button
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+                    style={{ backgroundColor: isUserMenuOpen ? '#2A2A2A' : 'transparent' }}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: '#FF6B35' }}
+                    >
+                      <span className="text-white font-semibold text-sm">
+                        {session.user.name?.charAt(0).toUpperCase() || 'U'}
+                      </span>
+                    </div>
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`}
+                      style={{ color: '#888' }}
+                    />
+                  </button>
+                  {isUserMenuOpen && (
+                    <div
+                      className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg overflow-hidden"
+                      style={{ backgroundColor: '#2A2A2A', border: '1px solid #444' }}
+                    >
+                      <div className="px-4 py-3" style={{ borderBottom: '1px solid #444' }}>
+                        <p className="text-sm font-medium" style={{ color: '#F8F8F8' }}>
+                          {session.user.name}
+                        </p>
+                        <p className="text-xs truncate" style={{ color: '#888' }}>
+                          {session.user.email}
+                        </p>
+                      </div>
+                      <button
+                        onClick={async () => {
+                          console.log('[SignOut] Button clicked at:', new Date().toISOString());
+                          setIsUserMenuOpen(false);
+                          try {
+                            // Use redirect: false to prevent NextAuth from using NEXTAUTH_URL
+                            await signOut({ redirect: false });
+                            // Manually redirect to current origin
+                            window.location.href = window.location.origin;
+                          } catch (error) {
+                            console.error('[SignOut] Error:', error);
+                          }
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-black/20 transition-colors"
+                        style={{ color: '#F8F8F8' }}
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105"
+                  style={{
+                    color: '#F8F8F8',
+                    backgroundColor: 'rgba(255, 107, 53, 0.15)',
+                    border: '1px solid rgba(255, 107, 53, 0.4)'
+                  }}
+                >
+                  <User className="w-5 h-5" style={{ color: '#FF6B35' }} />
+                  <span className="font-medium">Sign In</span>
+                </Link>
+              )}
+            </div>
+
             <Link href="/order" className="hidden md:block btn-primary">
               Order Online
             </Link>
@@ -133,6 +227,59 @@ const Header = () => {
             >
               Order Online
             </Link>
+
+            {/* Mobile Auth Section */}
+            <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255, 107, 53, 0.2)' }}>
+              {session?.user ? (
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: '#FF6B35' }}
+                    >
+                      <span className="text-white font-semibold">
+                        {session.user.name?.charAt(0).toUpperCase() || 'U'}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-medium" style={{ color: '#F8F8F8' }}>
+                        {session.user.name}
+                      </p>
+                      <p className="text-sm" style={{ color: '#888' }}>
+                        {session.user.email}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      console.log('[SignOut Mobile] Button clicked');
+                      setIsMobileMenuOpen(false);
+                      try {
+                        await signOut({ redirect: false });
+                        window.location.href = window.location.origin;
+                      } catch (error) {
+                        console.error('[SignOut Mobile] Error:', error);
+                      }
+                    }}
+                    className="flex items-center gap-2 w-full py-2"
+                    style={{ color: '#F8F8F8' }}
+                  >
+                    <LogOut className="w-5 h-5" />
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2"
+                  style={{ color: '#F8F8F8' }}
+                >
+                  <User className="w-5 h-5" />
+                  Sign In / Create Account
+                </Link>
+              )}
+            </div>
           </div>
         )}
       </div>

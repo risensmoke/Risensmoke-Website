@@ -1,0 +1,33 @@
+Developer App:
+userid:  rjohnson@esposure.gg
+password:  Smoke@Master401!
+passcode:  3923
+PAKMS KEY:  89d46b8215248c65ee79c8e70c93ccf7
+API KEY:  9d964a3a-0909-682a-ccee-20b84b485bdd
+
+REST Configuration
+Site URL:  https://risensmoke.netlify.app/
+APP SECRET:  e7b238ef-9c77-c403-bc1d-fb40c6f670e8
+Default OAuth Response:  Token
+
+Clover
+RISE N SMOKE PIT
+401 Abbott Ave
+Hillsboro
+2542216247
+Clover Station Duo (2nd Generation)
+ID:  C055UQ30220607
+MID:  534701149748303
+Clover ID:  J5FJXN5RQ87N1
+This Device:  Clover C505 (C055UQ30220607)
+Software Version:  10 (5051061)
+SIM Serial Number:  N/A
+
+Printer:
+Star SP700
+Connection.  192.168.0.3
+Label:  KITCHEN
+
+SANDBOX APP
+APP ID:  E2YM5Z3PPYYJP
+APP SECRET:  e7b238ef-9c77-c403-bc1d-fb40c6f670e8

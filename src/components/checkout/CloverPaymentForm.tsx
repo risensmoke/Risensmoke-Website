@@ -1,0 +1,438 @@
+'use client';
+
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { CreditCard, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import type { CloverInstance, CloverElement, CloverElementEvent } from '@/types/clover-sdk';
+
+interface CloverPaymentFormProps {
+  amount: number;
+  orderId: string;
+  onSuccess: (result: PaymentResult) => void;
+  onError: (error: string) => void;
+  onCancel: () => void;
+}
+
+interface PaymentResult {
+  paymentId: string;
+  cloverOrderId: string;
+  last4: string;
+  brand: string;
+}
+
+const CLOVER_SDK_URL = process.env.NEXT_PUBLIC_CLOVER_SDK_URL;
+const CLOVER_API_KEY = process.env.NEXT_PUBLIC_CLOVER_API_KEY;
+
+export default function CloverPaymentForm({
+  amount,
+  orderId,
+  onSuccess,
+  onError,
+  onCancel,
+}: CloverPaymentFormProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [cardComplete, setCardComplete] = useState({
+    number: false,
+    date: false,
+    cvv: false,
+    zip: false,
+  });
+
+  const cloverRef = useRef<CloverInstance | null>(null);
+  const elementsRef = useRef<{
+    cardNumber?: CloverElement;
+    cardDate?: CloverElement;
+    cardCvv?: CloverElement;
+    cardPostalCode?: CloverElement;
+  }>({});
+  const mountedRef = useRef(false);
+
+  // Load Clover SDK
+  useEffect(() => {
+    if (!CLOVER_SDK_URL || !CLOVER_API_KEY) {
+      setError('Payment configuration is missing. Please contact support.');
+      setIsLoading(false);
+      return;
+    }
+
+    // Check if script already loaded
+    if (window.Clover) {
+      initializeClover();
+      return;
+    }
+
+    // Load the SDK script
+    const script = document.createElement('script');
+    script.src = CLOVER_SDK_URL;
+    script.async = true;
+    script.onload = initializeClover;
+    script.onerror = () => {
+      setError('Failed to load payment system. Please try again.');
+      setIsLoading(false);
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup elements on unmount
+      unmountElements();
+    };
+  }, []);
+
+  const initializeClover = useCallback(() => {
+    if (!CLOVER_API_KEY || !window.Clover || mountedRef.current) return;
+
+    try {
+      cloverRef.current = new window.Clover(CLOVER_API_KEY);
+      const elements = cloverRef.current.elements();
+
+      // Style configuration for the iframes
+      const styles = {
+        input: {
+          fontSize: '16px',
+          fontFamily: 'inherit',
+          color: '#F8F8F8',
+          backgroundColor: 'transparent',
+        },
+        'input::placeholder': {
+          color: '#888',
+        },
+      };
+
+      // Create and mount elements
+      elementsRef.current.cardNumber = elements.create('CARD_NUMBER', { styles });
+      elementsRef.current.cardDate = elements.create('CARD_DATE', { styles });
+      elementsRef.current.cardCvv = elements.create('CARD_CVV', { styles });
+      elementsRef.current.cardPostalCode = elements.create('CARD_POSTAL_CODE', { styles });
+
+      // Mount elements
+      elementsRef.current.cardNumber?.mount('#card-number');
+      elementsRef.current.cardDate?.mount('#card-date');
+      elementsRef.current.cardCvv?.mount('#card-cvv');
+      elementsRef.current.cardPostalCode?.mount('#card-postal-code');
+
+      // Add event listeners for validation
+      // Clover SDK event structure: { CARD_NUMBER: { error?: string, touched: boolean, info: string }, ... }
+      // Field is complete when touched=true AND error is undefined/empty
+      type CloverFieldEvent = { error?: string; touched?: boolean; info?: string };
+
+      const handleCardNumberChange = (event: CloverElementEvent) => {
+        const fieldEvent = (event as Record<string, CloverFieldEvent>).CARD_NUMBER;
+        const isComplete = fieldEvent?.touched && !fieldEvent?.error;
+        setCardComplete((prev) => ({ ...prev, number: !!isComplete }));
+      };
+
+      const handleCardDateChange = (event: CloverElementEvent) => {
+        const fieldEvent = (event as Record<string, CloverFieldEvent>).CARD_DATE;
+        const isComplete = fieldEvent?.touched && !fieldEvent?.error;
+        setCardComplete((prev) => ({ ...prev, date: !!isComplete }));
+      };
+
+      const handleCardCvvChange = (event: CloverElementEvent) => {
+        const fieldEvent = (event as Record<string, CloverFieldEvent>).CARD_CVV;
+        const isComplete = fieldEvent?.touched && !fieldEvent?.error;
+        setCardComplete((prev) => ({ ...prev, cvv: !!isComplete }));
+      };
+
+      const handleCardPostalCodeChange = (event: CloverElementEvent) => {
+        const fieldEvent = (event as Record<string, CloverFieldEvent>).CARD_POSTAL_CODE;
+        const isComplete = fieldEvent?.touched && !fieldEvent?.error;
+        setCardComplete((prev) => ({ ...prev, zip: !!isComplete }));
+      };
+
+      elementsRef.current.cardNumber?.addEventListener('change', handleCardNumberChange);
+      elementsRef.current.cardDate?.addEventListener('change', handleCardDateChange);
+      elementsRef.current.cardCvv?.addEventListener('change', handleCardCvvChange);
+      elementsRef.current.cardPostalCode?.addEventListener('change', handleCardPostalCodeChange);
+
+      mountedRef.current = true;
+      setIsLoading(false);
+    } catch (err) {
+      console.error('Error initializing Clover:', err);
+      setError('Failed to initialize payment form');
+      setIsLoading(false);
+    }
+  }, []);
+
+  const unmountElements = () => {
+    try {
+      elementsRef.current.cardNumber?.unmount();
+      elementsRef.current.cardDate?.unmount();
+      elementsRef.current.cardCvv?.unmount();
+      elementsRef.current.cardPostalCode?.unmount();
+    } catch (err) {
+      // Ignore unmount errors
+    }
+    mountedRef.current = false;
+  };
+
+  const isFormComplete = cardComplete.number && cardComplete.date && cardComplete.cvv && cardComplete.zip;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!cloverRef.current || !isFormComplete) {
+      setError('Please fill in all card details');
+      return;
+    }
+
+    setIsProcessing(true);
+    setError(null);
+
+    try {
+      // Create token from card data
+      const tokenResult = await cloverRef.current.createToken();
+
+      if (tokenResult.error) {
+        throw new Error(tokenResult.error.message);
+      }
+
+      if (!tokenResult.token) {
+        throw new Error('Failed to tokenize card');
+      }
+
+      // Send token to server for processing
+      const response = await fetch('/api/clover/payments/charge', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          localOrderId: orderId,
+          token: tokenResult.token,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || data.error || 'Payment failed');
+      }
+
+      // Payment successful
+      onSuccess({
+        paymentId: data.payment.id,
+        cloverOrderId: data.cloverOrderId,
+        last4: data.payment.last4,
+        brand: data.payment.brand,
+      });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Payment failed';
+      setError(errorMessage);
+      onError(errorMessage);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  return (
+    <div className="w-full">
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-4">
+        <CreditCard className="w-5 h-5" style={{ color: '#FFD700' }} />
+        <h3 className="text-lg font-bold" style={{ color: '#FFD700' }}>
+          Payment Details
+        </h3>
+      </div>
+
+      {/* Security Badge */}
+      <div
+        className="flex items-center gap-2 mb-4 p-2 rounded"
+        style={{ backgroundColor: 'rgba(255, 215, 0, 0.1)' }}
+      >
+        <Lock className="w-4 h-4" style={{ color: '#FFD700' }} />
+        <span className="text-xs" style={{ color: '#F8F8F8' }}>
+          Your payment information is securely processed by Clover
+        </span>
+      </div>
+
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#FF6B35' }} />
+          <span className="ml-2" style={{ color: '#F8F8F8' }}>
+            Loading payment form...
+          </span>
+        </div>
+      )}
+
+      {/* Error Display */}
+      {error && (
+        <div
+          className="flex items-center gap-2 mb-4 p-3 rounded"
+          style={{ backgroundColor: 'rgba(211, 47, 47, 0.2)', border: '1px solid #D32F2F' }}
+        >
+          <AlertCircle className="w-5 h-5 flex-shrink-0" style={{ color: '#D32F2F' }} />
+          <span className="text-sm" style={{ color: '#F8F8F8' }}>
+            {error}
+          </span>
+        </div>
+      )}
+
+      {/* Payment Form */}
+      <form onSubmit={handleSubmit} className={isLoading ? 'hidden' : ''}>
+        {/* Accepted Card Types */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+            Accepted Cards
+          </label>
+          <div className="flex flex-wrap gap-2">
+            <div
+              className="px-3 py-1 rounded text-xs font-bold"
+              style={{ backgroundColor: '#1A1F71', color: '#FFFFFF' }}
+            >
+              VISA
+            </div>
+            <div
+              className="px-3 py-1 rounded text-xs font-bold"
+              style={{ backgroundColor: '#EB001B', color: '#FFFFFF' }}
+            >
+              Mastercard
+            </div>
+            <div
+              className="px-3 py-1 rounded text-xs font-bold"
+              style={{ backgroundColor: '#FF6000', color: '#FFFFFF' }}
+            >
+              Discover
+            </div>
+            <div
+              className="px-3 py-1 rounded text-xs font-bold"
+              style={{ backgroundColor: '#006FCF', color: '#FFFFFF' }}
+            >
+              AMEX
+            </div>
+          </div>
+        </div>
+
+        {/* Card Number */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+            Card Number
+          </label>
+          <div
+            id="card-number"
+            className="w-full px-3 py-3 rounded h-12"
+            style={{
+              backgroundColor: '#1C1C1C',
+              border: cardComplete.number
+                ? '1px solid #4CAF50'
+                : '1px solid rgba(255, 107, 53, 0.3)',
+            }}
+          />
+        </div>
+
+        {/* Expiry and CVV */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+              Expiration Date
+            </label>
+            <div
+              id="card-date"
+              className="w-full px-3 py-3 rounded h-12"
+              style={{
+                backgroundColor: '#1C1C1C',
+                border: cardComplete.date
+                  ? '1px solid #4CAF50'
+                  : '1px solid rgba(255, 107, 53, 0.3)',
+              }}
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+              CVV
+            </label>
+            <div
+              id="card-cvv"
+              className="w-full px-3 py-3 rounded h-12"
+              style={{
+                backgroundColor: '#1C1C1C',
+                border: cardComplete.cvv
+                  ? '1px solid #4CAF50'
+                  : '1px solid rgba(255, 107, 53, 0.3)',
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Postal Code */}
+        <div className="mb-6">
+          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+            ZIP Code
+          </label>
+          <div
+            id="card-postal-code"
+            className="w-full px-3 py-3 rounded h-12"
+            style={{
+              backgroundColor: '#1C1C1C',
+              border: cardComplete.zip
+                ? '1px solid #4CAF50'
+                : '1px solid rgba(255, 107, 53, 0.3)',
+            }}
+          />
+        </div>
+
+        {/* Amount Display */}
+        <div
+          className="mb-6 p-4 rounded text-center"
+          style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)', border: '1px solid #FF6B35' }}
+        >
+          <span className="text-sm" style={{ color: '#F8F8F8' }}>
+            Order Amount
+          </span>
+          <div className="text-2xl font-bold" style={{ color: '#FFD700' }}>
+            ${amount.toFixed(2)}
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={isProcessing}
+            className="flex-1 py-3 rounded-lg font-semibold transition-opacity hover:opacity-80"
+            style={{
+              backgroundColor: 'rgba(100, 100, 100, 0.5)',
+              color: '#F8F8F8',
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={isProcessing || !isFormComplete}
+            className="flex-1 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-opacity"
+            style={{
+              background:
+                isProcessing || !isFormComplete
+                  ? 'rgba(100, 100, 100, 0.5)'
+                  : 'linear-gradient(135deg, #FF6B35, #D32F2F)',
+              color: '#F8F8F8',
+              cursor: isProcessing || !isFormComplete ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {isProcessing ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              <>
+                <Lock className="w-4 h-4" />
+                Pay ${amount.toFixed(2)}
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Trust Indicators */}
+        <div className="mt-4 text-center">
+          <p className="text-xs" style={{ color: '#888' }}>
+            Payments are securely processed by Clover. Your card details are never stored on our servers.
+          </p>
+        </div>
+      </form>
+    </div>
+  );
+}

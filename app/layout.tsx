@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartModal from "@/components/cart/CartModal";
+import SessionProvider from "@/components/providers/SessionProvider";
 
 export const metadata: Metadata = {
   title: "Rise N' Smoke - Real Smoke. Real Deep. Real Good.",
@@ -39,12 +40,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="custom-scrollbar flex flex-col min-h-screen" style={{ fontFamily: "'Source Sans Pro', Arial, sans-serif", color: "#F8F8F8", backgroundColor: "#1C1C1C" }}>
-        <Header />
-        <CartModal />
-        <main className="pt-20 flex-1">
-          {children}
-        </main>
-        <Footer />
+        <SessionProvider>
+          <Header />
+          <CartModal />
+          <main className="pt-20 flex-1">
+            {children}
+          </main>
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

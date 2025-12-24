@@ -5,6 +5,7 @@ import { calculateShippingCost } from '@/lib/shipping';
 interface CartItem {
   id: string;
   menuItemId: string;
+  cloverItemId?: string;
   name: string;
   basePrice: number;
   quantity: number;
@@ -16,6 +17,7 @@ interface CartItem {
 
 interface CartModifier {
   id: string;
+  cloverModId?: string;
   name: string;
   price: number;
   category: string;

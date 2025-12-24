@@ -3,12 +3,15 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { ShoppingCart, Clock, Plus, Minus, X, Calendar } from 'lucide-react';
+import Link from 'next/link';
+import { ShoppingCart, Clock, Plus, Minus, X, Calendar, User } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
+import { useSession } from 'next-auth/react';
 import SizeSelectionModal from '@/components/menu/SizeSelectionModal';
 import PlateCustomizationModal from '@/components/menu/PlateCustomizationModal';
 import CondimentSelectionModal from '@/components/menu/CondimentSelectionModal';
 import FavoritesCustomizationModal from '@/components/menu/FavoritesCustomizationModal';
+import CloverPaymentForm from '@/components/checkout/CloverPaymentForm';
 
 interface MenuItem {
   id: string;
@@ -603,6 +606,7 @@ const plateConfigs: { [key: string]: { meatCount: number; sideCount: number; exc
 
 function OrderPageContent() {
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sizeModalItem, setSizeModalItem] = useState<MenuItem | null>(null);
   const [plateModalItem, setPlateModalItem] = useState<MenuItem | null>(null);
@@ -615,6 +619,9 @@ function OrderPageContent() {
   } | null>(null);
   const [itemQuantities, setItemQuantities] = useState<{ [key: string]: number }>({});
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>({
@@ -640,6 +647,24 @@ function OrderPageContent() {
     setCheckoutForm(prev => ({ ...prev, pickupDate: today }));
   }, []);
 
+  // Pre-fill form with session data when user is signed in
+  useEffect(() => {
+    if (session?.user) {
+      const nameParts = session.user.name?.split(' ') || [];
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      const phone = (session.user as { phone?: string | null }).phone || '';
+
+      setCheckoutForm(prev => ({
+        ...prev,
+        firstName: prev.firstName || firstName,
+        lastName: prev.lastName || lastName,
+        email: prev.email || session.user?.email || '',
+        phone: prev.phone || phone,
+      }));
+    }
+  }, [session]);
+
   // Set category from URL parameter
   useEffect(() => {
     const category = searchParams.get('category');
@@ -647,6 +672,33 @@ function OrderPageContent() {
       setSelectedCategory(category);
     }
   }, [searchParams]);
+
+  // Auto-open checkout modal if returning from login
+  useEffect(() => {
+    const shouldOpenCheckout = searchParams.get('checkout');
+    if (shouldOpenCheckout === 'true' && items.length > 0) {
+      // Restore checkout form from sessionStorage
+      const savedForm = sessionStorage.getItem('checkoutForm');
+      if (savedForm) {
+        try {
+          const parsed = JSON.parse(savedForm);
+          setCheckoutForm(prev => ({
+            ...prev,
+            pickupDate: parsed.pickupDate || prev.pickupDate,
+            pickupTime: parsed.pickupTime || prev.pickupTime,
+            specialInstructions: parsed.specialInstructions || prev.specialInstructions,
+          }));
+          sessionStorage.removeItem('checkoutForm');
+          console.log('[Checkout] Restored form from sessionStorage:', parsed);
+        } catch (e) {
+          console.error('[Checkout] Failed to restore form:', e);
+        }
+      }
+      setShowCheckout(true);
+      // Clean up URL without reload
+      window.history.replaceState({}, '', '/order');
+    }
+  }, [searchParams, items.length]);
 
   const filteredItems = selectedCategory === 'All'
     ? menuItems
@@ -916,29 +968,104 @@ function OrderPageContent() {
     }
 
     setFormErrors(errors);
+    console.log('[Checkout] Validation errors:', errors);
     return Object.keys(errors).length === 0;
   };
 
-  const handleCheckoutSubmit = () => {
-    if (!validateForm()) return;
+  const handleCheckoutSubmit = async () => {
+    console.log('[Checkout] Submit button clicked');
+    console.log('[Checkout] Form data:', checkoutForm);
+    console.log('[Checkout] Cart items:', items);
+    console.log('[Checkout] Pickup date:', checkoutForm.pickupDate);
+    console.log('[Checkout] Pickup time:', checkoutForm.pickupTime);
 
-    // Generate order number
-    const orderNum = 'RSB' + Date.now().toString().slice(-6);
-    setOrderNumber(orderNum);
+    if (!validateForm()) {
+      console.log('[Checkout] Form validation failed - check errors above');
+      return;
+    }
+
+    console.log('[Checkout] Form validation passed, creating order...');
+    setPaymentProcessing(true);
+
+    try {
+      // Create local order first
+      const orderData = {
+        customer: {
+          firstName: checkoutForm.firstName,
+          lastName: checkoutForm.lastName,
+          email: checkoutForm.email,
+          phone: checkoutForm.phone.replace(/\D/g, ''),
+        },
+        pickupDate: checkoutForm.pickupDate,
+        pickupTime: checkoutForm.pickupTime,
+        specialInstructions: checkoutForm.specialInstructions || undefined,
+        items: items.map(item => ({
+          menuItemId: item.menuItemId,
+          name: item.name,
+          basePrice: item.basePrice,
+          quantity: item.quantity,
+          modifiers: item.modifiers,
+          specialInstructions: item.specialInstructions,
+          totalPrice: item.totalPrice,
+        })),
+        subtotal,
+        tax,
+        total,
+      };
+
+      console.log('[Checkout] Sending order data:', orderData);
+      console.time('[Checkout] API call duration');
+
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+      });
+
+      console.timeEnd('[Checkout] API call duration');
+      console.log('[Checkout] Response status:', response.status);
+
+      const result = await response.json();
+      console.log('[Checkout] Response body:', result);
+
+      if (!response.ok) {
+        throw new Error(result.error || result.message || 'Failed to create order');
+      }
+
+      console.log('[Checkout] Order created successfully:', result.order);
+
+      // Store order info and show payment modal
+      setCurrentOrderId(result.order.id);
+      setOrderNumber(result.order.orderNumber);
+      setShowCheckout(false);
+      setShowPaymentModal(true);
+    } catch (error) {
+      console.error('[Checkout] Order creation failed:', error);
+      alert(error instanceof Error ? error.message : 'Failed to create order. Please try again.');
+    } finally {
+      setPaymentProcessing(false);
+    }
+  };
+
+  const handlePaymentSuccess = (result: { paymentId: string; cloverOrderId: string; last4: string; brand: string }) => {
+    console.log('Payment successful:', result);
+    setShowPaymentModal(false);
     setOrderConfirmed(true);
 
-    // In production, this would send order to backend
-    console.log('Order submitted:', {
-      orderNumber: orderNum,
-      customer: checkoutForm,
-      items: items,
-      total: total
-    });
-
-    // Clear cart after successful order
+    // Clear cart after successful payment
     setTimeout(() => {
       clearCart();
     }, 2000);
+  };
+
+  const handlePaymentError = (error: string) => {
+    console.error('Payment failed:', error);
+    // Keep payment modal open so user can retry
+  };
+
+  const handlePaymentCancel = () => {
+    setShowPaymentModal(false);
+    // Order is already created, but unpaid - could show a message about this
   };
 
   const handleInputChange = (field: keyof CheckoutForm, value: string) => {
@@ -949,11 +1076,51 @@ function OrderPageContent() {
     }
   };
 
-  // Generate time slots for pickup
+  // Restaurant hours: Tuesday-Saturday 11 AM - 6 PM (Closed Sunday & Monday)
+  const OPENING_HOUR = 11;
+  const CLOSING_HOUR = 18; // 6 PM
+  const PREP_BUFFER_MINUTES = 30; // 30 min prep time buffer
+  const CLOSED_DAYS = [0, 1]; // Sunday = 0, Monday = 1
+
+  // Check if a date is a closed day
+  const isClosedDay = (dateStr: string) => {
+    const date = new Date(dateStr + 'T12:00:00'); // Use noon to avoid timezone issues
+    return CLOSED_DAYS.includes(date.getDay());
+  };
+
+  // Generate time slots for pickup (filters out past times if today is selected)
   const generateTimeSlots = () => {
-    const slots = [];
-    for (let hour = 11; hour <= 20; hour++) {
+    const slots: { value: string; display: string }[] = [];
+    const now = new Date();
+    const selectedDate = checkoutForm.pickupDate || new Date().toISOString().split('T')[0];
+    const todayStr = now.toISOString().split('T')[0];
+    const isToday = selectedDate === todayStr;
+
+    // Debug logging
+    console.log('[TimeSlots] Current time:', now.toLocaleString());
+    console.log('[TimeSlots] Selected date:', selectedDate, 'Is today:', isToday);
+    console.log('[TimeSlots] Day of week:', new Date(selectedDate + 'T12:00:00').getDay());
+
+    // Return empty if closed day
+    if (isClosedDay(selectedDate)) {
+      console.log('[TimeSlots] Closed day - no slots');
+      return slots;
+    }
+
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    for (let hour = OPENING_HOUR; hour < CLOSING_HOUR; hour++) {
       for (let minute = 0; minute < 60; minute += 30) {
+        // Skip past times if today is selected (with prep buffer)
+        if (isToday) {
+          const slotMinutes = hour * 60 + minute;
+          const nowMinutes = currentHour * 60 + currentMinute + PREP_BUFFER_MINUTES;
+          if (slotMinutes < nowMinutes) {
+            continue;
+          }
+        }
+
         const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
         const display = new Date(`2000-01-01T${time}`).toLocaleTimeString('en-US', {
           hour: 'numeric',
@@ -963,6 +1130,8 @@ function OrderPageContent() {
         slots.push({ value: time, display });
       }
     }
+
+    console.log('[TimeSlots] Generated slots:', slots.length);
     return slots;
   };
 
@@ -1286,23 +1455,50 @@ function OrderPageContent() {
                     color: '#F8F8F8'
                   }}
                 />
-                <select
-                  value={checkoutForm.pickupTime}
-                  onChange={(e) => handleInputChange('pickupTime', e.target.value)}
-                  className="w-full px-3 py-2 rounded"
-                  style={{
-                    backgroundColor: 'rgba(30, 30, 30, 0.8)',
-                    border: '1px solid rgba(255, 107, 53, 0.3)',
-                    color: '#F8F8F8'
-                  }}
-                >
-                  <option value="">Select pickup time</option>
-                  {generateTimeSlots().map(slot => (
-                    <option key={slot.value} value={slot.display}>
-                      {slot.display}
-                    </option>
-                  ))}
-                </select>
+                {(() => {
+                  const slots = generateTimeSlots();
+                  const selectedDateObj = new Date(checkoutForm.pickupDate + 'T12:00:00');
+                  const dayName = selectedDateObj.toLocaleDateString('en-US', { weekday: 'long' });
+                  const isClosed = isClosedDay(checkoutForm.pickupDate);
+
+                  if (isClosed) {
+                    return (
+                      <div className="p-3 rounded text-center" style={{ backgroundColor: 'rgba(211, 47, 47, 0.2)', border: '1px solid #D32F2F' }}>
+                        <p style={{ color: '#F8F8F8' }}>Closed on {dayName}s</p>
+                        <p className="text-sm mt-1" style={{ color: '#888' }}>Open Tuesday - Saturday, 11 AM - 6 PM</p>
+                      </div>
+                    );
+                  }
+
+                  if (slots.length === 0) {
+                    return (
+                      <div className="p-3 rounded text-center" style={{ backgroundColor: 'rgba(255, 193, 7, 0.2)', border: '1px solid #FFC107' }}>
+                        <p style={{ color: '#F8F8F8' }}>No pickup times available for today</p>
+                        <p className="text-sm mt-1" style={{ color: '#888' }}>Please select a future date</p>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <select
+                      value={checkoutForm.pickupTime}
+                      onChange={(e) => handleInputChange('pickupTime', e.target.value)}
+                      className="w-full px-3 py-2 rounded"
+                      style={{
+                        backgroundColor: 'rgba(30, 30, 30, 0.8)',
+                        border: '1px solid rgba(255, 107, 53, 0.3)',
+                        color: '#F8F8F8'
+                      }}
+                    >
+                      <option value="">Select pickup time</option>
+                      {slots.map(slot => (
+                        <option key={slot.value} value={slot.display}>
+                          {slot.display}
+                        </option>
+                      ))}
+                    </select>
+                  );
+                })()}
               </div>
 
               {/* Special Instructions */}
@@ -1394,6 +1590,54 @@ function OrderPageContent() {
                   <X className="w-6 h-6" />
                 </button>
               </div>
+
+              {/* Signed In User Badge */}
+              {session?.user && (
+                <div
+                  className="flex items-center gap-3 p-3 rounded-lg mb-4"
+                  style={{ backgroundColor: 'rgba(76, 175, 80, 0.15)', border: '1px solid rgba(76, 175, 80, 0.4)' }}
+                >
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: '#FF6B35' }}
+                  >
+                    <span className="text-white font-semibold">
+                      {session.user.name?.charAt(0).toUpperCase() || 'U'}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-semibold" style={{ color: '#4CAF50' }}>
+                      Signed in as {session.user.name}
+                    </p>
+                    <p className="text-sm" style={{ color: '#888' }}>
+                      {session.user.email}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Login prompt for guests */}
+              {!session?.user && (
+                <div
+                  className="flex items-center justify-between p-3 rounded-lg mb-4"
+                  style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)', border: '1px solid rgba(255, 107, 53, 0.3)' }}
+                >
+                  <p className="text-sm" style={{ color: '#F8F8F8' }}>
+                    Already have an account?
+                  </p>
+                  <Link
+                    href={`/auth/login?callbackUrl=${encodeURIComponent('/order?checkout=true')}`}
+                    onClick={() => {
+                      // Save checkout form to sessionStorage before login redirect
+                      sessionStorage.setItem('checkoutForm', JSON.stringify(checkoutForm));
+                    }}
+                    className="text-sm font-semibold hover:underline"
+                    style={{ color: '#FF6B35' }}
+                  >
+                    Sign in for faster checkout
+                  </Link>
+                </div>
+              )}
 
               <div className="space-y-4">
                 {/* Name Fields */}
@@ -1491,7 +1735,8 @@ function OrderPageContent() {
                   </div>
                 </div>
 
-                {/* Account Creation Option */}
+                {/* Account Creation Option - only show if not signed in */}
+                {!session?.user && (
                 <div
                   className="p-4 rounded-lg"
                   style={{ backgroundColor: 'rgba(255, 215, 0, 0.1)', border: '1px solid rgba(255, 215, 0, 0.3)' }}
@@ -1592,6 +1837,7 @@ function OrderPageContent() {
                     </div>
                   )}
                 </div>
+                )}
 
                 {/* Special Instructions */}
                 <div>
@@ -1649,15 +1895,53 @@ function OrderPageContent() {
                 {/* Submit Button */}
                 <button
                   onClick={handleCheckoutSubmit}
-                  className="w-full py-3 rounded-lg font-bold text-lg"
+                  disabled={paymentProcessing}
+                  className="w-full py-3 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
                   style={{
-                    background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
-                    color: '#F8F8F8'
+                    background: paymentProcessing
+                      ? 'rgba(100, 100, 100, 0.5)'
+                      : 'linear-gradient(135deg, #FF6B35, #D32F2F)',
+                    color: '#F8F8F8',
+                    cursor: paymentProcessing ? 'not-allowed' : 'pointer'
                   }}
                 >
-                  Place Order
+                  {paymentProcessing ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Creating Order...
+                    </>
+                  ) : (
+                    'Proceed to Payment'
+                  )}
                 </button>
               </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Payment Modal */}
+      {showPaymentModal && currentOrderId && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/70 z-[100000]"
+            onClick={() => {}} // Prevent closing by clicking backdrop
+          />
+          <div className="fixed inset-0 flex items-center justify-center z-[100001] p-4">
+            <div
+              className="w-full max-w-md rounded-lg p-4 sm:p-6"
+              style={{ backgroundColor: '#2a2a2a' }}
+            >
+              <CloverPaymentForm
+                amount={total}
+                orderId={currentOrderId}
+                onSuccess={handlePaymentSuccess}
+                onError={handlePaymentError}
+                onCancel={handlePaymentCancel}
+              />
             </div>
           </div>
         </>
@@ -1743,21 +2027,7 @@ function OrderPageContent() {
 
               <button
                 onClick={() => {
-                  setOrderConfirmed(false);
-                  setShowCheckout(false);
-                  setCheckoutForm({
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    phone: '',
-                    pickupDate: new Date().toISOString().split('T')[0],
-                    pickupTime: '',
-                    specialInstructions: '',
-                    createAccount: false,
-                    username: '',
-                    password: '',
-                    confirmPassword: ''
-                  });
+                  window.location.href = '/';
                 }}
                 className="w-full py-3 rounded-lg font-bold"
                 style={{
@@ -1765,7 +2035,7 @@ function OrderPageContent() {
                   color: '#F8F8F8'
                 }}
               >
-                Start New Order
+                Return Home
               </button>
             </div>
           </div>
