@@ -89,10 +89,19 @@ export default function CloverPaymentForm({
 
     try {
       // Initialize Clover SDK with API key and merchant ID
+      console.log('[Clover Init] Initializing with:', {
+        apiKey: CLOVER_API_KEY ? CLOVER_API_KEY.substring(0, 10) + '...' : 'MISSING',
+        merchantId: CLOVER_MERCHANT_ID || 'MISSING'
+      });
+
       cloverRef.current = new window.Clover(CLOVER_API_KEY, {
         merchantId: CLOVER_MERCHANT_ID
       });
+
+      console.log('[Clover Init] Clover instance created:', cloverRef.current);
+
       const elements = cloverRef.current.elements();
+      console.log('[Clover Init] Elements created:', elements);
 
       // Style configuration for the iframes
       // Note: Clover iframes have white backgrounds we can't change
@@ -201,21 +210,39 @@ export default function CloverPaymentForm({
 
     try {
       // Create token from card data
-      // Clover requires apiAccessKey to be passed in the createToken call
-      const tokenResult = await cloverRef.current.createToken({
-        apiAccessKey: CLOVER_API_KEY
+      // Clover requires both apiAccessKey and merchantId for tokenization
+      const tokenOptions = {
+        apiAccessKey: CLOVER_API_KEY,
+        merchantId: CLOVER_MERCHANT_ID
+      };
+
+      console.log('[Clover Debug] SDK initialized with:', {
+        apiKey: CLOVER_API_KEY ? CLOVER_API_KEY.substring(0, 10) + '...' : 'MISSING',
+        merchantId: CLOVER_MERCHANT_ID || 'MISSING',
+        sdkUrl: CLOVER_SDK_URL || 'MISSING'
       });
+      console.log('[Clover Debug] Calling createToken with options:', {
+        apiAccessKey: tokenOptions.apiAccessKey ? tokenOptions.apiAccessKey.substring(0, 10) + '...' : 'MISSING',
+        merchantId: tokenOptions.merchantId || 'MISSING'
+      });
+
+      const tokenResult = await cloverRef.current.createToken(tokenOptions);
+
+      console.log('[Clover Debug] Token result:', JSON.stringify(tokenResult, null, 2));
 
       // Check for various error formats Clover might return
       if (tokenResult?.errors) {
+        console.error('[Clover Debug] Token errors:', tokenResult.errors);
         throw new Error(tokenResult.errors[0]?.message || 'Card validation error');
       }
 
       if (tokenResult?.error) {
+        console.error('[Clover Debug] Token error:', tokenResult.error);
         throw new Error(tokenResult.error.message || 'Card tokenization error');
       }
 
       if (!tokenResult?.token) {
+        console.error('[Clover Debug] No token in result:', tokenResult);
         throw new Error('Failed to tokenize card - no token returned');
       }
 

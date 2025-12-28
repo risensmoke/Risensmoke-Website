@@ -9,6 +9,7 @@ export interface CloverOptions {
 
 export interface CreateTokenOptions {
   apiAccessKey?: string;
+  merchantId?: string;
 }
 
 export interface CloverInstance {
