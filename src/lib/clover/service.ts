@@ -164,7 +164,7 @@ export async function processPayment(
 }
 
 /**
- * Full order flow: create order first, then process payment linked to order
+ * Full order flow: create order, process payment, then print only if payment succeeds
  */
 export async function submitOrderWithPayment(
   data: OrderSubmissionData,
@@ -175,27 +175,55 @@ export async function submitOrderWithPayment(
   payment: CloverChargeResponse;
   printed: boolean;
 }> {
-  // Step 1: Create order in Clover first (so we have the order ID for payment linking)
-  const { cloverOrder, printed } = await submitOrderToClover(data);
+  // Step 1: Create order in Clover (WITHOUT printing - we'll print only after payment succeeds)
+  const { cloverOrder, customerId } = await createOrderWithoutPrint(data);
 
   // Step 2: Process payment with Clover order ID to link them
   const amountCents = Math.round(data.total * 100);
   const taxAmountCents = Math.round(data.tax * 100);
-  const payment = await processPayment(
-    paymentToken,
-    amountCents,
-    taxAmountCents, // Pass tax amount separately
-    localOrderId,
-    cloverOrder.id, // Link payment to Clover order
-    data.customer.email,
-    `Rise N' Smoke Order #${localOrderId}`
-  );
+
+  let payment: CloverChargeResponse;
+  try {
+    payment = await processPayment(
+      paymentToken,
+      amountCents,
+      taxAmountCents,
+      localOrderId,
+      cloverOrder.id,
+      data.customer.email,
+      `Rise N' Smoke Order #${localOrderId}`
+    );
+  } catch (error) {
+    // Payment failed - delete the Clover order
+    console.error('[CloverService] Payment failed, deleting order:', cloverOrder.id);
+    try {
+      await cloverClient.deleteOrder(cloverOrder.id);
+    } catch (deleteError) {
+      console.error('[CloverService] Failed to delete order after payment failure:', deleteError);
+    }
+    throw error;
+  }
 
   // Verify payment succeeded
   if (payment.status !== 'succeeded') {
-    // Payment failed - order exists but unpaid
-    // Could optionally delete the Clover order here, but leaving it allows retry
+    // Payment declined - delete the Clover order
+    console.error('[CloverService] Payment declined, deleting order:', cloverOrder.id);
+    try {
+      await cloverClient.deleteOrder(cloverOrder.id);
+    } catch (deleteError) {
+      console.error('[CloverService] Failed to delete order after payment decline:', deleteError);
+    }
     throw new Error(`Payment failed: ${payment.failure_message || 'Unknown error'}`);
+  }
+
+  // Step 3: Payment succeeded - now trigger print
+  let printed = false;
+  try {
+    await cloverClient.triggerPrint(cloverOrder.id);
+    printed = true;
+  } catch (error) {
+    console.error('[CloverService] Failed to trigger print:', error);
+    // Don't fail the order if print fails - payment already succeeded
   }
 
   return {
@@ -203,6 +231,35 @@ export async function submitOrderWithPayment(
     payment,
     printed,
   };
+}
+
+/**
+ * Create order in Clover without triggering print
+ */
+async function createOrderWithoutPrint(
+  data: OrderSubmissionData
+): Promise<{ cloverOrder: CloverOrder; customerId?: string }> {
+  // Get or create customer in Clover
+  let customerId: string | undefined;
+  try {
+    const customer = await cloverClient.getOrCreateCustomer({
+      firstName: data.customer.firstName,
+      lastName: data.customer.lastName,
+      email: data.customer.email,
+      phone: data.customer.phone,
+    });
+    customerId = customer.id;
+  } catch (error) {
+    console.error('[CloverService] Failed to create/find customer:', error);
+  }
+
+  // Map cart to Clover order format
+  const atomicOrder = mapCartToCloverOrder(data, customerId);
+
+  // Create the order in Clover (no print trigger)
+  const cloverOrder = await cloverClient.createAtomicOrder(atomicOrder);
+
+  return { cloverOrder, customerId };
 }
 
 // ============================================
