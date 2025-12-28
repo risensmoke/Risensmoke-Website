@@ -1,0 +1,14 @@
+VM98:2032 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+VM98:2043 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+VM98:2032 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+VM98:2043 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+VM105:2033 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+VM105:2045 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+VM105:2033 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+VM105:2045 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:54 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:73 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:54 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:73 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:54 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:54 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js

@@ -210,23 +210,16 @@ export default function CloverPaymentForm({
 
     try {
       // Create token from card data
-      // Clover requires both apiAccessKey and merchantId for tokenization
-      const tokenOptions = {
-        apiAccessKey: CLOVER_API_KEY,
-        merchantId: CLOVER_MERCHANT_ID
-      };
-
-      console.log('[Clover Debug] SDK initialized with:', {
+      console.log('[Clover Debug] SDK config:', {
         apiKey: CLOVER_API_KEY ? CLOVER_API_KEY.substring(0, 10) + '...' : 'MISSING',
         merchantId: CLOVER_MERCHANT_ID || 'MISSING',
         sdkUrl: CLOVER_SDK_URL || 'MISSING'
       });
-      console.log('[Clover Debug] Calling createToken with options:', {
-        apiAccessKey: tokenOptions.apiAccessKey ? tokenOptions.apiAccessKey.substring(0, 10) + '...' : 'MISSING',
-        merchantId: tokenOptions.merchantId || 'MISSING'
-      });
 
-      const tokenResult = await cloverRef.current.createToken(tokenOptions);
+      // Per Clover docs, createToken() uses the values from SDK initialization
+      // Try without options first (as shown in Clover docs)
+      console.log('[Clover Debug] Calling createToken() without options (per Clover docs)...');
+      const tokenResult = await cloverRef.current.createToken();
 
       console.log('[Clover Debug] Token result:', JSON.stringify(tokenResult, null, 2));
 

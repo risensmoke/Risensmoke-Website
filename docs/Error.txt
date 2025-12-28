@@ -1,0 +1,45 @@
+src/components/checkout/CloverPaymentForm.tsx (218:17) @ handleSubmit
+
+
+  216 |
+  217 |       if (!tokenResult.token) {
+> 218 |         console.error('[CloverPayment] No token in result:', tokenResult);
+      |                 ^
+  219 |         throw new Error('Failed to tokenize card');
+  220 |       }
+  221 |
+Call Stack
+4
+
+Show 3 ignore-listed frame(s)
+handleSubmit
+src/components/checkout/CloverPaymentForm.tsx (218:17)
+
+
+2/2
+
+Next.js 15.5.4 (outdated)
+Turbopack
+Console Error
+
+
+Payment failed: "Failed to tokenize card"
+
+app/order/page.tsx (1144:13) @ handlePaymentError
+
+
+  1142 |
+  1143 |   const handlePaymentError = (error: string) => {
+> 1144 |     console.error('Payment failed:', error);
+       |             ^
+  1145 |     // Keep payment modal open so user can retry
+  1146 |   };
+  1147 |
+Call Stack
+5
+
+Show 3 ignore-listed frame(s)
+handlePaymentError
+app/order/page.tsx (1144:13)
+handleSubmit
+src/components/checkout/CloverPaymentForm.tsx (250:7)

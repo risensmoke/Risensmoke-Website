@@ -1,0 +1,80 @@
+Request URL
+https://token-sandbox.dev.clover.com/v1/tokens
+Request Method
+POST
+Status Code
+401 Unauthorized
+Referrer Policy
+strict-origin-when-cross-origin
+alt-svc
+h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+cache-control
+no-cache, no-store, must-revalidate
+content-length
+30
+content-type
+application/json; charset=utf-8
+date
+Sat, 27 Dec 2025 16:32:39 GMT
+expires
+Tue, 17 Sep 1991 10:00:00 PST
+pragma
+no-cache
+referrer-policy
+no-referrer
+strict-transport-security
+31536000
+via
+1.1 google
+x-content-type-options
+nosniff
+x-frame-options
+deny
+x-xss-protection
+1; mode=block
+:authority
+token-sandbox.dev.clover.com
+:method
+POST
+:path
+/v1/tokens
+:scheme
+https
+accept
+*/*
+accept-encoding
+gzip, deflate, br, zstd
+accept-language
+en-US,en;q=0.9
+apikey
+b503768097f06ece192e0ead1cba7a7f
+cache-control
+no-cache
+content-length
+2276
+content-type
+application/json
+origin
+https://checkout.sandbox.dev.clover.com
+pragma
+no-cache
+priority
+u=1, i
+referer
+https://checkout.sandbox.dev.clover.com/
+sec-ch-ua
+"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"
+sec-ch-ua-mobile
+?0
+sec-ch-ua-platform
+"Windows"
+sec-fetch-dest
+empty
+sec-fetch-mode
+cors
+sec-fetch-site
+same-site
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+x-clover-client-type
+HOSTED_IFRAME

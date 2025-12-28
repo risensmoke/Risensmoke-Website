@@ -1,0 +1,1118 @@
+react-dom-client.development.js:25630 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+(index):4832  Server   ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+react_stack_bottom_frame @ (index):4832
+resolveConsoleEntry @ (index):4382
+processFullStringRow @ (index):4532
+processFullBinaryRow @ (index):4472
+processBinaryChunk @ (index):4581
+progress @ (index):4747
+<StreamingMetadataOutletImpl>
+Function.all @ (index):1
+initializeFakeTask @ (index):4321
+react_stack_bottom_frame @ (index):4829
+resolveConsoleEntry @ (index):4382
+processFullStringRow @ (index):4532
+processFullBinaryRow @ (index):4472
+processBinaryChunk @ (index):4581
+progress @ (index):4747
+"use server"
+ResponseInstance @ (index):4074
+createResponseFromOptions @ (index):4685
+exports.createFromReadableStream @ (index):4873
+__TURBOPACK__module__evaluation__ @ index.js:1
+(anonymous) @ _class_private_field_loose_key.cjs:8
+runModuleExecutionHooks @ _class_private_field_loose_key.cjs:8
+instantiateModule @ _class_private_field_loose_key.cjs:8
+getOrInstantiateModuleFromParent @ _class_private_field_loose_key.cjs:8
+commonJsRequire @ _class_private_field_loose_key.cjs:8
+(anonymous) @ index.js:1
+(anonymous) @ browser.js:1
+loadScriptsInSequence @ browser.js:1
+appBootstrap @ browser.js:1
+__TURBOPACK__module__evaluation__ @ index.js:1
+(anonymous) @ _class_private_field_loose_key.cjs:8
+runModuleExecutionHooks @ _class_private_field_loose_key.cjs:8
+instantiateModule @ _class_private_field_loose_key.cjs:8
+getOrInstantiateRuntimeModule @ _class_private_field_loose_key.cjs:8
+registerChunk @ _class_private_field_loose_key.cjs:8
+await in registerChunk
+registerChunk @ _class_private_field_loose_key.cjs:8
+(anonymous) @ _class_private_field_loose_key.cjs:8
+(anonymous) @ _class_private_field_loose_key.cjs:8
+app_layout_tsx_0a548d63._.js:659 [Session] Status: loading User: none Time: 11:40:19 AM
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 311ms
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 1801ms
+app_layout_tsx_0a548d63._.js:659 [Session] Status: unauthenticated User: none Time: 11:40:31 AM
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 1125ms
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 115ms
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 216ms
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:51 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:42:51 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:00 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:00 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:03 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:03 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:04 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:04 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:13 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:13 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:17 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:17 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:18 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:18 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:21 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:21 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:25 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:25 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:25 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:25 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:27 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:27 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:29 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:29 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:29 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:29 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:30 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:31 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:32 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:32 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:33 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:34 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:35 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:36 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:37 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:37 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:37 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:37 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:38 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:38 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:38 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:38 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:38 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:38 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:39 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:40 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:40 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:41 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:41 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:43 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:43 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:44 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:44 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:44 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:44 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:45 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:46 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:46 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:46 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:46 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:47 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:48 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:49 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:3952 [Checkout] Submit button clicked
+VM102:3953 [Checkout] Form data: {firstName: 'Jimmy', lastName: 'Johnson', email: 'jimmy@esposure.gg', phone: '2146821800', pickupDate: '2025-12-27', …}
+VM102:3954 [Checkout] Cart items: (2) [{…}, {…}]
+VM102:3955 [Checkout] Pickup date: 2025-12-27
+VM102:3956 [Checkout] Pickup time: 1:00 PM
+VM102:3948 [Checkout] Validation errors: {}
+VM102:3961 [Checkout] Form validation passed, creating order...
+VM102:3988 [Checkout] Sending order data: {customer: {…}, pickupDate: '2025-12-27', pickupTime: '1:00 PM', specialInstructions: 'Package separately', items: Array(2), …}
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:51 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:51 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 691ms
+VM102:3997 [Checkout] API call duration: 2563.6689453125 ms
+VM102:3998 [Checkout] Response status: 200
+VM102:4000 [Checkout] Response body: {success: true, order: {…}}
+VM102:4004 [Checkout] Order created successfully: {id: 'ce309ac7-16f5-466c-95ca-7ebdf07b1aaa', orderNumber: 'RSBMJOLAOUJ1FN', status: 'CONFIRMED', total: 39.67, pickupTime: '2025-12-26T19:00:00+00:00', …}
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:54 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:43:54 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:2033 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+VM102:2034 [CloverPayment] API Key: 89d46b82...
+VM102:2035 [CloverPayment] Merchant ID: ES34M1BQ5HVQ1
+VM102:2045 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+VM102:2033 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+VM102:2034 [CloverPayment] API Key: 89d46b82...
+VM102:2035 [CloverPayment] Merchant ID: ES34M1BQ5HVQ1
+VM102:2045 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+VM102:2051 [CloverPayment] SDK loaded successfully
+VM102:2073 [CloverPayment] initializeClover called
+VM102:2074 [CloverPayment] API Key exists: true
+VM102:2075 [CloverPayment] window.Clover exists: true
+VM102:2076 [CloverPayment] mountedRef.current: false
+VM102:2084 [CloverPayment] Creating Clover instance with key: 89d46b82...
+VM102:2085 [CloverPayment] Merchant ID: ES34M1BQ5HVQ1
+VM102:2090 [CloverPayment] Clover instance created: true
+VM102:2092 [CloverPayment] Elements created: true
+VM102:2051 [CloverPayment] SDK loaded successfully
+VM102:2073 [CloverPayment] initializeClover called
+VM102:2074 [CloverPayment] API Key exists: true
+VM102:2075 [CloverPayment] window.Clover exists: true
+VM102:2076 [CloverPayment] mountedRef.current: true
+VM102:2078 [CloverPayment] Skipping initialization
+VM102:2206 [CloverPayment] Creating token...
+VM102:2207 [CloverPayment] Clover instance: true
+VM102:2208 [CloverPayment] Card complete states: {number: true, date: true, cvv: true, zip: true}
+VM102:2209 [CloverPayment] Elements mounted: {cardNumber: true, cardDate: true, cardCvv: true, cardPostalCode: true}
+VM102:2216 [CloverPayment] Token result (full): {card: {…}, token: 'clv_1TSTSGPNSnbFY8jgFDiN5SgZ'}
+VM102:2217 [CloverPayment] Token result keys: (2) ['card', 'token']
+VM102:2218 [CloverPayment] Token result stringified: {
+  "card": {
+    "exp_month": "12",
+    "exp_year": "2028",
+    "first6": "411111",
+    "last4": "1111",
+    "brand": "VISA",
+    "address_zip": "75154"
+  },
+  "token": "clv_1TSTSGPNSnbFY8jgFDiN5SgZ"
+}
+index.js:1 [Fast Refresh] rebuilding
+index.js:1 [Fast Refresh] done in 425ms
+VM102:4027 Payment failed: 401 Unauthorized
+error @ fill-lazy-items-till-leaf-with-head.ts:62
+handlePaymentError @ VM102:4027
+handleSubmit @ VM102:2262
+await in handleSubmit
+executeDispatch @ react-dom-client.development.js:16970
+runWithFiberInDEV @ react-dom-client.development.js:871
+processDispatchQueue @ react-dom-client.development.js:17020
+(anonymous) @ react-dom-client.development.js:17621
+batchedUpdates$1 @ react-dom-client.development.js:3311
+dispatchEventForPluginEventSystem @ react-dom-client.development.js:17174
+dispatchEvent @ react-dom-client.development.js:21357
+dispatchDiscreteEvent @ react-dom-client.development.js:21325
+<form>
+exports.jsxDEV @ react-jsx-dev-runtime.development.js:323
+CloverPaymentForm @ VM102:2397
+react_stack_bottom_frame @ react-dom-client.development.js:23583
+renderWithHooksAgain @ react-dom-client.development.js:6892
+renderWithHooks @ react-dom-client.development.js:6804
+updateFunctionComponent @ react-dom-client.development.js:9246
+beginWork @ react-dom-client.development.js:10857
+runWithFiberInDEV @ react-dom-client.development.js:871
+performUnitOfWork @ react-dom-client.development.js:15726
+workLoopSync @ react-dom-client.development.js:15546
+renderRootSync @ react-dom-client.development.js:15526
+performWorkOnRoot @ react-dom-client.development.js:14990
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:16815
+performWorkUntilDeadline @ (index):2601
+<CloverPaymentForm>
+exports.jsxDEV @ react-jsx-dev-runtime.development.js:323
+OrderPageContent @ VM102:5943
+react_stack_bottom_frame @ react-dom-client.development.js:23583
+renderWithHooksAgain @ react-dom-client.development.js:6892
+renderWithHooks @ react-dom-client.development.js:6804
+updateFunctionComponent @ react-dom-client.development.js:9246
+beginWork @ react-dom-client.development.js:10857
+runWithFiberInDEV @ react-dom-client.development.js:871
+performUnitOfWork @ react-dom-client.development.js:15726
+workLoopSync @ react-dom-client.development.js:15546
+renderRootSync @ react-dom-client.development.js:15526
+performWorkOnRoot @ react-dom-client.development.js:14990
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:16815
+performWorkUntilDeadline @ (index):2601
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:17 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:17 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:21 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:21 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:23 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+VM102:4068 [TimeSlots] Current time: 12/27/2025, 11:47:24 AM
+VM102:4069 [TimeSlots] Selected date: 2025-12-27 Is today: true
+VM102:4070 [TimeSlots] Day of week: 6
+VM102:4100 [TimeSlots] Generated slots: 11
+react-dom-client.development.js:25630 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+VM45 <anonymous>:1  Server   ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+react_stack_bottom_frame @ react-server-dom-turbopack-client.browser.development.js:3405
+resolveConsoleEntry @ react-server-dom-turbopack-client.browser.development.js:2615
+processFullStringRow @ react-server-dom-turbopack-client.browser.development.js:2853
+processFullBinaryRow @ react-server-dom-turbopack-client.browser.development.js:2755
+processBinaryChunk @ react-server-dom-turbopack-client.browser.development.js:2958
+progress @ react-server-dom-turbopack-client.browser.development.js:3222
+<StreamingMetadataOutletImpl>
+Function.all @ VM45 <anonymous>:1
+initializeFakeTask @ react-server-dom-turbopack-client.browser.development.js:2518
+react_stack_bottom_frame @ react-server-dom-turbopack-client.browser.development.js:3402
+resolveConsoleEntry @ react-server-dom-turbopack-client.browser.development.js:2615
+processFullStringRow @ react-server-dom-turbopack-client.browser.development.js:2853
+processFullBinaryRow @ react-server-dom-turbopack-client.browser.development.js:2755
+processBinaryChunk @ react-server-dom-turbopack-client.browser.development.js:2958
+progress @ react-server-dom-turbopack-client.browser.development.js:3222
+"use server"
+ResponseInstance @ react-server-dom-turbopack-client.browser.development.js:2030
+createResponseFromOptions @ react-server-dom-turbopack-client.browser.development.js:3083
+exports.createFromReadableStream @ react-server-dom-turbopack-client.browser.development.js:3460
+__TURBOPACK__module__evaluation__ @ app-index.tsx:156
+(anonymous) @ dev-base.ts:241
+runModuleExecutionHooks @ dev-base.ts:275
+instantiateModule @ dev-base.ts:235
+getOrInstantiateModuleFromParent @ dev-base.ts:162
+commonJsRequire @ runtime-utils.ts:366
+(anonymous) @ app-next-turbopack.ts:11
+(anonymous) @ app-bootstrap.ts:76
+loadScriptsInSequence @ app-bootstrap.ts:22
+appBootstrap @ app-bootstrap.ts:58
+__TURBOPACK__module__evaluation__ @ app-next-turbopack.ts:10
+(anonymous) @ dev-base.ts:241
+runModuleExecutionHooks @ dev-base.ts:275
+instantiateModule @ dev-base.ts:235
+getOrInstantiateRuntimeModule @ dev-base.ts:128
+registerChunk @ runtime-backend-dom.ts:57
+await in registerChunk
+registerChunk @ dev-base.ts:1146
+(anonymous) @ dev-backend-dom.ts:126
+(anonymous) @ dev-backend-dom.ts:126
+Header.tsx:19 [Session] Status: loading User: none Time: 6:41:22 AM
+turbopack-hot-reloader-common.ts:43 [Fast Refresh] rebuilding
+report-hmr-latency.ts:26 [Fast Refresh] done in 11265ms
+turbopack-hot-reloader-common.ts:43 [Fast Refresh] rebuilding
+report-hmr-latency.ts:26 [Fast Refresh] done in 259ms
+turbopack-hot-reloader-common.ts:43 [Fast Refresh] rebuilding
+report-hmr-latency.ts:26 [Fast Refresh] done in 154ms
+turbopack-hot-reloader-common.ts:43 [Fast Refresh] rebuilding
+report-hmr-latency.ts:26 [Fast Refresh] done in 382ms
+Header.tsx:19 [Session] Status: unauthenticated User: none Time: 6:41:50 AM
+ [Checkout] Submit button clicked
+ [Checkout] Form data: {firstName: 'Jimmy', lastName: 'Johnson', email: 'jimmy@esposure.gg', phone: '2146821800', pickupDate: '2025-12-30', …}
+ [Checkout] Cart items: (2) [{…}, {…}]
+ [Checkout] Pickup date: 2025-12-30
+ [Checkout] Pickup time: 11:00 AM
+ [Checkout] Validation errors: {}
+ [Checkout] Form validation passed, creating order...
+ [Checkout] Sending order data: {customer: {…}, pickupDate: '2025-12-30', pickupTime: '11:00 AM', specialInstructions: 'Package Separately', items: Array(2), …}
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 2036ms
+ [Checkout] API call duration: 4450.50390625 ms
+ [Checkout] Response status: 200
+ [Checkout] Response body: {success: true, order: {…}}
+ [Checkout] Order created successfully: {id: '862848d1-60b2-486b-b371-e2131fb13e36', orderNumber: 'RSBMJPQ1V9GAFC', status: 'CONFIRMED', total: 39.67, pickupTime: '2025-12-29T17:00:00+00:00', …}
+ [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+ [CloverPayment] API Key: 89d46b82...
+ [CloverPayment] Merchant ID: ES34M1BQ5HVQ1
+ [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+ [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+ [CloverPayment] API Key: 89d46b82...
+ [CloverPayment] Merchant ID: ES34M1BQ5HVQ1
+ [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+ [CloverPayment] SDK loaded successfully
+ [CloverPayment] initializeClover called
+ [CloverPayment] API Key exists: true
+ [CloverPayment] window.Clover exists: true
+ [CloverPayment] mountedRef.current: false
+ [CloverPayment] Creating Clover instance with key: 89d46b82...
+ [CloverPayment] Merchant ID: ES34M1BQ5HVQ1
+ [CloverPayment] Clover instance created: true
+ [CloverPayment] Elements created: true
+ [CloverPayment] SDK loaded successfully
+ [CloverPayment] initializeClover called
+ [CloverPayment] API Key exists: true
+ [CloverPayment] window.Clover exists: true
+ [CloverPayment] mountedRef.current: true
+ [CloverPayment] Skipping initialization
+ [CloverPayment] Creating token...
+ [CloverPayment] Clover instance: true
+ [CloverPayment] Card complete states: {number: true, date: true, cvv: true, zip: true}
+ [CloverPayment] Elements mounted: {cardNumber: true, cardDate: true, cardCvv: true, cardPostalCode: true}
+ [CloverPayment] Token result (full): {card: {…}, token: 'clv_1TSTSCm1STAYWzfc48hi2eWk'}
+ [CloverPayment] Token result keys: (2) ['card', 'token']
+ [CloverPayment] Token result stringified: {
+  "card": {
+    "exp_month": "12",
+    "exp_year": "2028",
+    "first6": "411111",
+    "last4": "1111",
+    "brand": "VISA",
+    "address_zip": "75154"
+  },
+  "token": "clv_1TSTSCm1STAYWzfc48hi2eWk"
+}
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 395ms
+ Payment failed: 401 Unauthorized
+error @ node_modules_next_di…_b0daae9a._.js:2360
+handlePaymentError @ _79211083._.js:4027
+handleSubmit @ _79211083._.js:2262
+await in handleSubmit
+executeDispatch @ node_modules_next_di…_1e674e59._.js:8965
+runWithFiberInDEV @ node_modules_next_di…m_1e674e59._.js:886
+processDispatchQueue @ node_modules_next_di…_1e674e59._.js:8991
+(anonymous) @ node_modules_next_di…_1e674e59._.js:9286
+batchedUpdates$1 @ node_modules_next_di…_1e674e59._.js:2211
+dispatchEventForPluginEventSystem @ node_modules_next_di…_1e674e59._.js:9067
+dispatchEvent @ node_modules_next_di…1e674e59._.js:11224
+dispatchDiscreteEvent @ node_modules_next_di…1e674e59._.js:11206
+<form>
+exports.jsxDEV @ node_modules_0a536802._.js:203
+CloverPaymentForm @ _79211083._.js:2397
+react_stack_bottom_frame @ node_modules_next_di…1e674e59._.js:13072
+renderWithHooksAgain @ node_modules_next_di…_1e674e59._.js:4146
+renderWithHooks @ node_modules_next_di…_1e674e59._.js:4097
+updateFunctionComponent @ node_modules_next_di…_1e674e59._.js:5523
+beginWork @ node_modules_next_di…_1e674e59._.js:6111
+runWithFiberInDEV @ node_modules_next_di…m_1e674e59._.js:886
+performUnitOfWork @ node_modules_next_di…_1e674e59._.js:8298
+workLoopSync @ node_modules_next_di…_1e674e59._.js:8190
+renderRootSync @ node_modules_next_di…_1e674e59._.js:8173
+performWorkOnRoot @ node_modules_next_di…_1e674e59._.js:7908
+performWorkOnRootViaSchedulerTask @ node_modules_next_di…_1e674e59._.js:8882
+performWorkUntilDeadline @ node_modules_next_di…_5150ccfd._.js:2601
+<CloverPaymentForm>
+exports.jsxDEV @ node_modules_0a536802._.js:203
+OrderPageContent @ _79211083._.js:5937
+react_stack_bottom_frame @ node_modules_next_di…1e674e59._.js:13072
+renderWithHooksAgain @ node_modules_next_di…_1e674e59._.js:4146
+renderWithHooks @ node_modules_next_di…_1e674e59._.js:4097
+updateFunctionComponent @ node_modules_next_di…_1e674e59._.js:5523
+beginWork @ node_modules_next_di…_1e674e59._.js:6111
+runWithFiberInDEV @ node_modules_next_di…m_1e674e59._.js:886
+performUnitOfWork @ node_modules_next_di…_1e674e59._.js:8298
+workLoopSync @ node_modules_next_di…_1e674e59._.js:8190
+renderRootSync @ node_modules_next_di…_1e674e59._.js:8173
+performWorkOnRoot @ node_modules_next_di…_1e674e59._.js:7908
+performWorkOnRootViaSchedulerTask @ node_modules_next_di…_1e674e59._.js:8882
+performWorkUntilDeadline @ node_modules_next_di…_5150ccfd._.js:2601

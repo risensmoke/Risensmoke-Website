@@ -2,8 +2,8 @@ Developer App:
 userid:  rjohnson@esposure.gg
 password:  Smoke@Master401!
 passcode:  3923
-PAKMS KEY:  89d46b8215248c65ee79c8e70c93ccf7
-API KEY:  9d964a3a-0909-682a-ccee-20b84b485bdd
+PAKMS KEY:  b503769397196ece192e0ead1cba7a7f
+API token:  81411725-9936-9616-abec-3354ce74938b
 
 REST Configuration
 Site URL:  https://risensmoke.netlify.app/
@@ -13,7 +13,7 @@ Default OAuth Response:  Token
 Clover
 RISE N SMOKE PIT
 401 Abbott Ave
-Hillsboro
+Hillsboro TX 76645
 2542216247
 Clover Station Duo (2nd Generation)
 ID:  C055UQ30220607
@@ -31,3 +31,16 @@ Label:  KITCHEN
 SANDBOX APP
 APP ID:  E2YM5Z3PPYYJP
 APP SECRET:  e7b238ef-9c77-c403-bc1d-fb40c6f670e8
+
+
+API token:  81411725-9936-9616-abec-3354ce74938b
+
+ To test the payment flow:
+
+  1. Open your browser and go to: http://localhost:3001/test-payment
+  2. Use these test card details:
+    - Card: 4111 1111 1111 1111
+    - Expiry: Any future date (e.g., 12/28)
+    - CVV: Any 3 digits (e.g., 123)
+    - ZIP: Any 5 digits (e.g., 76645)
+  3. Click "Pay" to process the test payment

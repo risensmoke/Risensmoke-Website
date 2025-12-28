@@ -1,0 +1,85 @@
+11a8597f77a0093b.js:1 d: There was a problem with the server configuration. Check the server logs for more information.. Read more at https://errors.authjs.dev#autherror
+    at h (11a8597f77a0093b.js:1:9147)
+    at async w (11a8597f77a0093b.js:1:10915)
+    at async x._getSession (11a8597f77a0093b.js:1:13485)
+h @ 11a8597f77a0093b.js:1
+await in h
+w @ 11a8597f77a0093b.js:1
+x._getSession @ 11a8597f77a0093b.js:1
+(anonymous) @ 11a8597f77a0093b.js:1
+oZ @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+uk @ c262c49f15ce2f1f.js:1
+uw @ c262c49f15ce2f1f.js:1
+iz @ c262c49f15ce2f1f.js:1
+(anonymous) @ c262c49f15ce2f1f.js:1
+T @ c262c49f15ce2f1f.js:1
+11a8597f77a0093b.js:1 d: There was a problem with the server configuration. Check the server logs for more information.. Read more at https://errors.authjs.dev#autherror
+    at h (11a8597f77a0093b.js:1:9147)
+    at async w (11a8597f77a0093b.js:1:10915)
+    at async x._getSession (11a8597f77a0093b.js:1:13485)
+h @ 11a8597f77a0093b.js:1
+await in h
+w @ 11a8597f77a0093b.js:1
+x._getSession @ 11a8597f77a0093b.js:1
+e @ 11a8597f77a0093b.js:1
+VM323 f9d43c4bdd18ebe7.js:1 Payment failed: Failed to tokenize card - no token returned
+onError @ VM323 f9d43c4bdd18ebe7.js:1
+k @ VM323 f9d43c4bdd18ebe7.js:1
+await in k
+i2 @ c262c49f15ce2f1f.js:1
+(anonymous) @ c262c49f15ce2f1f.js:1
+tS @ c262c49f15ce2f1f.js:1
+i9 @ c262c49f15ce2f1f.js:1
+cu @ c262c49f15ce2f1f.js:1
+ca @ c262c49f15ce2f1f.js:1

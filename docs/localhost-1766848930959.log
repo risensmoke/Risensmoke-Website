@@ -1,0 +1,662 @@
+ Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+  Server   ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+react_stack_bottom_frame @ node_modules_next_di…_5150ccfd._.js:4832
+ [Session] Status: loading User: none Time: 9:19:10 AM
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 3328ms
+ [Session] Status: unauthenticated User: none Time: 9:19:24 AM
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 1832ms
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 208ms
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 138ms
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 1207ms
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 151ms
+ [TimeSlots] Current time: 12/27/2025, 9:19:41 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:41 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 110ms
+ [TimeSlots] Current time: 12/27/2025, 9:19:41 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:41 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [Fast Refresh] rebuilding
+ [Fast Refresh] done in 657ms
+ [TimeSlots] Current time: 12/27/2025, 9:19:43 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:43 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:44 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:44 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:47 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:47 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:53 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:53 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:58 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:19:58 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:00 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:00 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:04 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:05 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:06 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:06 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:06 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:06 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:07 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:07 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:09 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:10 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:10 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:10 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:10 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:10 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:10 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:12 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:13 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:13 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:13 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:13 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:14 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:15 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:15 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:15 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:15 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:15 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:15 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:16 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:16 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:16 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:16 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:17 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:18 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:21 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:21 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:22 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:22 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:23 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:23 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:24 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:25 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:25 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:25 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:25 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:25 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:25 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:27 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:28 AM
+ [TimeSlots] Selected date: 2025-12-27 Is today: true
+ [TimeSlots] Day of week: 6
+ [TimeSlots] Generated slots: 14
+ [TimeSlots] Current time: 12/27/2025, 9:20:28 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:28 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:28 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:28 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:28 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1058 [Checkout] Submit button clicked
+page.tsx:1059 [Checkout] Form data: Object
+page.tsx:1060 [Checkout] Cart items: Array(1)
+page.tsx:1061 [Checkout] Pickup date: 2025-12-27
+page.tsx:1062 [Checkout] Pickup time: 1:00 PM
+page.tsx:1053 [Checkout] Validation errors: Object
+page.tsx:1069 [Checkout] Form validation passed, creating order...
+page.tsx:1098 [Checkout] Sending order data: Object
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:31 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:31 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+turbopack-hot-reloader-common.ts:43 [Fast Refresh] rebuilding
+report-hmr-latency.ts:26 [Fast Refresh] done in 1660ms
+page.tsx:1107 [Checkout] API call duration: 4195.90087890625 ms
+page.tsx:1108 [Checkout] Response status: 200
+page.tsx:1111 [Checkout] Response body: Object
+page.tsx:1117 [Checkout] Order created successfully: Object
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:36 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+page.tsx:1182 [TimeSlots] Current time: 12/27/2025, 9:20:36 AM
+page.tsx:1183 [TimeSlots] Selected date: 2025-12-27 Is today: true
+page.tsx:1184 [TimeSlots] Day of week: 6
+page.tsx:1216 [TimeSlots] Generated slots: 14
+CloverPaymentForm.tsx:53 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:54 [CloverPayment] API Key: b6037693...
+CloverPaymentForm.tsx:71 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:53 [CloverPayment] SDK URL: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:54 [CloverPayment] API Key: b6037693...
+CloverPaymentForm.tsx:71 [CloverPayment] Loading SDK from: https://checkout.sandbox.dev.clover.com/sdk.js
+CloverPaymentForm.tsx:76 [CloverPayment] SDK loaded successfully
+CloverPaymentForm.tsx:93 [CloverPayment] initializeClover called
+CloverPaymentForm.tsx:94 [CloverPayment] API Key exists: true
+CloverPaymentForm.tsx:95 [CloverPayment] window.Clover exists: true
+CloverPaymentForm.tsx:96 [CloverPayment] mountedRef.current: false
+CloverPaymentForm.tsx:104 [CloverPayment] Creating Clover instance with key: b6037693...
+CloverPaymentForm.tsx:106 [CloverPayment] Clover instance created: true
+CloverPaymentForm.tsx:108 [CloverPayment] Elements created: true
+CloverPaymentForm.tsx:76 [CloverPayment] SDK loaded successfully
+CloverPaymentForm.tsx:93 [CloverPayment] initializeClover called
+CloverPaymentForm.tsx:94 [CloverPayment] API Key exists: true
+CloverPaymentForm.tsx:95 [CloverPayment] window.Clover exists: true
+CloverPaymentForm.tsx:96 [CloverPayment] mountedRef.current: true
+CloverPaymentForm.tsx:99 [CloverPayment] Skipping initialization
+CloverPaymentForm.tsx:205 [CloverPayment] Creating token...
+CloverPaymentForm.tsx:206 [CloverPayment] Clover instance: true
+CloverPaymentForm.tsx:210 [CloverPayment] Token result: {}
+intercept-console-error.ts:44 [CloverPayment] No token in result: Object
+error @ intercept-console-error.ts:44
+intercept-console-error.ts:44 Payment failed: Failed to tokenize card
+error @ intercept-console-error.ts:44
