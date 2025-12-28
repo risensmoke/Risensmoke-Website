@@ -180,7 +180,10 @@ export default function TestPaymentPage() {
 
     try {
       console.log('[Test] Creating token...');
-      const tokenResult = await cloverRef.current.createToken();
+      // Clover requires apiAccessKey to be passed in the createToken call
+      const tokenResult = await cloverRef.current.createToken({
+        apiAccessKey: CLOVER_API_KEY
+      });
 
       if (tokenResult.error) {
         throw new Error(tokenResult.error.message);

@@ -201,7 +201,10 @@ export default function CloverPaymentForm({
 
     try {
       // Create token from card data
-      const tokenResult = await cloverRef.current.createToken();
+      // Clover requires apiAccessKey to be passed in the createToken call
+      const tokenResult = await cloverRef.current.createToken({
+        apiAccessKey: CLOVER_API_KEY
+      });
 
       // Check for various error formats Clover might return
       if (tokenResult?.errors) {

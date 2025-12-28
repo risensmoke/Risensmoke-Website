@@ -7,9 +7,13 @@ export interface CloverOptions {
   merchantId?: string;
 }
 
+export interface CreateTokenOptions {
+  apiAccessKey?: string;
+}
+
 export interface CloverInstance {
   elements: () => CloverElements;
-  createToken: () => Promise<{
+  createToken: (options?: CreateTokenOptions) => Promise<{
     token?: string;
     error?: { message: string };
     errors?: Array<{ message?: string }>;
