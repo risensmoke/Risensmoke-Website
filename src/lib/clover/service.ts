@@ -22,7 +22,7 @@ import type {
  */
 function formatWebOrderNote(data: OrderSubmissionData): string {
   const lines = [
-    '══════ WEB ORDER ══════',
+    '****** WEB ORDER ******',
     `Customer: ${data.customer.firstName} ${data.customer.lastName}`,
     `Phone: ${data.customer.phone}`,
     `Email: ${data.customer.email}`,
@@ -33,7 +33,7 @@ function formatWebOrderNote(data: OrderSubmissionData): string {
     lines.push(`Notes: ${data.specialInstructions}`);
   }
 
-  lines.push('═══════════════════════');
+  lines.push('***********************');
 
   return lines.join('\n');
 }
