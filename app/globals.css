@@ -1409,45 +1409,32 @@ button:disabled {
 
 /* ============================================
    Clover Payment Iframe Custom Styles
-   Override default white backgrounds
+   Style the white input containers to look intentional
    ============================================ */
 
-/* Ensure containers properly display iframes */
-.clover-input-container {
-  position: relative;
-  width: 100%;
-  min-height: 60px;
-  background-color: #1e1e1e !important;
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-
-/* Target Clover iframe containers by ID */
+/* Style Clover iframe containers */
 #card-number,
 #card-date,
 #card-cvv,
 #card-postal-code {
-  background-color: #1e1e1e !important;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
 }
 
-/* Style the iframes inside the containers */
-.clover-input-container iframe,
+/* Ensure iframes fill their containers */
 #card-number iframe,
 #card-date iframe,
 #card-cvv iframe,
 #card-postal-code iframe {
-  background-color: transparent !important;
   width: 100% !important;
-  height: 60px !important;
-  min-height: 60px !important;
+  height: 100% !important;
+  min-height: 48px !important;
   border: none !important;
   display: block !important;
 }
 
-/* Force Clover elements to be properly sized */
-.clover-input-container > div,
+/* Style the inner div wrapper Clover creates */
 #card-number > div,
 #card-date > div,
 #card-cvv > div,

@@ -94,28 +94,25 @@ export default function CloverPaymentForm({
       });
       const elements = cloverRef.current.elements();
 
-      // Style configuration for the iframes - larger text for better UX
+      // Style configuration for the iframes
+      // Note: Clover iframes have white backgrounds we can't change
+      // So we style the input text to be dark and readable on white
       const styles = {
-        body: {
-          backgroundColor: 'transparent',
-          margin: '0',
-          padding: '16px',
-        },
         input: {
-          fontSize: '18px',
-          fontFamily: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-          color: '#F8F8F8',
-          backgroundColor: 'transparent',
-          lineHeight: '24px',
-          padding: '0',
+          fontSize: '16px',
+          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          color: '#333333',
+          backgroundColor: '#FFFFFF',
+          lineHeight: '48px',
+          height: '48px',
+          padding: '0 12px',
           margin: '0',
           border: 'none',
           outline: 'none',
           width: '100%',
-          height: '100%',
         },
         'input::placeholder': {
-          color: '#888',
+          color: '#999999',
         },
         'input:focus': {
           outline: 'none',
@@ -344,12 +341,14 @@ export default function CloverPaymentForm({
           </label>
           <div
             id="card-number"
-            className="clover-input-container w-full rounded-lg transition-all duration-200"
+            className="w-full rounded-lg overflow-hidden transition-all duration-200"
             style={{
+              backgroundColor: '#FFFFFF',
               border: cardComplete.number
                 ? '2px solid #4CAF50'
-                : '2px solid rgba(255, 107, 53, 0.4)',
-              minHeight: '60px',
+                : '2px solid rgba(255, 107, 53, 0.6)',
+              height: '52px',
+              boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
             }}
           />
         </div>
@@ -362,12 +361,14 @@ export default function CloverPaymentForm({
             </label>
             <div
               id="card-date"
-              className="clover-input-container w-full rounded-lg transition-all duration-200"
+              className="w-full rounded-lg overflow-hidden transition-all duration-200"
               style={{
+                backgroundColor: '#FFFFFF',
                 border: cardComplete.date
                   ? '2px solid #4CAF50'
-                  : '2px solid rgba(255, 107, 53, 0.4)',
-                minHeight: '60px',
+                  : '2px solid rgba(255, 107, 53, 0.6)',
+                height: '52px',
+                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
               }}
             />
           </div>
@@ -377,12 +378,14 @@ export default function CloverPaymentForm({
             </label>
             <div
               id="card-cvv"
-              className="clover-input-container w-full rounded-lg transition-all duration-200"
+              className="w-full rounded-lg overflow-hidden transition-all duration-200"
               style={{
+                backgroundColor: '#FFFFFF',
                 border: cardComplete.cvv
                   ? '2px solid #4CAF50'
-                  : '2px solid rgba(255, 107, 53, 0.4)',
-                minHeight: '60px',
+                  : '2px solid rgba(255, 107, 53, 0.6)',
+                height: '52px',
+                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
               }}
             />
           </div>
@@ -395,12 +398,14 @@ export default function CloverPaymentForm({
           </label>
           <div
             id="card-postal-code"
-            className="clover-input-container w-full rounded-lg transition-all duration-200"
+            className="w-full rounded-lg overflow-hidden transition-all duration-200"
             style={{
+              backgroundColor: '#FFFFFF',
               border: cardComplete.zip
                 ? '2px solid #4CAF50'
-                : '2px solid rgba(255, 107, 53, 0.4)',
-              minHeight: '60px',
+                : '2px solid rgba(255, 107, 53, 0.6)',
+              height: '52px',
+              boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
             }}
           />
         </div>
