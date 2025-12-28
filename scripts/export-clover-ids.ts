@@ -50,6 +50,8 @@ interface CloverModifierGroup extends CloverElement {
 interface CloverItem extends CloverElement {
   price?: number;
   categories?: { elements: CloverElement[] };
+  hidden?: boolean;
+  enabledOnline?: boolean;
 }
 
 interface CloverCategory extends CloverElement {
@@ -112,8 +114,14 @@ async function exportCloverIds() {
   const itemsResponse = await cloverFetch<{ elements: CloverItem[] }>(
     `/v3/merchants/${CLOVER_MERCHANT_ID}/items?expand=categories`
   );
-  const cloverItems = itemsResponse.elements || [];
-  console.log(`  Found ${cloverItems.length} items`);
+  const allCloverItems = itemsResponse.elements || [];
+  console.log(`  Found ${allCloverItems.length} total items in Clover`);
+
+  // Filter to only include active items (not hidden AND enabled online)
+  const cloverItems = allCloverItems.filter(
+    (item) => item.hidden === false && item.enabledOnline === true
+  );
+  console.log(`  Filtered to ${cloverItems.length} active items (hidden=false, enabledOnline=true)`);
 
   // Build mappings by matching names
   const mappings = {
