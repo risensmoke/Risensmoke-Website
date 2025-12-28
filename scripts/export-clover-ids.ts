@@ -22,6 +22,10 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env.local (override any existing)
+dotenv.config({ path: '.env.local', override: true });
 
 const CLOVER_API_BASE_URL = process.env.CLOVER_API_BASE_URL || 'https://sandbox.dev.clover.com';
 const CLOVER_MERCHANT_ID = process.env.CLOVER_MERCHANT_ID;
