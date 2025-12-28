@@ -21,6 +21,7 @@ interface PaymentResult {
 
 const CLOVER_SDK_URL = process.env.NEXT_PUBLIC_CLOVER_SDK_URL;
 const CLOVER_API_KEY = process.env.NEXT_PUBLIC_CLOVER_API_KEY;
+const CLOVER_MERCHANT_ID = process.env.NEXT_PUBLIC_CLOVER_MERCHANT_ID;
 
 export default function CloverPaymentForm({
   amount,
@@ -50,7 +51,7 @@ export default function CloverPaymentForm({
 
   // Load Clover SDK
   useEffect(() => {
-    if (!CLOVER_SDK_URL || !CLOVER_API_KEY) {
+    if (!CLOVER_SDK_URL || !CLOVER_API_KEY || !CLOVER_MERCHANT_ID) {
       setError('Payment configuration is missing. Please contact support.');
       setIsLoading(false);
       return;
@@ -66,7 +67,9 @@ export default function CloverPaymentForm({
     const script = document.createElement('script');
     script.src = CLOVER_SDK_URL;
     script.async = true;
-    script.onload = initializeClover;
+    script.onload = () => {
+      initializeClover();
+    };
     script.onerror = () => {
       setError('Failed to load payment system. Please try again.');
       setIsLoading(false);
@@ -80,22 +83,42 @@ export default function CloverPaymentForm({
   }, []);
 
   const initializeClover = useCallback(() => {
-    if (!CLOVER_API_KEY || !window.Clover || mountedRef.current) return;
+    if (!CLOVER_API_KEY || !window.Clover || mountedRef.current) {
+      return;
+    }
 
     try {
-      cloverRef.current = new window.Clover(CLOVER_API_KEY);
+      // Initialize Clover SDK with API key and merchant ID
+      cloverRef.current = new window.Clover(CLOVER_API_KEY, {
+        merchantId: CLOVER_MERCHANT_ID
+      });
       const elements = cloverRef.current.elements();
 
-      // Style configuration for the iframes
+      // Style configuration for the iframes - larger text for better UX
       const styles = {
+        body: {
+          backgroundColor: 'transparent',
+          margin: '0',
+          padding: '16px',
+        },
         input: {
-          fontSize: '16px',
-          fontFamily: 'inherit',
+          fontSize: '18px',
+          fontFamily: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif",
           color: '#F8F8F8',
           backgroundColor: 'transparent',
+          lineHeight: '24px',
+          padding: '0',
+          margin: '0',
+          border: 'none',
+          outline: 'none',
+          width: '100%',
+          height: '100%',
         },
         'input::placeholder': {
           color: '#888',
+        },
+        'input:focus': {
+          outline: 'none',
         },
       };
 
@@ -183,12 +206,17 @@ export default function CloverPaymentForm({
       // Create token from card data
       const tokenResult = await cloverRef.current.createToken();
 
-      if (tokenResult.error) {
-        throw new Error(tokenResult.error.message);
+      // Check for various error formats Clover might return
+      if (tokenResult?.errors) {
+        throw new Error(tokenResult.errors[0]?.message || 'Card validation error');
       }
 
-      if (!tokenResult.token) {
-        throw new Error('Failed to tokenize card');
+      if (tokenResult?.error) {
+        throw new Error(tokenResult.error.message || 'Card tokenization error');
+      }
+
+      if (!tokenResult?.token) {
+        throw new Error('Failed to tokenize card - no token returned');
       }
 
       // Send token to server for processing
@@ -226,22 +254,27 @@ export default function CloverPaymentForm({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-md mx-auto">
       {/* Header */}
-      <div className="flex items-center gap-2 mb-4">
-        <CreditCard className="w-5 h-5" style={{ color: '#FFD700' }} />
-        <h3 className="text-lg font-bold" style={{ color: '#FFD700' }}>
+      <div className="flex items-center gap-3 mb-6">
+        <div
+          className="p-2 rounded-lg"
+          style={{ backgroundColor: 'rgba(255, 215, 0, 0.15)' }}
+        >
+          <CreditCard className="w-6 h-6" style={{ color: '#FFD700' }} />
+        </div>
+        <h3 className="text-xl font-bold" style={{ color: '#FFD700', fontFamily: "'Rye', serif" }}>
           Payment Details
         </h3>
       </div>
 
       {/* Security Badge */}
       <div
-        className="flex items-center gap-2 mb-4 p-2 rounded"
-        style={{ backgroundColor: 'rgba(255, 215, 0, 0.1)' }}
+        className="flex items-center gap-3 mb-6 p-3 rounded-lg"
+        style={{ backgroundColor: 'rgba(76, 175, 80, 0.1)', border: '1px solid rgba(76, 175, 80, 0.3)' }}
       >
-        <Lock className="w-4 h-4" style={{ color: '#FFD700' }} />
-        <span className="text-xs" style={{ color: '#F8F8F8' }}>
+        <Lock className="w-5 h-5 flex-shrink-0" style={{ color: '#4CAF50' }} />
+        <span className="text-sm" style={{ color: '#F8F8F8' }}>
           Your payment information is securely processed by Clover
         </span>
       </div>
@@ -305,51 +338,51 @@ export default function CloverPaymentForm({
         </div>
 
         {/* Card Number */}
-        <div className="mb-4">
-          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-semibold" style={{ color: '#FFD700' }}>
             Card Number
           </label>
           <div
             id="card-number"
-            className="w-full px-3 py-3 rounded h-12"
+            className="clover-input-container w-full rounded-lg transition-all duration-200"
             style={{
-              backgroundColor: '#1C1C1C',
               border: cardComplete.number
-                ? '1px solid #4CAF50'
-                : '1px solid rgba(255, 107, 53, 0.3)',
+                ? '2px solid #4CAF50'
+                : '2px solid rgba(255, 107, 53, 0.4)',
+              minHeight: '60px',
             }}
           />
         </div>
 
         {/* Expiry and CVV */}
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-2 gap-4 mb-5">
           <div>
-            <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+            <label className="block mb-2 text-sm font-semibold" style={{ color: '#FFD700' }}>
               Expiration Date
             </label>
             <div
               id="card-date"
-              className="w-full px-3 py-3 rounded h-12"
+              className="clover-input-container w-full rounded-lg transition-all duration-200"
               style={{
-                backgroundColor: '#1C1C1C',
                 border: cardComplete.date
-                  ? '1px solid #4CAF50'
-                  : '1px solid rgba(255, 107, 53, 0.3)',
+                  ? '2px solid #4CAF50'
+                  : '2px solid rgba(255, 107, 53, 0.4)',
+                minHeight: '60px',
               }}
             />
           </div>
           <div>
-            <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+            <label className="block mb-2 text-sm font-semibold" style={{ color: '#FFD700' }}>
               CVV
             </label>
             <div
               id="card-cvv"
-              className="w-full px-3 py-3 rounded h-12"
+              className="clover-input-container w-full rounded-lg transition-all duration-200"
               style={{
-                backgroundColor: '#1C1C1C',
                 border: cardComplete.cvv
-                  ? '1px solid #4CAF50'
-                  : '1px solid rgba(255, 107, 53, 0.3)',
+                  ? '2px solid #4CAF50'
+                  : '2px solid rgba(255, 107, 53, 0.4)',
+                minHeight: '60px',
               }}
             />
           </div>
@@ -357,44 +390,50 @@ export default function CloverPaymentForm({
 
         {/* Postal Code */}
         <div className="mb-6">
-          <label className="block mb-2 text-sm" style={{ color: '#F8F8F8' }}>
+          <label className="block mb-2 text-sm font-semibold" style={{ color: '#FFD700' }}>
             ZIP Code
           </label>
           <div
             id="card-postal-code"
-            className="w-full px-3 py-3 rounded h-12"
+            className="clover-input-container w-full rounded-lg transition-all duration-200"
             style={{
-              backgroundColor: '#1C1C1C',
               border: cardComplete.zip
-                ? '1px solid #4CAF50'
-                : '1px solid rgba(255, 107, 53, 0.3)',
+                ? '2px solid #4CAF50'
+                : '2px solid rgba(255, 107, 53, 0.4)',
+              minHeight: '60px',
             }}
           />
         </div>
 
         {/* Amount Display */}
         <div
-          className="mb-6 p-4 rounded text-center"
-          style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)', border: '1px solid #FF6B35' }}
+          className="mb-8 p-5 rounded-lg text-center"
+          style={{
+            backgroundColor: 'rgba(255, 107, 53, 0.1)',
+            border: '2px solid rgba(255, 107, 53, 0.5)',
+            boxShadow: '0 4px 15px rgba(255, 107, 53, 0.1)'
+          }}
         >
-          <span className="text-sm" style={{ color: '#F8F8F8' }}>
-            Order Amount
+          <span className="text-sm font-semibold uppercase tracking-wider" style={{ color: '#F8F8F8' }}>
+            Order Total
           </span>
-          <div className="text-2xl font-bold" style={{ color: '#FFD700' }}>
+          <div className="text-3xl font-bold mt-1" style={{ color: '#FFD700', fontFamily: "'Rye', serif" }}>
             ${amount.toFixed(2)}
           </div>
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-3">
+        <div className="flex gap-4">
           <button
             type="button"
             onClick={onCancel}
             disabled={isProcessing}
-            className="flex-1 py-3 rounded-lg font-semibold transition-opacity hover:opacity-80"
+            className="flex-1 py-4 rounded-lg font-semibold transition-all duration-200 hover:opacity-90"
             style={{
-              backgroundColor: 'rgba(100, 100, 100, 0.5)',
+              backgroundColor: 'rgba(80, 80, 80, 0.6)',
               color: '#F8F8F8',
+              border: '1px solid rgba(150, 150, 150, 0.3)',
+              fontSize: '16px',
             }}
           >
             Cancel
@@ -402,14 +441,18 @@ export default function CloverPaymentForm({
           <button
             type="submit"
             disabled={isProcessing || !isFormComplete}
-            className="flex-1 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-opacity"
+            className="flex-1 py-4 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200"
             style={{
               background:
                 isProcessing || !isFormComplete
-                  ? 'rgba(100, 100, 100, 0.5)'
+                  ? 'rgba(80, 80, 80, 0.6)'
                   : 'linear-gradient(135deg, #FF6B35, #D32F2F)',
               color: '#F8F8F8',
               cursor: isProcessing || !isFormComplete ? 'not-allowed' : 'pointer',
+              fontSize: '16px',
+              boxShadow: isProcessing || !isFormComplete
+                ? 'none'
+                : '0 4px 15px rgba(255, 107, 53, 0.4)',
             }}
           >
             {isProcessing ? (
@@ -419,7 +462,7 @@ export default function CloverPaymentForm({
               </>
             ) : (
               <>
-                <Lock className="w-4 h-4" />
+                <Lock className="w-5 h-5" />
                 Pay ${amount.toFixed(2)}
               </>
             )}
@@ -427,9 +470,9 @@ export default function CloverPaymentForm({
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-4 text-center">
-          <p className="text-xs" style={{ color: '#888' }}>
-            Payments are securely processed by Clover. Your card details are never stored on our servers.
+        <div className="mt-6 text-center">
+          <p className="text-xs" style={{ color: '#777' }}>
+            🔒 Payments are securely processed by Clover. Your card details are never stored on our servers.
           </p>
         </div>
       </form>

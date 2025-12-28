@@ -88,6 +88,12 @@ export async function submitOrderToClover(
   // Get or create customer in Clover
   let customerId: string | undefined;
   try {
+    console.log('[CloverService] Creating/finding customer:', {
+      firstName: data.customer.firstName,
+      lastName: data.customer.lastName,
+      email: data.customer.email,
+      phone: data.customer.phone,
+    });
     const customer = await cloverClient.getOrCreateCustomer({
       firstName: data.customer.firstName,
       lastName: data.customer.lastName,
@@ -95,6 +101,7 @@ export async function submitOrderToClover(
       phone: data.customer.phone,
     });
     customerId = customer.id;
+    console.log('[CloverService] Customer created/found:', customerId);
   } catch (error) {
     console.error('[CloverService] Failed to create/find customer:', error);
     // Continue without customer - order will still be created
@@ -125,6 +132,7 @@ export async function submitOrderToClover(
 export async function processPayment(
   token: string,
   amountCents: number,
+  taxAmountCents: number,
   localOrderId: string,
   cloverOrderId?: string,
   customerEmail?: string,
@@ -140,6 +148,7 @@ export async function processPayment(
     {
       source: token,
       amount: amountCents,
+      tax_amount: taxAmountCents, // Include tax as separate line item
       currency: 'usd',
       capture: true,
       description: description || `Rise N' Smoke Web Order`,
@@ -171,9 +180,11 @@ export async function submitOrderWithPayment(
 
   // Step 2: Process payment with Clover order ID to link them
   const amountCents = Math.round(data.total * 100);
+  const taxAmountCents = Math.round(data.tax * 100);
   const payment = await processPayment(
     paymentToken,
     amountCents,
+    taxAmountCents, // Pass tax amount separately
     localOrderId,
     cloverOrder.id, // Link payment to Clover order
     data.customer.email,

@@ -161,7 +161,8 @@ export interface CloverOrderModification {
 
 export interface CloverCharge {
   source: string; // Tokenized card (clv_xxx)
-  amount: number; // in cents
+  amount: number; // in cents (total including tax)
+  tax_amount?: number; // Tax amount in cents
   currency: string;
   capture?: boolean;
   description?: string;

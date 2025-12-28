@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShoppingCart, Clock, Plus, Minus, X, Calendar, User } from 'lucide-react';
+import { ShoppingCart, Clock, Plus, Minus, X, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useCartStore } from '@/store/cartStore';
 import { useSession } from 'next-auth/react';
 import SizeSelectionModal from '@/components/menu/SizeSelectionModal';
@@ -21,6 +23,21 @@ interface MenuItem {
   category: string;
   image?: string;
   available: boolean;
+  cloverItemId?: string;
+}
+
+interface MenuModifier {
+  id: string;
+  name: string;
+  price: number;
+  cloverModId?: string;
+}
+
+interface MenuModifierGroup {
+  id: string;
+  name: string;
+  cloverModifierGroupId?: string;
+  modifiers: MenuModifier[];
 }
 
 interface CheckoutForm {
@@ -615,7 +632,7 @@ function OrderPageContent() {
   const [favoritesModalItem, setFavoritesModalItem] = useState<MenuItem | null>(null);
   const [pendingMeatData, setPendingMeatData] = useState<{
     item: MenuItem;
-    weight: { label: string; price: number };
+    weight: { label: string; price: number; cloverModId?: string };
   } | null>(null);
   const [itemQuantities, setItemQuantities] = useState<{ [key: string]: number }>({});
   const [showCheckout, setShowCheckout] = useState(false);
@@ -624,6 +641,8 @@ function OrderPageContent() {
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
+  const [cloverModifierGroups, setCloverModifierGroups] = useState<MenuModifierGroup[]>([]);
+  const [cloverItemIds, setCloverItemIds] = useState<Record<string, string>>({});
   const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>({
     firstName: '',
     lastName: '',
@@ -640,6 +659,46 @@ function OrderPageContent() {
   const [formErrors, setFormErrors] = useState<Partial<CheckoutForm>>({});
 
   const { items, addItem, removeItem, updateQuantity, subtotal, tax, total, clearCart } = useCartStore();
+
+  // Fetch Clover modifier groups and item IDs on mount
+  useEffect(() => {
+    async function fetchCloverData() {
+      try {
+        const response = await fetch('/api/menu');
+        if (response.ok) {
+          const data = await response.json();
+          setCloverModifierGroups(data.modifierGroups || []);
+
+          // Build item ID lookup map
+          const itemIdMap: Record<string, string> = {};
+          for (const item of data.items || []) {
+            if (item.cloverItemId) {
+              itemIdMap[item.id] = item.cloverItemId;
+            }
+          }
+          setCloverItemIds(itemIdMap);
+        }
+      } catch (error) {
+        console.error('[Order] Failed to fetch Clover data:', error);
+      }
+    }
+    fetchCloverData();
+  }, []);
+
+  // Helper to get Clover modifier ID by name
+  const getCloverModId = useCallback((modifierName: string, groupId?: string): string | undefined => {
+    for (const group of cloverModifierGroups) {
+      if (groupId && group.id !== groupId) continue;
+      const mod = group.modifiers.find(m => m.name.toLowerCase() === modifierName.toLowerCase());
+      if (mod?.cloverModId) return mod.cloverModId;
+    }
+    return undefined;
+  }, [cloverModifierGroups]);
+
+  // Helper to get Clover item ID by local item ID
+  const getCloverItemId = useCallback((itemId: string): string | undefined => {
+    return cloverItemIds[itemId];
+  }, [cloverItemIds]);
 
   useEffect(() => {
     // Set default pickup date to today
@@ -689,9 +748,8 @@ function OrderPageContent() {
             specialInstructions: parsed.specialInstructions || prev.specialInstructions,
           }));
           sessionStorage.removeItem('checkoutForm');
-          console.log('[Checkout] Restored form from sessionStorage:', parsed);
-        } catch (e) {
-          console.error('[Checkout] Failed to restore form:', e);
+        } catch {
+          // Failed to restore form - ignore
         }
       }
       setShowCheckout(true);
@@ -738,6 +796,7 @@ function OrderPageContent() {
     const quantity = itemQuantities[item.id] || 1;
     addItem({
       menuItemId: item.id,
+      cloverItemId: getCloverItemId(item.id),
       name: item.name,
       basePrice: item.price,
       quantity: quantity,
@@ -754,13 +813,19 @@ function OrderPageContent() {
     const modifierPrice = size.price - baseSidePrice;
     const quantity = itemQuantities[item.id] || 1;
 
+    // Determine which size modifier group
+    const sizeGroupId = item.id === 'side-fries' ? 'size-fries' : 'size-sides';
+    const cloverModId = getCloverModId(size.label, sizeGroupId);
+
     addItem({
       menuItemId: item.id,
+      cloverItemId: getCloverItemId(item.id),
       name: item.name,
       basePrice: baseSidePrice,
       quantity: quantity,
       modifiers: [{
         id: `size-${size.label}`,
+        cloverModId,
         name: size.label,
         price: modifierPrice,
         category: 'Size'
@@ -780,18 +845,21 @@ function OrderPageContent() {
     const modifiers = [
       ...meats.map((meat, idx) => ({
         id: `meat-${idx}-${meat.label}`,
+        cloverModId: getCloverModId(meat.label, 'meat-selection'),
         name: meat.label,
         price: meat.price,
         category: 'Meat'
       })),
       ...sides.map((side, idx) => ({
         id: `side-${idx}-${side.label}`,
+        cloverModId: getCloverModId(side.label, 'side-selection'),
         name: side.label,
         price: side.price,
         category: 'Side'
       })),
       ...condiments.map((condiment, idx) => ({
         id: `condiment-${idx}-${condiment.label}`,
+        cloverModId: getCloverModId(condiment.label, 'condiments'),
         name: condiment.label,
         price: condiment.price,
         category: 'Condiment'
@@ -800,6 +868,7 @@ function OrderPageContent() {
 
     addItem({
       menuItemId: item.id,
+      cloverItemId: getCloverItemId(item.id),
       name: item.name,
       basePrice: item.price,
       quantity: quantity,
@@ -818,12 +887,14 @@ function OrderPageContent() {
       const modifiers = [
         {
           id: `weight-${pendingMeatData.weight.label}`,
+          cloverModId: pendingMeatData.weight.cloverModId,
           name: pendingMeatData.weight.label,
           price: 0,
           category: 'Weight'
         },
         ...condiments.map((condiment, idx) => ({
           id: `condiment-${idx}-${condiment.label}`,
+          cloverModId: getCloverModId(condiment.label, 'condiments'),
           name: condiment.label,
           price: condiment.price,
           category: 'Condiment'
@@ -832,6 +903,7 @@ function OrderPageContent() {
 
       addItem({
         menuItemId: pendingMeatData.item.id,
+        cloverItemId: getCloverItemId(pendingMeatData.item.id),
         name: pendingMeatData.item.name,
         basePrice: pendingMeatData.weight.price,
         quantity: quantity,
@@ -847,6 +919,7 @@ function OrderPageContent() {
       const quantity = itemQuantities[condimentModalItem.id] || 1;
       const modifiers = condiments.map((condiment, idx) => ({
         id: `condiment-${idx}-${condiment.label}`,
+        cloverModId: getCloverModId(condiment.label, 'condiments'),
         name: condiment.label,
         price: condiment.price,
         category: 'Condiment'
@@ -854,6 +927,7 @@ function OrderPageContent() {
 
       addItem({
         menuItemId: condimentModalItem.id,
+        cloverItemId: getCloverItemId(condimentModalItem.id),
         name: condimentModalItem.name,
         basePrice: condimentModalItem.price,
         quantity: quantity,
@@ -878,6 +952,7 @@ function OrderPageContent() {
       // Add meat selection if applicable
       ...(meat ? [{
         id: `meat-${meat.label}`,
+        cloverModId: getCloverModId(meat.label, 'meat-selection'),
         name: meat.label,
         price: meat.price,
         category: 'Meat'
@@ -885,6 +960,7 @@ function OrderPageContent() {
       // Add included toppings (no charge)
       ...includedToppings.map((topping, idx) => ({
         id: `topping-included-${idx}-${topping.label}`,
+        cloverModId: getCloverModId(topping.label, 'add-on-toppings'),
         name: topping.label,
         price: 0.00, // Included toppings are free
         category: 'Topping'
@@ -892,6 +968,7 @@ function OrderPageContent() {
       // Add add-on toppings (with charge)
       ...addOnToppings.map((topping, idx) => ({
         id: `topping-addon-${idx}-${topping.label}`,
+        cloverModId: getCloverModId(topping.label, 'add-on-toppings'),
         name: `Extra ${topping.label}`,
         price: topping.price,
         category: 'Add-on'
@@ -899,6 +976,7 @@ function OrderPageContent() {
       // Add condiments
       ...condiments.map((condiment, idx) => ({
         id: `condiment-${idx}-${condiment.label}`,
+        cloverModId: getCloverModId(condiment.label, 'condiments'),
         name: condiment.label,
         price: condiment.price,
         category: 'Condiment'
@@ -907,6 +985,7 @@ function OrderPageContent() {
 
     addItem({
       menuItemId: favoritesModalItem.id,
+      cloverItemId: getCloverItemId(favoritesModalItem.id),
       name: favoritesModalItem.name,
       basePrice: favoritesModalItem.price,
       quantity: quantity,
@@ -918,8 +997,12 @@ function OrderPageContent() {
   };
 
   const handleMeatWeightSelection = (item: MenuItem, weight: { label: string; price: number }) => {
+    // Determine which weight modifier group based on item (premium vs standard)
+    const weightGroupId = item.id === 'brisket-sliced' ? 'meat-weight-premium' : 'meat-weight-standard';
+    const cloverModId = getCloverModId(weight.label, weightGroupId);
+
     // Store meat weight data and close meat modal first
-    setPendingMeatData({ item, weight });
+    setPendingMeatData({ item, weight: { ...weight, cloverModId } });
     setMeatWeightModalItem(null);
 
     // Show condiment modal after a brief delay to ensure clean state transition
@@ -968,23 +1051,14 @@ function OrderPageContent() {
     }
 
     setFormErrors(errors);
-    console.log('[Checkout] Validation errors:', errors);
     return Object.keys(errors).length === 0;
   };
 
   const handleCheckoutSubmit = async () => {
-    console.log('[Checkout] Submit button clicked');
-    console.log('[Checkout] Form data:', checkoutForm);
-    console.log('[Checkout] Cart items:', items);
-    console.log('[Checkout] Pickup date:', checkoutForm.pickupDate);
-    console.log('[Checkout] Pickup time:', checkoutForm.pickupTime);
-
     if (!validateForm()) {
-      console.log('[Checkout] Form validation failed - check errors above');
       return;
     }
 
-    console.log('[Checkout] Form validation passed, creating order...');
     setPaymentProcessing(true);
 
     try {
@@ -1013,26 +1087,17 @@ function OrderPageContent() {
         total,
       };
 
-      console.log('[Checkout] Sending order data:', orderData);
-      console.time('[Checkout] API call duration');
-
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData),
       });
 
-      console.timeEnd('[Checkout] API call duration');
-      console.log('[Checkout] Response status:', response.status);
-
       const result = await response.json();
-      console.log('[Checkout] Response body:', result);
 
       if (!response.ok) {
         throw new Error(result.error || result.message || 'Failed to create order');
       }
-
-      console.log('[Checkout] Order created successfully:', result.order);
 
       // Store order info and show payment modal
       setCurrentOrderId(result.order.id);
@@ -1040,15 +1105,13 @@ function OrderPageContent() {
       setShowCheckout(false);
       setShowPaymentModal(true);
     } catch (error) {
-      console.error('[Checkout] Order creation failed:', error);
       alert(error instanceof Error ? error.message : 'Failed to create order. Please try again.');
     } finally {
       setPaymentProcessing(false);
     }
   };
 
-  const handlePaymentSuccess = (result: { paymentId: string; cloverOrderId: string; last4: string; brand: string }) => {
-    console.log('Payment successful:', result);
+  const handlePaymentSuccess = (_result: { paymentId: string; cloverOrderId: string; last4: string; brand: string }) => {
     setShowPaymentModal(false);
     setOrderConfirmed(true);
 
@@ -1096,14 +1159,8 @@ function OrderPageContent() {
     const todayStr = now.toISOString().split('T')[0];
     const isToday = selectedDate === todayStr;
 
-    // Debug logging
-    console.log('[TimeSlots] Current time:', now.toLocaleString());
-    console.log('[TimeSlots] Selected date:', selectedDate, 'Is today:', isToday);
-    console.log('[TimeSlots] Day of week:', new Date(selectedDate + 'T12:00:00').getDay());
-
     // Return empty if closed day
     if (isClosedDay(selectedDate)) {
-      console.log('[TimeSlots] Closed day - no slots');
       return slots;
     }
 
@@ -1131,7 +1188,6 @@ function OrderPageContent() {
       }
     }
 
-    console.log('[TimeSlots] Generated slots:', slots.length);
     return slots;
   };
 
@@ -1443,18 +1499,61 @@ function OrderPageContent() {
                   <Calendar className="inline w-4 h-4 mr-1" />
                   Pickup Date & Time
                 </label>
-                <input
-                  type="date"
-                  value={checkoutForm.pickupDate}
-                  onChange={(e) => handleInputChange('pickupDate', e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full px-3 py-2 rounded mb-2"
-                  style={{
-                    backgroundColor: 'rgba(30, 30, 30, 0.8)',
-                    border: '1px solid rgba(255, 107, 53, 0.3)',
-                    color: '#F8F8F8'
-                  }}
-                />
+                <div className="relative">
+                  <DatePicker
+                    selected={checkoutForm.pickupDate ? new Date(checkoutForm.pickupDate + 'T12:00:00') : null}
+                    onChange={(date: Date | null) => {
+                      if (date) {
+                        const dateStr = date.toISOString().split('T')[0];
+                        handleInputChange('pickupDate', dateStr);
+                        // Clear pickup time when date changes
+                        handleInputChange('pickupTime', '');
+                      }
+                    }}
+                    minDate={new Date()}
+                    filterDate={(date: Date) => {
+                      // Disable Sunday (0) and Monday (1)
+                      const day = date.getDay();
+                      return day !== 0 && day !== 1;
+                    }}
+                    dateFormat="EEEE, MMMM d, yyyy"
+                    placeholderText="Select pickup date"
+                    className="w-full px-3 py-2 rounded mb-2 cursor-pointer"
+                    calendarClassName="rise-n-smoke-calendar"
+                    wrapperClassName="w-full"
+                    popperClassName="rise-n-smoke-calendar-popper"
+                    showPopperArrow={false}
+                    renderCustomHeader={({
+                      date,
+                      decreaseMonth,
+                      increaseMonth,
+                      prevMonthButtonDisabled,
+                      nextMonthButtonDisabled,
+                    }) => (
+                      <div className="flex items-center justify-between px-2 py-2">
+                        <button
+                          onClick={decreaseMonth}
+                          disabled={prevMonthButtonDisabled}
+                          type="button"
+                          className="p-1 rounded hover:bg-orange-500/20 disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                          <ChevronLeft className="w-5 h-5" style={{ color: '#FF6B35' }} />
+                        </button>
+                        <span className="text-base font-semibold" style={{ color: '#FFD700' }}>
+                          {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                        </span>
+                        <button
+                          onClick={increaseMonth}
+                          disabled={nextMonthButtonDisabled}
+                          type="button"
+                          className="p-1 rounded hover:bg-orange-500/20 disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                          <ChevronRight className="w-5 h-5" style={{ color: '#FF6B35' }} />
+                        </button>
+                      </div>
+                    )}
+                  />
+                </div>
                 {(() => {
                   const slots = generateTimeSlots();
                   const selectedDateObj = new Date(checkoutForm.pickupDate + 'T12:00:00');
@@ -1830,8 +1929,7 @@ function OrderPageContent() {
                       <div className="mt-3 p-3 rounded" style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)' }}>
                         <p className="text-sm" style={{ color: '#FF6B35' }}>
                           ✓ Save your order history<br />
-                          ✓ Quick reorder your favorites<br />
-                          ✓ Earn loyalty points
+                          ✓ Quick reorder your favorites
                         </p>
                       </div>
                     </div>

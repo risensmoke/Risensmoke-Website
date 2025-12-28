@@ -14,11 +14,6 @@ const Header = () => {
   const userMenuRef = useRef<HTMLDivElement>(null);
   const { data: session, status } = useSession();
 
-  // Debug session loading
-  useEffect(() => {
-    console.log('[Session] Status:', status, 'User:', session?.user?.email || 'none', 'Time:', new Date().toLocaleTimeString());
-  }, [status, session]);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);

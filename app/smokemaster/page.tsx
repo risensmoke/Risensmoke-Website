@@ -17,22 +17,8 @@ export default function SmokeMasterPage() {
     <div className="min-h-screen" style={{ backgroundColor: '#1C1C1C' }}>
       {/* Hero Section with Parallax */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        >
-          <Image
-            src="/Image_Smokemaster.jpg"
-            alt="Mike Johnson - The SmokeMaster"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
-        </div>
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#1C1C1C] to-black" />
 
         {/* Smoke Animation */}
         <div className="absolute inset-0 opacity-30">
@@ -41,6 +27,23 @@ export default function SmokeMasterPage() {
 
         {/* Hero Content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto" style={{ padding: '0 1rem' }}>
+          {/* Rise N' Smoke Logo */}
+          <div
+            className="mb-8"
+            style={{
+              transform: `translateY(${scrollY * 0.3}px)`,
+            }}
+          >
+            <Image
+              src="/Assets/Logo/Logo_RiseNSmoke.svg"
+              alt="Rise N' Smoke Logo"
+              width={300}
+              height={300}
+              className="mx-auto shadow-2xl hover:scale-105 transition-transform duration-500"
+              style={{ backgroundColor: 'transparent', mixBlendMode: 'normal' }}
+              priority
+            />
+          </div>
           <h1
             className="text-5xl sm:text-6xl lg:text-7xl mb-6"
             style={{

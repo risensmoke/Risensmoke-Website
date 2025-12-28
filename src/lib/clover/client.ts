@@ -75,6 +75,11 @@ async function cloverFetch<T>(
     ...(options.headers as Record<string, string>),
   };
 
+  // Add merchant ID header for Ecommerce API calls
+  if (useEcomBase && CLOVER_MERCHANT_ID) {
+    headers['X-Clover-Merchant-Id'] = CLOVER_MERCHANT_ID;
+  }
+
   let lastError: Error | null = null;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
@@ -404,13 +409,14 @@ export async function getOrCreateCustomer(
   }
 
   // Create new customer
-  return createCustomer({
+  const newCustomer = await createCustomer({
     firstName: data.firstName,
     lastName: data.lastName,
     emailAddresses: [{ emailAddress: data.email }],
     phoneNumbers: [{ phoneNumber: data.phone.replace(/\D/g, '') }],
     marketingAllowed: false,
   });
+  return newCustomer;
 }
 
 // ============================================

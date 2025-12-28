@@ -10,7 +10,8 @@ This guide covers deploying the Rise N' Smoke online ordering application to pro
 
 - [ ] Clover production credentials obtained
 - [ ] Supabase production project created
-- [ ] Hosting platform selected (Vercel recommended)
+- [ ] Netlify account created
+- [ ] Clover ID export script run for production
 - [ ] Domain configured
 - [ ] SSL certificate active
 
@@ -18,28 +19,57 @@ This guide covers deploying the Rise N' Smoke online ordering application to pro
 
 ## Step 1: Clover Production Setup
 
+### Important: Production vs Sandbox
+
+**Production is simpler than Sandbox!**
+
+In sandbox, you deal with Developer Accounts, Apps, and Test Merchants that must be linked together. In production, there's just your **Merchant Account** - no separate "App" to install or configure.
+
+Since you already have a working Clover merchant account accepting counter payments, you just need to:
+1. Enable Ecommerce on your existing merchant
+2. Get the API credentials
+3. Configure the allowed Site URL
+
 ### 1.1 Get Production Credentials
 
-From your **Clover Merchant Dashboard** (https://www.clover.com/dashboard):
+Log into your **Clover Merchant Dashboard** at https://www.clover.com/dashboard
 
-1. **Merchant ID**
-   - Go to: Account & Setup > Business Information
-   - Copy your Merchant ID
+#### A. Merchant ID
+- Look at your browser URL when logged in: `clover.com/dashboard/m/XXXXXXXXXXXX`
+- The `XXXXXXXXXXXX` is your Merchant ID
+- Or go to: **Account & Setup** > **Business Information**
 
-2. **API Access Token**
-   - Go to: Account & Setup > API Tokens
-   - Create a new token with the following permissions:
-     - Orders (Read/Write)
-     - Payments (Read/Write)
-     - Customers (Read/Write)
-     - Inventory (Read)
-   - Copy the generated token
+#### B. REST API Access Token
+This token is used for orders, customers, inventory, and print functions.
 
-3. **Ecommerce API Keys**
-   - Go to: Account & Setup > Ecommerce
-   - Generate or copy your:
-     - **Public Key (PAKMS)** - for frontend tokenization
-     - **Private Key** - for backend charge processing
+1. Go to: **Account & Setup** > **API Tokens**
+2. Click **"Create new token"** (or use existing if one exists)
+3. Set permissions:
+   - **Customers**: Read & Write
+   - **Inventory**: Read & Write
+   - **Orders**: Read & Write
+   - **Payments**: Read & Write
+4. Copy the generated token (format: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`)
+
+#### C. Ecommerce API Keys (for Online Payments)
+These keys are used for credit card tokenization and charging.
+
+1. Go to: **Account & Setup** > **Ecommerce** > **API Tokens**
+   - Or navigate to: **Setup** > **Ecommerce** in the left menu
+2. If no token exists, click **"Create new token"** with Integration type: **IFRAME**
+3. Copy both keys:
+   - **Public Token** - 32 character hex string (for frontend iframe tokenization)
+   - **Private Token** - UUID format (for backend charge processing)
+
+#### D. Configure Site URL (REQUIRED for Payment Iframe)
+The Clover payment iframe will only work on whitelisted domains.
+
+1. Go to: **Account & Setup** > **Ecommerce** > **Hosted Checkout** (or similar)
+2. Look for **Site URL** or **Allowed Origins** setting
+3. Add your production domain: `https://risensmoke.com` (or `https://order.risensmoke.com`)
+4. Save changes
+
+**Note**: Without the correct Site URL configured, the payment form will fail to tokenize cards.
 
 ### 1.2 Production API URLs
 
@@ -196,8 +226,10 @@ CLOVER_ECOM_BASE_URL=https://scl.clover.com
 CLOVER_ECOM_PRIVATE_KEY=your_production_ecom_private_key
 
 # Clover Frontend SDK (Production)
+# Note: NEXT_PUBLIC_CLOVER_MERCHANT_ID should match CLOVER_MERCHANT_ID
 NEXT_PUBLIC_CLOVER_API_KEY=your_production_pakms_public_key
 NEXT_PUBLIC_CLOVER_SDK_URL=https://checkout.clover.com/sdk.js
+NEXT_PUBLIC_CLOVER_MERCHANT_ID=your_production_merchant_id
 
 # ===========================================
 # BUSINESS CONFIGURATION
@@ -236,25 +268,12 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 ### 4.1 Menu Data File
 
-The menu data is stored in `data/menu-data.json` and includes:
+The menu data is stored in `src/data/menu-data.json` and includes:
 - 8 Categories
 - 8 Modifier Groups
 - 44 Menu Items
 
-### 4.2 Clover Menu Sync
-
-The application reads menu data from the local JSON file. If you need to sync with Clover's inventory:
-
-1. **Option A: Use Local Menu** (Recommended)
-   - Menu is managed in `data/menu-data.json`
-   - Update this file to change menu items
-   - No Clover sync required
-
-2. **Option B: Sync from Clover**
-   - Use the menu export utility: `src/lib/clover/menuExport.ts`
-   - Run sync to pull items from Clover inventory
-
-### 4.3 Menu Data Structure
+### 4.2 Menu Data Structure
 
 ```json
 {
@@ -287,57 +306,205 @@ The application reads menu data from the local JSON file. If you need to sync wi
 
 ---
 
-## Step 5: Deploy to Vercel
+## Step 5: Clover ID Synchronization (REQUIRED)
 
-### 5.1 Connect Repository
+**This step is critical for orders to display correctly in Clover with all modifiers and item details.**
 
-1. Go to https://vercel.com
-2. Import your GitHub repository
-3. Select the `risensmoke-app` project
+### 5.1 How Clover IDs Work
 
-### 5.2 Configure Build Settings
+When you import menu items into Clover, Clover assigns unique IDs to each item and modifier. The website needs these IDs to link orders correctly. Without them, orders will only show item names without the linked Clover inventory items.
 
-- **Framework Preset**: Next.js
-- **Build Command**: `npm run build`
-- **Output Directory**: `.next`
-- **Install Command**: `npm install`
+### 5.2 The Synchronization Flow
 
-### 5.3 Add Environment Variables
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Import Menu    │ ──► │  Clover Assigns │ ──► │  Export IDs     │
+│  to Clover      │     │  Unique IDs     │     │  Back to App    │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                         │
+                                                         ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Orders Link    │ ◄── │  Website Uses   │ ◄── │  IDs Saved to   │
+│  to Clover Items│     │  Clover IDs     │     │  Mapping File   │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
 
-In Vercel Dashboard > Settings > Environment Variables:
+### 5.3 Export Clover IDs After Menu Import
 
-1. Add all production environment variables from Step 3
-2. Set them for **Production** environment
-3. Optionally set different values for **Preview** (sandbox credentials)
+After importing your menu to Clover (either via dashboard or import script), run the export script to fetch the Clover-assigned IDs:
 
-### 5.4 Deploy
+**For Sandbox (Testing):**
+```bash
+CLOVER_API_BASE_URL=https://sandbox.dev.clover.com \
+CLOVER_MERCHANT_ID=your_sandbox_merchant_id \
+CLOVER_ACCESS_TOKEN=your_sandbox_token \
+npx ts-node scripts/export-clover-ids.ts
+```
 
-1. Click "Deploy"
-2. Wait for build to complete
-3. Verify deployment at the generated URL
+**For Production:**
+```bash
+CLOVER_API_BASE_URL=https://api.clover.com \
+CLOVER_MERCHANT_ID=your_production_merchant_id \
+CLOVER_ACCESS_TOKEN=your_production_token \
+npx ts-node scripts/export-clover-ids.ts
+```
+
+### 5.4 Script Output
+
+The script will:
+1. Connect to your Clover merchant account
+2. Fetch all categories, items, and modifiers with their Clover IDs
+3. Match them to your local menu items by name
+4. Generate a mapping file: `src/data/clover-mappings-{environment}.json`
+
+Example output:
+```
+==================================================
+Clover ID Export Script
+==================================================
+Environment: production
+Merchant ID: XXXXXXXXXX
+
+Fetching categories...
+  Found 8 categories
+Fetching modifier groups...
+  Found 8 modifier groups
+Fetching items...
+  Found 44 items
+
+Matching categories...
+  ✓ Blessed Plates → VBC7HNG2EX0QG
+  ✓ Sandwiches → K5Q39Q30N168R
+  ...
+
+Matching modifier groups and modifiers...
+  ✓ Group: Meat Selection → BQ1M569SATSK0
+    ✓ Sliced Brisket → Y5M2M26XQ52BW
+    ✓ Chopped Brisket → JP2H237FDTFBW
+    ...
+
+Matching items...
+  ✓ Gospel Plate → RAS2VBTDFM7CG
+  ✓ Disciples Plate → SE0X2HYTM1WN2
+  ...
+
+==================================================
+Export Complete!
+==================================================
+Categories matched: 8/8
+Modifier groups matched: 8/8
+Modifiers matched: 40
+Items matched: 44/44
+
+Output saved to: src/data/clover-mappings-production.json
+```
+
+### 5.5 Verify Before Deployment
+
+After running the export:
+
+1. **Check the mapping file** at `src/data/clover-mappings-production.json`
+2. **Verify all items matched** - if any show "NOT FOUND", ensure names match exactly in Clover
+3. **Commit the mapping file** to your repository
+4. **Deploy** - the website will now use the correct Clover IDs
+
+### 5.6 When to Re-Run Export
+
+You must re-run the export script when:
+- Adding new menu items to Clover
+- Adding new modifiers to Clover
+- Changing item/modifier names in Clover
+- Switching from sandbox to production
 
 ---
 
-## Step 6: Domain Configuration
+## Step 6: Deploy to Netlify
 
-### 6.1 Add Custom Domain
+### 6.1 Connect Repository
 
-In Vercel Dashboard > Settings > Domains:
+1. Go to https://app.netlify.com
+2. Click "Add new site" > "Import an existing project"
+3. Connect your GitHub account and select the `risensmoke-app` repository
 
-1. Add your domain: `order.risensmoke.com`
-2. Configure DNS records as instructed:
-   - **CNAME**: `order` → `cname.vercel-dns.com`
-   - Or **A Record**: `@` → Vercel IP
+### 6.2 Configure Build Settings
 
-### 6.2 SSL Certificate
+- **Base directory**: (leave blank)
+- **Build command**: `npm run build`
+- **Publish directory**: `.next`
+- **Functions directory**: `netlify/functions` (if using)
 
-Vercel automatically provisions SSL certificates for custom domains.
+### 6.3 Install Next.js Plugin
+
+Netlify requires the Next.js runtime plugin. Add to your `netlify.toml` (create if it doesn't exist):
+
+```toml
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+```
+
+Install the plugin:
+```bash
+npm install -D @netlify/plugin-nextjs
+```
+
+### 6.4 Add Environment Variables
+
+In Netlify Dashboard > Site settings > Environment variables:
+
+1. Click "Add a variable"
+2. Add all production environment variables from Step 3
+3. Set the scope to **Production** (or All if you want same for deploy previews)
+
+**Required variables:**
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXTAUTH_URL`
+- `NEXTAUTH_SECRET`
+- `JWT_SECRET`
+- `CLOVER_API_BASE_URL`
+- `CLOVER_MERCHANT_ID`
+- `CLOVER_ACCESS_TOKEN`
+- `CLOVER_ECOM_BASE_URL`
+- `CLOVER_ECOM_PRIVATE_KEY`
+- `NEXT_PUBLIC_CLOVER_API_KEY`
+- `NEXT_PUBLIC_CLOVER_SDK_URL`
+- `NEXT_PUBLIC_CLOVER_MERCHANT_ID`
+
+### 6.5 Deploy
+
+1. Click "Deploy site"
+2. Wait for build to complete (first build may take 2-5 minutes)
+3. Verify deployment at the generated URL (e.g., `your-site-name.netlify.app`)
 
 ---
 
-## Step 7: Post-Deployment Verification
+## Step 7: Domain Configuration
 
-### 7.1 Test Checklist
+### 7.1 Add Custom Domain in Netlify
+
+In Netlify Dashboard > Domain management:
+
+1. Click "Add a domain"
+2. Enter your domain: `order.risensmoke.com`
+3. Configure DNS records as instructed:
+   - **CNAME**: `order` → `your-site-name.netlify.app`
+   - Or use Netlify DNS for automatic configuration
+
+### 7.2 SSL Certificate
+
+Netlify automatically provisions free SSL certificates via Let's Encrypt for custom domains.
+
+---
+
+## Step 8: Post-Deployment Verification
+
+### 8.1 Test Checklist
 
 - [ ] Homepage loads correctly
 - [ ] Menu items display with correct prices
@@ -350,7 +517,7 @@ Vercel automatically provisions SSL certificates for custom domains.
 - [ ] Receipt shows correct "Total paid"
 - [ ] Order confirmation page displays
 
-### 7.2 Test Card Numbers
+### 8.2 Test Card Numbers
 
 For Clover sandbox testing:
 | Card | Number | CVV | Expiry |
@@ -363,24 +530,25 @@ For Clover sandbox testing:
 
 ---
 
-## Step 8: Monitoring & Maintenance
+## Step 9: Monitoring & Maintenance
 
-### 8.1 Error Monitoring
+### 9.1 Error Monitoring
 
 Consider adding:
-- Vercel Analytics (built-in)
+- Netlify Analytics (available on paid plans)
 - Sentry for error tracking
 - LogRocket for session replay
 
-### 8.2 Database Backups
+### 9.2 Database Backups
 
 Supabase provides automatic daily backups on paid plans.
 
-### 8.3 Updates
+### 9.3 Updates
 
 To deploy updates:
 1. Push changes to main branch
-2. Vercel automatically rebuilds and deploys
+2. Netlify automatically rebuilds and deploys
+3. View build logs in Netlify Dashboard > Deploys
 
 ---
 
@@ -391,6 +559,8 @@ To deploy updates:
 | Issue | Solution |
 |-------|----------|
 | Payment form not loading | Check `NEXT_PUBLIC_CLOVER_API_KEY` and `NEXT_PUBLIC_CLOVER_SDK_URL` |
+| "Failed to tokenize card" or empty `{}` response | Verify Site URL is configured in Clover Ecommerce settings (Step 1.1.D) |
+| 401 Unauthorized on tokenization | Check `NEXT_PUBLIC_CLOVER_API_KEY` is correct and matches Ecommerce API public token |
 | Orders not appearing in Clover | Verify `CLOVER_MERCHANT_ID` and `CLOVER_ACCESS_TOKEN` |
 | Payment succeeds but not linked to order | Ensure using production Ecommerce API URL |
 | Customer not created | Check API token has Customers permission |
@@ -400,7 +570,7 @@ To deploy updates:
 
 - **Clover Support**: https://www.clover.com/support
 - **Supabase Support**: https://supabase.com/support
-- **Vercel Support**: https://vercel.com/support
+- **Netlify Support**: https://www.netlify.com/support
 
 ---
 
@@ -448,6 +618,7 @@ CLOVER_ACCESS_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 CLOVER_ECOM_PRIVATE_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_CLOVER_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_CLOVER_SDK_URL=https://checkout.clover.com/sdk.js
+NEXT_PUBLIC_CLOVER_MERCHANT_ID=XXXXXXXXXX
 
 # Business
 TAX_RATE=0.08

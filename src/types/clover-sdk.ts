@@ -9,7 +9,11 @@ export interface CloverOptions {
 
 export interface CloverInstance {
   elements: () => CloverElements;
-  createToken: () => Promise<{ token?: string; error?: { message: string } }>;
+  createToken: () => Promise<{
+    token?: string;
+    error?: { message: string };
+    errors?: Array<{ message?: string }>;
+  }>;
 }
 
 export interface CloverElements {

@@ -1,0 +1,583 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2024-12-24",
+  "restaurant": {
+    "name": "Rise N' Smoke",
+    "address": "401 Abbott Avenue, Hillsboro Texas 76645",
+    "phone": "(254) 221-6247"
+  },
+  "categories": [
+    { "id": "blessed-plates", "name": "Blessed Plates", "sortOrder": 1 },
+    { "id": "sandwiches", "name": "Sandwiches", "sortOrder": 2 },
+    { "id": "meats", "name": "Meats", "sortOrder": 3 },
+    { "id": "favorites", "name": "Favorites", "sortOrder": 4 },
+    { "id": "family-meals", "name": "Family Meals", "sortOrder": 5 },
+    { "id": "sides", "name": "Sides", "sortOrder": 6 },
+    { "id": "desserts", "name": "Desserts", "sortOrder": 7 },
+    { "id": "extras", "name": "Extras", "sortOrder": 8 }
+  ],
+  "modifierGroups": [
+    {
+      "id": "meat-selection",
+      "name": "Meat Selection",
+      "required": false,
+      "minSelections": 0,
+      "maxSelections": null,
+      "modifiers": [
+        { "id": "sliced-brisket", "name": "Sliced Brisket", "price": 0 },
+        { "id": "chopped-brisket", "name": "Chopped Brisket", "price": 0 },
+        { "id": "pulled-pork", "name": "Pulled Pork", "price": 0 },
+        { "id": "smoked-ribs", "name": "Smoked Ribs", "price": 0 },
+        { "id": "smoked-chicken", "name": "Smoked Chicken", "price": 0 },
+        { "id": "jalapeno-cheddar-sausage", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link", "name": "Hot Link", "price": 0 }
+      ]
+    },
+    {
+      "id": "side-selection",
+      "name": "Side Selection",
+      "required": false,
+      "minSelections": 0,
+      "maxSelections": null,
+      "modifiers": [
+        { "id": "mac-cheese", "name": "Mamas Smoky Mac & Cheese", "price": 0 },
+        { "id": "potato-salad", "name": "Blessed Potato Salad", "price": 0 },
+        { "id": "baked-beans", "name": "Hallelujah Baked Beans", "price": 0 },
+        { "id": "green-beans", "name": "Divine Green Beans", "price": 0 },
+        { "id": "cole-slaw", "name": "Salvation Cole Slaw", "price": 0 }
+      ]
+    },
+    {
+      "id": "condiments",
+      "name": "Condiments",
+      "required": false,
+      "minSelections": 0,
+      "maxSelections": null,
+      "modifiers": [
+        { "id": "smoky-bbq", "name": "Smoky BBQ Sauce", "price": 0 },
+        { "id": "sweet-spicy-bbq", "name": "Sweet & Spicy BBQ Sauce", "price": 0 },
+        { "id": "pickles", "name": "Pickles", "price": 0 },
+        { "id": "onions", "name": "Onions", "price": 0 },
+        { "id": "jalapenos", "name": "Jalapenos", "price": 0 },
+        { "id": "ketchup", "name": "Ketchup", "price": 0 }
+      ]
+    },
+    {
+      "id": "size-sides",
+      "name": "Size - Sides",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "modifiers": [
+        { "id": "4oz", "name": "4 oz", "price": 0 },
+        { "id": "16oz", "name": "16 oz", "price": 5.15 },
+        { "id": "32oz", "name": "32 oz", "price": 9.15 }
+      ]
+    },
+    {
+      "id": "size-fries",
+      "name": "Size - French Fries",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "modifiers": [
+        { "id": "small", "name": "Small", "price": 0 },
+        { "id": "large", "name": "Large", "price": 5.15 },
+        { "id": "family", "name": "Family", "price": 9.15 }
+      ]
+    },
+    {
+      "id": "meat-weight-standard",
+      "name": "Meat Weight - Standard",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "modifiers": [
+        { "id": "quarter-lb", "name": "1/4 lb", "price": 0 },
+        { "id": "half-lb", "name": "1/2 lb", "price": 5.50 },
+        { "id": "three-quarter-lb", "name": "3/4 lb", "price": 10.40 },
+        { "id": "one-lb", "name": "1 lb", "price": 14.00 }
+      ]
+    },
+    {
+      "id": "meat-weight-premium",
+      "name": "Meat Weight - Premium",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "modifiers": [
+        { "id": "quarter-lb-p", "name": "1/4 lb", "price": 0 },
+        { "id": "half-lb-p", "name": "1/2 lb", "price": 6.40 },
+        { "id": "three-quarter-lb-p", "name": "3/4 lb", "price": 9.50 },
+        { "id": "one-lb-p", "name": "1 lb", "price": 16.50 }
+      ]
+    },
+    {
+      "id": "add-on-toppings",
+      "name": "Add-on Toppings",
+      "required": false,
+      "minSelections": 0,
+      "maxSelections": null,
+      "modifiers": [
+        { "id": "shredded-cheese", "name": "Shredded Cheddar Cheese", "price": 1.00 },
+        { "id": "queso", "name": "Queso", "price": 1.85 },
+        { "id": "sour-cream", "name": "Sour Cream", "price": 0.50 },
+        { "id": "ranch", "name": "Ranch Dressing", "price": 0.50 },
+        { "id": "italian", "name": "Italian Dressing", "price": 0.50 }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "gospel-plate",
+      "name": "Gospel Plate",
+      "description": "Mini gospel truth about the smoke",
+      "price": 12.50,
+      "categoryId": "blessed-plates",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "disciples-plate",
+      "name": "Disciples Plate",
+      "description": "One meat blessed by the rise",
+      "price": 15.35,
+      "categoryId": "blessed-plates",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "trinity-plate",
+      "name": "Trinity Plate",
+      "description": "Two meats, one holy transformation",
+      "price": 16.95,
+      "categoryId": "blessed-plates",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "revelation-plate",
+      "name": "Revelation Plate",
+      "description": "Three meats; the truth about real smoke revealed",
+      "price": 18.45,
+      "categoryId": "blessed-plates",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "little-rise",
+      "name": "Rise N Smoke A Little",
+      "description": "Two Ribs; The Signature Rise N Smoke Plate",
+      "price": 13.00,
+      "categoryId": "blessed-plates",
+      "available": true,
+      "modifierGroupIds": ["side-selection", "condiments"]
+    },
+    {
+      "id": "lotta-rise",
+      "name": "Rise N Smoke A Lot",
+      "description": "Three Ribs; The Signature Rise N Smoke Plate",
+      "price": 18.45,
+      "categoryId": "blessed-plates",
+      "available": true,
+      "modifierGroupIds": ["side-selection", "condiments"]
+    },
+    {
+      "id": "brisket-sausage",
+      "name": "Smokey-Duo",
+      "description": "Double Smoked, Double Flavor *sausage & chopped brisket - no subs*",
+      "price": 13.00,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "sliced-brisket-sandwich",
+      "name": "Smoke Ring King",
+      "description": "Smoke Ring King - Sliced Brisket",
+      "price": 11.95,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "chopped-brisket-sandwich",
+      "name": "Smoke Ring Chopped",
+      "description": "Smoke Ring King - Chopped Brisket",
+      "price": 10.95,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "pulled-pork-sandwich",
+      "name": "Rise & Pull Pork",
+      "description": "Pork pulled from the rising flames of smoke",
+      "price": 10.95,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "hotlink-sandwich",
+      "name": "Fire & Desire",
+      "description": "Hotlink with a smokey edge to love",
+      "price": 8.50,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "jalapeno-cheddar-sandwich",
+      "name": "Cheesey Jalapeno Heat",
+      "description": "Sausage kissed with cheddar cheese & smokey jalapeno",
+      "price": 8.50,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "pork-ribs-sandwich",
+      "name": "Rise & Fall Ribs",
+      "description": "Rise, Smoke, and Fall from the bone!",
+      "price": 10.95,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "beef-sausage-sandwich",
+      "name": "Beef & Please",
+      "description": "Blessed by the rising flames",
+      "price": 10.95,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "smoke-chicken-sandwich",
+      "name": "Chicken & Smoke",
+      "description": "Smokey, finger-lickin goodness",
+      "price": 10.95,
+      "categoryId": "sandwiches",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "brisket-sliced-lb",
+      "name": "Sliced Brisket",
+      "description": "Premium smoked sliced brisket",
+      "price": 25.45,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-premium", "condiments"]
+    },
+    {
+      "id": "brisket-chopped-lb",
+      "name": "Chopped Brisket",
+      "description": "Premium smoked chopped brisket",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "pulled-pork-lb",
+      "name": "Pulled Pork",
+      "description": "Tender pulled pork shoulder",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "smoked-ribs-lb",
+      "name": "Smoked Ribs",
+      "description": "Fall-off-the-bone pork ribs",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "smoked-chicken-lb",
+      "name": "Smoked Chicken",
+      "description": "Tender smoked chicken",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "jalapeno-sausage-lb",
+      "name": "Jalapeño Cheddar Sausage",
+      "description": "Spicy jalapeño sausage",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "beef-sausage-lb",
+      "name": "Beef Sausage",
+      "description": "Premium beef sausage",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "hot-link-lb",
+      "name": "Hot Link",
+      "description": "Spicy hot link sausage",
+      "price": 19.95,
+      "categoryId": "meats",
+      "available": true,
+      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+    },
+    {
+      "id": "brisket-nachos",
+      "name": "Brisket Nachos",
+      "description": "Tortilla Chips, Chopped Brisket, Sauce & Queso",
+      "price": 11.95,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["add-on-toppings", "condiments"]
+    },
+    {
+      "id": "loaded-side-winder",
+      "name": "Loaded Side Winder",
+      "description": "Loaded Fries w/Sauce & Queso, Choice of Meat",
+      "price": 15.35,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "add-on-toppings", "condiments"]
+    },
+    {
+      "id": "red-pit-burrito",
+      "name": "Red Pit Burrito",
+      "description": "Seasoned Potatoes, Jalapeño Cheddar Sausage, Chopped Brisket, Sauce & Queso",
+      "price": 7.95,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "baked-potato-plain",
+      "name": "Baked Potato Plain",
+      "description": "Plain Baked Potato",
+      "price": 7.50,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["add-on-toppings"]
+    },
+    {
+      "id": "baked-potato-stuffed",
+      "name": "Baked Potato Stuffed",
+      "description": "Baked Potato stuffed w/Cheese & Sour Cream",
+      "price": 9.25,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["add-on-toppings"]
+    },
+    {
+      "id": "baked-potato-loaded",
+      "name": "Baked Potato Loaded",
+      "description": "Loaded Baked Potato w/Meat",
+      "price": 11.95,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "add-on-toppings"]
+    },
+    {
+      "id": "wraparound",
+      "name": "Sausage Wraparound",
+      "description": "Sausage Wraparound with your choice of premium sausage",
+      "price": 7.25,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["condiments"]
+    },
+    {
+      "id": "garden-salad",
+      "name": "Garden Salad",
+      "description": "Made to order garden salad",
+      "price": 6.50,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["add-on-toppings"]
+    },
+    {
+      "id": "chef-salad-meat",
+      "name": "Chef Salad with Meat",
+      "description": "Made to order Chef Salad with your choice of smoked meat",
+      "price": 9.25,
+      "categoryId": "favorites",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "add-on-toppings"]
+    },
+    {
+      "id": "small-group",
+      "name": "Small Smoke Stack",
+      "description": "Feeds 3-4 People - 1lb of Meat choice, 2 medium sides, bread & sauce",
+      "price": 44.95,
+      "categoryId": "family-meals",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "med-group",
+      "name": "Medium Smoke Stack",
+      "description": "Feeds 6-8 People - 2lbs of Meat choice, 2 large sides, bread & sauce",
+      "price": 82.95,
+      "categoryId": "family-meals",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "large-group",
+      "name": "Large Smoke Stack",
+      "description": "Feeds 10-12 People - 3lbs of Meat choice, 3 large sides, bread & sauce",
+      "price": 120.50,
+      "categoryId": "family-meals",
+      "available": true,
+      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+    },
+    {
+      "id": "mamas-smoky-mac",
+      "name": "Mamas Smoky Mac & Cheese",
+      "description": "Creamy comfort blessed by the kitchen",
+      "price": 2.85,
+      "categoryId": "sides",
+      "available": true,
+      "modifierGroupIds": ["size-sides"]
+    },
+    {
+      "id": "blessed-potato-salad",
+      "name": "Blessed Potato Salad",
+      "description": "Creamy potatoes touched by grace",
+      "price": 2.85,
+      "categoryId": "sides",
+      "available": true,
+      "modifierGroupIds": ["size-sides"]
+    },
+    {
+      "id": "hallelujah-baked-beans",
+      "name": "Hallelujah Baked Beans",
+      "description": "Baked sweet and smoky, worth the wait",
+      "price": 2.85,
+      "categoryId": "sides",
+      "available": true,
+      "modifierGroupIds": ["size-sides"]
+    },
+    {
+      "id": "divine-green-beans",
+      "name": "Divine Green Beans",
+      "description": "Divinely seasoned with love",
+      "price": 2.85,
+      "categoryId": "sides",
+      "available": true,
+      "modifierGroupIds": ["size-sides"]
+    },
+    {
+      "id": "salvation-cole-slaw",
+      "name": "Salvation Cole Slaw",
+      "description": "Fresh salvation in every bite",
+      "price": 2.85,
+      "categoryId": "sides",
+      "available": true,
+      "modifierGroupIds": ["size-sides"]
+    },
+    {
+      "id": "side-fries",
+      "name": "French Fries",
+      "description": "Crispy golden french fries",
+      "price": 2.85,
+      "categoryId": "sides",
+      "available": true,
+      "modifierGroupIds": ["size-fries"]
+    },
+    {
+      "id": "banana-pudding",
+      "name": "Banana Pudding",
+      "description": "Homemade banana pudding",
+      "price": 4.95,
+      "categoryId": "desserts",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "ice-cream",
+      "name": "Vanilla Ice Cream",
+      "description": "Rich & Creamy Vanilla Ice Cream",
+      "price": 1.25,
+      "categoryId": "desserts",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "peach-cobbler",
+      "name": "Homemade Peach Cobbler",
+      "description": "Delightful Peach Cobbler",
+      "price": 4.95,
+      "categoryId": "desserts",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "sweet-tea",
+      "name": "Tea",
+      "description": "Assorted variety of southern tea (unsweet, sweet, extra sweet)",
+      "price": 2.50,
+      "categoryId": "extras",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "soda",
+      "name": "Soda",
+      "description": "Assorted variety of Coca-Cola, Pepsi, and Dr Pepper products",
+      "price": 1.50,
+      "categoryId": "extras",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "water",
+      "name": "Bottled Water",
+      "description": "Bottled Water",
+      "price": 2.00,
+      "categoryId": "extras",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "potato-chips",
+      "name": "Potato Chips",
+      "description": "Assorted variety of Frito Lay chips",
+      "price": 1.35,
+      "categoryId": "extras",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "lil-wrangler-meal",
+      "name": "Lil Wrangler Meal",
+      "description": "Chopped Beef Wraparound, Chips, Cookies, Capri-Sun",
+      "price": 7.95,
+      "categoryId": "extras",
+      "available": true,
+      "modifierGroupIds": []
+    },
+    {
+      "id": "sausage-stick",
+      "name": "Sausage on a Stick",
+      "description": "Sausage on a Stick",
+      "price": 7.25,
+      "categoryId": "extras",
+      "available": true,
+      "modifierGroupIds": []
+    }
+  ]
+}

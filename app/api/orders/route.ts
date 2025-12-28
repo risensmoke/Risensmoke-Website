@@ -11,6 +11,7 @@ import { supabase } from '@/lib/supabase';
 // Validation schema for order creation
 const orderItemModifierSchema = z.object({
   id: z.string().optional(),
+  cloverModId: z.string().optional(),
   name: z.string(),
   price: z.number(),
   category: z.string().optional(),
@@ -134,6 +135,8 @@ export async function POST(request: NextRequest) {
       total_price: item.totalPrice,
       special_instructions: item.specialInstructions || null,
       modifiers: item.modifiers.map((mod) => ({
+        id: mod.id || null,
+        cloverModId: mod.cloverModId || null,
         name: mod.name,
         price: mod.price,
         category: mod.category || null,
