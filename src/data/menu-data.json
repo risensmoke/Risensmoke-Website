@@ -35,6 +35,60 @@
       ]
     },
     {
+      "id": "meat-selection-1",
+      "name": "Meat Selection (1)",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "sliced-brisket-1", "name": "Sliced Brisket", "price": 0 },
+        { "id": "chopped-brisket-1", "name": "Chopped Brisket", "price": 0 },
+        { "id": "pulled-pork-1", "name": "Pulled Pork", "price": 0 },
+        { "id": "smoked-ribs-1", "name": "Smoked Ribs", "price": 0 },
+        { "id": "smoked-chicken-1", "name": "Smoked Chicken", "price": 0 },
+        { "id": "jalapeno-cheddar-sausage-1", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage-1", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link-1", "name": "Hot Link", "price": 0 }
+      ]
+    },
+    {
+      "id": "meat-selection-2",
+      "name": "Meat Selection (2)",
+      "required": true,
+      "minSelections": 2,
+      "maxSelections": 2,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "sliced-brisket-2", "name": "Sliced Brisket", "price": 0 },
+        { "id": "chopped-brisket-2", "name": "Chopped Brisket", "price": 0 },
+        { "id": "pulled-pork-2", "name": "Pulled Pork", "price": 0 },
+        { "id": "smoked-ribs-2", "name": "Smoked Ribs", "price": 0 },
+        { "id": "smoked-chicken-2", "name": "Smoked Chicken", "price": 0 },
+        { "id": "jalapeno-cheddar-sausage-2", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage-2", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link-2", "name": "Hot Link", "price": 0 }
+      ]
+    },
+    {
+      "id": "meat-selection-3",
+      "name": "Meat Selection (3)",
+      "required": true,
+      "minSelections": 3,
+      "maxSelections": 3,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "sliced-brisket-3", "name": "Sliced Brisket", "price": 0 },
+        { "id": "chopped-brisket-3", "name": "Chopped Brisket", "price": 0 },
+        { "id": "pulled-pork-3", "name": "Pulled Pork", "price": 0 },
+        { "id": "smoked-ribs-3", "name": "Smoked Ribs", "price": 0 },
+        { "id": "smoked-chicken-3", "name": "Smoked Chicken", "price": 0 },
+        { "id": "jalapeno-cheddar-sausage-3", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage-3", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link-3", "name": "Hot Link", "price": 0 }
+      ]
+    },
+    {
       "id": "side-selection",
       "name": "Side Selection",
       "required": false,
@@ -46,6 +100,51 @@
         { "id": "baked-beans", "name": "Hallelujah Baked Beans", "price": 0 },
         { "id": "green-beans", "name": "Divine Green Beans", "price": 0 },
         { "id": "cole-slaw", "name": "Salvation Cole Slaw", "price": 0 }
+      ]
+    },
+    {
+      "id": "side-selection-1",
+      "name": "Side Selection (1)",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "mac-cheese-1", "name": "Mamas Smoky Mac & Cheese", "price": 0 },
+        { "id": "potato-salad-1", "name": "Blessed Potato Salad", "price": 0 },
+        { "id": "baked-beans-1", "name": "Hallelujah Baked Beans", "price": 0 },
+        { "id": "green-beans-1", "name": "Divine Green Beans", "price": 0 },
+        { "id": "cole-slaw-1", "name": "Salvation Cole Slaw", "price": 0 }
+      ]
+    },
+    {
+      "id": "side-selection-2",
+      "name": "Side Selection (2)",
+      "required": true,
+      "minSelections": 2,
+      "maxSelections": 2,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "mac-cheese-2", "name": "Mamas Smoky Mac & Cheese", "price": 0 },
+        { "id": "potato-salad-2", "name": "Blessed Potato Salad", "price": 0 },
+        { "id": "baked-beans-2", "name": "Hallelujah Baked Beans", "price": 0 },
+        { "id": "green-beans-2", "name": "Divine Green Beans", "price": 0 },
+        { "id": "cole-slaw-2", "name": "Salvation Cole Slaw", "price": 0 }
+      ]
+    },
+    {
+      "id": "side-selection-3",
+      "name": "Side Selection (3)",
+      "required": true,
+      "minSelections": 3,
+      "maxSelections": 3,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "mac-cheese-3", "name": "Mamas Smoky Mac & Cheese", "price": 0 },
+        { "id": "potato-salad-3", "name": "Blessed Potato Salad", "price": 0 },
+        { "id": "baked-beans-3", "name": "Hallelujah Baked Beans", "price": 0 },
+        { "id": "green-beans-3", "name": "Divine Green Beans", "price": 0 },
+        { "id": "cole-slaw-3", "name": "Salvation Cole Slaw", "price": 0 }
       ]
     },
     {
@@ -136,7 +235,11 @@
       "price": 12.50,
       "categoryId": "blessed-plates",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 1, "max": 1 },
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "disciples-plate",
@@ -145,7 +248,11 @@
       "price": 15.35,
       "categoryId": "blessed-plates",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 1, "max": 1 },
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "trinity-plate",
@@ -154,7 +261,11 @@
       "price": 16.95,
       "categoryId": "blessed-plates",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 2, "max": 2 },
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "revelation-plate",
@@ -163,7 +274,11 @@
       "price": 18.45,
       "categoryId": "blessed-plates",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 3, "max": 3 },
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "little-rise",
@@ -172,7 +287,10 @@
       "price": 13.00,
       "categoryId": "blessed-plates",
       "available": true,
-      "modifierGroupIds": ["side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "lotta-rise",
@@ -181,7 +299,10 @@
       "price": 18.45,
       "categoryId": "blessed-plates",
       "available": true,
-      "modifierGroupIds": ["side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "brisket-sausage",
@@ -190,7 +311,9 @@
       "price": 13.00,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "sliced-brisket-sandwich",
@@ -199,7 +322,9 @@
       "price": 11.95,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "chopped-brisket-sandwich",
@@ -208,7 +333,9 @@
       "price": 10.95,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "pulled-pork-sandwich",
@@ -217,7 +344,9 @@
       "price": 10.95,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "hotlink-sandwich",
@@ -226,7 +355,9 @@
       "price": 8.50,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "jalapeno-cheddar-sandwich",
@@ -235,7 +366,9 @@
       "price": 8.50,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "pork-ribs-sandwich",
@@ -244,7 +377,9 @@
       "price": 10.95,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "beef-sausage-sandwich",
@@ -253,7 +388,9 @@
       "price": 10.95,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "smoke-chicken-sandwich",
@@ -262,7 +399,9 @@
       "price": 10.95,
       "categoryId": "sandwiches",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "brisket-sliced-lb",
@@ -271,7 +410,10 @@
       "price": 25.45,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-premium", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-premium", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "brisket-chopped-lb",
@@ -280,7 +422,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "pulled-pork-lb",
@@ -289,7 +434,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "smoked-ribs-lb",
@@ -298,7 +446,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "smoked-chicken-lb",
@@ -307,7 +458,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "jalapeno-sausage-lb",
@@ -316,7 +470,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "beef-sausage-lb",
@@ -325,7 +482,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "hot-link-lb",
@@ -334,7 +494,10 @@
       "price": 19.95,
       "categoryId": "meats",
       "available": true,
-      "modifierGroupIds": ["meat-weight-standard", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "brisket-nachos",
@@ -343,7 +506,10 @@
       "price": 11.95,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["add-on-toppings", "condiments"]
+      "modifierGroups": [
+        { "groupId": "add-on-toppings", "min": 0, "max": null },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "loaded-side-winder",
@@ -352,7 +518,11 @@
       "price": 15.35,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "add-on-toppings", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 1, "max": 1 },
+        { "groupId": "add-on-toppings", "min": 0, "max": null },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "red-pit-burrito",
@@ -361,7 +531,9 @@
       "price": 7.95,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "baked-potato-plain",
@@ -370,7 +542,9 @@
       "price": 7.50,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["add-on-toppings"]
+      "modifierGroups": [
+        { "groupId": "add-on-toppings", "min": 0, "max": null }
+      ]
     },
     {
       "id": "baked-potato-stuffed",
@@ -379,7 +553,9 @@
       "price": 9.25,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["add-on-toppings"]
+      "modifierGroups": [
+        { "groupId": "add-on-toppings", "min": 0, "max": null }
+      ]
     },
     {
       "id": "baked-potato-loaded",
@@ -388,7 +564,10 @@
       "price": 11.95,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "add-on-toppings"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 1, "max": 1 },
+        { "groupId": "add-on-toppings", "min": 0, "max": null }
+      ]
     },
     {
       "id": "wraparound",
@@ -397,7 +576,9 @@
       "price": 7.25,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["condiments"]
+      "modifierGroups": [
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "garden-salad",
@@ -406,7 +587,9 @@
       "price": 6.50,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["add-on-toppings"]
+      "modifierGroups": [
+        { "groupId": "add-on-toppings", "min": 0, "max": null }
+      ]
     },
     {
       "id": "chef-salad-meat",
@@ -415,7 +598,10 @@
       "price": 9.25,
       "categoryId": "favorites",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "add-on-toppings"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 1, "max": 1 },
+        { "groupId": "add-on-toppings", "min": 0, "max": null }
+      ]
     },
     {
       "id": "small-group",
@@ -424,7 +610,11 @@
       "price": 44.95,
       "categoryId": "family-meals",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 1, "max": 1 },
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "med-group",
@@ -433,7 +623,11 @@
       "price": 82.95,
       "categoryId": "family-meals",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 2, "max": 2 },
+        { "groupId": "side-selection", "min": 2, "max": 2 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "large-group",
@@ -442,7 +636,11 @@
       "price": 120.50,
       "categoryId": "family-meals",
       "available": true,
-      "modifierGroupIds": ["meat-selection", "side-selection", "condiments"]
+      "modifierGroups": [
+        { "groupId": "meat-selection", "min": 3, "max": 3 },
+        { "groupId": "side-selection", "min": 3, "max": 3 },
+        { "groupId": "condiments", "min": 0, "max": null }
+      ]
     },
     {
       "id": "mamas-smoky-mac",
@@ -451,7 +649,9 @@
       "price": 2.85,
       "categoryId": "sides",
       "available": true,
-      "modifierGroupIds": ["size-sides"]
+      "modifierGroups": [
+        { "groupId": "size-sides", "min": 1, "max": 1 }
+      ]
     },
     {
       "id": "blessed-potato-salad",
@@ -460,7 +660,9 @@
       "price": 2.85,
       "categoryId": "sides",
       "available": true,
-      "modifierGroupIds": ["size-sides"]
+      "modifierGroups": [
+        { "groupId": "size-sides", "min": 1, "max": 1 }
+      ]
     },
     {
       "id": "hallelujah-baked-beans",
@@ -469,7 +671,9 @@
       "price": 2.85,
       "categoryId": "sides",
       "available": true,
-      "modifierGroupIds": ["size-sides"]
+      "modifierGroups": [
+        { "groupId": "size-sides", "min": 1, "max": 1 }
+      ]
     },
     {
       "id": "divine-green-beans",
@@ -478,7 +682,9 @@
       "price": 2.85,
       "categoryId": "sides",
       "available": true,
-      "modifierGroupIds": ["size-sides"]
+      "modifierGroups": [
+        { "groupId": "size-sides", "min": 1, "max": 1 }
+      ]
     },
     {
       "id": "salvation-cole-slaw",
@@ -487,7 +693,9 @@
       "price": 2.85,
       "categoryId": "sides",
       "available": true,
-      "modifierGroupIds": ["size-sides"]
+      "modifierGroups": [
+        { "groupId": "size-sides", "min": 1, "max": 1 }
+      ]
     },
     {
       "id": "side-fries",
@@ -496,7 +704,9 @@
       "price": 2.85,
       "categoryId": "sides",
       "available": true,
-      "modifierGroupIds": ["size-fries"]
+      "modifierGroups": [
+        { "groupId": "size-fries", "min": 1, "max": 1 }
+      ]
     },
     {
       "id": "banana-pudding",
@@ -505,7 +715,7 @@
       "price": 4.95,
       "categoryId": "desserts",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "ice-cream",
@@ -514,7 +724,7 @@
       "price": 1.25,
       "categoryId": "desserts",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "peach-cobbler",
@@ -523,7 +733,7 @@
       "price": 4.95,
       "categoryId": "desserts",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "sweet-tea",
@@ -532,7 +742,7 @@
       "price": 2.50,
       "categoryId": "extras",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "soda",
@@ -541,7 +751,7 @@
       "price": 1.50,
       "categoryId": "extras",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "water",
@@ -550,7 +760,7 @@
       "price": 2.00,
       "categoryId": "extras",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "potato-chips",
@@ -559,7 +769,7 @@
       "price": 1.35,
       "categoryId": "extras",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "lil-wrangler-meal",
@@ -568,7 +778,7 @@
       "price": 7.95,
       "categoryId": "extras",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     },
     {
       "id": "sausage-stick",
@@ -577,7 +787,52 @@
       "price": 7.25,
       "categoryId": "extras",
       "available": true,
-      "modifierGroupIds": []
+      "modifierGroups": []
     }
-  ]
+  ],
+  "itemModifierGroupMapping": {
+    "gospel-plate": {
+      "meat-selection": "meat-selection-1",
+      "side-selection": "side-selection-2"
+    },
+    "disciples-plate": {
+      "meat-selection": "meat-selection-1",
+      "side-selection": "side-selection-2"
+    },
+    "trinity-plate": {
+      "meat-selection": "meat-selection-2",
+      "side-selection": "side-selection-2"
+    },
+    "revelation-plate": {
+      "meat-selection": "meat-selection-3",
+      "side-selection": "side-selection-2"
+    },
+    "little-rise": {
+      "side-selection": "side-selection-2"
+    },
+    "lotta-rise": {
+      "side-selection": "side-selection-2"
+    },
+    "loaded-side-winder": {
+      "meat-selection": "meat-selection-1"
+    },
+    "baked-potato-loaded": {
+      "meat-selection": "meat-selection-1"
+    },
+    "chef-salad-meat": {
+      "meat-selection": "meat-selection-1"
+    },
+    "small-group": {
+      "meat-selection": "meat-selection-1",
+      "side-selection": "side-selection-2"
+    },
+    "med-group": {
+      "meat-selection": "meat-selection-2",
+      "side-selection": "side-selection-2"
+    },
+    "large-group": {
+      "meat-selection": "meat-selection-3",
+      "side-selection": "side-selection-3"
+    }
+  }
 }

@@ -49,6 +49,7 @@ interface MenuData {
   categories: MenuCategory[];
   modifierGroups: MenuModifierGroup[];
   items: MenuItem[];
+  itemModifierGroupMapping?: Record<string, Record<string, string>>;
 }
 
 interface CloverMappings {
@@ -130,5 +131,6 @@ export async function GET() {
     categories,
     modifierGroups,
     items,
+    itemModifierGroupMapping: menuData.itemModifierGroupMapping || {},
   });
 }

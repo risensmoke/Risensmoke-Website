@@ -643,6 +643,7 @@ function OrderPageContent() {
   const [orderNumber, setOrderNumber] = useState('');
   const [cloverModifierGroups, setCloverModifierGroups] = useState<MenuModifierGroup[]>([]);
   const [cloverItemIds, setCloverItemIds] = useState<Record<string, string>>({});
+  const [itemModifierGroupMapping, setItemModifierGroupMapping] = useState<Record<string, Record<string, string>>>({});
   const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>({
     firstName: '',
     lastName: '',
@@ -668,6 +669,7 @@ function OrderPageContent() {
         if (response.ok) {
           const data = await response.json();
           setCloverModifierGroups(data.modifierGroups || []);
+          setItemModifierGroupMapping(data.itemModifierGroupMapping || {});
 
           // Build item ID lookup map
           const itemIdMap: Record<string, string> = {};
@@ -686,14 +688,21 @@ function OrderPageContent() {
   }, []);
 
   // Helper to get Clover modifier ID by name
-  const getCloverModId = useCallback((modifierName: string, groupId?: string): string | undefined => {
+  // Uses itemModifierGroupMapping to resolve the correct Clover group for each item
+  const getCloverModId = useCallback((modifierName: string, groupId?: string, itemId?: string): string | undefined => {
+    // If itemId is provided, check for a group mapping
+    let resolvedGroupId = groupId;
+    if (itemId && groupId && itemModifierGroupMapping[itemId]?.[groupId]) {
+      resolvedGroupId = itemModifierGroupMapping[itemId][groupId];
+    }
+
     for (const group of cloverModifierGroups) {
-      if (groupId && group.id !== groupId) continue;
+      if (resolvedGroupId && group.id !== resolvedGroupId) continue;
       const mod = group.modifiers.find(m => m.name.toLowerCase() === modifierName.toLowerCase());
       if (mod?.cloverModId) return mod.cloverModId;
     }
     return undefined;
-  }, [cloverModifierGroups]);
+  }, [cloverModifierGroups, itemModifierGroupMapping]);
 
   // Helper to get Clover item ID by local item ID
   const getCloverItemId = useCallback((itemId: string): string | undefined => {
@@ -845,21 +854,21 @@ function OrderPageContent() {
     const modifiers = [
       ...meats.map((meat, idx) => ({
         id: `meat-${idx}-${meat.label}`,
-        cloverModId: getCloverModId(meat.label, 'meat-selection'),
+        cloverModId: getCloverModId(meat.label, 'meat-selection', item.id),
         name: meat.label,
         price: meat.price,
         category: 'Meat'
       })),
       ...sides.map((side, idx) => ({
         id: `side-${idx}-${side.label}`,
-        cloverModId: getCloverModId(side.label, 'side-selection'),
+        cloverModId: getCloverModId(side.label, 'side-selection', item.id),
         name: side.label,
         price: side.price,
         category: 'Side'
       })),
       ...condiments.map((condiment, idx) => ({
         id: `condiment-${idx}-${condiment.label}`,
-        cloverModId: getCloverModId(condiment.label, 'condiments'),
+        cloverModId: getCloverModId(condiment.label, 'condiments', item.id),
         name: condiment.label,
         price: condiment.price,
         category: 'Condiment'

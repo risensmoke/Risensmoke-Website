@@ -29,6 +29,11 @@ const CLOVER_ACCESS_TOKEN = process.env.CLOVER_ACCESS_TOKEN;
 // Determine environment from URL
 const environment = CLOVER_API_BASE_URL.includes('sandbox') ? 'sandbox' : 'production';
 
+// Test mode - only import Gospel Plate for testing
+const TEST_MODE = process.argv.includes('--test');
+const TEST_CATEGORY = 'blessed-plates';
+const TEST_ITEM = 'gospel-plate';
+
 // Rate limiting - Clover API has rate limits
 const DELAY_MS = 250;
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -52,7 +57,14 @@ interface LocalModifierGroup {
   required: boolean;
   minSelections: number;
   maxSelections: number | null;
+  cloverOnly?: boolean;
   modifiers: LocalModifier[];
+}
+
+interface ItemModifierGroupConfig {
+  groupId: string;
+  min: number;
+  max: number | null;
 }
 
 interface LocalItem {
@@ -62,13 +74,15 @@ interface LocalItem {
   price: number;
   categoryId: string;
   available: boolean;
-  modifierGroupIds: string[];
+  modifierGroups?: ItemModifierGroupConfig[];
+  modifierGroupIds?: string[]; // Legacy format support
 }
 
 interface MenuData {
   categories: LocalCategory[];
   modifierGroups: LocalModifierGroup[];
   items: LocalItem[];
+  itemModifierGroupMapping?: Record<string, Record<string, string>>;
 }
 
 // ID mappings (local ID -> Clover ID)
@@ -208,7 +222,11 @@ async function linkItemToCategory(itemId: string, categoryId: string): Promise<v
   await sleep(DELAY_MS);
 }
 
-async function linkItemToModifierGroup(itemId: string, modifierGroupId: string): Promise<void> {
+async function linkItemToModifierGroup(
+  itemId: string,
+  modifierGroupId: string
+): Promise<void> {
+  // Constraints are set at the modifier group level, not per-item
   await cloverFetch(
     `/v3/merchants/${CLOVER_MERCHANT_ID}/item_modifier_groups`,
     'POST',
@@ -240,10 +258,30 @@ async function importMenu() {
   }
 
   // Load menu data
-  const menuDataPath = path.join(__dirname, '../data/menu-data.json');
+  const menuDataPath = path.join(__dirname, '../src/data/menu-data.json');
   console.log(`\nLoading menu data from: ${menuDataPath}`);
 
   const menuData: MenuData = JSON.parse(fs.readFileSync(menuDataPath, 'utf-8'));
+
+  // Apply test mode filters
+  if (TEST_MODE) {
+    console.log('\n*** TEST MODE - Only importing Gospel Plate ***\n');
+    menuData.categories = menuData.categories.filter(c => c.id === TEST_CATEGORY);
+    menuData.items = menuData.items.filter(i => i.id === TEST_ITEM);
+
+    // Get the modifier groups needed for the test item
+    const testItem = menuData.items[0];
+    const neededGroups = new Set<string>();
+    if (testItem?.modifierGroups) {
+      for (const mg of testItem.modifierGroups) {
+        // Add both the website group and the Clover group (from mapping)
+        neededGroups.add(mg.groupId);
+        const mapping = menuData.itemModifierGroupMapping?.[testItem.id]?.[mg.groupId];
+        if (mapping) neededGroups.add(mapping);
+      }
+    }
+    menuData.modifierGroups = menuData.modifierGroups.filter(g => neededGroups.has(g.id));
+  }
 
   console.log(`  Categories: ${menuData.categories.length}`);
   console.log(`  Modifier Groups: ${menuData.modifierGroups.length}`);
@@ -324,25 +362,38 @@ async function importMenu() {
     }
   }
 
-  // Step 5: Link Items to Modifier Groups
+  // Step 5: Link Items to Modifier Groups (using cross-reference mapping)
   console.log('\n' + '-'.repeat(60));
   console.log('Step 5: Linking Items to Modifier Groups');
   console.log('-'.repeat(60));
+
+  // Get the cross-reference mapping
+  const itemMapping = menuData.itemModifierGroupMapping || {};
 
   for (const item of menuData.items) {
     const itemCloverId = itemMap.get(item.id);
 
     if (!itemCloverId) continue;
 
-    for (const modGroupId of item.modifierGroupIds) {
-      const modGroupCloverId = modifierGroupMap.get(modGroupId);
+    // Get item-specific mapping if it exists
+    const itemGroupMapping = itemMapping[item.id] || {};
 
-      if (modGroupCloverId) {
-        try {
-          await linkItemToModifierGroup(itemCloverId, modGroupCloverId);
-          console.log(`  Linked ${item.name} -> ${modGroupId}`);
-        } catch (error) {
-          console.error(`  ERROR linking ${item.name} to ${modGroupId}:`, error);
+    if (item.modifierGroups && item.modifierGroups.length > 0) {
+      for (const modGroup of item.modifierGroups) {
+        // Check if this item has a specific Clover group mapping
+        const cloverGroupId = itemGroupMapping[modGroup.groupId] || modGroup.groupId;
+        const modGroupCloverId = modifierGroupMap.get(cloverGroupId);
+
+        if (modGroupCloverId) {
+          try {
+            // No per-item constraints needed - constraints are at the group level now
+            await linkItemToModifierGroup(itemCloverId, modGroupCloverId);
+            console.log(`  Linked ${item.name} -> ${cloverGroupId}`);
+          } catch (error) {
+            console.error(`  ERROR linking ${item.name} to ${cloverGroupId}:`, error);
+          }
+        } else {
+          console.log(`  SKIP ${item.name} -> ${cloverGroupId} (group not found, may be website-only)`);
         }
       }
     }
@@ -359,7 +410,7 @@ async function importMenu() {
     items: Object.fromEntries(itemMap),
   };
 
-  const outputPath = path.join(__dirname, `../data/clover-mappings-${environment}.json`);
+  const outputPath = path.join(__dirname, `../src/data/clover-mappings-${environment}.json`);
   fs.writeFileSync(outputPath, JSON.stringify(mappings, null, 2));
 
   // Summary
