@@ -254,13 +254,14 @@ export default function CloverPaymentForm({
       const data = await response.json();
 
       if (!response.ok) {
-        console.error('[Clover Debug] Charge failed:', {
-          status: response.status,
-          statusText: response.statusText,
-          data,
-        });
-        // Show detailed error message including Clover's response
-        const errorMsg = data.details?.cloverError?.message
+        // Log full error details for debugging
+        console.error('[Clover Debug] Charge failed:', JSON.stringify(data, null, 2));
+
+        // Extract the most specific error message available
+        const cloverError = data.details?.cloverError;
+        const errorMsg = cloverError?.error?.message  // Nested error.message
+          || cloverError?.message  // Direct message
+          || cloverError?.code  // Error code
           || data.message
           || data.error
           || `Payment failed: ${response.status} ${response.statusText}`;

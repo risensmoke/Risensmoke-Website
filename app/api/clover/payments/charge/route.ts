@@ -144,22 +144,33 @@ export async function POST(request: NextRequest) {
 
     // Extract detailed error info
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const isPaymentError = errorMessage.includes('Payment failed');
+    const errorName = error instanceof Error ? error.name : 'Unknown';
+    const cloverError = (error as { cloverError?: unknown })?.cloverError;
+    const statusCode = (error as { statusCode?: number })?.statusCode;
+
+    // Check if this is a payment-related error (402 from Clover or contains payment keywords)
+    const isPaymentError = statusCode === 402
+      || errorMessage.includes('Payment failed')
+      || errorMessage.includes('402')
+      || errorName === 'CloverApiError';
 
     // Log full error details for debugging
     const errorDetails = {
       message: errorMessage,
-      name: error instanceof Error ? error.name : 'Unknown',
-      // Include Clover error if available
-      cloverError: (error as { cloverError?: unknown })?.cloverError,
-      statusCode: (error as { statusCode?: number })?.statusCode,
+      name: errorName,
+      cloverError,
+      statusCode,
     };
     console.error('[API/clover/payments/charge] Error details:', JSON.stringify(errorDetails, null, 2));
+
+    // Extract user-friendly message from Clover error if available
+    const cloverMessage = (cloverError as { message?: string; error?: { message?: string } })?.message
+      || (cloverError as { error?: { message?: string } })?.error?.message;
 
     return NextResponse.json(
       {
         error: isPaymentError ? 'Payment failed' : 'Failed to process order',
-        message: errorMessage,
+        message: cloverMessage || errorMessage,
         details: errorDetails,
       },
       { status: isPaymentError ? 402 : 500 }
