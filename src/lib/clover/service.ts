@@ -144,19 +144,23 @@ export async function processPayment(
   // Clover external_reference_id has max 12 chars - use last 12 chars of order ID
   const externalRefId = localOrderId.slice(-12);
 
+  const chargeRequest = {
+    source: token,
+    amount: amountCents,
+    tax_amount: taxAmountCents, // Include tax as separate line item
+    currency: 'usd',
+    capture: true,
+    description: description || `Rise N' Smoke Web Order`,
+    external_reference_id: externalRefId,
+    receipt_email: customerEmail,
+    ecomind: 'ecom',
+    order_id: cloverOrderId, // Link payment to Clover order
+  };
+
+  console.log('[CloverService] Creating charge:', JSON.stringify(chargeRequest, null, 2));
+
   const chargeResponse = await cloverClient.createCharge(
-    {
-      source: token,
-      amount: amountCents,
-      tax_amount: taxAmountCents, // Include tax as separate line item
-      currency: 'usd',
-      capture: true,
-      description: description || `Rise N' Smoke Web Order`,
-      external_reference_id: externalRefId,
-      receipt_email: customerEmail,
-      ecomind: 'ecom',
-      order_id: cloverOrderId, // Link payment to Clover order
-    },
+    chargeRequest,
     idempotencyKey
   );
 
