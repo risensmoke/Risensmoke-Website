@@ -242,6 +242,12 @@ async function createOrderWithoutPrint(
   // Get or create customer in Clover
   let customerId: string | undefined;
   try {
+    console.log('[CloverService] Creating/finding customer:', {
+      firstName: data.customer.firstName,
+      lastName: data.customer.lastName,
+      email: data.customer.email,
+      phone: data.customer.phone,
+    });
     const customer = await cloverClient.getOrCreateCustomer({
       firstName: data.customer.firstName,
       lastName: data.customer.lastName,
@@ -249,6 +255,7 @@ async function createOrderWithoutPrint(
       phone: data.customer.phone,
     });
     customerId = customer.id;
+    console.log('[CloverService] Customer created/found:', customerId);
   } catch (error) {
     console.error('[CloverService] Failed to create/find customer:', error);
   }

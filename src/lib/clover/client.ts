@@ -129,9 +129,9 @@ async function cloverFetch<T>(
     } catch (error) {
       lastError = error as Error;
 
-      // Don't retry on authentication errors or bad requests
+      // Don't retry on authentication errors, bad requests, or payment failures
       if (error instanceof CloverApiError) {
-        if (error.statusCode === 401 || error.statusCode === 403 || error.statusCode === 400) {
+        if (error.statusCode === 401 || error.statusCode === 403 || error.statusCode === 400 || error.statusCode === 402) {
           throw error;
         }
       }
@@ -396,26 +396,36 @@ export async function findCustomerByName(firstName: string, lastName: string): P
 export async function getOrCreateCustomer(
   data: { firstName: string; lastName: string; email: string; phone: string }
 ): Promise<CloverCustomer> {
+  console.log('[CloverClient] getOrCreateCustomer called with:', data);
+
   // Try to find existing customer by email first
+  console.log('[CloverClient] Searching for customer by email:', data.email);
   let customer = await findCustomerByEmail(data.email);
   if (customer) {
+    console.log('[CloverClient] Found customer by email:', customer.id);
     return customer;
   }
 
   // Try to find by phone
+  console.log('[CloverClient] Searching for customer by phone:', data.phone);
   customer = await findCustomerByPhone(data.phone);
   if (customer) {
+    console.log('[CloverClient] Found customer by phone:', customer.id);
     return customer;
   }
 
   // Create new customer
-  const newCustomer = await createCustomer({
+  console.log('[CloverClient] No existing customer found, creating new one');
+  const customerData = {
     firstName: data.firstName,
     lastName: data.lastName,
     emailAddresses: [{ emailAddress: data.email }],
     phoneNumbers: [{ phoneNumber: data.phone.replace(/\D/g, '') }],
     marketingAllowed: false,
-  });
+  };
+  console.log('[CloverClient] Creating customer with data:', customerData);
+  const newCustomer = await createCustomer(customerData);
+  console.log('[CloverClient] Customer created:', newCustomer.id);
   return newCustomer;
 }
 

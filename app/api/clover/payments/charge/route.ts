@@ -142,14 +142,25 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[API/clover/payments/charge] Error processing payment:', error);
 
-    // Determine if it's a payment-specific error
+    // Extract detailed error info
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isPaymentError = errorMessage.includes('Payment failed');
+
+    // Log full error details for debugging
+    const errorDetails = {
+      message: errorMessage,
+      name: error instanceof Error ? error.name : 'Unknown',
+      // Include Clover error if available
+      cloverError: (error as { cloverError?: unknown })?.cloverError,
+      statusCode: (error as { statusCode?: number })?.statusCode,
+    };
+    console.error('[API/clover/payments/charge] Error details:', JSON.stringify(errorDetails, null, 2));
 
     return NextResponse.json(
       {
         error: isPaymentError ? 'Payment failed' : 'Failed to process order',
         message: errorMessage,
+        details: errorDetails,
       },
       { status: isPaymentError ? 402 : 500 }
     );
