@@ -157,7 +157,7 @@ export async function processPayment(
     description: description || `Rise N' Smoke Web Order`,
     external_reference_id: externalRefId,
     receipt_email: customerEmail,
-    ecomind: 'ecom',
+    ecomind: 'ecom' as const,
     order_id: cloverOrderId, // Link payment to Clover order
   };
 
