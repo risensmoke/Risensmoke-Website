@@ -63,6 +63,9 @@ function mapCartItemToLineItem(item: LocalCartItem): CloverLineItem {
   };
 }
 
+// Order type ID for web orders (from Clover Dashboard)
+const CLOVER_WEB_ORDER_TYPE_ID = process.env.CLOVER_WEB_ORDER_TYPE_ID;
+
 /**
  * Map cart data to Clover atomic order format
  */
@@ -72,8 +75,9 @@ export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: str
   return {
     orderCart: {
       lineItems,
-      title: `*** ONLINE ORDER - ${data.pickupTime} ***`,
+      title: `*** ONLINE ORDER - ${data.pickupDate} ${data.pickupTime} ***`,
       note: formatWebOrderNote(data),
+      orderType: CLOVER_WEB_ORDER_TYPE_ID ? { id: CLOVER_WEB_ORDER_TYPE_ID } : undefined,
       customers: customerId ? [{ id: customerId }] : undefined,
     },
   };
