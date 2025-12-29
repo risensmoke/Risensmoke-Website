@@ -179,6 +179,12 @@ export interface CloverCharge {
   order_id?: string; // Clover order ID to link payment to order
 }
 
+export interface CloverPayForOrderRequest {
+  source: string; // Tokenized card (clv_xxx)
+  email?: string; // Customer email for receipt
+  ecomind?: 'ecom' | 'moto';
+}
+
 export interface CloverChargeResponse {
   id: string;
   amount: number;

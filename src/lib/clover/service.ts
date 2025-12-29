@@ -131,44 +131,33 @@ export async function submitOrderToClover(
 }
 
 /**
- * Process payment with Clover using tokenized card
+ * Process payment for an existing Clover order using tokenized card
+ * Uses /v1/orders/{orderId}/pay to link payment to order's line items
  */
 export async function processPayment(
   token: string,
-  amountCents: number,
-  taxAmountCents: number,
   localOrderId: string,
-  cloverOrderId?: string,
-  customerEmail?: string,
-  description?: string
+  cloverOrderId: string,
+  customerEmail?: string
 ): Promise<CloverChargeResponse> {
   // Generate idempotency key from order ID
   const idempotencyKey = `order_${localOrderId}_${Date.now()}`;
 
-  // Clover external_reference_id has max 12 chars - use last 12 chars of order ID
-  const externalRefId = localOrderId.slice(-12);
-
-  const chargeRequest = {
+  const payRequest = {
     source: token,
-    amount: amountCents,
-    tax_amount: taxAmountCents, // Include tax as separate line item
-    currency: 'usd',
-    capture: true,
-    description: description || `Rise N' Smoke Web Order`,
-    external_reference_id: externalRefId,
-    receipt_email: customerEmail,
+    email: customerEmail,
     ecomind: 'ecom' as const,
-    order_id: cloverOrderId, // Link payment to Clover order
   };
 
-  console.log('[CloverService] Creating charge:', JSON.stringify(chargeRequest, null, 2));
+  console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
 
-  const chargeResponse = await cloverClient.createCharge(
-    chargeRequest,
+  const paymentResponse = await cloverClient.payForOrder(
+    cloverOrderId,
+    payRequest,
     idempotencyKey
   );
 
-  return chargeResponse;
+  return paymentResponse;
 }
 
 /**
@@ -186,20 +175,14 @@ export async function submitOrderWithPayment(
   // Step 1: Create order in Clover (WITHOUT printing - we'll print only after payment succeeds)
   const { cloverOrder, customerId } = await createOrderWithoutPrint(data);
 
-  // Step 2: Process payment with Clover order ID to link them
-  const amountCents = Math.round(data.total * 100);
-  const taxAmountCents = Math.round(data.tax * 100);
-
+  // Step 2: Process payment for the Clover order
   let payment: CloverChargeResponse;
   try {
     payment = await processPayment(
       paymentToken,
-      amountCents,
-      taxAmountCents,
       localOrderId,
       cloverOrder.id,
-      data.customer.email,
-      `Rise N' Smoke Order #${localOrderId}`
+      data.customer.email
     );
   } catch (error) {
     // Payment failed - delete the Clover order

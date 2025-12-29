@@ -12,6 +12,7 @@ import type {
   CloverOrder,
   CloverCharge,
   CloverChargeResponse,
+  CloverPayForOrderRequest,
   CloverPrintEvent,
   CloverMerchant,
   CloverCustomer,
@@ -251,6 +252,8 @@ export async function deleteOrder(orderId: string): Promise<void> {
 /**
  * Create a charge using tokenized card
  * Uses the Ecommerce API endpoint
+ * NOTE: This creates a standalone charge with an implicit order.
+ * For orders with line items, use payForOrder() instead.
  */
 export async function createCharge(
   charge: CloverCharge,
@@ -268,6 +271,34 @@ export async function createCharge(
       method: 'POST',
       headers,
       body: JSON.stringify(charge),
+    },
+    true // Use ecommerce base URL
+  );
+}
+
+/**
+ * Pay for an existing order using tokenized card
+ * Uses the Ecommerce API endpoint: /v1/orders/{orderId}/pay
+ * This links the payment to the existing order's line items,
+ * so receipts display actual item names instead of "Item 1"
+ */
+export async function payForOrder(
+  orderId: string,
+  payRequest: CloverPayForOrderRequest,
+  idempotencyKey?: string
+): Promise<CloverChargeResponse> {
+  const headers: Record<string, string> = {};
+
+  if (idempotencyKey) {
+    headers['Idempotency-Key'] = idempotencyKey;
+  }
+
+  return cloverFetch<CloverChargeResponse>(
+    `/v1/orders/${orderId}/pay`,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payRequest),
     },
     true // Use ecommerce base URL
   );
@@ -448,6 +479,7 @@ export const cloverClient = {
 
   // Payments
   createCharge,
+  payForOrder,
   getCharge,
   refundCharge,
 
