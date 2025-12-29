@@ -108,20 +108,23 @@ export default function CloverPaymentForm({
       // So we style the input text to be dark and readable on white
       const styles = {
         input: {
-          fontSize: '16px',
+          fontSize: '22px',
+          fontWeight: '500',
           fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-          color: '#333333',
+          color: '#222222',
           backgroundColor: '#FFFFFF',
           lineHeight: '48px',
           height: '48px',
-          padding: '0 12px',
+          padding: '0 14px',
           margin: '0',
           border: 'none',
           outline: 'none',
           width: '100%',
         },
         'input::placeholder': {
-          color: '#999999',
+          color: '#666666',
+          fontSize: '20px',
+          fontWeight: '400',
         },
         'input:focus': {
           outline: 'none',
@@ -129,10 +132,10 @@ export default function CloverPaymentForm({
       };
 
       // Create and mount elements
-      elementsRef.current.cardNumber = elements.create('CARD_NUMBER', { styles });
-      elementsRef.current.cardDate = elements.create('CARD_DATE', { styles });
-      elementsRef.current.cardCvv = elements.create('CARD_CVV', { styles });
-      elementsRef.current.cardPostalCode = elements.create('CARD_POSTAL_CODE', { styles });
+      elementsRef.current.cardNumber = elements.create('CARD_NUMBER', styles);
+      elementsRef.current.cardDate = elements.create('CARD_DATE', styles);
+      elementsRef.current.cardCvv = elements.create('CARD_CVV', styles);
+      elementsRef.current.cardPostalCode = elements.create('CARD_POSTAL_CODE', styles);
 
       // Mount elements
       elementsRef.current.cardNumber?.mount('#card-number');
