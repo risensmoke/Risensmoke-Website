@@ -1154,8 +1154,19 @@ function OrderPageContent() {
   const PREP_BUFFER_MINUTES = 30; // 30 min prep time buffer
   const CLOSED_DAYS = [0, 1]; // Sunday = 0, Monday = 1
 
+  // Specific dates when the restaurant is closed (holidays, etc.)
+  // Format: 'YYYY-MM-DD'
+  const CLOSED_DATES = [
+    '2025-12-31', // New Year's Eve
+    '2026-01-01', // New Year's Day
+  ];
+
   // Check if a date is a closed day
   const isClosedDay = (dateStr: string) => {
+    // Check specific closed dates first
+    if (CLOSED_DATES.includes(dateStr)) {
+      return true;
+    }
     const date = new Date(dateStr + 'T12:00:00'); // Use noon to avoid timezone issues
     return CLOSED_DAYS.includes(date.getDay());
   };
@@ -1523,7 +1534,11 @@ function OrderPageContent() {
                     filterDate={(date: Date) => {
                       // Disable Sunday (0) and Monday (1)
                       const day = date.getDay();
-                      return day !== 0 && day !== 1;
+                      if (day === 0 || day === 1) return false;
+                      // Disable specific closed dates (holidays)
+                      const dateStr = date.toISOString().split('T')[0];
+                      if (CLOSED_DATES.includes(dateStr)) return false;
+                      return true;
                     }}
                     dateFormat="EEEE, MMMM d, yyyy"
                     placeholderText="Select pickup date"
