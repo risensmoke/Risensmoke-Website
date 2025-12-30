@@ -196,9 +196,11 @@ export async function submitOrderWithPayment(
   }
 
   // Verify payment succeeded
-  if (payment.status !== 'succeeded') {
+  // Note: /v1/charges returns status: 'succeeded', but /v1/orders/{id}/pay returns status: 'paid'
+  const isPaymentSuccessful = payment.status === 'succeeded' || payment.status === 'paid' || payment.paid === true;
+  if (!isPaymentSuccessful) {
     // Payment declined - delete the Clover order
-    console.error('[CloverService] Payment declined, deleting order:', cloverOrder.id);
+    console.error('[CloverService] Payment declined, deleting order:', cloverOrder.id, 'status:', payment.status);
     try {
       await cloverClient.deleteOrder(cloverOrder.id);
     } catch (deleteError) {

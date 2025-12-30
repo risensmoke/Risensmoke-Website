@@ -203,7 +203,7 @@ export interface CloverChargeResponse {
   };
   paid: boolean;
   ref_num: string;
-  status: 'succeeded' | 'pending' | 'failed';
+  status: 'succeeded' | 'pending' | 'failed' | 'paid'; // 'paid' returned by /v1/orders/{id}/pay
   source: {
     id: string;
     brand: string;
