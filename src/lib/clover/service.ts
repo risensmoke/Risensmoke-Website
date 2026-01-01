@@ -147,6 +147,7 @@ export async function processPayment(
   token: string,
   localOrderId: string,
   cloverOrderId: string,
+  totalAmountCents: number,
   taxAmountCents: number,
   customerEmail?: string
 ): Promise<CloverChargeResponse> {
@@ -157,7 +158,8 @@ export async function processPayment(
     source: token,
     email: customerEmail,
     ecomind: 'ecom' as const,
-    tax_amount: taxAmountCents, // Include tax amount from website calculation
+    amount: totalAmountCents, // Override with website-calculated total
+    tax_amount: taxAmountCents, // Tax portion of the total
   };
 
   console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
@@ -187,7 +189,8 @@ export async function submitOrderWithPayment(
   const { cloverOrder, customerId } = await createOrderWithoutPrint(data);
 
   // Step 2: Process payment for the Clover order
-  // Calculate tax in cents from the order data
+  // Calculate amounts in cents from the order data
+  const totalAmountCents = Math.round(data.total * 100);
   const taxAmountCents = Math.round(data.tax * 100);
 
   let payment: CloverChargeResponse;
@@ -196,6 +199,7 @@ export async function submitOrderWithPayment(
       paymentToken,
       localOrderId,
       cloverOrder.id,
+      totalAmountCents,
       taxAmountCents,
       data.customer.email
     );
