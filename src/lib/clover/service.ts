@@ -154,11 +154,14 @@ export async function processPayment(
   // Generate idempotency key from order ID
   const idempotencyKey = `order_${localOrderId}_${Date.now()}`;
 
-  // Use payForOrder - Clover will calculate tax based on order items
+  // Use payForOrder with explicit amount and tax_amount
+  // This tells Clover exactly how much to charge and what portion is tax
   const payRequest = {
     source: token,
     email: customerEmail,
     ecomind: 'ecom' as const,
+    amount: totalAmountCents,
+    tax_amount: taxAmountCents,
   };
 
   console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
