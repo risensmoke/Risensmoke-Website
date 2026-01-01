@@ -142,7 +142,7 @@ export async function submitOrderToClover(
 
 /**
  * Process payment for an existing Clover order using tokenized card
- * Uses /v1/orders/{orderId}/pay to link payment to order's line items
+ * Uses /v1/charges with order_id to link payment to order
  */
 export async function processPayment(
   token: string,
@@ -155,23 +155,30 @@ export async function processPayment(
   // Generate idempotency key from order ID
   const idempotencyKey = `order_${localOrderId}_${Date.now()}`;
 
-  const payRequest = {
+  // Clover external_reference_id has max 12 chars - use last 12 chars of order ID
+  const externalRefId = localOrderId.slice(-12);
+
+  const chargeRequest = {
     source: token,
-    email: customerEmail,
+    amount: totalAmountCents,
+    tax_amount: taxAmountCents,
+    currency: 'usd',
+    capture: true,
+    description: `Rise N' Smoke Web Order`,
+    external_reference_id: externalRefId,
+    receipt_email: customerEmail,
     ecomind: 'ecom' as const,
-    amount: totalAmountCents, // Override with website-calculated total
-    tax_amount: taxAmountCents, // Tax portion of the total
+    order_id: cloverOrderId, // Link payment to Clover order
   };
 
-  console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
+  console.log('[CloverService] Creating charge for order:', cloverOrderId, JSON.stringify(chargeRequest, null, 2));
 
-  const paymentResponse = await cloverClient.payForOrder(
-    cloverOrderId,
-    payRequest,
+  const chargeResponse = await cloverClient.createCharge(
+    chargeRequest,
     idempotencyKey
   );
 
-  return paymentResponse;
+  return chargeResponse;
 }
 
 /**
