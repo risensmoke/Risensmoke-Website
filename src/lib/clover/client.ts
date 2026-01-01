@@ -371,6 +371,16 @@ export async function getMerchant(): Promise<CloverMerchant> {
   );
 }
 
+/**
+ * Get merchant's default tax rates
+ */
+export async function getTaxRates(): Promise<{ id: string; name: string; rate: number; isDefault: boolean }[]> {
+  const response = await cloverFetch<CloverApiResponse<{ id: string; name: string; rate: number; isDefault: boolean }>>(
+    `/v3/merchants/${CLOVER_MERCHANT_ID}/tax_rates`
+  );
+  return response.elements || [];
+}
+
 // ============================================
 // Customer Methods
 // ============================================
@@ -488,6 +498,7 @@ export const cloverClient = {
 
   // Merchant
   getMerchant,
+  getTaxRates,
 
   // Customers
   createCustomer,

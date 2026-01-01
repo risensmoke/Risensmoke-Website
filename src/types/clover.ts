@@ -102,6 +102,7 @@ export interface CloverLineItem {
   printed?: boolean;
   note?: string;
   modifications?: CloverModification[];
+  taxRates?: { id: string }[]; // Tax rate references to apply to this line item
 }
 
 export interface CloverModification {

@@ -43,7 +43,7 @@ function formatWebOrderNote(data: OrderSubmissionData): string {
  * Creates separate line items for each quantity (qty 2 = 2 line items)
  * This ensures proper display on receipts instead of combined pricing
  */
-function mapCartItemToLineItems(item: LocalCartItem): CloverLineItem[] {
+function mapCartItemToLineItems(item: LocalCartItem, taxRateIds?: { id: string }[]): CloverLineItem[] {
   // Calculate item price in cents
   const unitPrice = Math.round(item.basePrice * 100);
 
@@ -65,6 +65,7 @@ function mapCartItemToLineItems(item: LocalCartItem): CloverLineItem[] {
       printed: false,
       note: item.specialInstructions || undefined,
       modifications: modifications.length > 0 ? modifications : undefined,
+      taxRates: taxRateIds, // Apply merchant's tax rates to line item
     });
   }
 
@@ -77,9 +78,14 @@ const CLOVER_WEB_ORDER_TYPE_ID = process.env.CLOVER_WEB_ORDER_TYPE_ID;
 /**
  * Map cart data to Clover atomic order format
  */
-export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: string): CloverAtomicOrder {
+export function mapCartToCloverOrder(
+  data: OrderSubmissionData,
+  customerId?: string,
+  taxRateIds?: { id: string }[]
+): CloverAtomicOrder {
   // Flatten line items (each quantity becomes a separate line item)
-  const lineItems = data.items.flatMap(mapCartItemToLineItems);
+  // Apply tax rates to each line item so Clover calculates tax
+  const lineItems = data.items.flatMap((item) => mapCartItemToLineItems(item, taxRateIds));
 
   return {
     orderCart: {
@@ -253,6 +259,19 @@ export async function submitOrderWithPayment(
 async function createOrderWithoutPrint(
   data: OrderSubmissionData
 ): Promise<{ cloverOrder: CloverOrder; customerId?: string }> {
+  // Fetch merchant's tax rates to apply to line items
+  let taxRateIds: { id: string }[] | undefined;
+  try {
+    console.log('[CloverService] Fetching merchant tax rates...');
+    const taxRates = await cloverClient.getTaxRates();
+    console.log('[CloverService] Tax rates found:', taxRates);
+    // Use all tax rates (or just default ones if you prefer)
+    taxRateIds = taxRates.map((tr) => ({ id: tr.id }));
+  } catch (error) {
+    console.error('[CloverService] Failed to fetch tax rates:', error);
+    // Continue without tax rates - payment will still work with amount override
+  }
+
   // Get or create customer in Clover
   let customerId: string | undefined;
   try {
@@ -274,12 +293,14 @@ async function createOrderWithoutPrint(
     console.error('[CloverService] Failed to create/find customer:', error);
   }
 
-  // Map cart to Clover order format
-  const atomicOrder = mapCartToCloverOrder(data, customerId);
+  // Map cart to Clover order format with tax rates applied to line items
+  const atomicOrder = mapCartToCloverOrder(data, customerId, taxRateIds);
+  console.log('[CloverService] Creating atomic order with tax rates:', JSON.stringify(atomicOrder, null, 2));
 
   // Create the order in Clover (no print trigger)
-  // Clover will calculate tax at 8.25% (matching our website rate)
+  // Clover will calculate tax based on the tax rates applied to line items
   const cloverOrder = await cloverClient.createAtomicOrder(atomicOrder);
+  console.log('[CloverService] Order created, total:', cloverOrder.total);
 
   return { cloverOrder, customerId };
 }
