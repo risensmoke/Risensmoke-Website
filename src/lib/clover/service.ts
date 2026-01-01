@@ -86,7 +86,7 @@ export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: str
       lineItems,
       title: `*** ONLINE ORDER - ${data.pickupDate} ${data.pickupTime} ***`,
       note: formatWebOrderNote(data),
-      orderType: CLOVER_WEB_ORDER_TYPE_ID ? { id: CLOVER_WEB_ORDER_TYPE_ID } : undefined,
+      // Don't set orderType - let Clover use default which has tax enabled
       customers: customerId ? [{ id: customerId }] : undefined,
     },
   };
@@ -154,12 +154,11 @@ export async function processPayment(
   // Generate idempotency key from order ID
   const idempotencyKey = `order_${localOrderId}_${Date.now()}`;
 
-  // Use payForOrder with tax_amount to properly record tax in Clover
+  // Use payForOrder - Clover will calculate tax based on order items
   const payRequest = {
     source: token,
     email: customerEmail,
     ecomind: 'ecom' as const,
-    tax_amount: taxAmountCents, // Send tax amount so it shows in Clover's tax field
   };
 
   console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
