@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, Check } from 'lucide-react';
+import { X, Check, Plus, Minus } from 'lucide-react';
 
 interface SelectionOption {
   label: string;
@@ -35,7 +35,7 @@ export default function PlateCustomizationModal({
 }: PlateCustomizationModalProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedMeats, setSelectedMeats] = useState<SelectionOption[]>([]);
-  const [selectedSides, setSelectedSides] = useState<SelectionOption[]>([]);
+  const [sideQuantities, setSideQuantities] = useState<Map<string, number>>(new Map());
   const [selectedCondiments, setSelectedCondiments] = useState<SelectionOption[]>([]);
 
   // Filter out ribs if needed (for Gospel plate)
@@ -47,11 +47,14 @@ export default function PlateCustomizationModal({
   useEffect(() => {
     if (isOpen) {
       setSelectedMeats([]);
-      setSelectedSides([]);
+      setSideQuantities(new Map());
       setSelectedCondiments([]);
       setCurrentStep(meatCount > 0 ? 1 : 2); // Skip to sides if no meat selection needed
     }
   }, [isOpen, meatCount]);
+
+  // Calculate total sides selected (sum of all quantities)
+  const totalSidesSelected = Array.from(sideQuantities.values()).reduce((sum, qty) => sum + qty, 0);
 
   if (!isOpen) return null;
 
@@ -66,12 +69,23 @@ export default function PlateCustomizationModal({
     }
   };
 
-  const handleSideToggle = (side: SelectionOption) => {
-    if (selectedSides.find(s => s.label === side.label)) {
-      setSelectedSides(selectedSides.filter(s => s.label !== side.label));
-    } else if (selectedSides.length < sideCount) {
-      setSelectedSides([...selectedSides, side]);
+  const handleSideIncrease = (side: SelectionOption) => {
+    if (totalSidesSelected >= sideCount) return; // Can't add more
+    const newQuantities = new Map(sideQuantities);
+    const currentQty = newQuantities.get(side.label) || 0;
+    newQuantities.set(side.label, currentQty + 1);
+    setSideQuantities(newQuantities);
+  };
+
+  const handleSideDecrease = (side: SelectionOption) => {
+    const newQuantities = new Map(sideQuantities);
+    const currentQty = newQuantities.get(side.label) || 0;
+    if (currentQty <= 1) {
+      newQuantities.delete(side.label);
+    } else {
+      newQuantities.set(side.label, currentQty - 1);
     }
+    setSideQuantities(newQuantities);
   };
 
   const handleCondimentToggle = (condiment: SelectionOption) => {
@@ -83,7 +97,7 @@ export default function PlateCustomizationModal({
   };
 
   const canProceedFromMeats = selectedMeats.length === meatCount;
-  const canProceedFromSides = selectedSides.length === sideCount;
+  const canProceedFromSides = totalSidesSelected === sideCount;
 
   const handleNext = () => {
     if (currentStep === 1 && canProceedFromMeats) {
@@ -93,13 +107,27 @@ export default function PlateCustomizationModal({
     }
   };
 
+  // Convert sideQuantities map to array with duplicates for onComplete
+  const buildSidesArray = (): SelectionOption[] => {
+    const sides: SelectionOption[] = [];
+    sideQuantities.forEach((qty, label) => {
+      const side = sideOptions.find(s => s.label === label);
+      if (side) {
+        for (let i = 0; i < qty; i++) {
+          sides.push(side);
+        }
+      }
+    });
+    return sides;
+  };
+
   const handleComplete = () => {
-    onComplete(selectedMeats, selectedSides, selectedCondiments);
+    onComplete(selectedMeats, buildSidesArray(), selectedCondiments);
     onClose();
   };
 
   const handleSkipCondiments = () => {
-    onComplete(selectedMeats, selectedSides, []);
+    onComplete(selectedMeats, buildSidesArray(), []);
     onClose();
   };
 
@@ -197,17 +225,18 @@ export default function PlateCustomizationModal({
                 Select {sideCount} Sides
               </h3>
               <p className="text-sm mb-4" style={{ color: '#999' }}>
-                {selectedSides.length} of {sideCount} selected
+                {totalSidesSelected} of {sideCount} selected
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {sideOptions.map((side) => {
-                  const isSelected = selectedSides.find(s => s.label === side.label);
+                  const quantity = sideQuantities.get(side.label) || 0;
+                  const isSelected = quantity > 0;
+                  const canIncrease = totalSidesSelected < sideCount;
                   return (
-                    <button
+                    <div
                       key={side.label}
-                      onClick={() => handleSideToggle(side)}
-                      className="p-4 rounded-lg border-2 transition-all text-left relative"
+                      className="p-4 rounded-lg border-2 transition-all"
                       style={{
                         backgroundColor: isSelected ? 'rgba(255, 107, 53, 0.2)' : 'rgba(40, 40, 40, 0.8)',
                         borderColor: isSelected ? '#FF6B35' : 'rgba(255, 107, 53, 0.3)',
@@ -216,11 +245,36 @@ export default function PlateCustomizationModal({
                     >
                       <div className="flex justify-between items-center">
                         <span className="font-semibold">{side.label}</span>
-                        {isSelected && (
-                          <Check className="w-5 h-5" style={{ color: '#FFD700' }} />
-                        )}
+                        <div className="flex items-center gap-2">
+                          {isSelected && (
+                            <button
+                              onClick={() => handleSideDecrease(side)}
+                              className="w-8 h-8 rounded-full flex items-center justify-center"
+                              style={{ backgroundColor: 'rgba(255, 107, 53, 0.5)' }}
+                            >
+                              <Minus className="w-4 h-4" />
+                            </button>
+                          )}
+                          {isSelected && (
+                            <span className="w-6 text-center font-bold" style={{ color: '#FFD700' }}>
+                              {quantity}
+                            </span>
+                          )}
+                          <button
+                            onClick={() => handleSideIncrease(side)}
+                            disabled={!canIncrease}
+                            className="w-8 h-8 rounded-full flex items-center justify-center transition-opacity"
+                            style={{
+                              backgroundColor: canIncrease ? 'rgba(255, 107, 53, 0.5)' : 'rgba(100, 100, 100, 0.3)',
+                              opacity: canIncrease ? 1 : 0.5,
+                              cursor: canIncrease ? 'pointer' : 'not-allowed'
+                            }}
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
-                    </button>
+                    </div>
                   );
                 })}
               </div>
