@@ -91,6 +91,7 @@ export interface CloverOrderCart {
   title?: string; // Appears prominently on receipt (e.g., "*** ONLINE ORDER ***")
   orderType?: { id: string }; // Reference to order type
   customers?: { id: string }[]; // Customer references
+  taxRemoved?: boolean; // Disable auto tax calculation (we handle tax in payment)
 }
 
 export interface CloverLineItem {

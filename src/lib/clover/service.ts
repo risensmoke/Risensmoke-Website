@@ -88,6 +88,7 @@ export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: str
       note: formatWebOrderNote(data),
       orderType: CLOVER_WEB_ORDER_TYPE_ID ? { id: CLOVER_WEB_ORDER_TYPE_ID } : undefined,
       customers: customerId ? [{ id: customerId }] : undefined,
+      taxRemoved: true, // Disable Clover auto-tax - we calculate tax on website (8.25%)
     },
   };
 }
