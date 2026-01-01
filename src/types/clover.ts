@@ -183,6 +183,8 @@ export interface CloverPayForOrderRequest {
   source: string; // Tokenized card (clv_xxx)
   email?: string; // Customer email for receipt
   ecomind?: 'ecom' | 'moto';
+  tax_amount?: number; // Tax amount in cents
+  amount?: number; // Override order total in cents (optional)
 }
 
 export interface CloverChargeResponse {

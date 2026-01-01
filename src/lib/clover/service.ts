@@ -40,8 +40,10 @@ function formatWebOrderNote(data: OrderSubmissionData): string {
 
 /**
  * Map a local cart item to Clover line item format
+ * Creates separate line items for each quantity (qty 2 = 2 line items)
+ * This ensures proper display on receipts instead of combined pricing
  */
-function mapCartItemToLineItem(item: LocalCartItem): CloverLineItem {
+function mapCartItemToLineItems(item: LocalCartItem): CloverLineItem[] {
   // Calculate item price in cents
   const unitPrice = Math.round(item.basePrice * 100);
 
@@ -52,15 +54,21 @@ function mapCartItemToLineItem(item: LocalCartItem): CloverLineItem {
     amount: Math.round(mod.price * 100),
   }));
 
-  return {
-    item: item.cloverItemId ? { id: item.cloverItemId } : undefined,
-    name: item.name,
-    price: unitPrice,
-    unitQty: item.quantity * 1000, // Clover uses 1000 units = 1 item
-    printed: false,
-    note: item.specialInstructions || undefined,
-    modifications: modifications.length > 0 ? modifications : undefined,
-  };
+  // Create separate line items for each quantity
+  const lineItems: CloverLineItem[] = [];
+  for (let i = 0; i < item.quantity; i++) {
+    lineItems.push({
+      item: item.cloverItemId ? { id: item.cloverItemId } : undefined,
+      name: item.name,
+      price: unitPrice,
+      unitQty: 1000, // 1000 = 1 unit in Clover
+      printed: false,
+      note: item.specialInstructions || undefined,
+      modifications: modifications.length > 0 ? modifications : undefined,
+    });
+  }
+
+  return lineItems;
 }
 
 // Order type ID for web orders (from Clover Dashboard)
@@ -70,7 +78,8 @@ const CLOVER_WEB_ORDER_TYPE_ID = process.env.CLOVER_WEB_ORDER_TYPE_ID;
  * Map cart data to Clover atomic order format
  */
 export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: string): CloverAtomicOrder {
-  const lineItems = data.items.map(mapCartItemToLineItem);
+  // Flatten line items (each quantity becomes a separate line item)
+  const lineItems = data.items.flatMap(mapCartItemToLineItems);
 
   return {
     orderCart: {
@@ -138,6 +147,7 @@ export async function processPayment(
   token: string,
   localOrderId: string,
   cloverOrderId: string,
+  taxAmountCents: number,
   customerEmail?: string
 ): Promise<CloverChargeResponse> {
   // Generate idempotency key from order ID
@@ -147,6 +157,7 @@ export async function processPayment(
     source: token,
     email: customerEmail,
     ecomind: 'ecom' as const,
+    tax_amount: taxAmountCents, // Include tax amount from website calculation
   };
 
   console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
@@ -176,12 +187,16 @@ export async function submitOrderWithPayment(
   const { cloverOrder, customerId } = await createOrderWithoutPrint(data);
 
   // Step 2: Process payment for the Clover order
+  // Calculate tax in cents from the order data
+  const taxAmountCents = Math.round(data.tax * 100);
+
   let payment: CloverChargeResponse;
   try {
     payment = await processPayment(
       paymentToken,
       localOrderId,
       cloverOrder.id,
+      taxAmountCents,
       data.customer.email
     );
   } catch (error) {
