@@ -226,6 +226,33 @@
         { "id": "ranch", "name": "Ranch Dressing", "price": 0.50 },
         { "id": "italian", "name": "Italian Dressing", "price": 0.50 }
       ]
+    },
+    {
+      "id": "sausage-selection",
+      "name": "Sausage Selection",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "modifiers": [
+        { "id": "jalapeno-cheddar-sausage-wrap", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage-wrap", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link-wrap", "name": "Hot Link", "price": 0 }
+      ]
+    },
+    {
+      "id": "meat-selection-salad",
+      "name": "Salad Meat Selection",
+      "required": true,
+      "minSelections": 1,
+      "maxSelections": 1,
+      "modifiers": [
+        { "id": "chopped-brisket-salad", "name": "Chopped Brisket", "price": 0 },
+        { "id": "pulled-pork-salad", "name": "Pulled Pork", "price": 0 },
+        { "id": "smoked-chicken-salad", "name": "Smoked Chicken", "price": 0 },
+        { "id": "jalapeno-cheddar-sausage-salad", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage-salad", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link-salad", "name": "Hot Link", "price": 0 }
+      ]
     }
   ],
   "items": [
@@ -580,6 +607,7 @@
       "categoryId": "favorites",
       "available": true,
       "modifierGroups": [
+        { "groupId": "sausage-selection", "min": 1, "max": 1 },
         { "groupId": "condiments", "min": 0, "max": null }
       ]
     },
@@ -826,7 +854,10 @@
       "meat-selection": "meat-selection-1"
     },
     "chef-salad-meat": {
-      "meat-selection": "meat-selection-1"
+      "meat-selection": "meat-selection-salad"
+    },
+    "wraparound": {
+      "meat-selection": "sausage-selection"
     },
     "small-group": {
       "meat-selection": "meat-selection-1",
