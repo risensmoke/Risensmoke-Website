@@ -232,7 +232,7 @@ export default function CartModal() {
                   <span style={{ color: '#F8F8F8' }}>${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span style={{ color: '#F8F8F8' }}>Tax (8%)</span>
+                  <span style={{ color: '#F8F8F8' }}>Tax (8.25%)</span>
                   <span style={{ color: '#F8F8F8' }}>${tax.toFixed(2)}</span>
                 </div>
                 {orderType === 'shipping' && shippingCost > 0 && (
