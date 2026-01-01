@@ -1597,12 +1597,14 @@ function OrderPageContent() {
                   const slots = generateTimeSlots();
                   const selectedDateObj = new Date(checkoutForm.pickupDate + 'T12:00:00');
                   const dayName = selectedDateObj.toLocaleDateString('en-US', { weekday: 'long' });
-                  const isClosed = isClosedDay(checkoutForm.pickupDate);
+                  const isHoliday = CLOSED_DATES.includes(checkoutForm.pickupDate);
+                  const isRegularClosedDay = CLOSED_DAYS.includes(selectedDateObj.getDay());
+                  const isClosed = isHoliday || isRegularClosedDay;
 
                   if (isClosed) {
                     return (
                       <div className="p-3 rounded text-center" style={{ backgroundColor: 'rgba(211, 47, 47, 0.2)', border: '1px solid #D32F2F' }}>
-                        <p style={{ color: '#F8F8F8' }}>Closed on {dayName}s</p>
+                        <p style={{ color: '#F8F8F8' }}>{isHoliday ? 'Closed for Holiday' : `Closed on ${dayName}s`}</p>
                         <p className="text-sm mt-1" style={{ color: '#888' }}>Open Tuesday - Saturday, 11 AM - 6 PM</p>
                       </div>
                     );
