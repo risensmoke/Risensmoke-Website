@@ -193,10 +193,10 @@
       "minSelections": 1,
       "maxSelections": 1,
       "modifiers": [
-        { "id": "quarter-lb", "name": "1/4 lb", "price": 0 },
-        { "id": "half-lb", "name": "1/2 lb", "price": 5.50 },
-        { "id": "three-quarter-lb", "name": "3/4 lb", "price": 10.40 },
-        { "id": "one-lb", "name": "1 lb", "price": 14.00 }
+        { "id": "quarter-lb", "name": "1/4 lb", "price": 5.95 },
+        { "id": "half-lb", "name": "1/2 lb", "price": 11.45 },
+        { "id": "three-quarter-lb", "name": "3/4 lb", "price": 16.35 },
+        { "id": "one-lb", "name": "1 lb", "price": 19.95 }
       ]
     },
     {
@@ -206,10 +206,10 @@
       "minSelections": 1,
       "maxSelections": 1,
       "modifiers": [
-        { "id": "quarter-lb-p", "name": "1/4 lb", "price": 0 },
-        { "id": "half-lb-p", "name": "1/2 lb", "price": 6.40 },
-        { "id": "three-quarter-lb-p", "name": "3/4 lb", "price": 9.50 },
-        { "id": "one-lb-p", "name": "1 lb", "price": 16.50 }
+        { "id": "quarter-lb-p", "name": "1/4 lb", "price": 8.95 },
+        { "id": "half-lb-p", "name": "1/2 lb", "price": 15.35 },
+        { "id": "three-quarter-lb-p", "name": "3/4 lb", "price": 18.45 },
+        { "id": "one-lb-p", "name": "1 lb", "price": 25.45 }
       ]
     },
     {
@@ -407,7 +407,7 @@
       "id": "brisket-sliced-lb",
       "name": "Sliced Brisket",
       "description": "Premium smoked sliced brisket",
-      "price": 25.45,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -419,7 +419,7 @@
       "id": "brisket-chopped-lb",
       "name": "Chopped Brisket",
       "description": "Premium smoked chopped brisket",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -431,7 +431,7 @@
       "id": "pulled-pork-lb",
       "name": "Pulled Pork",
       "description": "Tender pulled pork shoulder",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -443,7 +443,7 @@
       "id": "smoked-ribs-lb",
       "name": "Smoked Ribs",
       "description": "Fall-off-the-bone pork ribs",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -455,7 +455,7 @@
       "id": "smoked-chicken-lb",
       "name": "Smoked Chicken",
       "description": "Tender smoked chicken",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -467,7 +467,7 @@
       "id": "jalapeno-sausage-lb",
       "name": "Jalapeño Cheddar Sausage",
       "description": "Spicy jalapeño sausage",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -479,7 +479,7 @@
       "id": "beef-sausage-lb",
       "name": "Beef Sausage",
       "description": "Premium beef sausage",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
@@ -491,7 +491,7 @@
       "id": "hot-link-lb",
       "name": "Hot Link",
       "description": "Spicy hot link sausage",
-      "price": 19.95,
+      "price": 0,
       "categoryId": "meats",
       "available": true,
       "modifierGroups": [
