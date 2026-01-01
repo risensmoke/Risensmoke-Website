@@ -277,7 +277,16 @@ async function createOrderWithoutPrint(
   const atomicOrder = mapCartToCloverOrder(data, customerId);
 
   // Create the order in Clover (no print trigger)
-  const cloverOrder = await cloverClient.createAtomicOrder(atomicOrder);
+  let cloverOrder = await cloverClient.createAtomicOrder(atomicOrder);
+
+  // Update order to disable Clover's auto-tax (we calculate 8.25% on website)
+  try {
+    cloverOrder = await cloverClient.updateOrder(cloverOrder.id, { taxRemoved: true });
+    console.log('[CloverService] Set taxRemoved=true on order:', cloverOrder.id);
+  } catch (error) {
+    console.error('[CloverService] Failed to set taxRemoved:', error);
+    // Continue anyway - payment might still work
+  }
 
   return { cloverOrder, customerId };
 }
