@@ -29,10 +29,12 @@ const CLOVER_ACCESS_TOKEN = process.env.CLOVER_ACCESS_TOKEN;
 // Determine environment from URL
 const environment = CLOVER_API_BASE_URL.includes('sandbox') ? 'sandbox' : 'production';
 
-// Test mode - only import Gospel Plate for testing
+// Test mode - import a single category for testing
+// Usage: npx ts-node scripts/import-menu-to-clover.ts --test
+// Or specify category: npx ts-node scripts/import-menu-to-clover.ts --test --category=favorites
 const TEST_MODE = process.argv.includes('--test');
-const TEST_CATEGORY = 'blessed-plates';
-const TEST_ITEM = 'gospel-plate';
+const categoryArg = process.argv.find(arg => arg.startsWith('--category='));
+const TEST_CATEGORY = categoryArg ? categoryArg.split('=')[1] : 'favorites';
 
 // Rate limiting - Clover API has rate limits
 const DELAY_MS = 250;
@@ -199,8 +201,25 @@ async function createItem(item: LocalItem): Promise<string> {
       priceType: 'FIXED',
       defaultTaxRates: true,
       hidden: !item.available,
+      isRevenue: true,
+      showInReporting: true,
     }
   );
+
+  // Enable item for online ordering (separate API call required for this field)
+  try {
+    await cloverFetch(
+      `/v3/merchants/${CLOVER_MERCHANT_ID}/items/${result.id}`,
+      'PUT',
+      {
+        available: true,
+        enabledOnline: true,
+      }
+    );
+    await sleep(DELAY_MS);
+  } catch (error) {
+    console.log(`    Warning: Could not enable online ordering for ${item.name}`);
+  }
 
   await sleep(DELAY_MS);
   return result.id;
@@ -242,6 +261,56 @@ async function linkItemToModifierGroup(
   await sleep(DELAY_MS);
 }
 
+// Tag (Label) functions for kitchen printer routing
+async function getExistingTags(): Promise<{ id: string; name: string }[]> {
+  const result = await cloverFetch<{ elements: { id: string; name: string }[] }>(
+    `/v3/merchants/${CLOVER_MERCHANT_ID}/tags`
+  );
+  return result.elements || [];
+}
+
+async function createTag(name: string): Promise<string> {
+  console.log(`  Creating tag: ${name}`);
+  const result = await cloverFetch<{ id: string }>(
+    `/v3/merchants/${CLOVER_MERCHANT_ID}/tags`,
+    'POST',
+    {
+      name,
+      showInReporting: true,
+    }
+  );
+  await sleep(DELAY_MS);
+  return result.id;
+}
+
+async function getOrCreateKitchenTag(): Promise<string> {
+  const existingTags = await getExistingTags();
+  const kitchenTag = existingTags.find(t => t.name.toUpperCase() === 'KITCHEN');
+
+  if (kitchenTag) {
+    console.log(`  Found existing KITCHEN tag: ${kitchenTag.id}`);
+    return kitchenTag.id;
+  }
+
+  return await createTag('KITCHEN');
+}
+
+async function tagItem(itemId: string, tagId: string): Promise<void> {
+  await cloverFetch(
+    `/v3/merchants/${CLOVER_MERCHANT_ID}/tag_items`,
+    'POST',
+    {
+      elements: [
+        {
+          item: { id: itemId },
+          tag: { id: tagId },
+        },
+      ],
+    }
+  );
+  await sleep(DELAY_MS);
+}
+
 async function importMenu() {
   console.log('='.repeat(60));
   console.log('Clover Menu Import Script');
@@ -265,19 +334,20 @@ async function importMenu() {
 
   // Apply test mode filters
   if (TEST_MODE) {
-    console.log('\n*** TEST MODE - Only importing Gospel Plate ***\n');
+    console.log(`\n*** TEST MODE - Only importing category: ${TEST_CATEGORY} ***\n`);
     menuData.categories = menuData.categories.filter(c => c.id === TEST_CATEGORY);
-    menuData.items = menuData.items.filter(i => i.id === TEST_ITEM);
+    menuData.items = menuData.items.filter(i => i.categoryId === TEST_CATEGORY);
 
-    // Get the modifier groups needed for the test item
-    const testItem = menuData.items[0];
+    // Get the modifier groups needed for all items in this category
     const neededGroups = new Set<string>();
-    if (testItem?.modifierGroups) {
-      for (const mg of testItem.modifierGroups) {
-        // Add both the website group and the Clover group (from mapping)
-        neededGroups.add(mg.groupId);
-        const mapping = menuData.itemModifierGroupMapping?.[testItem.id]?.[mg.groupId];
-        if (mapping) neededGroups.add(mapping);
+    for (const item of menuData.items) {
+      if (item.modifierGroups) {
+        for (const mg of item.modifierGroups) {
+          // Add both the website group and the Clover group (from mapping)
+          neededGroups.add(mg.groupId);
+          const mapping = menuData.itemModifierGroupMapping?.[item.id]?.[mg.groupId];
+          if (mapping) neededGroups.add(mapping);
+        }
       }
     }
     menuData.modifierGroups = menuData.modifierGroups.filter(g => neededGroups.has(g.id));
@@ -398,6 +468,29 @@ async function importMenu() {
       }
     }
   }
+
+  // Step 6: Tag all items with KITCHEN label for kitchen printer routing
+  console.log('\n' + '-'.repeat(60));
+  console.log('Step 6: Tagging Items with KITCHEN Label');
+  console.log('-'.repeat(60));
+
+  const kitchenTagId = await getOrCreateKitchenTag();
+  console.log(`  Using KITCHEN tag ID: ${kitchenTagId}`);
+
+  let taggedCount = 0;
+  for (const item of menuData.items) {
+    const itemCloverId = itemMap.get(item.id);
+    if (itemCloverId) {
+      try {
+        await tagItem(itemCloverId, kitchenTagId);
+        taggedCount++;
+        console.log(`  Tagged ${item.name}`);
+      } catch (error) {
+        console.error(`  ERROR tagging ${item.name}:`, error);
+      }
+    }
+  }
+  console.log(`\nTagged ${taggedCount}/${menuData.items.length} items with KITCHEN label`);
 
   // Save mappings
   const mappings = {

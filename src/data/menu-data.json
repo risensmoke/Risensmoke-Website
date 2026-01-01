@@ -219,12 +219,25 @@
       "minSelections": 0,
       "maxSelections": null,
       "modifiers": [
-        { "id": "seasoned-potatoes", "name": "Seasoned Potatoes", "price": 0.00 },
         { "id": "shredded-cheese", "name": "Shredded Cheddar Cheese", "price": 1.00 },
         { "id": "queso", "name": "Queso", "price": 1.85 },
         { "id": "sour-cream", "name": "Sour Cream", "price": 0.50 },
         { "id": "ranch", "name": "Ranch Dressing", "price": 0.50 },
         { "id": "italian", "name": "Italian Dressing", "price": 0.50 }
+      ]
+    },
+    {
+      "id": "add-on-toppings-red-pit",
+      "name": "Red Pit Burrito Add-ons",
+      "required": false,
+      "minSelections": 0,
+      "maxSelections": null,
+      "cloverOnly": true,
+      "modifiers": [
+        { "id": "seasoned-potatoes-rp", "name": "Seasoned Potatoes", "price": 0.00 },
+        { "id": "shredded-cheese-rp", "name": "Shredded Cheddar Cheese", "price": 0.00 },
+        { "id": "queso-rp", "name": "Queso", "price": 0.00 },
+        { "id": "sour-cream-rp", "name": "Sour Cream", "price": 0.50 }
       ]
     },
     {
@@ -240,18 +253,19 @@
       ]
     },
     {
-      "id": "meat-selection-salad",
-      "name": "Salad Meat Selection",
+      "id": "meat-selection-favs",
+      "name": "Meat Selection (Standard)",
       "required": true,
       "minSelections": 1,
       "maxSelections": 1,
+      "cloverOnly": true,
       "modifiers": [
-        { "id": "chopped-brisket-salad", "name": "Chopped Brisket", "price": 0 },
-        { "id": "pulled-pork-salad", "name": "Pulled Pork", "price": 0 },
-        { "id": "smoked-chicken-salad", "name": "Smoked Chicken", "price": 0 },
-        { "id": "jalapeno-cheddar-sausage-salad", "name": "Jalapeño Cheddar Sausage", "price": 0 },
-        { "id": "beef-sausage-salad", "name": "Beef Sausage", "price": 0 },
-        { "id": "hot-link-salad", "name": "Hot Link", "price": 0 }
+        { "id": "chopped-brisket-favs", "name": "Chopped Brisket", "price": 0 },
+        { "id": "pulled-pork-favs", "name": "Pulled Pork", "price": 0 },
+        { "id": "smoked-chicken-favs", "name": "Smoked Chicken", "price": 0 },
+        { "id": "jalapeno-cheddar-sausage-favs", "name": "Jalapeño Cheddar Sausage", "price": 0 },
+        { "id": "beef-sausage-favs", "name": "Beef Sausage", "price": 0 },
+        { "id": "hot-link-favs", "name": "Hot Link", "price": 0 }
       ]
     }
   ],
@@ -816,9 +830,11 @@
       "name": "Sausage on a Stick",
       "description": "Sausage on a Stick",
       "price": 7.25,
-      "categoryId": "extras",
+      "categoryId": "favorites",
       "available": true,
-      "modifierGroups": []
+      "modifierGroups": [
+        { "groupId": "sausage-selection", "min": 1, "max": 1 }
+      ]
     }
   ],
   "itemModifierGroupMapping": {
@@ -845,16 +861,19 @@
       "side-selection": "side-selection-2"
     },
     "loaded-side-winder": {
-      "meat-selection": "meat-selection-1"
+      "meat-selection": "meat-selection-favs"
     },
     "brisket-nachos": {
-      "meat-selection": "meat-selection-1"
+      "meat-selection": "meat-selection-favs"
     },
     "baked-potato-loaded": {
-      "meat-selection": "meat-selection-1"
+      "meat-selection": "meat-selection-favs"
     },
     "chef-salad-meat": {
-      "meat-selection": "meat-selection-salad"
+      "meat-selection": "meat-selection-favs"
+    },
+    "red-pit-burrito": {
+      "add-on-toppings": "add-on-toppings-red-pit"
     },
     "wraparound": {
       "meat-selection": "sausage-selection"
