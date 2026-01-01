@@ -81,6 +81,17 @@ export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: str
   // Flatten line items (each quantity becomes a separate line item)
   const lineItems = data.items.flatMap(mapCartItemToLineItems);
 
+  // Add tax as a separate line item
+  const taxAmountCents = Math.round(data.tax * 100);
+  if (taxAmountCents > 0) {
+    lineItems.push({
+      name: 'Tax (8.25%)',
+      price: taxAmountCents,
+      unitQty: 1000,
+      printed: false,
+    });
+  }
+
   return {
     orderCart: {
       lineItems,
