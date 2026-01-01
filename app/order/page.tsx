@@ -1667,7 +1667,7 @@ function OrderPageContent() {
                   <span style={{ color: '#F8F8F8' }}>${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span style={{ color: '#F8F8F8' }}>Tax</span>
+                  <span style={{ color: '#F8F8F8' }}>Tax (8.25%)</span>
                   <span style={{ color: '#F8F8F8' }}>${tax.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-4 text-xl font-bold">
