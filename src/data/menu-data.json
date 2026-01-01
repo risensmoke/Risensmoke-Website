@@ -219,6 +219,7 @@
       "minSelections": 0,
       "maxSelections": null,
       "modifiers": [
+        { "id": "seasoned-potatoes", "name": "Seasoned Potatoes", "price": 0.00 },
         { "id": "shredded-cheese", "name": "Shredded Cheddar Cheese", "price": 1.00 },
         { "id": "queso", "name": "Queso", "price": 1.85 },
         { "id": "sour-cream", "name": "Sour Cream", "price": 0.50 },
@@ -533,6 +534,7 @@
       "categoryId": "favorites",
       "available": true,
       "modifierGroups": [
+        { "groupId": "add-on-toppings", "min": 0, "max": null },
         { "groupId": "condiments", "min": 0, "max": null }
       ]
     },

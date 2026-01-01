@@ -977,14 +977,26 @@ function OrderPageContent() {
         price: 0.00, // Included toppings are free
         category: 'Topping'
       })),
-      // Add add-on toppings (with charge)
-      ...addOnToppings.map((topping, idx) => ({
-        id: `topping-addon-${idx}-${topping.label}`,
-        cloverModId: getCloverModId(topping.label, 'add-on-toppings'),
-        name: `Extra ${topping.label}`,
-        price: topping.price,
-        category: 'Add-on'
-      })),
+      // Add add-on toppings (with charge, except for red-pit-burrito included items)
+      ...addOnToppings.map((topping, idx) => {
+        // Price overrides for red-pit-burrito included items
+        let price = topping.price;
+        let name = `Extra ${topping.label}`;
+        if (favoritesModalItem.id === 'red-pit-burrito') {
+          const label = topping.label.toLowerCase();
+          if (label.includes('queso') || label.includes('shredded cheddar') || label.includes('seasoned potatoes')) {
+            price = 0.00;
+            name = topping.label; // Not "Extra" since it's included
+          }
+        }
+        return {
+          id: `topping-addon-${idx}-${topping.label}`,
+          cloverModId: getCloverModId(topping.label, 'add-on-toppings'),
+          name,
+          price,
+          category: 'Add-on'
+        };
+      }),
       // Add condiments
       ...condiments.map((condiment, idx) => ({
         id: `condiment-${idx}-${condiment.label}`,

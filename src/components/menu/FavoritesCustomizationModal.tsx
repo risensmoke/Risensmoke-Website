@@ -46,10 +46,12 @@ export default function FavoritesCustomizationModal({
   const [selectedCondiments, setSelectedCondiments] = useState<SelectionOption[]>([]);
 
   // Determine if meat selection should be shown
+  // red-pit-burrito has fixed meats (Jalapeño Cheddar Sausage + Chopped Brisket) - no selection needed
   const skipMeatSelection = [
     'baked-potato-plain',
     'baked-potato-stuffed',
-    'garden-salad'
+    'garden-salad',
+    'red-pit-burrito'
   ].includes(itemId);
 
   // Determine if item is a salad (for dressing selection)
@@ -63,16 +65,12 @@ export default function FavoritesCustomizationModal({
         if (choppedBrisket) {
           setSelectedMeat(choppedBrisket);
         }
-      } else if (itemId === 'red-pit-burrito') {
-        const jalapenoSausage = meatOptions.find(m => m.label.toLowerCase().includes('jalap'));
-        if (jalapenoSausage) {
-          setSelectedMeat(jalapenoSausage);
-        }
       }
+      // Note: red-pit-burrito has fixed meats shown in included info section, not as selectable
     }
   }, [isOpen, itemId, meatOptions]);
 
-  // Auto-select toppings based on item
+  // Auto-select toppings based on item (for INCLUDED section)
   useEffect(() => {
     if (isOpen) {
       const autoToppings: ToppingOption[] = [];
@@ -89,8 +87,8 @@ export default function FavoritesCustomizationModal({
         if (sourCream) autoToppings.push(sourCream);
       }
 
-      // Queso auto-selected for specific items
-      if (['brisket-nachos', 'red-pit-burrito'].includes(itemId)) {
+      // Queso auto-selected for brisket-nachos only (red-pit-burrito uses ADD-ON style)
+      if (itemId === 'brisket-nachos') {
         const queso = toppingOptions.find(t => t.label.toLowerCase().includes('queso'));
         if (queso) autoToppings.push(queso);
       }
@@ -99,7 +97,26 @@ export default function FavoritesCustomizationModal({
     }
   }, [isOpen, itemId, toppingOptions]);
 
+  // Auto-select ADD-ON toppings for red-pit-burrito (all toppings are add-ons, some pre-selected)
+  useEffect(() => {
+    if (isOpen && itemId === 'red-pit-burrito') {
+      const preSelectedAddOns: ToppingOption[] = [];
+
+      // Pre-select Seasoned Potatoes, Queso, and Shredded Cheddar Cheese
+      const potatoes = toppingOptions.find(t => t.label.toLowerCase().includes('seasoned potatoes'));
+      const queso = toppingOptions.find(t => t.label.toLowerCase().includes('queso'));
+      const cheese = toppingOptions.find(t => t.label.toLowerCase().includes('shredded cheddar'));
+
+      if (potatoes) preSelectedAddOns.push(potatoes);
+      if (queso) preSelectedAddOns.push(queso);
+      if (cheese) preSelectedAddOns.push(cheese);
+
+      setAddOnToppings(preSelectedAddOns);
+    }
+  }, [isOpen, itemId, toppingOptions]);
+
   // Get list of auto-selected topping labels for this item (for filtering ADD-ON section)
+  // Note: red-pit-burrito uses ADD-ON style for everything, so no labels here
   const getAutoSelectedLabels = () => {
     const labels: string[] = [];
     if (['baked-potato-stuffed', 'baked-potato-loaded', 'chef-salad-meat'].includes(itemId)) {
@@ -108,10 +125,21 @@ export default function FavoritesCustomizationModal({
     if (['baked-potato-stuffed', 'baked-potato-loaded'].includes(itemId)) {
       labels.push('Sour Cream');
     }
-    if (['brisket-nachos', 'red-pit-burrito'].includes(itemId)) {
+    if (itemId === 'brisket-nachos') {
       labels.push('Queso');
     }
     return labels;
+  };
+
+  // Price overrides for red-pit-burrito (Queso and Cheese are $0, Potatoes already $0)
+  const getOverridePrice = (topping: ToppingOption): number => {
+    if (itemId === 'red-pit-burrito') {
+      const label = topping.label.toLowerCase();
+      if (label.includes('queso') || label.includes('shredded cheddar') || label.includes('seasoned potatoes')) {
+        return 0.00;
+      }
+    }
+    return topping.price;
   };
 
   const autoSelectedLabels = getAutoSelectedLabels();
@@ -141,15 +169,25 @@ export default function FavoritesCustomizationModal({
     );
   }
 
+  // For red-pit-burrito, show all available toppings as add-ons (Potatoes, Queso, Cheese, Sour Cream)
+  if (itemId === 'red-pit-burrito') {
+    addOnSectionToppings = availableToppings.filter(t =>
+      ['Seasoned Potatoes', 'Shredded Cheddar Cheese', 'Queso', 'Sour Cream'].includes(t.label)
+    );
+  }
+
   // Reset when modal opens/closes
   useEffect(() => {
     if (isOpen) {
       setCurrentStep(skipMeatSelection ? 2 : 1);
-      // Don't reset meat for items with pre-selected locked meat
-      if (!skipMeatSelection && !['brisket-nachos', 'red-pit-burrito'].includes(itemId)) {
+      // Don't reset meat for brisket-nachos (has pre-selected locked meat)
+      if (!skipMeatSelection && itemId !== 'brisket-nachos') {
         setSelectedMeat(null);
       }
-      setAddOnToppings([]);
+      // Don't reset addOnToppings for red-pit-burrito (they are pre-selected in separate useEffect)
+      if (itemId !== 'red-pit-burrito') {
+        setAddOnToppings([]);
+      }
       setSelectedDressing(null);
       setSelectedCondiments([]);
     }
@@ -160,8 +198,8 @@ export default function FavoritesCustomizationModal({
   const totalSteps = skipMeatSelection ? 2 : 3;
 
   const handleMeatSelect = (meat: SelectionOption) => {
-    // For items with pre-selected meat, meat is locked
-    if (['brisket-nachos', 'red-pit-burrito'].includes(itemId)) return;
+    // For brisket-nachos, meat is pre-selected and locked (Chopped Brisket)
+    if (itemId === 'brisket-nachos') return;
     setSelectedMeat(meat);
   };
 
@@ -294,14 +332,13 @@ export default function FavoritesCustomizationModal({
                 Choose Your Meat
               </h3>
               <p className="text-sm mb-4" style={{ color: '#999' }}>
-                {itemId === 'brisket-nachos' ? 'Chopped Brisket is included' :
-                 itemId === 'red-pit-burrito' ? 'Jalapeño Cheddar Sausage is included' : 'Select one meat'}
+                {itemId === 'brisket-nachos' ? 'Chopped Brisket is included' : 'Select one meat'}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {meatOptions.map((meat) => {
                   const isSelected = selectedMeat?.label === meat.label;
-                  const isLocked = ['brisket-nachos', 'red-pit-burrito'].includes(itemId);
+                  const isLocked = itemId === 'brisket-nachos';
 
                   return (
                     <button
@@ -352,6 +389,23 @@ export default function FavoritesCustomizationModal({
               <p className="text-sm mb-4" style={{ color: '#999' }}>
                 Included toppings are free. Add extras for additional charge.
               </p>
+
+              {/* Red Pit Burrito - Included Meats Info */}
+              {itemId === 'red-pit-burrito' && (
+                <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'rgba(255, 107, 53, 0.15)', border: '1px solid rgba(255, 107, 53, 0.3)' }}>
+                  <h4 className="text-md font-semibold mb-2" style={{ color: '#FFD700' }}>
+                    Included Meats
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 rounded-full text-sm font-medium" style={{ backgroundColor: 'rgba(255, 107, 53, 0.3)', color: '#F8F8F8' }}>
+                      Jalapeño Cheddar Sausage
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-sm font-medium" style={{ backgroundColor: 'rgba(255, 107, 53, 0.3)', color: '#F8F8F8' }}>
+                      Chopped Brisket
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {/* INCLUDED Section - Regular Toppings */}
               {includedSectionToppings.length > 0 && (
@@ -463,11 +517,12 @@ export default function FavoritesCustomizationModal({
               {addOnSectionToppings.length > 0 && (
                 <div className="mb-6">
                   <h4 className="text-md font-semibold mb-3" style={{ color: '#FFD700' }}>
-                    Toppings - ADD-ON
+                    {itemId === 'red-pit-burrito' ? 'Toppings' : 'Toppings - ADD-ON'}
                   </h4>
                   <div className="grid grid-cols-1 gap-3">
                     {addOnSectionToppings.map((topping) => {
                       const isAddOn = addOnToppings.find(t => t.label === topping.label);
+                      const displayPrice = getOverridePrice(topping);
 
                       return (
                         <button
@@ -483,8 +538,8 @@ export default function FavoritesCustomizationModal({
                           <div className="flex justify-between items-center">
                             <span className="font-semibold">{topping.label}</span>
                             <div className="flex items-center gap-2">
-                              <span className="font-bold" style={{ color: '#FFD700' }}>
-                                ${topping.price.toFixed(2)}
+                              <span className="font-bold" style={{ color: displayPrice === 0 ? '#4CAF50' : '#FFD700' }}>
+                                {displayPrice === 0 ? 'Included' : `$${displayPrice.toFixed(2)}`}
                               </span>
                               {isAddOn && (
                                 <Check className="w-5 h-5" style={{ color: '#FFD700' }} />
