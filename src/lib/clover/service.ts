@@ -88,7 +88,6 @@ export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: str
       note: formatWebOrderNote(data),
       orderType: CLOVER_WEB_ORDER_TYPE_ID ? { id: CLOVER_WEB_ORDER_TYPE_ID } : undefined,
       customers: customerId ? [{ id: customerId }] : undefined,
-      taxRemoved: true, // Disable Clover auto-tax - we calculate tax on website (8.25%)
     },
   };
 }
@@ -142,7 +141,7 @@ export async function submitOrderToClover(
 
 /**
  * Process payment for an existing Clover order using tokenized card
- * Uses /v1/charges with order_id to link payment to order
+ * Uses /v1/orders/{orderId}/pay to link payment to order's line items
  */
 export async function processPayment(
   token: string,
@@ -155,30 +154,22 @@ export async function processPayment(
   // Generate idempotency key from order ID
   const idempotencyKey = `order_${localOrderId}_${Date.now()}`;
 
-  // Clover external_reference_id has max 12 chars - use last 12 chars of order ID
-  const externalRefId = localOrderId.slice(-12);
-
-  const chargeRequest = {
+  // Use payForOrder - let Clover use order's calculated total (with matching 8.25% tax)
+  const payRequest = {
     source: token,
-    amount: totalAmountCents,
-    tax_amount: taxAmountCents,
-    currency: 'usd',
-    capture: true,
-    description: `Rise N' Smoke Web Order`,
-    external_reference_id: externalRefId,
-    receipt_email: customerEmail,
+    email: customerEmail,
     ecomind: 'ecom' as const,
-    order_id: cloverOrderId, // Link payment to Clover order
   };
 
-  console.log('[CloverService] Creating charge for order:', cloverOrderId, JSON.stringify(chargeRequest, null, 2));
+  console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
 
-  const chargeResponse = await cloverClient.createCharge(
-    chargeRequest,
+  const paymentResponse = await cloverClient.payForOrder(
+    cloverOrderId,
+    payRequest,
     idempotencyKey
   );
 
-  return chargeResponse;
+  return paymentResponse;
 }
 
 /**
@@ -284,16 +275,8 @@ async function createOrderWithoutPrint(
   const atomicOrder = mapCartToCloverOrder(data, customerId);
 
   // Create the order in Clover (no print trigger)
-  let cloverOrder = await cloverClient.createAtomicOrder(atomicOrder);
-
-  // Update order to disable Clover's auto-tax (we calculate 8.25% on website)
-  try {
-    cloverOrder = await cloverClient.updateOrder(cloverOrder.id, { taxRemoved: true });
-    console.log('[CloverService] Set taxRemoved=true on order:', cloverOrder.id);
-  } catch (error) {
-    console.error('[CloverService] Failed to set taxRemoved:', error);
-    // Continue anyway - payment might still work
-  }
+  // Clover will calculate tax at 8.25% (matching our website rate)
+  const cloverOrder = await cloverClient.createAtomicOrder(atomicOrder);
 
   return { cloverOrder, customerId };
 }
