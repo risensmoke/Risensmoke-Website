@@ -81,17 +81,6 @@ export function mapCartToCloverOrder(data: OrderSubmissionData, customerId?: str
   // Flatten line items (each quantity becomes a separate line item)
   const lineItems = data.items.flatMap(mapCartItemToLineItems);
 
-  // Add tax as a separate line item
-  const taxAmountCents = Math.round(data.tax * 100);
-  if (taxAmountCents > 0) {
-    lineItems.push({
-      name: 'Tax (8.25%)',
-      price: taxAmountCents,
-      unitQty: 1000,
-      printed: false,
-    });
-  }
-
   return {
     orderCart: {
       lineItems,
@@ -165,11 +154,12 @@ export async function processPayment(
   // Generate idempotency key from order ID
   const idempotencyKey = `order_${localOrderId}_${Date.now()}`;
 
-  // Use payForOrder - let Clover use order's calculated total (with matching 8.25% tax)
+  // Use payForOrder with tax_amount to properly record tax in Clover
   const payRequest = {
     source: token,
     email: customerEmail,
     ecomind: 'ecom' as const,
+    tax_amount: taxAmountCents, // Send tax amount so it shows in Clover's tax field
   };
 
   console.log('[CloverService] Paying for order:', cloverOrderId, JSON.stringify(payRequest, null, 2));
