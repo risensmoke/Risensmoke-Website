@@ -47,7 +47,6 @@ export default function FavoritesCustomizationModal({
 
   // Determine if meat selection should be shown
   const skipMeatSelection = [
-    'red-pit-burrito',
     'baked-potato-plain',
     'baked-potato-stuffed',
     'garden-salad'
@@ -58,10 +57,17 @@ export default function FavoritesCustomizationModal({
 
   // Auto-select meat for specific items
   useEffect(() => {
-    if (isOpen && itemId === 'brisket-nachos') {
-      const choppedBrisket = meatOptions.find(m => m.label.toLowerCase().includes('chopped brisket'));
-      if (choppedBrisket) {
-        setSelectedMeat(choppedBrisket);
+    if (isOpen) {
+      if (itemId === 'brisket-nachos') {
+        const choppedBrisket = meatOptions.find(m => m.label.toLowerCase().includes('chopped brisket'));
+        if (choppedBrisket) {
+          setSelectedMeat(choppedBrisket);
+        }
+      } else if (itemId === 'red-pit-burrito') {
+        const jalapenoSausage = meatOptions.find(m => m.label.toLowerCase().includes('jalap'));
+        if (jalapenoSausage) {
+          setSelectedMeat(jalapenoSausage);
+        }
       }
     }
   }, [isOpen, itemId, meatOptions]);
@@ -84,7 +90,7 @@ export default function FavoritesCustomizationModal({
       }
 
       // Queso auto-selected for specific items
-      if (['brisket-nachos', 'loaded-sidewinder'].includes(itemId)) {
+      if (['brisket-nachos', 'red-pit-burrito'].includes(itemId)) {
         const queso = toppingOptions.find(t => t.label.toLowerCase().includes('queso'));
         if (queso) autoToppings.push(queso);
       }
@@ -102,7 +108,7 @@ export default function FavoritesCustomizationModal({
     if (['baked-potato-stuffed', 'baked-potato-loaded'].includes(itemId)) {
       labels.push('Sour Cream');
     }
-    if (['brisket-nachos', 'loaded-sidewinder'].includes(itemId)) {
+    if (['brisket-nachos', 'red-pit-burrito'].includes(itemId)) {
       labels.push('Queso');
     }
     return labels;
@@ -139,7 +145,8 @@ export default function FavoritesCustomizationModal({
   useEffect(() => {
     if (isOpen) {
       setCurrentStep(skipMeatSelection ? 2 : 1);
-      if (!skipMeatSelection && itemId !== 'brisket-nachos') {
+      // Don't reset meat for items with pre-selected locked meat
+      if (!skipMeatSelection && !['brisket-nachos', 'red-pit-burrito'].includes(itemId)) {
         setSelectedMeat(null);
       }
       setAddOnToppings([]);
@@ -153,8 +160,8 @@ export default function FavoritesCustomizationModal({
   const totalSteps = skipMeatSelection ? 2 : 3;
 
   const handleMeatSelect = (meat: SelectionOption) => {
-    // For brisket nachos, meat is locked
-    if (itemId === 'brisket-nachos') return;
+    // For items with pre-selected meat, meat is locked
+    if (['brisket-nachos', 'red-pit-burrito'].includes(itemId)) return;
     setSelectedMeat(meat);
   };
 
@@ -287,13 +294,14 @@ export default function FavoritesCustomizationModal({
                 Choose Your Meat
               </h3>
               <p className="text-sm mb-4" style={{ color: '#999' }}>
-                {itemId === 'brisket-nachos' ? 'Chopped Brisket is included' : 'Select one meat'}
+                {itemId === 'brisket-nachos' ? 'Chopped Brisket is included' :
+                 itemId === 'red-pit-burrito' ? 'Jalapeño Cheddar Sausage is included' : 'Select one meat'}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {meatOptions.map((meat) => {
                   const isSelected = selectedMeat?.label === meat.label;
-                  const isLocked = itemId === 'brisket-nachos';
+                  const isLocked = ['brisket-nachos', 'red-pit-burrito'].includes(itemId);
 
                   return (
                     <button

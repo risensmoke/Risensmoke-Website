@@ -957,11 +957,14 @@ function OrderPageContent() {
     if (!favoritesModalItem) return;
 
     const quantity = itemQuantities[favoritesModalItem.id] || 1;
+    // For red-pit-burrito, meat is fixed/included - don't send as modifier
+    const shouldSendMeatModifier = meat && favoritesModalItem.id !== 'red-pit-burrito';
+
     const modifiers = [
-      // Add meat selection if applicable
-      ...(meat ? [{
+      // Add meat selection if applicable (skip for items with locked/included meat)
+      ...(shouldSendMeatModifier ? [{
         id: `meat-${meat.label}`,
-        cloverModId: getCloverModId(meat.label, 'meat-selection'),
+        cloverModId: getCloverModId(meat.label, 'meat-selection', favoritesModalItem.id),
         name: meat.label,
         price: meat.price,
         category: 'Meat'
