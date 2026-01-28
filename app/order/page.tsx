@@ -1174,13 +1174,7 @@ function OrderPageContent() {
   const CLOSED_DATES = [
     '2025-12-31', // New Year's Eve
     '2026-01-01', // New Year's Day
-    '2026-01-27', // Inclement weather
   ];
-
-  // Custom closure messages for specific dates (optional - defaults to "Closed for Holiday")
-  const CLOSURE_MESSAGES: Record<string, string> = {
-    '2026-01-27': 'Closed due to inclement weather',
-  };
 
   // Check if a date is a closed day
   const isClosedDay = (dateStr: string) => {
@@ -1608,12 +1602,9 @@ function OrderPageContent() {
                   const isClosed = isHoliday || isRegularClosedDay;
 
                   if (isClosed) {
-                    const closureMessage = isHoliday
-                      ? (CLOSURE_MESSAGES[checkoutForm.pickupDate] || 'Closed for Holiday')
-                      : `Closed on ${dayName}s`;
                     return (
                       <div className="p-3 rounded text-center" style={{ backgroundColor: 'rgba(211, 47, 47, 0.2)', border: '1px solid #D32F2F' }}>
-                        <p style={{ color: '#F8F8F8' }}>{closureMessage}</p>
+                        <p style={{ color: '#F8F8F8' }}>{isHoliday ? 'Closed for Holiday' : `Closed on ${dayName}s`}</p>
                         <p className="text-sm mt-1" style={{ color: '#888' }}>Open Tuesday - Saturday, 11 AM - 6 PM</p>
                       </div>
                     );
