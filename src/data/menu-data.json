@@ -26,7 +26,7 @@
       "modifiers": [
         { "id": "sliced-brisket", "name": "Sliced Brisket", "price": 0 },
         { "id": "chopped-brisket", "name": "Chopped Brisket", "price": 0 },
-        { "id": "pulled-pork", "name": "Pulled Pork", "price": 0 },
+        { "id": "pulled-pork", "name": "Pulled Pork", "price": 0, "available": false },
         { "id": "smoked-ribs", "name": "Smoked Ribs", "price": 0 },
         { "id": "smoked-chicken", "name": "Smoked Chicken", "price": 0 },
         { "id": "jalapeno-cheddar-sausage", "name": "Jalapeño Cheddar Sausage", "price": 0 },
@@ -44,7 +44,7 @@
       "modifiers": [
         { "id": "sliced-brisket-1", "name": "Sliced Brisket", "price": 0 },
         { "id": "chopped-brisket-1", "name": "Chopped Brisket", "price": 0 },
-        { "id": "pulled-pork-1", "name": "Pulled Pork", "price": 0 },
+        { "id": "pulled-pork-1", "name": "Pulled Pork", "price": 0, "available": false },
         { "id": "smoked-ribs-1", "name": "Smoked Ribs", "price": 0 },
         { "id": "smoked-chicken-1", "name": "Smoked Chicken", "price": 0 },
         { "id": "jalapeno-cheddar-sausage-1", "name": "Jalapeño Cheddar Sausage", "price": 0 },
@@ -62,7 +62,7 @@
       "modifiers": [
         { "id": "sliced-brisket-2", "name": "Sliced Brisket", "price": 0 },
         { "id": "chopped-brisket-2", "name": "Chopped Brisket", "price": 0 },
-        { "id": "pulled-pork-2", "name": "Pulled Pork", "price": 0 },
+        { "id": "pulled-pork-2", "name": "Pulled Pork", "price": 0, "available": false },
         { "id": "smoked-ribs-2", "name": "Smoked Ribs", "price": 0 },
         { "id": "smoked-chicken-2", "name": "Smoked Chicken", "price": 0 },
         { "id": "jalapeno-cheddar-sausage-2", "name": "Jalapeño Cheddar Sausage", "price": 0 },
@@ -80,7 +80,7 @@
       "modifiers": [
         { "id": "sliced-brisket-3", "name": "Sliced Brisket", "price": 0 },
         { "id": "chopped-brisket-3", "name": "Chopped Brisket", "price": 0 },
-        { "id": "pulled-pork-3", "name": "Pulled Pork", "price": 0 },
+        { "id": "pulled-pork-3", "name": "Pulled Pork", "price": 0, "available": false },
         { "id": "smoked-ribs-3", "name": "Smoked Ribs", "price": 0 },
         { "id": "smoked-chicken-3", "name": "Smoked Chicken", "price": 0 },
         { "id": "jalapeno-cheddar-sausage-3", "name": "Jalapeño Cheddar Sausage", "price": 0 },
@@ -261,7 +261,7 @@
       "cloverOnly": true,
       "modifiers": [
         { "id": "chopped-brisket-favs", "name": "Chopped Brisket", "price": 0 },
-        { "id": "pulled-pork-favs", "name": "Pulled Pork", "price": 0 },
+        { "id": "pulled-pork-favs", "name": "Pulled Pork", "price": 0, "available": false },
         { "id": "smoked-chicken-favs", "name": "Smoked Chicken", "price": 0 },
         { "id": "jalapeno-cheddar-sausage-favs", "name": "Jalapeño Cheddar Sausage", "price": 0 },
         { "id": "beef-sausage-favs", "name": "Beef Sausage", "price": 0 },
@@ -385,7 +385,7 @@
       "description": "Pork pulled from the rising flames of smoke",
       "price": 10.95,
       "categoryId": "sandwiches",
-      "available": true,
+      "available": false,
       "modifierGroups": [
         { "groupId": "condiments", "min": 0, "max": null }
       ]
@@ -475,7 +475,7 @@
       "description": "Tender pulled pork shoulder",
       "price": 0,
       "categoryId": "meats",
-      "available": true,
+      "available": false,
       "modifierGroups": [
         { "groupId": "meat-weight-standard", "min": 1, "max": 1 },
         { "groupId": "condiments", "min": 0, "max": null }
@@ -585,7 +585,7 @@
       "description": "Plain Baked Potato",
       "price": 7.50,
       "categoryId": "favorites",
-      "available": true,
+      "available": false,
       "modifierGroups": [
         { "groupId": "add-on-toppings", "min": 0, "max": null }
       ]
@@ -596,7 +596,7 @@
       "description": "Baked Potato stuffed w/Cheese & Sour Cream",
       "price": 9.25,
       "categoryId": "favorites",
-      "available": true,
+      "available": false,
       "modifierGroups": [
         { "groupId": "add-on-toppings", "min": 0, "max": null }
       ]
@@ -607,7 +607,7 @@
       "description": "Loaded Baked Potato w/Meat",
       "price": 11.95,
       "categoryId": "favorites",
-      "available": true,
+      "available": false,
       "modifierGroups": [
         { "groupId": "meat-selection", "min": 1, "max": 1 },
         { "groupId": "add-on-toppings", "min": 0, "max": null }

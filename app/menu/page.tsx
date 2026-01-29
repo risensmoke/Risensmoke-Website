@@ -110,7 +110,7 @@ const menuItems: MenuItem[] = [
     description: 'Pork pulled from the rising flames of smoke',
     price: 10.95,
     category: 'Sandwiches',
-    available: true,
+    available: false,
     image: '/Assets/sand-pull-pork.jpg'
   },
   {
@@ -184,7 +184,7 @@ const menuItems: MenuItem[] = [
     description: 'Tender pulled pork shoulder',
     price: 19.95,
     category: 'Meats',
-    available: true,
+    available: false,
     image: '/Assets/pound-pull-pork.jpeg'
   },
   {
@@ -267,7 +267,7 @@ const menuItems: MenuItem[] = [
     description: 'Plain Baked Potato',
     price: 7.50,
     category: 'Favorites',
-    available: true,
+    available: false,
     image: '/Assets/fav-potato-plain.PNG'
   },
   {
@@ -276,7 +276,7 @@ const menuItems: MenuItem[] = [
     description: 'Baked Potato stuffed w/Cheese & Sour Cream',
     price: 9.25,
     category: 'Favorites',
-    available: true,
+    available: false,
     image: '/Assets/fav-potato-stuffed.PNG'
   },
   {
@@ -285,7 +285,7 @@ const menuItems: MenuItem[] = [
     description: 'Loaded Baked Potato w/Meat',
     price: 11.95,
     category: 'Favorites',
-    available: true,
+    available: false,
     image: '/Assets/fav-potato-loaded.png'
   },
   {
@@ -514,15 +514,15 @@ const premiumMeatWeightOptions = [
 ];
 
 const meatOptions = [
-  { label: 'Sliced Brisket', price: 0.00 },
-  { label: 'Chopped Brisket', price: 0.00 },
-  { label: 'Pulled Pork', price: 0.00 },
-  { label: 'Smoked Ribs', price: 0.00 },
-  { label: 'Smoked Chicken', price: 0.00 },
-  { label: 'Jalapeño Cheddar Sausage', price: 0.00 },
-  { label: 'Beef Sausage', price: 0.00 },
-  { label: 'Hot Link', price: 0.00 }
-];
+  { label: 'Sliced Brisket', price: 0.00, available: true },
+  { label: 'Chopped Brisket', price: 0.00, available: true },
+  { label: 'Pulled Pork', price: 0.00, available: false },
+  { label: 'Smoked Ribs', price: 0.00, available: true },
+  { label: 'Smoked Chicken', price: 0.00, available: true },
+  { label: 'Jalapeño Cheddar Sausage', price: 0.00, available: true },
+  { label: 'Beef Sausage', price: 0.00, available: true },
+  { label: 'Hot Link', price: 0.00, available: true }
+].filter(option => option.available);
 
 const sidesOptions = [
   { label: 'Mamas Smoky Mac & Cheese', price: 0.00 },
@@ -546,13 +546,13 @@ const ketchupOptions = [
 
 // Favorites meat options
 const favoritesMeatOptions = [
-  { label: 'Chopped Brisket', price: 0.00 },
-  { label: 'Pulled Pork', price: 0.00 },
-  { label: 'Smoked Chicken', price: 0.00 },
-  { label: 'Jalapeno Cheddar Sausage', price: 0.00 },
-  { label: 'Beef Sausage', price: 0.00 },
-  { label: 'Hot Link', price: 0.00 }
-];
+  { label: 'Chopped Brisket', price: 0.00, available: true },
+  { label: 'Pulled Pork', price: 0.00, available: false },
+  { label: 'Smoked Chicken', price: 0.00, available: true },
+  { label: 'Jalapeno Cheddar Sausage', price: 0.00, available: true },
+  { label: 'Beef Sausage', price: 0.00, available: true },
+  { label: 'Hot Link', price: 0.00, available: true }
+].filter(option => option.available);
 
 // Favorites topping options
 const favoritesToppingOptions = [
