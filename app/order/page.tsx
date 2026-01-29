@@ -1174,13 +1174,10 @@ function OrderPageContent() {
   const CLOSED_DATES = [
     '2025-12-31', // New Year's Eve
     '2026-01-01', // New Year's Day
-    '2026-01-28', // Inclement weather
   ];
 
   // Custom closure messages for specific dates (optional - defaults to "Closed for Holiday")
-  const CLOSURE_MESSAGES: Record<string, string> = {
-    '2026-01-28': 'Closed due to inclement weather',
-  };
+  const CLOSURE_MESSAGES: Record<string, string> = {};
 
   // Check if a date is a closed day
   const isClosedDay = (dateStr: string) => {
