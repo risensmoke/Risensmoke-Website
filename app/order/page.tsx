@@ -1175,11 +1175,13 @@ function OrderPageContent() {
     '2025-12-31', // New Year's Eve
     '2026-01-01', // New Year's Day
     '2026-04-04', // Sold out
+    '2026-05-09', // Holiday
   ];
 
   // Custom closure messages for specific dates (optional - defaults to "Closed for Holiday")
   const CLOSURE_MESSAGES: Record<string, string> = {
     '2026-04-04': 'Online Ordering Sold Out For Today',
+    '2026-05-09': 'Online Ordering Closed for Holiday',
   };
 
   // Check if a date is a closed day
