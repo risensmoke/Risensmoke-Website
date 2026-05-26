@@ -1183,12 +1183,14 @@ function OrderPageContent() {
     '2026-05-23', // Closed until 2026-05-26
     '2026-05-24', // Closed until 2026-05-26
     '2026-05-25', // Closed until 2026-05-26
+    '2026-05-26', // Holiday
   ];
 
   // Custom closure messages for specific dates (optional - defaults to "Closed for Holiday")
   const CLOSURE_MESSAGES: Record<string, string> = {
     '2026-04-04': 'Online Ordering Sold Out For Today',
     '2026-05-09': 'Online Ordering Closed for Holiday',
+    '2026-05-26': 'Online Ordering Closed for Holiday',
     '2026-05-19': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-20': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-21': 'Online Ordering Will Return on 05/26/2026',
