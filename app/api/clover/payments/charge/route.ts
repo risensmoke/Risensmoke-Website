@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabase } from '@/lib/supabase';
 import { cloverService } from '@/lib/clover/service';
+import { resolveCloverModId, isResolvableCategory } from '@/lib/clover/modifierResolver';
 import type { OrderSubmissionData } from '@/types/clover';
 
 // Validation schema
@@ -105,23 +106,44 @@ export async function POST(request: NextRequest) {
       total: localOrder.total,
     };
 
-    // Tripwire: catalog-backed selections (sides/meats) must carry a
-    // cloverModId or Clover silently drops them from the kitchen ticket.
-    // The order UI blocks checkout until Clover data loads, so this should
-    // never fire — log loudly if it does so the regression is visible.
-    const droppedModifiers = orderData.items.flatMap((item) =>
-      item.modifiers
-        .filter(
-          (mod) =>
-            !mod.cloverModId &&
-            ['side', 'meat'].includes((mod.category || '').toLowerCase())
-        )
-        .map((mod) => `${item.name} -> ${mod.category}:${mod.name}`)
-    );
-    if (droppedModifiers.length > 0) {
+    // Re-resolve catalog modifiers server-side before submitting to Clover.
+    // The cart snapshots cloverModId at add-to-cart time, client-side; if the
+    // catalog wasn't loaded then (slow load, stale build, an old persisted
+    // cart) the modifier is saved null, and if the Clover catalog was later
+    // re-exported the saved id goes stale. Either way Clover drops the
+    // modification and the side/meat vanishes from the kitchen ticket. Here we
+    // resolve each catalog-backed modifier against the current committed
+    // mappings, which is deterministic via itemModifierGroupMapping. This
+    // patches both null and drifted ids regardless of how the cart was built.
+    const patched: string[] = [];
+    const unresolved: string[] = [];
+    for (const item of orderData.items) {
+      for (const mod of item.modifiers) {
+        if (!isResolvableCategory(mod.category)) continue;
+        const resolved = resolveCloverModId(item.name, mod.category, mod.name);
+        if (resolved) {
+          if (resolved !== mod.cloverModId) {
+            patched.push(`${item.name} -> ${mod.category}:${mod.name} (${mod.cloverModId || 'null'} => ${resolved})`);
+            mod.cloverModId = resolved;
+          }
+        } else if (!mod.cloverModId) {
+          unresolved.push(`${item.name} -> ${mod.category}:${mod.name}`);
+        }
+      }
+    }
+    if (patched.length > 0) {
+      console.warn(
+        `[API/clover/payments/charge] Order ${localOrderId}: re-resolved ${patched.length} catalog modifier id(s) ` +
+          `before submission: ${patched.join(', ')}`
+      );
+    }
+    // Tripwire: anything still missing an id after re-resolution will be dropped
+    // by Clover. With the resolver in place this should never fire; if it does,
+    // the committed mappings are out of sync with the live catalog.
+    if (unresolved.length > 0) {
       console.error(
-        `[API/clover/payments/charge] Order ${localOrderId} has catalog modifiers with no cloverModId; ` +
-          `Clover will drop them: ${droppedModifiers.join(', ')}`
+        `[API/clover/payments/charge] Order ${localOrderId} has catalog modifiers that could not be resolved to a ` +
+          `cloverModId; Clover will drop them: ${unresolved.join(', ')}`
       );
     }
 
