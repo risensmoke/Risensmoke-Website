@@ -90,9 +90,12 @@ export async function POST(request: NextRequest) {
         basePrice: item.base_price,
         quantity: item.quantity,
         totalPrice: item.total_price,
-        modifiers: (item.modifiers || []).map((mod: { name: string; price: number; category?: string }) => ({
-          id: undefined,
-          cloverModId: undefined,
+        modifiers: (item.modifiers || []).map((mod: { id?: string; cloverModId?: string; name: string; price: number; category?: string }) => ({
+          id: mod.id || undefined,
+          // Preserve the saved Clover modifier reference. Discarding it (the
+          // previous behavior) made Clover drop the modifier from the ticket,
+          // e.g. plate sides vanishing. Matches payments/charge/route.ts.
+          cloverModId: mod.cloverModId || undefined,
           name: mod.name,
           price: mod.price,
           category: mod.category || 'Modifier',

@@ -644,6 +644,11 @@ function OrderPageContent() {
   const [cloverModifierGroups, setCloverModifierGroups] = useState<MenuModifierGroup[]>([]);
   const [cloverItemIds, setCloverItemIds] = useState<Record<string, string>>({});
   const [itemModifierGroupMapping, setItemModifierGroupMapping] = useState<Record<string, Record<string, string>>>({});
+  // True once Clover modifier data has loaded. Until then, modifier IDs cannot
+  // be resolved, so ordering is blocked to prevent saving items (e.g. plate
+  // sides) with a null cloverModId, which Clover silently drops from the ticket.
+  const [cloverDataReady, setCloverDataReady] = useState(false);
+  const [cloverDataError, setCloverDataError] = useState(false);
   const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>({
     firstName: '',
     lastName: '',
@@ -679,9 +684,14 @@ function OrderPageContent() {
             }
           }
           setCloverItemIds(itemIdMap);
+          setCloverDataError(false);
+          setCloverDataReady(true);
+        } else {
+          setCloverDataError(true);
         }
       } catch (error) {
         console.error('[Order] Failed to fetch Clover data:', error);
+        setCloverDataError(true);
       }
     }
     fetchCloverData();
@@ -772,6 +782,13 @@ function OrderPageContent() {
     : menuItems.filter(item => item.category === selectedCategory);
 
   const handleAddToCart = (item: MenuItem) => {
+    // Guard: Clover modifier data must be loaded before adding anything to the
+    // cart. Resolving cloverModId for plate sides/meats depends on this data;
+    // if it isn't ready the modifiers save with a null cloverModId and Clover
+    // drops them from the kitchen ticket. The buttons are disabled until ready,
+    // so this is a backstop for any programmatic call path.
+    if (!cloverDataReady) return;
+
     // Show size selection modal for Sides
     if (item.category === 'Sides') {
       setSizeModalItem(item);
@@ -1383,7 +1400,8 @@ function OrderPageContent() {
                               {/* Add to Cart Button */}
                               <button
                                 onClick={() => handleAddToCart(item)}
-                                className="w-full py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105"
+                                disabled={!cloverDataReady}
+                                className="w-full py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                 style={{
                                   background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
                                   color: '#F8F8F8',
@@ -1391,7 +1409,7 @@ function OrderPageContent() {
                                 }}
                               >
                                 <ShoppingCart className="w-4 h-4" />
-                                Add to Cart
+                                {cloverDataReady ? 'Add to Cart' : cloverDataError ? 'Menu Unavailable' : 'Loading Menu…'}
                               </button>
 
                               {/* In Cart Indicator */}
@@ -1487,7 +1505,8 @@ function OrderPageContent() {
                     {/* Add to Cart Button */}
                     <button
                       onClick={() => handleAddToCart(item)}
-                      className="w-full py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105"
+                      disabled={!cloverDataReady}
+                      className="w-full py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                       style={{
                         background: 'linear-gradient(135deg, #FF6B35, #D32F2F)',
                         color: '#F8F8F8',
@@ -1495,7 +1514,7 @@ function OrderPageContent() {
                       }}
                     >
                       <ShoppingCart className="w-4 h-4" />
-                      Add to Cart
+                      {cloverDataReady ? 'Add to Cart' : cloverDataError ? 'Menu Unavailable' : 'Loading Menu…'}
                     </button>
 
                     {/* In Cart Indicator */}

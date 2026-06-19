@@ -105,6 +105,26 @@ export async function POST(request: NextRequest) {
       total: localOrder.total,
     };
 
+    // Tripwire: catalog-backed selections (sides/meats) must carry a
+    // cloverModId or Clover silently drops them from the kitchen ticket.
+    // The order UI blocks checkout until Clover data loads, so this should
+    // never fire — log loudly if it does so the regression is visible.
+    const droppedModifiers = orderData.items.flatMap((item) =>
+      item.modifiers
+        .filter(
+          (mod) =>
+            !mod.cloverModId &&
+            ['side', 'meat'].includes((mod.category || '').toLowerCase())
+        )
+        .map((mod) => `${item.name} -> ${mod.category}:${mod.name}`)
+    );
+    if (droppedModifiers.length > 0) {
+      console.error(
+        `[API/clover/payments/charge] Order ${localOrderId} has catalog modifiers with no cloverModId; ` +
+          `Clover will drop them: ${droppedModifiers.join(', ')}`
+      );
+    }
+
     // Process payment and submit order to Clover
     const { cloverOrder, payment, printed } = await cloverService.submitOrderWithPayment(
       orderData,
