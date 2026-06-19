@@ -117,6 +117,14 @@ export async function POST(request: NextRequest) {
     // patches both null and drifted ids regardless of how the cart was built.
     const patched: string[] = [];
     const unresolved: string[] = [];
+    const resolutionDetails: {
+      item: string;
+      category: string | undefined;
+      name: string;
+      before: string | null;
+      after: string | null;
+      status: 'patched' | 'unresolved';
+    }[] = [];
     for (const item of orderData.items) {
       for (const mod of item.modifiers) {
         if (!isResolvableCategory(mod.category)) continue;
@@ -124,10 +132,18 @@ export async function POST(request: NextRequest) {
         if (resolved) {
           if (resolved !== mod.cloverModId) {
             patched.push(`${item.name} -> ${mod.category}:${mod.name} (${mod.cloverModId || 'null'} => ${resolved})`);
+            resolutionDetails.push({
+              item: item.name, category: mod.category, name: mod.name,
+              before: mod.cloverModId || null, after: resolved, status: 'patched',
+            });
             mod.cloverModId = resolved;
           }
         } else if (!mod.cloverModId) {
           unresolved.push(`${item.name} -> ${mod.category}:${mod.name}`);
+          resolutionDetails.push({
+            item: item.name, category: mod.category, name: mod.name,
+            before: null, after: null, status: 'unresolved',
+          });
         }
       }
     }
@@ -145,6 +161,24 @@ export async function POST(request: NextRequest) {
         `[API/clover/payments/charge] Order ${localOrderId} has catalog modifiers that could not be resolved to a ` +
           `cloverModId; Clover will drop them: ${unresolved.join(', ')}`
       );
+    }
+    // Early-warning log: a row here means the cart arrived with missing/stale
+    // modifier ids (the client-side capture failed) — the signal to analyze in
+    // real time when the kitchen reports a bare ticket. Best-effort; never let a
+    // logging failure block the payment.
+    if (resolutionDetails.length > 0) {
+      try {
+        await supabase.from('modifier_resolution_log').insert({
+          local_order_id: localOrderId,
+          order_number: localOrder.order_number,
+          customer_name: `${localOrder.customer_first_name} ${localOrder.customer_last_name}`,
+          patched_count: patched.length,
+          unresolved_count: unresolved.length,
+          details: resolutionDetails,
+        });
+      } catch (logError) {
+        console.error('[API/clover/payments/charge] Failed to write modifier_resolution_log:', logError);
+      }
     }
 
     // Process payment and submit order to Clover

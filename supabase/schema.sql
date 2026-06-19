@@ -48,8 +48,29 @@ CREATE TABLE IF NOT EXISTS order_items (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Modifier resolution log: one row per checkout where the cart arrived with
+-- catalog modifiers that had a missing/stale cloverModId and the server had to
+-- re-resolve them before submitting to Clover. This is the early-warning signal
+-- for the "sides/meats missing from the kitchen ticket" class: a row here means
+-- the client-side capture failed for that order (we auto-healed it, unless
+-- unresolved_count > 0). Query by order_number when the kitchen reports a bare
+-- ticket to get the full before/after picture for real-time analysis.
+CREATE TABLE IF NOT EXISTS modifier_resolution_log (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  local_order_id UUID,
+  order_number TEXT,
+  customer_name TEXT,
+  patched_count INTEGER NOT NULL DEFAULT 0,      -- null/stale ids we re-resolved
+  unresolved_count INTEGER NOT NULL DEFAULT 0,   -- still unresolved -> WILL drop at Clover
+  details JSONB DEFAULT '[]'::jsonb,             -- [{item, category, name, before, after, status}]
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Create indexes for common queries
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_modres_order_number ON modifier_resolution_log(order_number);
+CREATE INDEX IF NOT EXISTS idx_modres_created_at ON modifier_resolution_log(created_at);
+CREATE INDEX IF NOT EXISTS idx_modres_unresolved ON modifier_resolution_log(unresolved_count);
 CREATE INDEX IF NOT EXISTS idx_orders_order_number ON orders(order_number);
 CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
@@ -65,6 +86,9 @@ ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow all for service role" ON users FOR ALL USING (true);
 CREATE POLICY "Allow all for service role" ON orders FOR ALL USING (true);
 CREATE POLICY "Allow all for service role" ON order_items FOR ALL USING (true);
+
+ALTER TABLE modifier_resolution_log ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow all for service role" ON modifier_resolution_log FOR ALL USING (true);
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
