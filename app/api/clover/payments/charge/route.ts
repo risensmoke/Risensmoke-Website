@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabase } from '@/lib/supabase';
 import { cloverService } from '@/lib/clover/service';
+import type { StagedCheckoutError } from '@/lib/clover/service';
 import { resolveCloverModId, isResolvableCategory } from '@/lib/clover/modifierResolver';
 import type { OrderSubmissionData } from '@/types/clover';
 
@@ -18,6 +19,13 @@ const chargeSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  // Kept in scope for the error handler so failures can be logged against the order.
+  let failedOrderRef: {
+    id: string;
+    order_number: string;
+    customer_name: string;
+    total: number;
+  } | null = null;
   try {
     const body = await request.json();
 
@@ -48,6 +56,13 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
+
+    failedOrderRef = {
+      id: localOrder.id,
+      order_number: localOrder.order_number,
+      customer_name: `${localOrder.customer_first_name} ${localOrder.customer_last_name}`,
+      total: localOrder.total,
+    };
 
     // Check if already paid
     if (localOrder.payment_intent_id) {
@@ -238,6 +253,41 @@ export async function POST(request: NextRequest) {
       statusCode,
     };
     console.error('[API/clover/payments/charge] Error details:', JSON.stringify(errorDetails, null, 2));
+
+    // Persist the failure and mark the order row honestly. Netlify console logs
+    // are ephemeral — without this row, declines, crashes, and abandonment are
+    // indistinguishable after the fact. Best-effort: never let logging failures
+    // mask the original error.
+    if (failedOrderRef) {
+      const staged = error as StagedCheckoutError;
+      try {
+        await supabase.from('checkout_failure_log').insert({
+          local_order_id: failedOrderRef.id,
+          order_number: failedOrderRef.order_number,
+          customer_name: failedOrderRef.customer_name,
+          total: failedOrderRef.total,
+          stage: staged.stage || (isPaymentError ? 'payment' : 'unknown'),
+          status_code: statusCode ?? null,
+          error_name: errorName,
+          error_message: errorMessage,
+          clover_error: cloverError ?? null,
+          leaked_clover_order_id: staged.leakedCloverOrderId ?? null,
+        });
+      } catch (logError) {
+        console.error('[API/clover/payments/charge] Failed to write checkout_failure_log:', logError);
+      }
+      try {
+        // Guard on payment_intent_id so a concurrent successful charge is never
+        // clobbered back to PAYMENT_FAILED.
+        await supabase
+          .from('orders')
+          .update({ status: 'PAYMENT_FAILED' })
+          .eq('id', failedOrderRef.id)
+          .is('payment_intent_id', null);
+      } catch (statusError) {
+        console.error('[API/clover/payments/charge] Failed to mark order PAYMENT_FAILED:', statusError);
+      }
+    }
 
     // Extract user-friendly message from Clover error if available
     const cloverMessage = (cloverError as { message?: string; error?: { message?: string } })?.message

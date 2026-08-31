@@ -41,7 +41,7 @@ export interface DbOrder {
   total: number;
   pickup_time: string;
   estimated_ready: string;
-  status: 'CONFIRMED' | 'PREPARING' | 'READY' | 'PICKED_UP' | 'CANCELLED';
+  status: 'PENDING_PAYMENT' | 'PAYMENT_FAILED' | 'CONFIRMED' | 'PREPARING' | 'READY' | 'PICKED_UP' | 'CANCELLED';
   payment_intent_id: string | null;
   special_instructions: string | null;
   created_at: string;

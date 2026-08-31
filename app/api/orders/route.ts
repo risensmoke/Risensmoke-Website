@@ -113,7 +113,9 @@ export async function POST(request: NextRequest) {
         pickup_time: pickupTime.toISOString(),
         estimated_ready: estimatedReady.toISOString(),
         special_instructions: data.specialInstructions || null,
-        status: 'CONFIRMED',
+        // Nothing is confirmed yet — the charge route promotes to CONFIRMED
+        // after payment succeeds, or PAYMENT_FAILED when it doesn't.
+        status: 'PENDING_PAYMENT',
       })
       .select()
       .single();

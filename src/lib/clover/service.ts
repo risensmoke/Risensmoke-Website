@@ -182,6 +182,40 @@ export async function processPayment(
 }
 
 /**
+ * Error thrown by submitOrderWithPayment, tagged with which stage failed so the
+ * charge route can log it. leakedCloverOrderId is set when an unpaid Clover
+ * order was created but could not be deleted afterwards.
+ */
+export interface StagedCheckoutError extends Error {
+  stage?: 'clover_order_create' | 'payment';
+  leakedCloverOrderId?: string;
+}
+
+/**
+ * Delete an unpaid Clover order, retrying transient failures. Returns false if
+ * the order could not be deleted (it then lingers open in Clover and must be
+ * removed manually — seen once on 2026-08-26).
+ */
+async function deleteOrderWithRetry(cloverOrderId: string): Promise<boolean> {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      await cloverClient.deleteOrder(cloverOrderId);
+      return true;
+    } catch (error) {
+      console.error(
+        `[CloverService] Delete attempt ${attempt}/3 failed for unpaid order ${cloverOrderId}:`,
+        error
+      );
+      if (attempt < 3) await new Promise((r) => setTimeout(r, 1000 * attempt));
+    }
+  }
+  console.error(
+    `[CloverService] LEAKED unpaid Clover order ${cloverOrderId} — all delete attempts failed; remove it manually in Clover.`
+  );
+  return false;
+}
+
+/**
  * Full order flow: create order, process payment, then print only if payment succeeds
  */
 export async function submitOrderWithPayment(
@@ -194,7 +228,14 @@ export async function submitOrderWithPayment(
   printed: boolean;
 }> {
   // Step 1: Create order in Clover (WITHOUT printing - we'll print only after payment succeeds)
-  const { cloverOrder, customerId } = await createOrderWithoutPrint(data);
+  let created: { cloverOrder: CloverOrder; customerId?: string };
+  try {
+    created = await createOrderWithoutPrint(data);
+  } catch (error) {
+    (error as StagedCheckoutError).stage = 'clover_order_create';
+    throw error;
+  }
+  const { cloverOrder, customerId } = created;
 
   // Step 2: Process payment for the Clover order
   // Calculate amounts in cents from the order data
@@ -214,11 +255,10 @@ export async function submitOrderWithPayment(
   } catch (error) {
     // Payment failed - delete the Clover order
     console.error('[CloverService] Payment failed, deleting order:', cloverOrder.id);
-    try {
-      await cloverClient.deleteOrder(cloverOrder.id);
-    } catch (deleteError) {
-      console.error('[CloverService] Failed to delete order after payment failure:', deleteError);
-    }
+    const deleted = await deleteOrderWithRetry(cloverOrder.id);
+    const staged = error as StagedCheckoutError;
+    staged.stage = 'payment';
+    if (!deleted) staged.leakedCloverOrderId = cloverOrder.id;
     throw error;
   }
 
@@ -228,12 +268,13 @@ export async function submitOrderWithPayment(
   if (!isPaymentSuccessful) {
     // Payment declined - delete the Clover order
     console.error('[CloverService] Payment declined, deleting order:', cloverOrder.id, 'status:', payment.status);
-    try {
-      await cloverClient.deleteOrder(cloverOrder.id);
-    } catch (deleteError) {
-      console.error('[CloverService] Failed to delete order after payment decline:', deleteError);
-    }
-    throw new Error(`Payment failed: ${payment.failure_message || 'Unknown error'}`);
+    const deleted = await deleteOrderWithRetry(cloverOrder.id);
+    const declineError: StagedCheckoutError = new Error(
+      `Payment failed: ${payment.failure_message || 'Unknown error'}`
+    );
+    declineError.stage = 'payment';
+    if (!deleted) declineError.leakedCloverOrderId = cloverOrder.id;
+    throw declineError;
   }
 
   // Step 3: Payment succeeded - now trigger print
