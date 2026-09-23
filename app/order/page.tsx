@@ -1203,6 +1203,7 @@ function OrderPageContent() {
     '2026-05-26', // Holiday
     '2026-06-20', // Closed - in-store only
     '2026-07-07', // Closed - in-store only
+    '2026-09-23', // Closed - in-store only
   ];
 
   // Custom closure messages for specific dates (optional - defaults to "Closed for Holiday")
@@ -1212,6 +1213,7 @@ function OrderPageContent() {
     '2026-05-26': 'Online Ordering Closed for Holiday',
     '2026-06-20': 'Online Ordering Closed Today - Come Visit Us In Store',
     '2026-07-07': 'Online Ordering Closed Today - Come Visit Us In Store',
+    '2026-09-23': 'Online Ordering Closed Today - Come Visit Us In Store',
     '2026-05-19': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-20': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-21': 'Online Ordering Will Return on 05/26/2026',
