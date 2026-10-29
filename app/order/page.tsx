@@ -1096,6 +1096,14 @@ function OrderPageContent() {
   };
 
   const handleCheckoutSubmit = async () => {
+    // Re-check closures at submit time: the page may have been open since before a cutoff
+    if (isClosedDay(checkoutForm.pickupDate)) {
+      alert(CLOSURE_MESSAGES[checkoutForm.pickupDate] || 'Online ordering is closed for the selected date.');
+      setShowCheckout(false);
+      handleInputChange('pickupTime', '');
+      return;
+    }
+
     if (!validateForm()) {
       return;
     }
