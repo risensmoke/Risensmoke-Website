@@ -1204,7 +1204,22 @@ function OrderPageContent() {
     '2026-06-20', // Closed - in-store only
     '2026-07-07', // Closed - in-store only
     '2026-09-23', // Closed - in-store only
+    '2026-10-30', // Closed all day
+    '2026-10-31', // Closed all day
   ];
+
+  // Dates when online ordering stops partway through the day (hour in 24h local time)
+  const ONLINE_CLOSE_HOURS: Record<string, number> = {
+    '2026-10-29': 16, // Online ordering closes at 4 PM
+  };
+
+  // True once today's online-ordering cutoff has passed
+  const isPastOnlineCutoff = (dateStr: string) => {
+    const cutoff = ONLINE_CLOSE_HOURS[dateStr];
+    if (cutoff === undefined) return false;
+    const now = new Date();
+    return dateStr === now.toISOString().split('T')[0] && now.getHours() >= cutoff;
+  };
 
   // Custom closure messages for specific dates (optional - defaults to "Closed for Holiday")
   const CLOSURE_MESSAGES: Record<string, string> = {
@@ -1214,6 +1229,9 @@ function OrderPageContent() {
     '2026-06-20': 'Online Ordering Closed Today - Come Visit Us In Store',
     '2026-07-07': 'Online Ordering Closed Today - Come Visit Us In Store',
     '2026-09-23': 'Online Ordering Closed Today - Come Visit Us In Store',
+    '2026-10-29': 'Business is now closed - will reopen on Tuesday, November 3rd',
+    '2026-10-30': 'Business is now closed - will reopen on Tuesday, November 3rd',
+    '2026-10-31': 'Business is now closed - will reopen on Tuesday, November 3rd',
     '2026-05-19': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-20': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-21': 'Online Ordering Will Return on 05/26/2026',
@@ -1226,7 +1244,7 @@ function OrderPageContent() {
   // Check if a date is a closed day
   const isClosedDay = (dateStr: string) => {
     // Check specific closed dates first
-    if (CLOSED_DATES.includes(dateStr)) {
+    if (CLOSED_DATES.includes(dateStr) || isPastOnlineCutoff(dateStr)) {
       return true;
     }
     const date = new Date(dateStr + 'T12:00:00'); // Use noon to avoid timezone issues
@@ -1646,7 +1664,7 @@ function OrderPageContent() {
                   const slots = generateTimeSlots();
                   const selectedDateObj = new Date(checkoutForm.pickupDate + 'T12:00:00');
                   const dayName = selectedDateObj.toLocaleDateString('en-US', { weekday: 'long' });
-                  const isHoliday = CLOSED_DATES.includes(checkoutForm.pickupDate);
+                  const isHoliday = CLOSED_DATES.includes(checkoutForm.pickupDate) || isPastOnlineCutoff(checkoutForm.pickupDate);
                   const isRegularClosedDay = CLOSED_DAYS.includes(selectedDateObj.getDay());
                   const isClosed = isHoliday || isRegularClosedDay;
 
