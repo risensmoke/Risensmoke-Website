@@ -1205,7 +1205,6 @@ function OrderPageContent() {
     '2026-07-07', // Closed - in-store only
     '2026-09-23', // Closed - in-store only
     '2026-10-30', // Closed all day
-    '2026-10-31', // Closed all day
   ];
 
   // Dates when online ordering stops partway through the day (hour in 24h local time)
@@ -1229,9 +1228,8 @@ function OrderPageContent() {
     '2026-06-20': 'Online Ordering Closed Today - Come Visit Us In Store',
     '2026-07-07': 'Online Ordering Closed Today - Come Visit Us In Store',
     '2026-09-23': 'Online Ordering Closed Today - Come Visit Us In Store',
-    '2026-10-29': 'Business is now closed - will reopen on Tuesday, November 3rd',
-    '2026-10-30': 'Business is now closed - will reopen on Tuesday, November 3rd',
-    '2026-10-31': 'Business is now closed - will reopen on Tuesday, November 3rd',
+    '2026-10-29': 'Business is now closed - will reopen on Saturday, October 31st',
+    '2026-10-30': 'Business is now closed - will reopen on Saturday, October 31st',
     '2026-05-19': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-20': 'Online Ordering Will Return on 05/26/2026',
     '2026-05-21': 'Online Ordering Will Return on 05/26/2026',
@@ -1267,7 +1265,8 @@ function OrderPageContent() {
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
 
-    for (let hour = OPENING_HOUR; hour < CLOSING_HOUR; hour++) {
+    const lastHour = ONLINE_CLOSE_HOURS[selectedDate] ?? CLOSING_HOUR;
+    for (let hour = OPENING_HOUR; hour < lastHour; hour++) {
       for (let minute = 0; minute < 60; minute += 30) {
         // Skip past times if today is selected (with prep buffer)
         if (isToday) {
